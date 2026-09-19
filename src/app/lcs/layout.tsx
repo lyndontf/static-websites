@@ -45,9 +45,6 @@ function LcsFooter() {
             <ul>
               <li><a href="tel:+60196210457">+6019 621 0457</a></li>
               <li><a href="mailto:hello@lifecaresystems.com.my">Email Us</a></li>
-              <li><a href="https://www.facebook.com/gflexsdnbhd/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-              <li><a href="https://www.instagram.com/lifecaresystems/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href="https://www.linkedin.com/company/genesisflex" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
             </ul>
           </div>
         </div>

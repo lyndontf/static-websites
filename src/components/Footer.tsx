@@ -13,6 +13,7 @@ interface FooterProps {
 export default function Footer({ settings }: FooterProps) {
   const lang = useSiteLang();
   const social = settings?.social_links || {};
+  const hasSocial = ['facebook', 'instagram', 'youtube', 'tiktok', 'xiaohongshu', 'linkedin'].some((k) => social[k]);
   const locations = centreNavEN.find((item) => item.label === 'Locations')?.children || [];
   const forFamilies = centreNavEN.find((item) => item.label === 'For Families')?.children || [];
 
@@ -28,7 +29,8 @@ export default function Footer({ settings }: FooterProps) {
             {settings?.tagline && (
               <p className="text-sm text-[#cfe6ec] mb-4">{settings.tagline}</p>
             )}
-            {/* Social Links */}
+            {/* Social Links — omitted entirely when the brand has none */}
+            {hasSocial && (
             <div className="flex gap-3 mt-4">
               {social.facebook && (
                 <a href={social.facebook} target="_blank" rel="noopener noreferrer" className="text-[#9ed3dd] hover:text-white transition-colors" aria-label="Facebook">
@@ -61,6 +63,7 @@ export default function Footer({ settings }: FooterProps) {
                 </a>
               )}
             </div>
+            )}
           </div>
 
           {/* Services */}
