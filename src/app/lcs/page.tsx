@@ -56,11 +56,6 @@ export const metadata: Metadata = {
           addressCountry: 'MY',
         },
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.8',
-        reviewCount: '47',
-      },
     }),
   },
 };
@@ -89,11 +84,6 @@ export default function LCSPage() {
         postalCode: '41000',
         addressCountry: 'MY',
       },
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '47',
     },
   };
 
