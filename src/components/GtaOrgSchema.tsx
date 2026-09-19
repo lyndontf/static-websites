@@ -20,10 +20,6 @@ const gtaOrgJsonLd = {
     postalCode: '41500',
     addressCountry: 'MY',
   },
-  sameAs: [
-    'https://facebook.com/genesislifecare',
-    'https://instagram.com/genesislifecare',
-  ],
 };
 
 export default function GtaOrgSchema() {
