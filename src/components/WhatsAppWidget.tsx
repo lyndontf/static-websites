@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useSiteLang } from '@/lib/useSiteLang';
+import { withCampaignCode } from '@/lib/attribution';
 
 const WA_MESSAGES = {
   en: [
@@ -57,7 +58,8 @@ export default function WhatsAppWidget({ phone }: WhatsAppWidgetProps) {
   }, []);
 
   function sendMessage() {
-    const text = input.trim() || 'Hello, I have a question about Genesis Life Care.';
+    // #172: a visitor who came from a tracked post carries its Campaign code into WhatsApp.
+    const text = withCampaignCode(input.trim() || 'Hello, I have a question about Genesis Life Care.');
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
   }
 

@@ -3,11 +3,15 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import { captureUtm } from '@/lib/attribution';
 
 export default function TrackingScript() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // #172: remember the visit's UTM tags (first page of the session wins).
+    captureUtm();
+
     // Generate or retrieve session ID
     let sessionId = sessionStorage.getItem('_sid');
     if (!sessionId) {

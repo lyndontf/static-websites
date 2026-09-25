@@ -1,6 +1,7 @@
 import { cache } from 'react';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { isVisitorRegionBlocked } from './geo-block';
+import { getUtm } from './attribution';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -552,10 +553,14 @@ export async function submitContactForm(formData: {
 }): Promise<boolean> {
   if (isVisitorRegionBlocked()) return false;
 
+  // #172: carry the visit's UTM tags (and the agency Campaign code in
+  // utm_campaign) with the lead, so staff can attribute the enquiry.
+  const utm = getUtm();
   const { error } = await supabase.from('cms_forms').insert({
     ...formData,
     form_type: 'contact',
     status: 'new',
+    ...(utm ? { metadata: { utm } } : {}),
   });
   return !error;
 }
