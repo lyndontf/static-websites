@@ -36,7 +36,6 @@ function LcsFooter() {
             <h4>Company</h4>
             <ul>
               <li><a href="/lcs/about">About Us</a></li>
-              <li><a href="/lcs/about#team">Our Team</a></li>
               <li><a href="/lcs/contact">Contact</a></li>
             </ul>
           </div>
