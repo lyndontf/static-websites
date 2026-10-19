@@ -104,7 +104,7 @@ const checklist = [
   { title: 'Cleanliness & Hygiene', desc: 'We maintain strict hygiene standards with regular deep cleaning, infection control protocols, and well-maintained facilities.' },
   { title: 'Meal Quality & Options', desc: 'Freshly prepared nutritious meals, dietary accommodations for medical conditions, and varied menus.' },
   { title: 'Visiting Policy', desc: 'We encourage family involvement with flexible visiting hours and comfortable spaces for quality time together.' },
-  { title: 'Location & Accessibility', desc: 'Our Puchong centre in Bandar Puteri is easily accessible via LDP Expressway and ELITE Highway, with ample parking for visitors.' },
+  { title: 'Location & Accessibility', desc: 'Our Puchong centre in Taman Perindustrian Puchong is easily accessible via LDP Expressway and ELITE Highway, with ample parking for visitors.' },
   { title: 'Specialist Care Available', desc: 'Beyond basic care, we offer dementia programmes, stroke rehabilitation, palliative care, and post-surgery recovery.' },
 ];
 
@@ -115,7 +115,7 @@ const checklistZh = [
   { title: '清洁与卫生', desc: '我们严格执行卫生标准，定期进行深层清洁、感染控制措施，并保持设施完善。' },
   { title: '膳食品质与选择', desc: '新鲜烹制的营养膳食、针对医疗状况的饮食安排，以及多样化的菜单。' },
   { title: '探访政策', desc: '我们鼓励家属参与，提供灵活的探访时间和舒适的空间，让家人共度美好时光。' },
-  { title: '地点与交通', desc: '我们位于Bandar Puteri的蒲种中心可轻松经由白蒲大道（LDP）及ELITE大道抵达，并设有充足的访客停车位。' },
+  { title: '地点与交通', desc: '我们位于Taman Perindustrian Puchong的蒲种中心可轻松经由白蒲大道（LDP）及ELITE大道抵达，并设有充足的访客停车位。' },
   { title: '提供专科护理', desc: '除基本护理外，我们也提供痴呆症护理计划、中风康复、缓和医疗及术后康复服务。' },
 ];
 
@@ -135,11 +135,11 @@ const admissionStepsZh = [
 const faqs = [
   {
     q: 'How much does an old folks home cost in Puchong?',
-    a: 'Costs at Genesis Life Care Puchong vary depending on the level of care required and room type. We offer competitive rates for our Bandar Puteri location. Contact us for a personalised quote based on your loved one\'s needs.',
+    a: 'Costs at Genesis Life Care Puchong vary depending on the level of care required and room type. We offer competitive rates for our Puchong centre. Contact us for a personalised quote based on your loved one\'s needs.',
   },
   {
     q: 'What is the difference between an old folks home and a nursing home?',
-    a: 'In Malaysia, "old folks home" and "nursing home" are often used interchangeably. At Genesis Life Care, we provide professional nursing care alongside a warm, home-like environment — combining the best of both. Our residents receive 24/7 medical support while enjoying daily activities and social engagement.',
+    a: 'In Malaysia, "old folks home" and "nursing home" are often used interchangeably. At Genesis Life Care, we provide professional nursing care alongside a warm, home-like environment — combining the best of both. Our residents receive 24/7 nursing care and weekly doctor consultations while enjoying daily activities and social engagement.',
   },
   {
     q: 'Is Genesis Life Care Puchong affordable?',
@@ -147,7 +147,7 @@ const faqs = [
   },
   {
     q: 'What are visiting hours at the Puchong old folks home?',
-    a: 'We maintain flexible visiting hours to encourage family involvement. General visiting hours are from 10am to 6pm daily. Special arrangements can be made for families who need to visit outside these hours — just speak with our care team.',
+    a: 'We maintain flexible visiting hours to encourage family involvement. General visiting hours are from 9am to 6pm daily. Special arrangements can be made for families who need to visit outside these hours — just speak with our care team.',
   },
 ];
 
@@ -162,11 +162,11 @@ const faqs = [
 const faqsZh = [
   {
     q: '蒲种老年人之家要多少钱？',
-    a: 'Genesis Life Care Puchong的费用取决于所需护理的水平和房间类型。我们为Bandar Puteri的中心提供具有竞争力的价格。根据您亲人的需求，请与我们联系获取个性化报价。',
+    a: 'Genesis Life Care Puchong的费用取决于所需护理的水平和房间类型。我们为蒲种中心提供具有竞争力的价格。根据您亲人的需求，请与我们联系获取个性化报价。',
   },
   {
     q: '老年人之家和疗养院有什么区别？',
-    a: '在马来西亚，"老年人之家"和"疗养院"经常互换使用。在Genesis Life Care，我们提供专业护理和温暖、家庭般的环境——结合两者的优点。我们的居民获得24/7医疗支持，同时享受日常活动和社交互动。',
+    a: '在马来西亚，"老年人之家"和"疗养院"经常互换使用。在Genesis Life Care，我们提供专业护理和温暖、家庭般的环境——结合两者的优点。我们的居民获得24/7护理及每周医生问诊，同时享受日常活动和社交互动。',
   },
   {
     q: 'Genesis Life Care Puchong价格合理吗？',
@@ -174,7 +174,7 @@ const faqsZh = [
   },
   {
     q: '蒲种老年人之家的访问时间是什么？',
-    a: '我们保持灵活的访问时间以鼓励家庭参与。一般访问时间为每日上午10点至下午6点。对于需要在这些时间之外访问的家庭，可以进行特殊安排——只需与我们的护理团队交谈。',
+    a: '我们保持灵活的访问时间以鼓励家庭参与。一般访问时间为每日上午9点至下午6点。对于需要在这些时间之外访问的家庭，可以进行特殊安排——只需与我们的护理团队交谈。',
   },
 ];
 
@@ -199,7 +199,7 @@ function buildJsonLd(locale: 'en' | 'zh') {
       '@type': 'LocalBusiness',
       '@id': pageUrl,
       name: centre.fullName,
-      description: 'Modern old folks home in Puchong, Bandar Puteri with 24/7 nursing care, rehabilitation and dementia care.',
+      description: 'Modern old folks home in Puchong with 24/7 nursing care, rehabilitation and dementia care.',
       url: pageUrl,
       telephone: centre.phone,
       address: {
@@ -292,8 +292,8 @@ export function OldFolksHomePuchongContent({ locale = 'en' }: { locale?: 'en' | 
               </h1>
               <p className="text-lg text-white/90 max-w-xl mb-8 leading-relaxed" style={{ color: 'rgba(255,255,255,0.9)' }}>
                 <Bilingual
-                  en="A modern, purpose-built facility where your loved ones receive professional care with dignity and compassion. Our Puchong centre in Bandar Puteri features rehabilitation facilities, nutritious meals, and a caring team available around the clock."
-                  zh="一个现代化、专门建造的设施，让您的亲人在此获得尊严与关怀兼备的专业护理。我们位于Bandar Puteri的蒲种中心设有康复设施、营养膳食，以及全天候待命的护理团队。"
+                  en="A modern, purpose-built facility where your loved ones receive professional care with dignity and compassion. Our Puchong centre in Taman Perindustrian Puchong features rehabilitation facilities, nutritious meals, and a caring team available around the clock."
+                  zh="一个现代化、专门建造的设施，让您的亲人在此获得尊严与关怀兼备的专业护理。我们位于Taman Perindustrian Puchong的蒲种中心设有康复设施、营养膳食，以及全天候待命的护理团队。"
                 />
               </p>
 
@@ -349,8 +349,8 @@ export function OldFolksHomePuchongContent({ locale = 'en' }: { locale?: 'en' | 
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
                   <Bilingual
-                    en="Located in Bandar Puteri, one of Puchong's most well-established and family-friendly townships, our modern facility offers contemporary amenities and purpose-built spaces designed for elderly comfort. Genesis Life Care Puchong is ideal for families seeking high-quality senior care in a convenient, accessible location."
-                    zh="我们的蒲种中心坐落于Bandar Puteri，是蒲种最成熟、最适合家庭居住的社区之一，现代化设施与专门设计的空间，为长者提供舒适的生活环境。Genesis Life Care Puchong非常适合寻求优质乐龄护理、且重视交通便利的家庭。"
+                    en="Located in Taman Perindustrian Puchong, off Jln TPP 1/1, our modern facility offers contemporary amenities and purpose-built spaces designed for elderly comfort. Genesis Life Care Puchong is ideal for families seeking high-quality senior care in a convenient, accessible location."
+                    zh="我们的蒲种中心坐落于Taman Perindustrian Puchong，现代化设施与专门设计的空间，为长者提供舒适的生活环境。Genesis Life Care Puchong非常适合寻求优质乐龄护理、且重视交通便利的家庭。"
                   />
                 </p>
                 <p>
@@ -371,7 +371,7 @@ export function OldFolksHomePuchongContent({ locale = 'en' }: { locale?: 'en' | 
                   { en: 'Modern Facility', zh: '现代化设施' },
                   { en: 'Quality Dining', zh: '优质餐饮' },
                   { en: 'LDP & ELITE Access', zh: 'LDP与ELITE大道直达' },
-                  { en: 'Bandar Puteri', zh: 'Bandar Puteri' },
+                  { en: 'Taman Perindustrian Puchong', zh: 'Taman Perindustrian Puchong' },
                   { en: 'Near Hospitals', zh: '邻近医院' },
                 ].map((t) => (
                   <span key={t.en} className="bg-primary-50 text-primary-700 text-xs font-semibold px-3 py-1.5 rounded-full"><Bilingual en={t.en} zh={t.zh} /></span>
