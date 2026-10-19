@@ -46,3 +46,26 @@ export function formMetadata(extra: { lang?: string; centre?: string } = {}): Re
     referrer: a.referrer ?? (typeof document !== 'undefined' ? document.referrer || undefined : undefined),
   };
 }
+
+// Each centre's website code in LCS (lcs#977; marketing.standing_code, channel website). A WhatsApp message from a
+// centre page carries it, so LCS routes the chat to that centre and counts it in the Front Door Report.
+const CENTRE_WEB_CODES: Record<string, string> = {
+  kajang: 'GKJG2610-WB',
+  klang: 'GKLG2610-WB',
+  'petaling-jaya': 'GPJS2610-WB',
+  puchong: 'GTPP2610-WB',
+  'johor-bahru': 'GHP2610-WB',
+};
+
+/** The code for a WhatsApp message from this page: the visit's campaign code (?c=), else the centre page's code. */
+export function pageWhatsAppCode(): string | undefined {
+  try {
+    const a = JSON.parse(sessionStorage.getItem(KEY) || '{}') as Attribution;
+    if (a.code) return a.code.toUpperCase();
+  } catch {
+    // storage blocked
+  }
+  if (typeof window === 'undefined') return undefined;
+  const m = /old-folks-home-in-([a-z-]+)/.exec(window.location.pathname);
+  return m ? CENTRE_WEB_CODES[m[1]] : undefined;
+}

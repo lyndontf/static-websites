@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { pageWhatsAppCode } from '@/lib/attribution';
 import { useSiteLang } from '@/lib/useSiteLang';
 
 const WA_MESSAGES = {
@@ -57,7 +58,9 @@ export default function WhatsAppWidget({ phone }: WhatsAppWidgetProps) {
   }, []);
 
   function sendMessage() {
-    const text = input.trim() || 'Hello, I have a question about Genesis Life Care.';
+    const typed = input.trim() || 'Hello, I have a question about Genesis Life Care.';
+    const code = pageWhatsAppCode();   // lcs#977: routes the chat to the page's centre in LCS
+    const text = code ? `${typed} (Ref: ${code})` : typed;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
   }
 
