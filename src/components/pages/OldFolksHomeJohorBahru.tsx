@@ -139,7 +139,7 @@ const faqs = [
   },
   {
     q: 'What is the difference between an old folks home and a nursing home?',
-    a: 'In Malaysia, "old folks home" and "nursing home" are often used interchangeably. At Genesis Life Care, we provide professional nursing care alongside a warm, home-like environment — combining the best of both. Our residents receive 24/7 medical support while enjoying daily activities and social engagement.',
+    a: 'In Malaysia, "old folks home" and "nursing home" are often used interchangeably. At Genesis Life Care, we provide professional nursing care alongside a warm, home-like environment — combining the best of both. Our residents receive 24/7 nursing care and weekly doctor consultations while enjoying daily activities and social engagement.',
   },
   {
     q: 'Is Genesis Life Care Johor Bahru affordable?',
@@ -151,7 +151,7 @@ const faqs = [
   },
   {
     q: 'What are visiting hours at the JB old folks home?',
-    a: 'We maintain flexible visiting hours to encourage family involvement. General visiting hours are from 10am to 6pm daily. Special arrangements can be made for families who need to visit outside these hours — just speak with our care team.',
+    a: 'We maintain flexible visiting hours to encourage family involvement. General visiting hours are from 9am to 6pm daily. Special arrangements can be made for families who need to visit outside these hours — just speak with our care team.',
   },
 ];
 
@@ -163,7 +163,7 @@ const faqsZh = [
   },
   {
     q: '老年人之家和疗养院有什么区别？',
-    a: '在马来西亚，"老年人之家"和"疗养院"经常互换使用。在Genesis Life Care，我们提供专业护理和温暖、家庭般的环境——结合两者的优点。我们的居民获得24/7医疗支持，同时享受日常活动和社交互动。',
+    a: '在马来西亚，"老年人之家"和"疗养院"经常互换使用。在Genesis Life Care，我们提供专业护理和温暖、家庭般的环境——结合两者的优点。我们的居民获得24/7护理及每周医生问诊，同时享受日常活动和社交互动。',
   },
   {
     q: 'Genesis Life Care Johor Bahru价格合理吗？',
@@ -175,7 +175,7 @@ const faqsZh = [
   },
   {
     q: 'JB老年人之家的访问时间是什么？',
-    a: '我们保持灵活的访问时间以鼓励家庭参与。一般访问时间为每日上午10点至下午6点。对于需要在这些时间之外访问的家庭，可以进行特殊安排——只需与我们的护理团队交谈。',
+    a: '我们保持灵活的访问时间以鼓励家庭参与。一般访问时间为每日上午9点至下午6点。对于需要在这些时间之外访问的家庭，可以进行特殊安排——只需与我们的护理团队交谈。',
   },
 ];
 
