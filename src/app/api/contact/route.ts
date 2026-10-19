@@ -58,6 +58,8 @@ export async function POST(request: NextRequest) {
       page_url: page_url || null,
       form_type: 'contact',
       status: 'new',
+      // lcs#974: LCS turns Genesis website forms into enquiries from this
+      metadata: { host: (request.headers.get('host') || '').split(':')[0], site: siteSlug || null, path: page_url || null },
     });
 
     if (insertError) {
