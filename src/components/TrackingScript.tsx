@@ -3,11 +3,13 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import { captureAttribution } from '@/lib/attribution';
 
 export default function TrackingScript() {
   const pathname = usePathname();
 
   useEffect(() => {
+    captureAttribution();   // UTM tags / campaign code of the visit's landing page, for enquiry forms (lcs#974)
     // Generate or retrieve session ID
     let sessionId = sessionStorage.getItem('_sid');
     if (!sessionId) {

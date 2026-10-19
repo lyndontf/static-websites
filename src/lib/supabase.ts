@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { formMetadata } from './attribution';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { isVisitorRegionBlocked } from './geo-block';
 
@@ -549,13 +550,19 @@ export async function submitContactForm(formData: {
   message: string;
   page_url?: string;
   centre_id?: string;
+  /** #974: the form's language and "Which centre?" slug (kajang, klang, petaling-jaya, puchong, johor-bahru) */
+  lang?: 'en' | 'zh';
+  centre?: string;
 }): Promise<boolean> {
   if (isVisitorRegionBlocked()) return false;
 
+  const { lang, centre, ...row } = formData;
   const { error } = await supabase.from('cms_forms').insert({
-    ...formData,
+    ...row,
     form_type: 'contact',
     status: 'new',
+    // LCS turns Genesis website forms into enquiries from this (lyndontf/lcs#974)
+    metadata: formMetadata({ lang, centre }),
   });
   return !error;
 }

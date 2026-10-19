@@ -86,6 +86,7 @@ export default function HeroEnquiryForm({
       phone: form.phone.trim(),
       message: form.message.trim() || `Enquiry from ${centreName} old folks home page`,
       page_url: pageUrl,
+      lang,
     });
 
     setSubmitting(false);

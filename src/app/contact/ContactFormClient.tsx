@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { submitContactForm } from '@/lib/supabase';
 import { useSiteLang } from '@/lib/useSiteLang';
 
@@ -15,6 +15,8 @@ const t = {
     fullName: 'Full Name',
     email: 'Email',
     phoneNumber: 'Phone Number',
+    centre: 'Which centre?',
+    centreNotSure: 'Not sure yet',
     message: 'Message',
     namePlaceholder: 'Your name',
     messagePlaceholder: 'How can we help you?',
@@ -43,6 +45,8 @@ const t = {
     fullName: '全名',
     email: '电邮',
     phoneNumber: '电话号码',
+    centre: '哪一间中心？',
+    centreNotSure: '还不确定',
     message: '讯息',
     namePlaceholder: '您的姓名',
     messagePlaceholder: '我们可以如何协助您？',
@@ -63,10 +67,23 @@ const t = {
   },
 };
 
+// "Which centre?" (Genesis website only, lcs#974): routes the enquiry to that centre in LCS; "Not sure" -> Unassigned.
+const CENTRES = [
+  { slug: 'kajang', en: 'Kajang', zh: '加影' },
+  { slug: 'klang', en: 'Klang', zh: '巴生' },
+  { slug: 'petaling-jaya', en: 'Petaling Jaya', zh: '八打灵再也' },
+  { slug: 'puchong', en: 'Puchong', zh: '蒲种' },
+  { slug: 'johor-bahru', en: 'Johor Bahru', zh: '新山' },
+];
+
 export default function ContactFormClient() {
   const lang = useSiteLang();
   const l = t[lang];
-  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '', centre: '' });
+  const [isGenesis, setIsGenesis] = useState(false);
+  useEffect(() => {
+    setIsGenesis(/(^|\.)genesiscare\.com\.my$/i.test(window.location.hostname));
+  }, []);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -87,13 +104,15 @@ export default function ContactFormClient() {
       phone: form.phone.trim() || undefined,
       message: form.message.trim(),
       page_url: '/contact',
+      lang,
+      centre: isGenesis ? form.centre : undefined,
     });
 
     setSubmitting(false);
 
     if (success) {
       setSubmitted(true);
-      setForm({ name: '', email: '', phone: '', message: '' });
+      setForm({ name: '', email: '', phone: '', message: '', centre: '' });
     } else {
       setError(l.genericError);
     }
@@ -176,6 +195,24 @@ export default function ContactFormClient() {
                     placeholder="+60 12-345 6789"
                   />
                 </div>
+                {isGenesis && (
+                  <div>
+                    <label htmlFor="centre" className="block text-sm font-medium text-[#33424a] mb-1">
+                      {l.centre}
+                    </label>
+                    <select
+                      id="centre"
+                      value={form.centre}
+                      onChange={(e) => setForm({ ...form, centre: e.target.value })}
+                      className="w-full px-4 py-2.5 bg-[#f8fafc] border border-[#dbe3e6] rounded-lg text-sm text-[#173039] focus:ring-2 focus:ring-[#2c88a2]/30 focus:border-[#2c88a2] outline-none transition-colors"
+                    >
+                      <option value="">{l.centreNotSure}</option>
+                      {CENTRES.map((c) => (
+                        <option key={c.slug} value={c.slug}>{lang === 'zh' ? c.zh : c.en}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-[#33424a] mb-1">
                     {l.message} <span className="text-[#c1493f]">*</span>
