@@ -258,10 +258,17 @@ export interface JobListing {
   updated_at: string;
 }
 
+// Signed-out visitors read job_listings_public with these columns only: the table itself is closed to them
+// (a homecare posting carries the family's contact details). lyndontf/lcs map #1283.
+// (One string literal, so supabase-js can type the rows.)
+const JOB_COLUMNS =
+  'id, organization_id, title, slug, department, location, employment_type, description, requirements, salary_range, status, closing_date, published_at, created_at, updated_at';
+
 export async function getPublishedJobListings(): Promise<JobListing[]> {
   const { data } = await supabase
-    .from('job_listings')
-    .select('*')
+    .from('job_listings_public')
+    .select(JOB_COLUMNS)
+    .eq('listing_kind', 'staff')
     .eq('status', 'published')
     .order('published_at', { ascending: false });
   return (data || []) as JobListing[];
@@ -269,8 +276,9 @@ export async function getPublishedJobListings(): Promise<JobListing[]> {
 
 export async function getJobListingById(id: string): Promise<JobListing | null> {
   const { data } = await supabase
-    .from('job_listings')
-    .select('*')
+    .from('job_listings_public')
+    .select(JOB_COLUMNS)
+    .eq('listing_kind', 'staff')
     .eq('id', id)
     .eq('status', 'published')
     .limit(1)
@@ -398,8 +406,9 @@ export async function submitBiodataApplication(formData: {
 
 export async function getPublishedJobListingsForSite(orgId: string): Promise<JobListing[]> {
   const { data } = await supabase
-    .from('job_listings')
-    .select('*')
+    .from('job_listings_public')
+    .select(JOB_COLUMNS)
+    .eq('listing_kind', 'staff')
     .eq('organization_id', orgId)
     .eq('status', 'published')
     .order('published_at', { ascending: false });
@@ -432,110 +441,68 @@ export interface BiodataPreviousEmployer {
   remarks?: string;
 }
 
+/** A published candidate as the public sees it: public fields only (public name, age in years; no date of birth,
+ * religion, family details, notes or PDF). */
 export interface BiodataCandidate {
   id: string;
-  organization_id: string;
   reference_no: string | null;
   status: 'available' | 'unavailable' | 'placed';
   job_category: string | null;
   photo_url: string | null;
-  pdf_url: string | null;
   full_name: string;
-  date_of_birth: string | null;
-  age: number | null;
   nationality: string | null;
-  height_cm: number | null;
-  weight_kg: number | null;
+  age: number | null;
   education_level: string | null;
-  religion: string | null;
-  food_preference: string | null;
-  diet: string | null;
-  siblings_count: number | null;
-  sibling_position: number | null;
-  marital_status: string | null;
-  children_info: string | null;
   monthly_salary_myr: number | null;
   rest_days_per_month: number | null;
   off_day_compensation_myr: number | null;
   languages: BiodataLanguage[];
   skills: BiodataSkill[];
   helper_experience: Record<string, string>;
-  previous_employers: BiodataPreviousEmployer[];
-  notes: string | null;
   created_at: string;
-  updated_at: string;
 }
 
-// Published candidates are the single source of truth in `public.candidates`,
-// shared by /biodata, the agency site, and agency-services.html. Approved resume
-// submissions become published candidates via the approve_biodata() RPC.
+// Published candidates come from `public.candidate_public_profile`: the published marketplace candidates of
+// `public.candidates`, public fields only (`name` is the public name, never the full name). Signed-out visitors cannot read `candidates` itself (PDPA,
+// lyndontf/lcs map #1283). Approved resume submissions become published candidates via approve_biodata().
 const CAREGIVER_COLUMNS =
-  'id, name, profile_pic_url, nationality_text, dob, created_at, ' +
-  'reference_no, job_category, pdf_url, ' +
-  'education_level, food_preference, children_info, ' +
-  'monthly_salary_myr, rest_days_per_month, ' +
-  'off_day_compensation_myr, languages, skills, ' +
-  'experience, notes, height_cm, weight_kg, religion, diet, ' +
-  'siblings_count, sibling_position, marital_status_text, previous_employers';
+  'id, name, profile_pic_url, nationality_text, age, education_level, created_at, reference_no, job_category, ' +
+  'monthly_salary_myr, rest_days_per_month, off_day_compensation_myr, languages, skills, experience';
 
 function mapUserToCandidate(u: Record<string, any>): BiodataCandidate {
-  let age: number | null = null;
-  if (u.dob) {
-    const d = new Date(u.dob);
-    if (!isNaN(d.getTime())) {
-      age = Math.floor((Date.now() - d.getTime()) / (365.25 * 24 * 3600 * 1000));
-    }
-  }
   return {
     id: u.id,
-    organization_id: '',
     reference_no: u.reference_no ?? null,
     status: 'available',
     job_category: u.job_category ?? null,
     photo_url: u.profile_pic_url ?? null,
-    pdf_url: u.pdf_url ?? null,
     full_name: u.name ?? '',
-    date_of_birth: u.dob ?? null,
-    age,
     nationality: u.nationality_text ?? null,
-    height_cm: u.height_cm ?? null,
-    weight_kg: u.weight_kg ?? null,
+    age: u.age ?? null,
     education_level: u.education_level ?? null,
-    religion: u.religion ?? null,
-    food_preference: u.food_preference ?? null,
-    diet: u.diet ?? null,
-    siblings_count: u.siblings_count ?? null,
-    sibling_position: u.sibling_position ?? null,
-    marital_status: u.marital_status_text ?? null,
-    children_info: u.children_info ?? null,
     monthly_salary_myr: u.monthly_salary_myr ?? null,
     rest_days_per_month: u.rest_days_per_month ?? null,
     off_day_compensation_myr: u.off_day_compensation_myr ?? null,
     languages: (u.languages as BiodataLanguage[]) ?? [],
     skills: (u.skills as BiodataSkill[]) ?? [],
     helper_experience: (u.experience as Record<string, string>) ?? {},
-    previous_employers: (u.previous_employers as BiodataPreviousEmployer[]) ?? [],
-    notes: u.notes ?? null,
     created_at: u.created_at ?? '',
-    updated_at: u.created_at ?? '',
   };
 }
 
 export async function getAvailableBiodata(): Promise<BiodataCandidate[]> {
   const { data } = await supabase
-    .from('candidates')
+    .from('candidate_public_profile')
     .select(CAREGIVER_COLUMNS)
-    .eq('is_published', true)
     .order('created_at', { ascending: false });
   return (data || []).map(mapUserToCandidate);
 }
 
 export async function getBiodataById(id: string): Promise<BiodataCandidate | null> {
   const { data } = await supabase
-    .from('candidates')
+    .from('candidate_public_profile')
     .select(CAREGIVER_COLUMNS)
     .eq('id', id)
-    .eq('is_published', true)
     .limit(1)
     .maybeSingle();
   return data ? mapUserToCandidate(data) : null;

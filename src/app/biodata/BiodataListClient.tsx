@@ -102,7 +102,6 @@ export default function BiodataListClient({ candidates }: { candidates: BiodataC
                     <span className="glc-tag">{c.nationality || '—'}</span>
                     <span className="glc-tag">{c.age != null ? `${c.age} yrs` : '—'}</span>
                     <span className="glc-tag">{totalExperience(c.helper_experience || {})} experience</span>
-                    {c.marital_status && <span className="glc-tag">{c.marital_status}</span>}
                   </div>
                   <p style={{ margin: '0 0 12px', fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)' }}>
                     Languages: {languageSummary(c.languages)}
