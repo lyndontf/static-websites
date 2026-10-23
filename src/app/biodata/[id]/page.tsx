@@ -129,18 +129,11 @@ export default async function BiodataDetailPage({ params }: { params: Promise<{ 
             <div className="glc-card">
               <h2 style={{ fontSize: 'var(--glc-fs-h3)', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <svg className="w-5 h-5" stroke="var(--glc-teal)" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                Personal Information
+                Profile
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-6 text-sm">
                 <InfoItem label="Nationality" value={c.nationality} />
-                <InfoItem label="Age" value={c.age != null ? String(c.age) : null} />
-                <InfoItem label="Marital Status" value={c.marital_status} />
-                <InfoItem label="Education" value={c.education_level} />
-                <InfoItem label="Religion" value={c.religion} />
-                <InfoItem label="Diet" value={c.diet || c.food_preference} />
-                {c.height_cm && <InfoItem label="Height" value={`${c.height_cm} cm`} />}
-                {c.weight_kg && <InfoItem label="Weight" value={`${c.weight_kg} kg`} />}
-                {c.children_info && <InfoItem label="Children" value={c.children_info} />}
+                <InfoItem label="Category" value={c.job_category} />
               </div>
             </div>
 
@@ -220,37 +213,6 @@ export default async function BiodataDetailPage({ params }: { params: Promise<{ 
               </div>
             )}
 
-            {/* Previous Employers */}
-            {c.previous_employers && c.previous_employers.length > 0 && (
-              <div className="glc-card">
-                <h2 style={{ fontSize: 'var(--glc-fs-h3)', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <svg className="w-5 h-5" stroke="var(--glc-teal)" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                  Previous Employers
-                </h2>
-                <div className="space-y-4">
-                  {c.previous_employers.map((emp, i) => (
-                    <div key={i} style={{ background: 'var(--glc-cloud)', borderRadius: 'var(--glc-r)', padding: 16 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                        <span style={{ fontWeight: 700, fontSize: 'var(--glc-fs-sm)', color: 'var(--glc-ink)' }}>
-                          {emp.country || 'Unknown Country'}
-                        </span>
-                        {(emp.period_from || emp.period_to) && (
-                          <span style={{ fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)' }}>
-                            {emp.period_from || '?'} — {emp.period_to || 'Present'}
-                          </span>
-                        )}
-                      </div>
-                      <div className="grid grid-cols-2 gap-2" style={{ fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate)' }}>
-                        {emp.housing_type && <div><span style={{ fontWeight: 600, color: 'var(--glc-slate-soft)' }}>Housing:</span> {emp.housing_type}</div>}
-                        {emp.family_composition && <div><span style={{ fontWeight: 600, color: 'var(--glc-slate-soft)' }}>Family:</span> {emp.family_composition}</div>}
-                        {emp.duties && <div className="col-span-2"><span style={{ fontWeight: 600, color: 'var(--glc-slate-soft)' }}>Duties:</span> {emp.duties}</div>}
-                        {emp.termination_reason && <div className="col-span-2"><span style={{ fontWeight: 600, color: 'var(--glc-slate-soft)' }}>Reason for leaving:</span> {emp.termination_reason}</div>}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
           {/* ─── SIDEBAR ─── */}
@@ -280,29 +242,13 @@ export default async function BiodataDetailPage({ params }: { params: Promise<{ 
               <a
                 href={`mailto:${EMAIL}?subject=${emailSubject}&body=${emailBody}`}
                 className="glc-btn glc-btn--outline glc-btn--block"
-                style={{ marginBottom: c.pdf_url ? 12 : 20 }}
+                style={{ marginBottom: 20 }}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 Email Enquiry
               </a>
-
-              {/* Resume PDF Button */}
-              {c.pdf_url && (
-                <a
-                  href={c.pdf_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glc-btn glc-btn--outline glc-btn--block"
-                  style={{ marginBottom: 20 }}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  View Resume (PDF)
-                </a>
-              )}
 
               <div style={{ borderTop: '1px solid var(--glc-line)', paddingTop: 16, textAlign: 'center' }}>
                 <p style={{ fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)' }}>
@@ -320,9 +266,7 @@ export default async function BiodataDetailPage({ params }: { params: Promise<{ 
               <div className="space-y-3 text-sm">
                 <SummaryRow label="Category" value={c.job_category || '—'} />
                 <SummaryRow label="Nationality" value={c.nationality || '—'} />
-                <SummaryRow label="Age" value={c.age != null ? `${c.age} years old` : '—'} />
                 <SummaryRow label="Experience" value={totalExperience(c.helper_experience || {})} />
-                <SummaryRow label="Education" value={c.education_level || '—'} />
                 {c.monthly_salary_myr && (
                   <SummaryRow label="Expected Salary" value={`RM ${Number(c.monthly_salary_myr).toLocaleString()}/mo`} />
                 )}
