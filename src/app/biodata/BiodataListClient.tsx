@@ -100,6 +100,7 @@ export default function BiodataListClient({ candidates }: { candidates: BiodataC
                   <p style={{ margin: 0, fontSize: 'var(--glc-fs-sm)' }}>{categoryLabel(c.job_category)}</p>
                   <div className="glc-biodata-card__meta">
                     <span className="glc-tag">{c.nationality || '—'}</span>
+                    <span className="glc-tag">{c.age != null ? `${c.age} yrs` : '—'}</span>
                     <span className="glc-tag">{totalExperience(c.helper_experience || {})} experience</span>
                   </div>
                   <p style={{ margin: '0 0 12px', fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)' }}>

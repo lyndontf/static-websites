@@ -133,6 +133,8 @@ export default async function BiodataDetailPage({ params }: { params: Promise<{ 
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-6 text-sm">
                 <InfoItem label="Nationality" value={c.nationality} />
+                <InfoItem label="Age" value={c.age != null ? String(c.age) : null} />
+                <InfoItem label="Education" value={c.education_level} />
                 <InfoItem label="Category" value={c.job_category} />
               </div>
             </div>
@@ -266,7 +268,9 @@ export default async function BiodataDetailPage({ params }: { params: Promise<{ 
               <div className="space-y-3 text-sm">
                 <SummaryRow label="Category" value={c.job_category || '—'} />
                 <SummaryRow label="Nationality" value={c.nationality || '—'} />
+                <SummaryRow label="Age" value={c.age != null ? `${c.age} years old` : '—'} />
                 <SummaryRow label="Experience" value={totalExperience(c.helper_experience || {})} />
+                <SummaryRow label="Education" value={c.education_level || '—'} />
                 {c.monthly_salary_myr && (
                   <SummaryRow label="Expected Salary" value={`RM ${Number(c.monthly_salary_myr).toLocaleString()}/mo`} />
                 )}

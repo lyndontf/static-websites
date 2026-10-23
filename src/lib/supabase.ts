@@ -441,7 +441,8 @@ export interface BiodataPreviousEmployer {
   remarks?: string;
 }
 
-/** A published candidate as the public sees it: public fields only (no age, religion, family, notes or PDF). */
+/** A published candidate as the public sees it: public fields only (public name, age in years; no date of birth,
+ * religion, family details, notes or PDF). */
 export interface BiodataCandidate {
   id: string;
   reference_no: string | null;
@@ -450,6 +451,8 @@ export interface BiodataCandidate {
   photo_url: string | null;
   full_name: string;
   nationality: string | null;
+  age: number | null;
+  education_level: string | null;
   monthly_salary_myr: number | null;
   rest_days_per_month: number | null;
   off_day_compensation_myr: number | null;
@@ -460,10 +463,10 @@ export interface BiodataCandidate {
 }
 
 // Published candidates come from `public.candidate_public_profile`: the published marketplace candidates of
-// `public.candidates`, public fields only. Signed-out visitors cannot read `candidates` itself (PDPA,
+// `public.candidates`, public fields only (`name` is the public name, never the full name). Signed-out visitors cannot read `candidates` itself (PDPA,
 // lyndontf/lcs map #1283). Approved resume submissions become published candidates via approve_biodata().
 const CAREGIVER_COLUMNS =
-  'id, name, profile_pic_url, nationality_text, created_at, reference_no, job_category, ' +
+  'id, name, profile_pic_url, nationality_text, age, education_level, created_at, reference_no, job_category, ' +
   'monthly_salary_myr, rest_days_per_month, off_day_compensation_myr, languages, skills, experience';
 
 function mapUserToCandidate(u: Record<string, any>): BiodataCandidate {
@@ -475,6 +478,8 @@ function mapUserToCandidate(u: Record<string, any>): BiodataCandidate {
     photo_url: u.profile_pic_url ?? null,
     full_name: u.name ?? '',
     nationality: u.nationality_text ?? null,
+    age: u.age ?? null,
+    education_level: u.education_level ?? null,
     monthly_salary_myr: u.monthly_salary_myr ?? null,
     rest_days_per_month: u.rest_days_per_month ?? null,
     off_day_compensation_myr: u.off_day_compensation_myr ?? null,
