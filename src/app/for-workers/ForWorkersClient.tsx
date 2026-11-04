@@ -442,7 +442,7 @@ export default function ForWorkersClient() {
 
       <p style={{ fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)', textAlign: 'center' }}>
         By submitting this form, you agree to allow us to store your information for placement purposes.
-        We will never share your data with unauthorized third parties.
+        We will never share your data with unauthorized third parties. If your profile is published, your age, marital status and languages may be shown on Genesis websites.
       </p>
     </form>
   );
