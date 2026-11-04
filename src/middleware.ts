@@ -18,6 +18,8 @@ const DOMAIN_TO_SITE: Record<string, string> = {
   'www.dementia.my': 'dementia',
   'strokerehab.my': 'stroke',
   'www.strokerehab.my': 'stroke',
+  'maidsinmalaysia.com': 'maids',
+  'www.maidsinmalaysia.com': 'maids',
 };
 
 // Canonical (non-www) domain for each www variant — used for 301 redirects
@@ -30,6 +32,7 @@ const WWW_TO_CANONICAL: Record<string, string> = {
   'www.genesiscare.com.my': 'genesiscare.com.my',
   'www.dementia.my': 'dementia.my',
   'www.strokerehab.my': 'strokerehab.my',
+  'www.maidsinmalaysia.com': 'maidsinmalaysia.com',
 };
 
 // Path prefix to site slug mapping (for shared-domain hosting / dev)
@@ -40,6 +43,7 @@ const PATH_TO_SITE: Record<string, string> = {
   '/project-deo': 'project-deo',
   '/dementia': 'dementia',
   '/stroke': 'stroke',
+  '/maids': 'maids',
 };
 
 // Vulnerability-scanner probe paths (WordPress/PHP/CGI exploit attempts, dotfiles,
