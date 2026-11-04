@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { missingForCandidate, normaliseMyMobile } from './candidateRules';
 import { formMetadata } from './attribution';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { isVisitorRegionBlocked } from './geo-block';
@@ -298,6 +299,9 @@ export async function submitJobApplication(formData: {
   current_employer?: string;
   years_experience?: number;
   expected_salary?: string;
+  photo_url?: string;
+  lives_in_malaysia?: boolean;
+  malaysia_state?: string;
 }): Promise<boolean> {
   // Professional/internal-hire applications (e.g. Resident Medical Officer)
   // now live in the unified `candidates` table alongside GLC Hire marketplace
@@ -305,6 +309,8 @@ export async function submitJobApplication(formData: {
   // are centre-scoped instead, so `centre_id` is left unset and an admin
   // assigns it later in the Biodata Pool screen.
   if (isVisitorRegionBlocked()) return false;
+  // #1774: a photo, a Malaysian mobile and "lives in Malaysia now" with a state, on every route
+  if (missingForCandidate({ photo: formData.photo_url, phone: formData.applicant_phone, livesInMalaysia: formData.lives_in_malaysia, state: formData.malaysia_state }).length) return false;
 
   const notes = [
     formData.current_employer ? `Current employer: ${formData.current_employer}` : null,
@@ -315,7 +321,10 @@ export async function submitJobApplication(formData: {
   const { error } = await supabase.from('candidates').insert({
     name: formData.applicant_name,
     email: formData.applicant_email,
-    phone: formData.applicant_phone ?? null,
+    phone: normaliseMyMobile(formData.applicant_phone),
+    profile_pic_url: formData.photo_url ?? null,
+    lives_in_malaysia: true,
+    malaysia_state: formData.malaysia_state ?? null,
     pdf_url: formData.resume_url ?? null,
     cover_letter: formData.cover_letter ?? null,
     job_listing_id: formData.job_listing_id,
@@ -362,10 +371,14 @@ export async function submitBiodataApplication(formData: {
   previous_employers?: BiodataPreviousEmployer[];
   cover_letter?: string;
   photo_url?: string;
+  lives_in_malaysia?: boolean;
+  malaysia_state?: string;
   job_listing_id?: string;
   organization_id?: string;
 }): Promise<boolean> {
   if (isVisitorRegionBlocked()) return false;
+  // #1774: the form says what is missing; this is the last check before anything is sent
+  if (missingForCandidate({ photo: formData.photo_url, phone: formData.applicant_phone, livesInMalaysia: formData.lives_in_malaysia, state: formData.malaysia_state }).length) return false;
 
   // GLC Hire marketplace biodata applications now insert directly into the
   // unified `candidates` table. `age` (derived elsewhere from dob) and
@@ -374,7 +387,9 @@ export async function submitBiodataApplication(formData: {
   const { error } = await supabase.from('candidates').insert({
     name: formData.full_name,
     email: formData.applicant_email,
-    phone: formData.applicant_phone ?? null,
+    phone: normaliseMyMobile(formData.applicant_phone),
+    lives_in_malaysia: true,
+    malaysia_state: formData.malaysia_state ?? null,
     job_category: formData.job_category ?? null,
     nationality_text: formData.nationality ?? null,
     dob: formData.date_of_birth ?? null,

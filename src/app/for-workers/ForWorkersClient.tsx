@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { submitBiodataApplication, uploadBiodataPhoto, type BiodataPreviousEmployer } from '@/lib/supabase';
+import { MALAYSIA_STATES, missingForCandidate } from '@/lib/candidateRules';
 
 const GLC_ORG_ID = '09db6826-ee70-4e6a-a8b6-f19667cfd025';
 
@@ -29,6 +30,8 @@ export default function ForWorkersClient() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [livesInMalaysia, setLivesInMalaysia] = useState(false);
+  const [malaysiaState, setMalaysiaState] = useState('');
   const [category, setCategory] = useState('');
   const [nationality, setNationality] = useState('');
   const [dob, setDob] = useState('');
@@ -119,6 +122,12 @@ export default function ForWorkersClient() {
       setError('Please fill in your full name and email address.');
       return;
     }
+    // #1774: a photo, a Malaysian mobile and "I live in Malaysia now" with a state are needed; say plainly which is missing
+    const missing = missingForCandidate({ photo: photoFile, phone, livesInMalaysia, state: malaysiaState });
+    if (missing.length) {
+      setError(missing.join(' '));
+      return;
+    }
     setSubmitting(true);
     setError('');
 
@@ -140,7 +149,7 @@ export default function ForWorkersClient() {
     const success = await submitBiodataApplication({
       full_name: name.trim(),
       applicant_email: email.trim(),
-      applicant_phone: phone.trim() || undefined,
+      applicant_phone: phone.trim(),
       job_category: category || undefined,
       nationality: nationality.trim() || undefined,
       date_of_birth: dob || undefined,
@@ -158,6 +167,8 @@ export default function ForWorkersClient() {
       previous_employers: previousEmployers.length > 0 ? previousEmployers : undefined,
       cover_letter: coverLetter.trim() || undefined,
       photo_url: photoUrl,
+      lives_in_malaysia: livesInMalaysia,
+      malaysia_state: malaysiaState,
       organization_id: GLC_ORG_ID,
     });
 
@@ -235,7 +246,7 @@ export default function ForWorkersClient() {
               onClick={() => fileInputRef.current?.click()}
               style={{ color: 'var(--glc-teal)', fontWeight: 700, background: 'none', border: 0, cursor: 'pointer', padding: 0 }}
             >
-              {photoPreview ? 'Change photo' : 'Upload a photo'}
+              {photoPreview ? 'Change photo' : 'Upload a photo (required)'}
             </button>
             <p style={{ fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)', marginTop: 2 }}>JPG or PNG, max 5MB</p>
           </div>
@@ -265,8 +276,18 @@ export default function ForWorkersClient() {
             <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" className={INPUT_CLASS} />
           </div>
           <div>
-            <label className={LABEL_CLASS}>Phone Number</label>
-            <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+60123456789" className={INPUT_CLASS} />
+            <label className={LABEL_CLASS}>Malaysian mobile number (for WhatsApp) <span className="text-red-400">*</span></label>
+            <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="012-345 6789 (Malaysian mobile)" className={INPUT_CLASS} />
+            <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 8, fontSize: 'var(--glc-fs-sm)' }}>
+              <input type="checkbox" checked={livesInMalaysia} onChange={(e) => setLivesInMalaysia(e.target.checked)} />
+              I live in Malaysia now
+            </label>
+            {livesInMalaysia && (
+              <select required value={malaysiaState} onChange={(e) => setMalaysiaState(e.target.value)} className={INPUT_CLASS} style={{ marginTop: 8 }}>
+                <option value="">State or area where you live…</option>
+                {MALAYSIA_STATES.map((st) => <option key={st} value={st}>{st}</option>)}
+              </select>
+            )}
           </div>
           <div>
             <label className={LABEL_CLASS}>Job Category</label>
