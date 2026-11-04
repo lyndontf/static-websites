@@ -28,7 +28,17 @@ export function captureAttribution(): void {
 }
 
 /** The metadata a form submission carries. */
-export function formMetadata(extra: { lang?: string; centre?: string } = {}): Record<string, unknown> {
+export function formMetadata(extra: {
+  lang?: string;
+  centre?: string;
+  /** Maids in Malaysia (lcs#1836): what the employer asked for. LCS adds these to the enquiry note. */
+  service?: string;
+  area?: string;
+  household?: string;
+  nationality?: string;
+  /** the unticked "follow-up updates" box: true only when the visitor ticked it */
+  marketing_consent?: boolean;
+} = {}): Record<string, unknown> {
   let a: Attribution = {};
   try {
     a = JSON.parse(sessionStorage.getItem(KEY) || '{}');
@@ -40,6 +50,11 @@ export function formMetadata(extra: { lang?: string; centre?: string } = {}): Re
     path: typeof window !== 'undefined' ? window.location.pathname : undefined,
     lang: extra.lang,
     centre: extra.centre || undefined,
+    service: extra.service || undefined,
+    area: extra.area || undefined,
+    household: extra.household || undefined,
+    nationality: extra.nationality || undefined,
+    marketing_consent: extra.marketing_consent === undefined ? undefined : String(extra.marketing_consent),
     code: a.code,
     utm: a.utm,
     landing: a.landing,

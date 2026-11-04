@@ -520,16 +520,22 @@ export async function submitContactForm(formData: {
   /** #974: the form's language and "Which centre?" slug (kajang, klang, petaling-jaya, puchong, johor-bahru) */
   lang?: 'en' | 'zh';
   centre?: string;
+  /** Maids in Malaysia (lcs#1836): stored in metadata, not as columns */
+  service?: string;
+  area?: string;
+  household?: string;
+  nationality?: string;
+  marketing_consent?: boolean;
 }): Promise<boolean> {
   if (isVisitorRegionBlocked()) return false;
 
-  const { lang, centre, ...row } = formData;
+  const { lang, centre, service, area, household, nationality, marketing_consent, ...row } = formData;
   const { error } = await supabase.from('cms_forms').insert({
     ...row,
     form_type: 'contact',
     status: 'new',
     // LCS turns Genesis website forms into enquiries from this (lyndontf/lcs#974)
-    metadata: formMetadata({ lang, centre }),
+    metadata: formMetadata({ lang, centre, service, area, household, nationality, marketing_consent }),
   });
   return !error;
 }
