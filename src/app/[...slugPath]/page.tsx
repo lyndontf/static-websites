@@ -6,6 +6,7 @@ import ContentRenderer from '@/components/ContentRenderer';
 import { CmsRawBlocks } from '@/components/CmsHtmlPage';
 import { isRawBlockSequence } from '@/lib/cms-blocks';
 import CmsContentPage from '@/components/CmsContentPage';
+import { MaidsPageSchema } from '@/components/MaidsSchema';
 
 // This REQUIRED catch-all (note: [...slugPath], not the optional [[...slugPath]]) merges
 // what used to be single-segment CMS page routes ([slug]/page.tsx) with locale-prefixed
@@ -289,6 +290,17 @@ export default async function DynamicPage({ params }: PageProps) {
             </div>
           </section>
         )}
+      </>
+    );
+  }
+
+  if (siteSlug === 'maids') {
+    // Maids in Malaysia (lcs#1842): structured data per page, and a hero that keeps the page's direct answer
+    // in the body and shows no stock photo.
+    return (
+      <>
+        <MaidsPageSchema page={page} />
+        <CmsContentPage page={page} plainHero />
       </>
     );
   }
