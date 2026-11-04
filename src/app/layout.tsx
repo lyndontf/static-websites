@@ -8,6 +8,7 @@ import WhatsAppWidget from '@/components/WhatsAppWidget';
 import LayoutWrapper from '@/components/LayoutWrapper';
 import TrackingScript from '@/components/TrackingScript';
 import GtaOrgSchema from '@/components/GtaOrgSchema';
+import { MaidsSiteSchema } from '@/components/MaidsSchema';
 import Script from 'next/script';
 import { centreNavEN } from '@/lib/nav';
 import { getSiteSettings, getPageBySlug } from '@/lib/supabase';
@@ -121,6 +122,7 @@ export default async function RootLayout({
       </head>
       <body className={`${isFullHtmlPage ? '' : isBloom ? hanken.className : inter.className} flex flex-col min-h-screen`}>
         {siteSlug === 'gta' && <GtaOrgSchema />}
+        {siteSlug === 'maids' && <MaidsSiteSchema />}
         <LangProvider initialLang={isZhRoute ? 'zh' : 'en'}>
           {!isCmsSite && !isAgencyPage && !isFullHtmlPage && <Header settings={settings} menuItems={centreNavEN} />}
           <LayoutWrapper

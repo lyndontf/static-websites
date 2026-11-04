@@ -8,7 +8,10 @@ import ContentRenderer from '@/components/ContentRenderer';
 // actually visible on first paint is decided by the site-wide toggle (default)
 // or, on a /zh/* route, by the LangProvider the root layout installs there —
 // this component itself is locale-agnostic, it just prepares both.
-export default function CmsContentPage({ page }: { page: any }) {
+// plainHero (Maids in Malaysia): keep the page's first paragraph in the body (it is the page's direct
+// answer, which the hero would otherwise drop when a meta description exists) and show no stock photo
+// behind the heading unless the page has its own featured image.
+export default function CmsContentPage({ page, plainHero = false }: { page: any; plainHero?: boolean }) {
   const heroHeading = page.content?.find(
     (b: any) => b.type === 'heading' && (b.level === 1 || !b.level)
   );
@@ -16,7 +19,7 @@ export default function CmsContentPage({ page }: { page: any }) {
 
   const remainingBlocks = page.content?.filter((b: any) => {
     if (b === heroHeading) return false;
-    if (b === heroParagraph) return false;
+    if (b === heroParagraph && !plainHero) return false;
     return true;
   }) || [];
 
@@ -47,11 +50,13 @@ export default function CmsContentPage({ page }: { page: any }) {
       ` }} />
       {/* ─── HERO ─── */}
       <section className="cms-hero relative bg-gradient-to-br from-primary-800 via-primary to-secondary overflow-hidden">
-        <img
-          src={page.featured_image_url || '/images/general/staff-care.jpg'}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        {(page.featured_image_url || !plainHero) && (
+          <img
+            src={page.featured_image_url || '/images/general/staff-care.jpg'}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-800/90 via-primary/85 to-secondary/80" />
         <div
           className="absolute inset-0 opacity-[0.04]"
