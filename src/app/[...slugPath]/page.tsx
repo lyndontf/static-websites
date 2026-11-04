@@ -68,6 +68,12 @@ async function resolveRoute(slugPath: string[] | undefined, siteId: string | und
     return { locale: first, slug: second };
   }
 
+  // Guides live one level down, e.g. /guides/maid-faq (Maids in Malaysia, lcs#1840): the page's slug is
+  // 'guides/maid-faq'. Only this one prefix is allowed, so scanner paths like /a/b never reach the database.
+  if (first === 'guides' && second !== undefined && rest.length === 0) {
+    return { locale: 'en', slug: `guides/${second}` };
+  }
+
   // Plain English (default-locale) page slug, e.g. /about-us
   if (segments.length > 1) return null; // no deeper nesting supported for plain slugs
   return { locale: 'en', slug: first };
@@ -79,7 +85,7 @@ export async function generateStaticParams() {
   const pages = await getPublishedPages();
   return pages
     .filter((p) => p.slug !== 'home' && (p.locale || 'en') === 'en')
-    .map((p) => ({ slugPath: [p.slug] }));
+    .map((p) => ({ slugPath: p.slug.split('/') }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
