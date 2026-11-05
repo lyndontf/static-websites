@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import CmsContentPage from '@/components/CmsContentPage';
 import Link from 'next/link';
 import { getPageBySlug, getSiteSettings, getPublishedPosts } from '@/lib/supabase';
 import { getCurrentSiteId, getCurrentSiteSlug, getCurrentSiteBaseUrl } from '@/lib/site-context';
@@ -102,6 +103,12 @@ export default async function HomePage() {
     getSiteSettings(sid),
     getPublishedPosts(sid),
   ]);
+
+  // Maids in Malaysia: the Home page is ordinary CMS blocks, so render it like the site's other pages (its own
+  // H1 in the banner, once) instead of the generic hero below, which prints the meta title and then the H1 again.
+  if (siteSlug === 'maids' && page?.content && page.content.length > 1) {
+    return <CmsContentPage page={page} plainHero />;
+  }
 
   // ─── Non-centre sites: render CMS content dynamically ───
   if (siteSlug !== 'centre') {

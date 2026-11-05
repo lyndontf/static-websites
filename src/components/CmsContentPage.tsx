@@ -49,7 +49,11 @@ export default function CmsContentPage({ page, plainHero = false }: { page: any;
         .cms-hero h1, .cms-hero p, .cms-hero span, .cms-hero div { color: #ffffff !important; }
       ` }} />
       {/* ─── HERO ─── */}
-      <section className="cms-hero relative bg-gradient-to-br from-primary-800 via-primary to-secondary overflow-hidden">
+      <section
+        className="cms-hero relative bg-gradient-to-br from-primary-800 via-primary to-secondary overflow-hidden"
+        // Maids in Malaysia: its own brand blue instead of the shared blue-to-teal gradient.
+        style={plainHero ? { background: 'linear-gradient(135deg, #17497F 0%, #1F5FA8 100%)' } : undefined}
+      >
         {(page.featured_image_url || !plainHero) && (
           <img
             src={page.featured_image_url || '/images/general/staff-care.jpg'}
@@ -57,7 +61,9 @@ export default function CmsContentPage({ page, plainHero = false }: { page: any;
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-800/90 via-primary/85 to-secondary/80" />
+        {!plainHero && (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-800/90 via-primary/85 to-secondary/80" />
+        )}
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
