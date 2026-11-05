@@ -160,8 +160,6 @@ const nextConfig = {
       { source: '/senior-daycare', destination: '/elderly-day-care', permanent: true },
       { source: '/geriatric-care', destination: '/our-services', permanent: true },
       { source: '/geriatric-care/', destination: '/our-services', permanent: true },
-      { source: '/cost-calculator', destination: 'https://web.lifecaresystems.com.my/cost-calculator', permanent: false },
-      { source: '/cost-calculator/', destination: 'https://web.lifecaresystems.com.my/cost-calculator', permanent: false },
       { source: '/read-our-reviews', destination: '/our-gallery', permanent: true },
       { source: '/read-our-reviews/', destination: '/our-gallery', permanent: true },
       { source: '/review-of-our-old-folks-home', destination: '/our-gallery', permanent: true },
