@@ -4,6 +4,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { ContentBlock } from '@/lib/supabase';
 import { useSiteLang } from '@/lib/useSiteLang';
+import MaidsPlugBox from '@/components/MaidsPlugs';
 
 const JobListingsEmbed = dynamic(() => import('./JobListingsEmbed'), { ssr: false });
 
@@ -135,6 +136,27 @@ export default function ContentRenderer({
 
           case 'job_listings':
             return <JobListingsEmbed key={i} />;
+
+          // Maids in Malaysia: a signed plug box, and expandable FAQ questions (all answers are in the HTML)
+          case 'maids_plug':
+            return <MaidsPlugBox key={i} plugKey={block.key || ''} code={block.code || ''} />;
+
+          case 'maids_faq':
+            return (
+              <div key={i} className="my-6 divide-y divide-[#D5E0EB] rounded-xl border border-[#D5E0EB] bg-white">
+                {(block.faq || []).map((q, j) => (
+                  <details key={j} className="group px-4 py-1 sm:px-5">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-4 text-lg font-extrabold text-[#0F2A43]">
+                      <span>{q.question}</span>
+                      <span aria-hidden="true" className="text-2xl font-normal text-[#1F5FA8] group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <div className="pb-4">
+                      <ContentRenderer blocks={q.blocks} />
+                    </div>
+                  </details>
+                ))}
+              </div>
+            );
 
           default:
             return null;

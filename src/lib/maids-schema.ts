@@ -2,6 +2,8 @@
 // Only facts Lyndon has confirmed go in here: the licence, the operator, the WhatsApp contact and the reply hours.
 // No review or rating markup: none exists, and none may be added until real, verifiable reviews do.
 
+import { parseFaq, faqPairsFromParsed } from '@/lib/maids-faq';
+
 export const MAIDS_BASE_URL = 'https://maidsinmalaysia.com';
 
 type Json = Record<string, unknown>;
@@ -122,8 +124,9 @@ export function maidsPageJsonLd(page: {
     });
   }
 
-  if (page.slug === 'guides/maid-faq') {
-    const pairs = faqPairs(page.content);
+  if (page.slug === 'guides/maid-faq' || page.slug.startsWith('faq/')) {
+    const parsed = page.slug.startsWith('faq/') ? parseFaq(page.content as any[]) : null;
+    const pairs = parsed ? faqPairsFromParsed(parsed) : faqPairs(page.content);
     if (pairs.length) {
       out.push({
         '@context': 'https://schema.org',

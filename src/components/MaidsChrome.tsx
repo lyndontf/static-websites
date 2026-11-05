@@ -8,13 +8,30 @@ const WHATSAPP =
   'https://api.whatsapp.com/send?phone=60192240457&text=Hi%2C%20I%27d%20like%20to%20hire%20a%20maid.%20Ref%3A%20IAPG2611-WB';
 
 const NAV = [
-  { href: '/hire-a-maid', label: 'Hire a maid' },
-  { href: '/transfer-a-maid', label: 'Transfer' },
+  { href: '/', label: 'Start here' },
+  { href: '/guides/how-to-hire-a-maid-malaysia', label: 'Step by step' },
+  { href: '/faq/process', label: 'FAQ' },
+  { href: '/rules-and-fees', label: 'Rules and fees' },
+  { href: '/official-links', label: 'Official links' },
+  { href: '/hire-a-maid', label: 'Our services' },
+];
+
+// Footer: the agency's own pages (labelled as ours), and the FAQ topics.
+const SERVICES = [
+  { href: '/hire-a-maid', label: 'Hire a maid from abroad' },
+  { href: '/transfer-a-maid', label: 'Transfer a maid' },
   { href: '/elderly-caregiver', label: 'Elderly care' },
   { href: '/replacement-guarantee', label: 'Guarantee' },
-  { href: '/guides/maid-faq', label: 'Questions' },
-  { href: '/licence', label: 'Licence' },
+  { href: '/licence', label: 'Our licence' },
   { href: '/contact', label: 'Contact' },
+  { href: '/privacy-notice', label: 'Privacy notice' },
+];
+const FAQS = [
+  { href: '/faq/process', label: 'FAQ: the hiring process' },
+  { href: '/faq/eligibility-and-rules', label: 'FAQ: eligibility and rules' },
+  { href: '/faq/scams-and-pitfalls', label: 'FAQ: scams and pitfalls' },
+  { href: '/rules-and-fees', label: 'Rules and fees' },
+  { href: '/official-links', label: 'Official links' },
 ];
 
 const GUIDES = [
@@ -110,23 +127,25 @@ export function MaidsFooter({
         <div>
           <p className="text-xs font-bold uppercase tracking-wide text-gray-500">Our services</p>
           <ul className="mt-2 space-y-1">
-            {NAV.map((n) => (
+            {SERVICES.map((n) => (
               <li key={n.href}>
                 <Link href={n.href} className="hover:text-[#1F5FA8]">
                   {n.label}
                 </Link>
               </li>
             ))}
-            <li>
-              <Link href="/privacy-notice" className="hover:text-[#1F5FA8]">
-                Privacy notice
-              </Link>
-            </li>
           </ul>
         </div>
         <div>
           <p className="text-xs font-bold uppercase tracking-wide text-gray-500">Guides</p>
           <ul className="mt-2 space-y-1">
+            {FAQS.map((g) => (
+              <li key={g.href}>
+                <Link href={g.href} className="hover:text-[#1F5FA8]">
+                  {g.label}
+                </Link>
+              </li>
+            ))}
             {GUIDES.map((g) => (
               <li key={g.href}>
                 <Link href={g.href} className="hover:text-[#1F5FA8]">
