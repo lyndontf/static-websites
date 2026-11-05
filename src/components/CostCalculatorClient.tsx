@@ -217,7 +217,7 @@ export default function CostCalculatorClient() {
                   <input className={INPUT} type="email" placeholder={t.email} value={lead.email} onChange={(e) => setLead((l) => ({ ...l, email: e.target.value }))} autoComplete="email" />
                   {leadState === 'missing' && <p className="text-xs text-[#c1493f]">{t.need}</p>}
                   {leadState === 'error' && <p className="text-xs text-[#c1493f]">{t.failed}</p>}
-                  <button type="submit" className="w-full bg-[#2c88a2] text-white py-3 rounded-xl font-bold text-sm hover:bg-[#0b4a5e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md" disabled={leadState === 'sending'}>{leadState === 'sending' ? t.sending : t.send}</button>
+                  <button type="submit" className="w-full bg-[#FAB515] text-[#173039] py-3 rounded-xl font-bold text-sm hover:bg-[#E5A20C] transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md" disabled={leadState === 'sending'}>{leadState === 'sending' ? t.sending : t.send}</button>
                   <p className={`text-xs ${MUTED}`}>{t.privacy}</p>
                 </>
               )}
