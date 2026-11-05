@@ -148,8 +148,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     if (Object.keys(langMap).length > 0) languages = langMap;
   }
 
+  // A meta title that already ends with the site name (Maids in Malaysia's do) must not get the layout's
+  // " | Site name" template added a second time.
+  const siteName = settings?.site_name?.trim();
+  const titleMeta = siteSlug === 'maids' && siteName && title.trim().toLowerCase().endsWith(siteName.toLowerCase()) ? { absolute: title } : title;
+
   return {
-    title,
+    title: titleMeta,
     description,
     alternates: {
       canonical: url,
