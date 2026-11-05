@@ -9,6 +9,7 @@ import LayoutWrapper from '@/components/LayoutWrapper';
 import TrackingScript from '@/components/TrackingScript';
 import GtaOrgSchema from '@/components/GtaOrgSchema';
 import { MaidsSiteSchema } from '@/components/MaidsSchema';
+import { MaidsHeader, MaidsFooter } from '@/components/MaidsChrome';
 import Script from 'next/script';
 import { centreNavEN } from '@/lib/nav';
 import { getSiteSettings, getPageBySlug } from '@/lib/supabase';
@@ -125,6 +126,7 @@ export default async function RootLayout({
         {siteSlug === 'maids' && <MaidsSiteSchema />}
         <LangProvider initialLang={isZhRoute ? 'zh' : 'en'}>
           {!isCmsSite && !isAgencyPage && !isFullHtmlPage && <Header settings={settings} menuItems={centreNavEN} />}
+          {siteSlug === 'maids' && <MaidsHeader siteName={settings?.site_name} />}
           <LayoutWrapper
             isCmsSite={isCmsSite}
             isFullHtmlPage={isFullHtmlPage}
@@ -134,6 +136,9 @@ export default async function RootLayout({
           >
             {children}
           </LayoutWrapper>
+          {siteSlug === 'maids' && (
+            <MaidsFooter siteName={settings?.site_name} footerText={settings?.footer_text} email={settings?.contact_email} />
+          )}
           {!isCmsSite && !isFullHtmlPage && (
             <WhatsAppWidget phone={(settings?.contact_phone || '60193250457').replace(/[^\d]/g, '')} />
           )}
