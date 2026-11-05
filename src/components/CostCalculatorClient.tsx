@@ -2,15 +2,16 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { submitContactForm } from '@/lib/supabase';
+import { useSiteLang } from '@/lib/useSiteLang';
 import {
   centreSlugFor, formatRM, getCostCentres, getCostOptions, getCostQuote, quoteSummary, shortCentreName,
   type CostCentre, type CostOption, type CostOptions, type CostPick, type CostQuote,
 } from '@/lib/costCalculator';
 
-type Lang = 'en' | 'zh';
-
 const T = {
   en: {
+    heroTag: 'Free tool', heroTitle: 'Nursing home cost calculator',
+    heroText: 'Select a centre, room type, care level and add-on services to see the full monthly cost, with the SST shown separately. No sign-up needed.',
     centre: 'Centre', choose: 'Choose…', none: 'None', stay: 'Length of stay', long: 'Long stay', short: 'Short stay',
     room: 'Room type', bed: 'Bed type', ac: 'Air-conditioning', laundry: 'Laundry', meal: 'Meals',
     feeding: 'Feeding assistance', grooming: 'Grooming assistance', mobility: 'Mobility assistance', toileting: 'Toileting assistance', wound: 'Wound care',
@@ -24,6 +25,8 @@ const T = {
     privacy: 'We use your details only to contact you about this enquiry.', need: 'Please fill in your name, mobile number and email.',
   },
   zh: {
+    heroTag: '免费工具', heroTitle: '安老院费用计算器',
+    heroText: '选择护理中心、房型、护理等级和附加服务，即可查看每月总费用，服务税 (SST) 另行列出。无需注册。',
     centre: '护理中心', choose: '请选择…', none: '不需要', stay: '入住时长', long: '长期入住', short: '短期入住',
     room: '房型', bed: '床型', ac: '冷气', laundry: '洗衣服务', meal: '膳食',
     feeding: '喂食协助', grooming: '梳洗协助', mobility: '行动协助', toileting: '如厕协助', wound: '伤口护理',
@@ -47,7 +50,9 @@ const LABEL = 'block text-xs font-bold text-[#5b6b73] mb-1.5';
 const CARD = 'bg-white rounded-2xl border border-[#e4eaed] shadow-sm p-5 sm:p-6';
 const MUTED = 'text-[#7a8a92]';
 
-export default function CostCalculatorClient({ lang = 'en' }: { lang?: Lang }) {
+// The language follows the site's own toggle (saved choice first, else the route's default), like every other page on the site.
+export default function CostCalculatorClient() {
+  const lang = useSiteLang();
   const t = T[lang];
   const [centres, setCentres] = useState<CostCentre[]>([]);
   const [centreId, setCentreId] = useState('');
@@ -122,6 +127,14 @@ export default function CostCalculatorClient({ lang = 'en' }: { lang?: Lang }) {
   };
 
   return (
+    <>
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0e5a72] to-[#2c88a2] py-14 sm:py-20">
+        <div className="relative max-w-2xl mx-auto px-4 text-center">
+          <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[.14em] uppercase text-white/90 mb-4">{t.heroTag}</span>
+          <h1 className="text-3xl sm:text-[40px] font-extrabold text-white leading-tight tracking-tight mb-4 text-balance">{t.heroTitle}</h1>
+          <p className="text-base sm:text-lg text-white/85 max-w-xl mx-auto leading-relaxed">{t.heroText}</p>
+        </div>
+      </section>
     <div className="max-w-5xl mx-auto px-4 py-10 sm:py-14">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className={`${CARD} space-y-4`}>
@@ -213,5 +226,6 @@ export default function CostCalculatorClient({ lang = 'en' }: { lang?: Lang }) {
         </div>
       </div>
     </div>
+    </>
   );
 }
