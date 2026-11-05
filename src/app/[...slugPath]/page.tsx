@@ -6,6 +6,7 @@ import ContentRenderer from '@/components/ContentRenderer';
 import { CmsRawBlocks } from '@/components/CmsHtmlPage';
 import { isRawBlockSequence } from '@/lib/cms-blocks';
 import CmsContentPage from '@/components/CmsContentPage';
+import { transformMaidsBlocks } from '@/lib/maids-blocks';
 import { MaidsPageSchema } from '@/components/MaidsSchema';
 
 // This REQUIRED catch-all (note: [...slugPath], not the optional [[...slugPath]]) merges
@@ -73,6 +74,10 @@ async function resolveRoute(slugPath: string[] | undefined, siteId: string | und
   // 'guides/maid-faq'. Only this one prefix is allowed, so scanner paths like /a/b never reach the database.
   if (first === 'guides' && second !== undefined && rest.length === 0) {
     return { locale: 'en', slug: `guides/${second}` };
+  }
+  // FAQ topic pages (Maids in Malaysia guide), e.g. /faq/process: same one-level rule, one extra allowed prefix.
+  if (first === 'faq' && second !== undefined && rest.length === 0) {
+    return { locale: 'en', slug: `faq/${second}` };
   }
 
   // Plain English (default-locale) page slug, e.g. /about-us
@@ -305,7 +310,7 @@ export default async function DynamicPage({ params }: PageProps) {
     return (
       <>
         <MaidsPageSchema page={page} />
-        <CmsContentPage page={page} plainHero />
+        <CmsContentPage page={{ ...page, content: transformMaidsBlocks(page.slug, page.content as any) as any }} plainHero />
       </>
     );
   }
