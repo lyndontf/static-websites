@@ -560,9 +560,7 @@ export default async function HomePage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 mb-6">
                   <a
-                    href="https://web.lifecaresystems.com.my/cost-calculator"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/cost-calculator"
                     className="inline-flex items-center justify-center gap-2 bg-primary text-white px-7 py-3.5 rounded-full text-base font-bold shadow-md hover:bg-primary-600 hover:shadow-lg transition-all whitespace-nowrap"
                   >
                     Calculate Your Cost
