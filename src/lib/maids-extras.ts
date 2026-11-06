@@ -18,9 +18,9 @@ export type MaidsHelper = {
   photo: string | null;
 };
 
-type Rule = { helpers?: 'maid' | 'elder'; centres?: boolean; eligibility?: boolean; flow?: boolean };
+type Rule = { helpers?: 'maid' | 'elder'; helpersAfter?: RegExp; centres?: boolean; eligibility?: boolean; flow?: boolean };
 const RULES: Record<string, Rule> = {
-  home: { helpers: 'maid', centres: true },
+  home: { helpers: 'maid', helpersAfter: /where do you want to start/i, centres: true },
   'hire-a-maid': { helpers: 'maid', eligibility: true, flow: true },
   'elderly-caregiver': { helpers: 'elder' },
   'guides/does-my-family-qualify-to-hire-a-maid': { centres: true },
@@ -67,6 +67,7 @@ export async function withMaidsExtras<T extends { type: string; key?: string }>(
   if (rule.eligibility) blocks = replaceSection(blocks, /does your family qualify/i, (n) => [{ type: 'maids_eligibility', code: maidsPageCode(slug) } as any]) as T[];
   if (rule.flow) blocks = replaceSection(blocks, /what happens next/i, (inner) => flowBlock(inner)) as T[];
   const extra: any[] = [];
+  let helpersBlock: any = null;
   const code = maidsPageCode(slug);
   if (rule.helpers) {
     try {
@@ -89,13 +90,26 @@ export async function withMaidsExtras<T extends { type: string; key?: string }>(
         rows = [...complete, ...rows.filter((r) => !ids.has(r.id))];
       }
       const helpers = rows.slice(0, 12).map(toHelper);
-      if (helpers.length) extra.push({ type: 'maids_helpers', variant: rule.helpers, helpers, code });
+      if (helpers.length) {
+        const hb = { type: 'maids_helpers', variant: rule.helpers, helpers, code };
+        if (rule.helpersAfter) helpersBlock = hb;
+        else extra.push(hb);
+      }
     } catch {
       /* no carousel if the list cannot be read */
     }
   }
   if (rule.centres && !blocks.some((b) => b.type === 'maids_plug' && b.key === 'centres')) {
     extra.push({ type: 'maids_plug', key: 'centres', code });
+  }
+  if (helpersBlock && rule.helpersAfter) {
+    // right after the section whose heading matches (before the next heading)
+    const h = blocks.findIndex((b: any) => b.type === 'heading' && rule.helpersAfter!.test((b as any).content || ''));
+    if (h >= 0) {
+      let j = h + 1;
+      while (j < blocks.length && blocks[j].type !== 'heading') j++;
+      blocks = [...blocks.slice(0, j), helpersBlock as T, ...blocks.slice(j)];
+    } else extra.unshift(helpersBlock);
   }
   if (!extra.length) return blocks;
   const at = blocks.findIndex((b) => b.type === 'maids_plug');

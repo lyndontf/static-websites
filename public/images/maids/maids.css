@@ -1066,3 +1066,15 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
   .elig form > .btn { grid-column: 1 / -1; justify-self: start; }
   .elig select, .elig input[type="number"] { max-width: none; }
 }
+
+/* Home: gold "Speak to a consultant" button */
+.hero .btn--outline { background: var(--color-accent); border-color: var(--color-accent); color: #000; }
+.hero .btn--outline:hover { background: #E3A200; border-color: #E3A200; color: #000; }
+
+/* Trust bar */
+.trustbar { background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
+.trustbar__list { margin: 0; padding: var(--space-6) 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--space-5) var(--space-6); }
+.trustbar__item { display: flex; align-items: flex-start; gap: var(--space-3); line-height: 1.4; }
+.trustbar__icon { flex: 0 0 48px; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-primary-tint); color: var(--color-primary); }
+.trustbar__item strong { display: block; font-size: 1.0625rem; font-weight: var(--fw-heavy); color: var(--color-ink); }
+.trustbar__item span > span { display: block; margin-top: 2px; font-size: var(--fs-small); color: var(--color-ink-soft); }

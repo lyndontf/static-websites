@@ -115,6 +115,15 @@ export default async function MaidsPage({ page, blocks }: { page: any; blocks: B
   );
 }
 
+// Trust bar on the Home page: each line is a signed fact (licence, sources and last-checked date, the family is the legal employer,
+// reply time).
+const TRUST = [
+  { title: 'Licensed agency', text: 'PEA Licence B No. 1681', icon: 'M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z M9 12l2 2 4-4' },
+  { title: 'Official sources', text: 'Rules checked against the official pages, last checked 5 November 2026', icon: 'M7 3h8l4 4v14H7z M15 3v4h4 M10 12h6 M10 16h6' },
+  { title: 'Your family is the employer', text: 'Never the agency or one of our group companies', icon: 'M4 11l8-7 8 7 M6 10v10h12V10 M10 20v-5h4v5' },
+  { title: 'Quick replies', text: 'A consultant replies within 1 working hour, 8am to 6pm Mon to Sat', icon: 'M12 7v5l3 2 M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+];
+
 export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }) {
   const { title, body } = prepare(page, await withMaidsExtras('home', blocks));
   const lead: string = page.meta_description || '';
@@ -147,12 +156,22 @@ export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }
         </div>
       </section>
 
-      <section className="section--ruled">
-        <div className="container section--tight">
-          <ul className="grid grid--wide list-reset" role="list">
-            <li className="trust__item">Rules link to their official source</li>
-            <li className="trust__item">Pages show when we last checked them</li>
-            <li className="trust__item">Published by a licensed agency, PEA Licence B No. 1681</li>
+      <section className="trustbar" aria-label="Why families trust this guide">
+        <div className="container">
+          <ul className="trustbar__list" role="list">
+            {TRUST.map((t) => (
+              <li key={t.title} className="trustbar__item">
+                <span className="trustbar__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={t.icon} />
+                  </svg>
+                </span>
+                <span>
+                  <strong>{t.title}</strong>
+                  <span>{t.text}</span>
+                </span>
+              </li>
+            ))}
           </ul>
         </div>
       </section>
