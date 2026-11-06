@@ -4,6 +4,7 @@ import { heroPhotoFor, sectionFor, MAIDS_PHOTOS } from '@/lib/maids-photos';
 import { withMaidsExtras } from '@/lib/maids-extras';
 import { T } from '@/components/MaidsLang';
 import MaidsLangSwitch from '@/components/MaidsLangSwitch';
+import MaidsTitle from '@/components/MaidsTitle';
 
 // Page layouts for maidsinmalaysia.com, from the Teal and Sand site template (public/images/maids/maids.css):
 // MaidsPage = the article layout (breadcrumb, hero with photo, contents list, reading column);
@@ -122,6 +123,7 @@ export default async function MaidsPage({ page, blocks, blocksZh }: { page: any;
 
   return (
     <article>
+      <MaidsTitle zh={zh?.title} />
       <section className="page-hero">
         <div className="container page-hero__inner">
           <Breadcrumb slug={slug} title={title} titleZh={zh?.title} />
@@ -182,6 +184,7 @@ export async function MaidsHome({ page, blocks, blocksZh }: { page: any; blocks:
 
   return (
     <article>
+      <MaidsTitle zh={zh?.title} />
       <section className="hero">
         <div className="container hero__inner split split--center">
           <div className="split__half hero__copy">
