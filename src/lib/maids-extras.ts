@@ -68,6 +68,28 @@ function toHelper(r: Record<string, any>): MaidsHelper {
   };
 }
 
+/** Available maids with a full card (age, status, nationality, languages, salary), for the agency homepage carousel. */
+export async function fetchAvailableMaids(limit = 16): Promise<MaidsHelper[]> {
+  try {
+    const { data } = await supabase.rpc('carer_showcase', { p_per_kind: 12 });
+    let rows = ((data as any[]) || []).filter((r) => r.kind === 'maid');
+    const { data: all } = await supabase
+      .from('caregiver_public_profiles')
+      .select('id, full_name, age, languages, marital_status, nationality, monthly_salary, profile_photo_url, job_category, created_at')
+      .order('created_at', { ascending: false })
+      .limit(200);
+    const complete = ((all as any[]) || [])
+      .filter((r) => /maid|helper|domestic/i.test(r.job_category || '') && !/care/i.test(r.job_category || ''))
+      .filter((r) => r.age && Array.isArray(r.languages) && r.languages.length && r.marital_status && Number(r.monthly_salary) > 0 && String(r.profile_photo_url || '').startsWith('http'))
+      .map((r) => ({ ...r, kind: 'maid' }));
+    const ids = new Set(complete.map((r) => r.id));
+    rows = [...complete, ...rows.filter((r) => !ids.has(r.id))];
+    return rows.slice(0, limit).map(toHelper);
+  } catch {
+    return [];
+  }
+}
+
 /** Adds the extra sections for a page: returns the blocks unchanged when the page has none. */
 export async function withMaidsExtras<T extends { type: string; key?: string }>(slug: string, blocks: T[], zh = false): Promise<T[]> {
   const rule = RULES[slug];

@@ -16,7 +16,7 @@ import type { MaidsHelper } from '@/lib/maids-extras';
 const WHATSAPP = 'https://api.whatsapp.com/send?phone=60192240457&text=';
 const SPEED = 28; // pixels per second
 
-export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpers: MaidsHelper[]; variant: string; code: string }) {
+export default function MaidsHelpersCarousel({ helpers, variant, code, phone, agency }: { helpers: MaidsHelper[]; variant: string; code: string; phone?: string; agency?: boolean }) {
   const tr = useT();
   const track = useRef<HTMLUListElement>(null);
   const paused = useRef(false);
@@ -123,7 +123,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
                     <li key={p}>{p}</li>
                   ))}
                 </ul>
-                <a className={`helper-card__cta${helpers.length && idx % helpers.length % 2 === 1 ? ' helper-card__cta--gold' : ''}`} href={WHATSAPP + encodeURIComponent(msg)} tabIndex={copy ? -1 : undefined}>
+                <a className={`helper-card__cta${helpers.length && idx % helpers.length % 2 === 1 ? ' helper-card__cta--gold' : ''}`} href={(phone ? `https://api.whatsapp.com/send?phone=${phone}&text=` : WHATSAPP) + encodeURIComponent(msg)} tabIndex={copy ? -1 : undefined}>
                   <T>{elder ? 'Ask about this caregiver' : 'Ask about her'}</T>
                 </a>
               </div>
@@ -131,7 +131,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
           );
         })}
       </ul>
-      <DisclosureShort />
+      {agency ? null : <DisclosureShort />}
     </aside>
   );
 }

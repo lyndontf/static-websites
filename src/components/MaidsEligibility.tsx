@@ -39,7 +39,7 @@ function Choice({ name, value, set, label }: { name: string; value: YN; set: (v:
   );
 }
 
-export default function MaidsEligibility({ code }: { code: string }) {
+export default function MaidsEligibility({ code, phone = '60192240457' }: { code: string; phone?: string }) {
   const tr = useT();
   const zh = useIsZh();
   const [household, setHousehold] = useState<YN>('');
@@ -82,7 +82,7 @@ export default function MaidsEligibility({ code }: { code: string }) {
     setTimeout(() => document.getElementById('elig-result')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 50);
   };
 
-  const wa = `https://api.whatsapp.com/send?phone=60192240457&text=${encodeURIComponent(`Hi, I'd like to speak to a consultant about hiring a maid. Ref: ${code}`)}`;
+  const wa = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(`Hi, I'd like to speak to a consultant about hiring a maid. Ref: ${code}`)}`;
 
   return (
     <div className="elig">

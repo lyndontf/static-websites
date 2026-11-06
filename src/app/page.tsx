@@ -8,6 +8,7 @@ import { getCurrentSiteId, getCurrentSiteSlug, getCurrentSiteBaseUrl } from '@/l
 import ContentRenderer from '@/components/ContentRenderer';
 import QuickEnquiryCard from '@/components/QuickEnquiryCard';
 import CmsHtmlRenderer from '@/components/CmsHtmlRenderer';
+import { AgencyCandidates, AgencyEligibility } from '@/components/AgencyHomeSections';
 
 export async function generateMetadata(): Promise<Metadata> {
   const [siteId, siteSlug] = await Promise.all([getCurrentSiteId(), getCurrentSiteSlug()]);
@@ -97,6 +98,23 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export const revalidate = 60;
 
+/** Agency homepage: swap the static "available candidates" section for the moving carousel and add the who-can-apply form. */
+async function agencyHome(html: string) {
+  const startMark = '<section class="glc-section glc-section--tint" id="biodata">';
+  const endMark = '<section class="glc-section" id="meet-our-helpers">';
+  const s = html.indexOf(startMark);
+  const e = html.indexOf(endMark);
+  if (s < 0 || e < s) return <CmsHtmlRenderer html={html} />;
+  return (
+    <>
+      <CmsHtmlRenderer html={html.slice(0, s)} />
+      <AgencyCandidates />
+      <AgencyEligibility />
+      <CmsHtmlRenderer html={html.slice(e)} />
+    </>
+  );
+}
+
 export default async function HomePage() {
   const [siteId, siteSlug] = await Promise.all([getCurrentSiteId(), getCurrentSiteSlug()]);
   const sid = siteId || undefined;
@@ -120,7 +138,7 @@ export default async function HomePage() {
           <>
             {/* Check if content is a single raw HTML block (full-page HTML) */}
             {page.content.length === 1 && page.content[0].type === 'html' ? (
-              <CmsHtmlRenderer html={page.content[0].content || ''} />
+              siteSlug === 'glc-hire' ? await agencyHome(page.content[0].content || '') : <CmsHtmlRenderer html={page.content[0].content || ''} />
             ) : (
               <article>
                 {/* Hero section */}
