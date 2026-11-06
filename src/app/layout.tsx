@@ -104,8 +104,17 @@ export default async function RootLayout({
   const isZhRoute = pathname === '/zh' || pathname.startsWith('/zh/');
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning {...(siteSlug === 'maids' ? { 'data-theme': 'teal' } : {})}>
       <head suppressHydrationWarning>
+        {siteSlug === 'maids' && (
+          <>
+            {/* Maids in Malaysia: Teal and Sand site template (public/images/maids/maids.css). Change the colours by editing data-theme on <html> above. */}
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+            <link rel="stylesheet" href="/images/maids/maids.css?v=5" />
+          </>
+        )}
         {/* custom_head_html is injected from <body> below — placing this inline script in <head> via the App Router renders it as visible text */}
         {settings?.google_analytics_id && (
           <>
@@ -121,7 +130,7 @@ export default async function RootLayout({
           </>
         )}
       </head>
-      <body className={`${isFullHtmlPage ? '' : isBloom ? hanken.className : inter.className} flex flex-col min-h-screen`}>
+      <body className={siteSlug === 'maids' ? 'mim flex flex-col min-h-screen' : `${isFullHtmlPage ? '' : isBloom ? hanken.className : inter.className} flex flex-col min-h-screen`}>
         {siteSlug === 'gta' && <GtaOrgSchema />}
         {siteSlug === 'maids' && <MaidsSiteSchema />}
         <LangProvider initialLang={isZhRoute ? 'zh' : 'en'}>
