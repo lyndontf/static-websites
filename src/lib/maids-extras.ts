@@ -18,10 +18,10 @@ export type MaidsHelper = {
   photo: string | null;
 };
 
-type Rule = { helpers?: 'maid' | 'elder'; centres?: boolean };
+type Rule = { helpers?: 'maid' | 'elder'; centres?: boolean; eligibility?: boolean; flow?: boolean };
 const RULES: Record<string, Rule> = {
   home: { helpers: 'maid', centres: true },
-  'hire-a-maid': { helpers: 'maid' },
+  'hire-a-maid': { helpers: 'maid', eligibility: true, flow: true },
   'elderly-caregiver': { helpers: 'elder' },
   'guides/does-my-family-qualify-to-hire-a-maid': { centres: true },
   contact: { centres: true },
@@ -64,6 +64,8 @@ function toHelper(r: Record<string, any>): MaidsHelper {
 export async function withMaidsExtras<T extends { type: string; key?: string }>(slug: string, blocks: T[]): Promise<T[]> {
   const rule = RULES[slug];
   if (!rule) return blocks;
+  if (rule.eligibility) blocks = replaceSection(blocks, /does your family qualify/i, (n) => [{ type: 'maids_eligibility', code: maidsPageCode(slug) } as any]) as T[];
+  if (rule.flow) blocks = replaceSection(blocks, /what happens next/i, (inner) => flowBlock(inner)) as T[];
   const extra: any[] = [];
   const code = maidsPageCode(slug);
   if (rule.helpers) {
@@ -99,4 +101,23 @@ export async function withMaidsExtras<T extends { type: string; key?: string }>(
   const at = blocks.findIndex((b) => b.type === 'maids_plug');
   const i = at >= 0 ? at : blocks.length;
   return [...blocks.slice(0, i), ...(extra as T[]), ...blocks.slice(i)];
+}
+
+type AnyBlock = { type: string; content?: string; items?: string[]; level?: number; [k: string]: any };
+
+/** Replaces what sits under a heading (up to the next heading) with other blocks; the heading stays. */
+function replaceSection(blocks: AnyBlock[], title: RegExp, make: (inner: AnyBlock[]) => AnyBlock[]): AnyBlock[] {
+  const i = blocks.findIndex((b) => b.type === 'heading' && title.test(b.content || ''));
+  if (i < 0) return blocks;
+  let j = i + 1;
+  while (j < blocks.length && blocks[j].type !== 'heading') j++;
+  return [...blocks.slice(0, i + 1), ...make(blocks.slice(i + 1, j)), ...blocks.slice(j)];
+}
+
+/** "What happens next": the signed ordered list becomes the steps, the paragraph after it becomes the note. */
+function flowBlock(inner: AnyBlock[]): AnyBlock[] {
+  const list = inner.find((b) => b.type === 'list' && Array.isArray(b.items));
+  if (!list) return inner;
+  const note = inner.find((b) => b.type === 'paragraph');
+  return [{ type: 'maids_flow', items: list.items, content: note?.content }];
 }
