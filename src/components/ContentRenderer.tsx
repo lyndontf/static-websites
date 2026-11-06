@@ -9,6 +9,7 @@ import MaidsHelpersCarousel from '@/components/MaidsHelpersCarousel';
 import MaidsEligibility from '@/components/MaidsEligibility';
 import MaidsFlow from '@/components/MaidsFlow';
 import MaidsCards from '@/components/MaidsCards';
+import MaidsCosts from '@/components/MaidsCosts';
 
 const JobListingsEmbed = dynamic(() => import('./JobListingsEmbed'), { ssr: false });
 
@@ -150,6 +151,9 @@ export default function ContentRenderer({
 
           case 'maids_flow':
             return <MaidsFlow key={i} items={block.items || []} note={block.content} variant={block.variant} />;
+
+          case 'maids_costs':
+            return <MaidsCosts key={i} whatsapp={`https://api.whatsapp.com/send?phone=60192240457&text=${encodeURIComponent(`Hi, I'd like to speak to a consultant about the cost of hiring a maid. Ref: ${block.code || ''}`)}`} />;
 
           case 'maids_cards':
             return <MaidsCards key={i} items={block.items || []} />;

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { T, useT, useIsZh } from '@/components/MaidsLang';
 
 // "Does your family qualify?" checker for Hire a maid. It applies the Immigration Department (JIM) rules that are on the
 // Rules and fees page (last checked 5 November 2026) to the visitor's answers, on the page only: nothing is sent or stored.
@@ -21,12 +22,16 @@ type Result = { ok: boolean; title: string; reasons: string[]; notes: string[] }
 function Choice({ name, value, set, label }: { name: string; value: YN; set: (v: YN) => void; label: string }) {
   return (
     <fieldset className="elig__field">
-      <legend>{label}</legend>
+      <legend>
+        <T>{label}</T>
+      </legend>
       <div className="elig__choices">
         {(['yes', 'no'] as const).map((v) => (
           <label key={v} className={value === v ? 'is-on' : ''}>
             <input type="radio" name={name} value={v} checked={value === v} onChange={() => set(v)} required />
-            <span>{v === 'yes' ? 'Yes' : 'No'}</span>
+            <span>
+              <T>{v === 'yes' ? 'Yes' : 'No'}</T>
+            </span>
           </label>
         ))}
       </div>
@@ -35,6 +40,8 @@ function Choice({ name, value, set, label }: { name: string; value: YN; set: (v:
 }
 
 export default function MaidsEligibility({ code }: { code: string }) {
+  const tr = useT();
+  const zh = useIsZh();
   const [household, setHousehold] = useState<YN>('');
   const [country, setCountry] = useState('');
   const [income, setIncome] = useState('');
@@ -55,7 +62,7 @@ export default function MaidsEligibility({ code }: { code: string }) {
     const min = INCOME[country];
     const n = Number(have);
     if (n === 0) {
-      if (inc < min) reasons.push(`For a helper from ${country}, JIM’s minimum net monthly income is ${money(min)}. Yours is ${money(inc)}.`);
+      if (inc < min) reasons.push(zh ? `聘请来自${tr(country)}的帮佣，移民局规定的每月净收入最低为 ${money(min)}。您的收入为 ${money(inc)}。` : `For a helper from ${country}, JIM’s minimum net monthly income is ${money(min)}. Yours is ${money(inc)}.`);
     } else if (n === 1) {
       if (inc <= 10000) reasons.push('A second helper needs an employer net monthly income of over RM10,000.');
       else notes.push('A second helper also needs a valid reason backed by documents.');
@@ -80,67 +87,77 @@ export default function MaidsEligibility({ code }: { code: string }) {
   return (
     <div className="elig">
       <p className="elig__intro">
-        Answer these questions to see whether your family meets JIM’s basic rules. Your answers stay on this page: we do not send or store them.
+        <T>Answer these questions to see whether your family meets JIM’s basic rules. Your answers stay on this page: we do not send or store them.</T>
       </p>
       <form onSubmit={check} onChange={() => setResult(null)}>
         <Choice name="household" value={household} set={setHousehold} label="1. Does your household have a child under 15, or a parent who is sick or ill?" />
         <div className="elig__field">
-          <label htmlFor="elig-country">2. Which country is the helper from?</label>
+          <label htmlFor="elig-country">
+            <T>2. Which country is the helper from?</T>
+          </label>
           <select id="elig-country" value={country} onChange={(e) => setCountry(e.target.value)} required>
-            <option value="">Choose a country</option>
+            <option value="">{tr('Choose a country')}</option>
             {COUNTRIES.map((c) => (
-              <option key={c}>{c}</option>
+              <option key={c} value={c}>
+                {tr(c)}
+              </option>
             ))}
           </select>
         </div>
         <div className="elig__field">
-          <label htmlFor="elig-income">3. What is your net monthly income (RM)?</label>
-          <input id="elig-income" type="number" inputMode="numeric" min="0" step="100" value={income} onChange={(e) => setIncome(e.target.value)} placeholder="For example 6000" required />
+          <label htmlFor="elig-income">
+            <T>3. What is your net monthly income (RM)?</T>
+          </label>
+          <input id="elig-income" type="number" inputMode="numeric" min="0" step="100" value={income} onChange={(e) => setIncome(e.target.value)} placeholder={tr('For example 6000')} required />
         </div>
         <div className="elig__field">
-          <label htmlFor="elig-have">4. How many foreign domestic helpers does your family employ now?</label>
+          <label htmlFor="elig-have">
+            <T>4. How many foreign domestic helpers does your family employ now?</T>
+          </label>
           <select id="elig-have" value={have} onChange={(e) => setHave(e.target.value)}>
-            <option value="0">None</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three or more</option>
+            <option value="0">{tr('None')}</option>
+            <option value="1">{tr('One')}</option>
+            <option value="2">{tr('Two')}</option>
+            <option value="3">{tr('Three or more')}</option>
           </select>
         </div>
         <Choice name="muslim" value={muslim} set={setMuslim} label="5. Are you a Muslim employer?" />
         <Choice name="helperMuslim" value={helperMuslim} set={setHelperMuslim} label="6. Is the helper a Muslim?" />
         <Choice name="barred" value={barred} set={setBarred} label="7. Have you been declared bankrupt, or are you on JIM’s suspect list or blacklist?" />
         <button type="submit" className="btn btn--primary">
-          Check my family
+          <T>Check my family</T>
         </button>
       </form>
       <div id="elig-result" role="status" aria-live="polite">
         {result ? (
           <div className={`elig__result ${result.ok ? 'is-ok' : 'is-no'}`}>
             <p className="elig__verdict">
-              <span aria-hidden="true">{result.ok ? '✓' : '✕'}</span> {result.title}
+              <span aria-hidden="true">{result.ok ? '✓' : '✕'}</span> {tr(result.title)}
             </p>
             {result.reasons.length ? (
               <ul>
                 {result.reasons.map((r) => (
-                  <li key={r}>{r}</li>
+                  <li key={r}>{tr(r)}</li>
                 ))}
               </ul>
             ) : null}
             {result.notes.length ? (
               <>
-                <p className="elig__sub">Keep in mind</p>
+                <p className="elig__sub">
+                  <T>Keep in mind</T>
+                </p>
                 <ul>
                   {result.notes.map((r) => (
-                    <li key={r}>{r}</li>
+                    <li key={r}>{tr(r)}</li>
                   ))}
                 </ul>
               </>
             ) : null}
             <p className="elig__fine">
-              This is a guide, not JIM’s decision, and it does not cover every condition. The approval decision is made by the authorities. Source: Immigration Department (JIM), last checked 5 November 2026.
+              <T>This is a guide, not JIM’s decision, and it does not cover every condition. The approval decision is made by the authorities. Source: Immigration Department (JIM), last checked 5 November 2026.</T>
             </p>
             <a className="btn btn--primary" href={wa}>
-              Speak to a consultant
+              <T>Speak to a consultant</T>
             </a>
           </div>
         ) : null}
