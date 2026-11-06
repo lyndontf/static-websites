@@ -109,7 +109,7 @@ export default async function HomePage() {
   // Maids in Malaysia: the Home page is ordinary CMS blocks, so render it like the site's other pages (its own
   // H1 in the banner, once) instead of the generic hero below, which prints the meta title and then the H1 again.
   if (siteSlug === 'maids' && page?.content && page.content.length > 1) {
-    return <MaidsHome page={page} blocks={transformMaidsBlocks('home', page.content as any) as any} />;
+    return <MaidsHome page={page} blocks={transformMaidsBlocks('home', page.content as any) as any} blocksZh={Array.isArray((page as any).content_zh) && (page as any).content_zh.length ? (transformMaidsBlocks('home', (page as any).content_zh) as any) : undefined} />;
   }
 
   // ─── Non-centre sites: render CMS content dynamically ───

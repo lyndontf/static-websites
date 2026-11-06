@@ -3,6 +3,7 @@ import ContentRenderer from '@/components/ContentRenderer';
 import { heroPhotoFor, sectionFor, MAIDS_PHOTOS } from '@/lib/maids-photos';
 import { withMaidsExtras } from '@/lib/maids-extras';
 import { T } from '@/components/MaidsLang';
+import MaidsLangSwitch from '@/components/MaidsLangSwitch';
 
 // Page layouts for maidsinmalaysia.com, from the Teal and Sand site template (public/images/maids/maids.css):
 // MaidsPage = the article layout (breadcrumb, hero with photo, contents list, reading column);
@@ -46,7 +47,18 @@ function prepare(page: any, blocks: Block[]) {
   return { title, body, toc, words };
 }
 
-function Breadcrumb({ slug, title }: { slug: string; title: string }) {
+/** Chinese version of a page: the same preparation, with the first paragraph after the H1 used as the lead line. */
+async function prepareZh(page: any, slug: string, blocksZh: Block[] | undefined) {
+  if (!blocksZh || !blocksZh.length) return null;
+  const prep = prepare(page, await withMaidsExtras(slug, blocksZh, true));
+  const i = prep.body.findIndex((b) => b.type === 'paragraph');
+  const first = i === 0 ? prep.body[0] : undefined;
+  const lead = first ? textOf(first) : '';
+  const body = first ? prep.body.slice(1) : prep.body;
+  return { ...prep, body, lead };
+}
+
+function Breadcrumb({ slug, title, titleZh }: { slug: string; title: string; titleZh?: string }) {
   const section = sectionFor(slug);
   return (
     <nav className="breadcrumb" aria-label="Breadcrumb">
@@ -63,15 +75,44 @@ function Breadcrumb({ slug, title }: { slug: string; title: string }) {
             </Link>
           </li>
         ) : null}
-        <li aria-current="page">{title}</li>
+        <li aria-current="page">
+          <MaidsLangSwitch en={title} zh={titleZh} />
+        </li>
       </ol>
     </nav>
   );
 }
 
-export default async function MaidsPage({ page, blocks }: { page: any; blocks: Block[] }) {
+function PageBody({ toc, body, showToc }: { toc: { id: string; label: string }[]; body: Block[]; showToc: boolean }) {
+  return (
+    <div className={`container page-body split${showToc ? '' : ' page-body--single'}`}>
+      {showToc ? (
+        <aside className="split__aside">
+          <nav className="toc" aria-labelledby="toc-label">
+            <p className="eyebrow toc__label" id="toc-label">
+              <T>On this page</T>
+            </p>
+            <ul className="toc__list">
+              {toc.map((t) => (
+                <li key={t.id}>
+                  <a href={`#${t.id}`}>{t.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      ) : null}
+      <div className="split__main mim-prose">
+        <ContentRenderer blocks={body as any} />
+      </div>
+    </div>
+  );
+}
+
+export default async function MaidsPage({ page, blocks, blocksZh }: { page: any; blocks: Block[]; blocksZh?: Block[] }) {
   const slug: string = page.slug || '';
   const { title, body, toc, words } = prepare(page, await withMaidsExtras(slug, blocks));
+  const zh = await prepareZh(page, slug, blocksZh);
   const section = sectionFor(slug);
   const photo = page.featured_image_url
     ? { src: page.featured_image_url as string, alt: '', pos: undefined as string | undefined }
@@ -83,7 +124,7 @@ export default async function MaidsPage({ page, blocks }: { page: any; blocks: B
     <article>
       <section className="page-hero">
         <div className="container page-hero__inner">
-          <Breadcrumb slug={slug} title={title} />
+          <Breadcrumb slug={slug} title={title} titleZh={zh?.title} />
           <div className="page-hero__body split split--center">
             <div className="split__main page-hero__copy">
               {section ? (
@@ -91,8 +132,22 @@ export default async function MaidsPage({ page, blocks }: { page: any; blocks: B
                   <T>{section.label === 'FAQ' ? 'Questions answered' : 'Step by step'}</T>
                 </span>
               ) : null}
-              <h1 className="h1">{title}</h1>
-              {lead ? <p className="lead">{lead}</p> : null}
+              <MaidsLangSwitch
+                en={
+                  <>
+                    <h1 className="h1">{title}</h1>
+                    {lead ? <p className="lead">{lead}</p> : null}
+                  </>
+                }
+                zh={
+                  zh ? (
+                    <>
+                      <h1 className="h1">{zh.title}</h1>
+                      {zh.lead ? <p className="lead">{zh.lead}</p> : null}
+                    </>
+                  ) : null
+                }
+              />
             </div>
             <div className="split__media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -102,27 +157,10 @@ export default async function MaidsPage({ page, blocks }: { page: any; blocks: B
         </div>
       </section>
 
-      <div className={`container page-body split${showToc ? '' : ' page-body--single'}`}>
-        {showToc ? (
-          <aside className="split__aside">
-            <nav className="toc" aria-labelledby="toc-label">
-              <p className="eyebrow toc__label" id="toc-label">
-                <T>On this page</T>
-              </p>
-              <ul className="toc__list">
-                {toc.map((t) => (
-                  <li key={t.id}>
-                    <a href={`#${t.id}`}>{t.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-        ) : null}
-        <div className="split__main mim-prose">
-          <ContentRenderer blocks={body as any} />
-        </div>
-      </div>
+      <MaidsLangSwitch
+        en={<PageBody toc={toc} body={body} showToc={showToc} />}
+        zh={zh ? <PageBody toc={zh.toc} body={zh.body} showToc={zh.toc.length >= 5 && zh.words >= 300} /> : null}
+      />
     </article>
   );
 }
@@ -136,8 +174,9 @@ const TRUST = [
   { title: 'Quick replies', text: 'A consultant replies within 1 working hour, 8am to 6pm Mon to Sat', icon: 'M12 7v5l3 2 M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
 ];
 
-export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }) {
+export async function MaidsHome({ page, blocks, blocksZh }: { page: any; blocks: Block[]; blocksZh?: Block[] }) {
   const { title, body } = prepare(page, await withMaidsExtras('home', blocks));
+  const zh = await prepareZh(page, 'home', blocksZh);
   const lead: string = page.meta_description || '';
   const photo = page.featured_image_url ? { src: page.featured_image_url as string, alt: '', pos: undefined as string | undefined } : MAIDS_PHOTOS.care;
 
@@ -146,9 +185,25 @@ export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }
       <section className="hero">
         <div className="container hero__inner split split--center">
           <div className="split__half hero__copy">
-            <span className="eyebrow">A hiring guide for families in Malaysia</span>
-            <h1 className="display">{title}</h1>
-            {lead ? <p className="lead">{lead}</p> : null}
+            <span className="eyebrow">
+              <T>A hiring guide for families in Malaysia</T>
+            </span>
+            <MaidsLangSwitch
+              en={
+                <>
+                  <h1 className="display">{title}</h1>
+                  {lead ? <p className="lead">{lead}</p> : null}
+                </>
+              }
+              zh={
+                zh ? (
+                  <>
+                    <h1 className="display">{zh.title}</h1>
+                    {zh.lead ? <p className="lead">{zh.lead}</p> : null}
+                  </>
+                ) : null
+              }
+            />
             <div className="btn-row">
               <Link className="btn btn--primary" href="/guides/how-to-hire-a-maid-malaysia">
                 <T>Start the guide</T>
@@ -192,11 +247,24 @@ export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }
         </div>
       </section>
 
-      <div className="container page-body page-body--single">
-        <div className="mim-prose">
-          <ContentRenderer blocks={body as any} />
-        </div>
-      </div>
+      <MaidsLangSwitch
+        en={
+          <div className="container page-body page-body--single">
+            <div className="mim-prose">
+              <ContentRenderer blocks={body as any} />
+            </div>
+          </div>
+        }
+        zh={
+          zh ? (
+            <div className="container page-body page-body--single">
+              <div className="mim-prose">
+                <ContentRenderer blocks={zh.body as any} />
+              </div>
+            </div>
+          ) : null
+        }
+      />
     </article>
   );
 }

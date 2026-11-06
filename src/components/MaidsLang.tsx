@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useLangToggle, useSiteLang } from '@/lib/useSiteLang';
 
 // English / Mandarin toggle for Maids in Malaysia, the same system as the agency site (shared 'glc-lang' choice, saved in the
@@ -122,6 +123,33 @@ export const ZH: Record<string, string> = {
   'If your helper is Muslim, you must let her pray and let her fast in Ramadan.': '若帮佣是穆斯林，您必须让她礼拜，并让她在斋戒月守斋。',
   'You will need proof of income: three months of payslips and EPF statements, or tax records.': '您需要提供收入证明：三个月的薪资单和 EPF 月结单，或税务记录。',
   'This is a guide, not JIM’s decision, and it does not cover every condition. The approval decision is made by the authorities. Source: Immigration Department (JIM), last checked 5 November 2026.': '这只是参考指南，并非移民局的决定，也未涵盖所有条件。批准与否由有关当局决定。资料来源：移民局（JIM），最近核对日期：2026年11月5日。',
+  // centres, disclosure, helper details
+  'Kajang, Selangor': '雪兰莪 加影',
+  'Klang, Selangor': '雪兰莪 巴生',
+  'Petaling Jaya, Selangor': '雪兰莪 八打灵再也',
+  'Puchong, Selangor': '雪兰莪 蒲种',
+  'Johor Bahru, Johor': '柔佛 新山',
+  'Genesis Life Care — Kajang': 'Genesis Life Care — 加影',
+  'Genesis Life Care — Klang': 'Genesis Life Care — 巴生',
+  'Genesis Life Care — Petaling Jaya': 'Genesis Life Care — 八打灵再也',
+  'Genesis Life Care — Puchong': 'Genesis Life Care — 蒲种',
+  'Genesis Life Care — Johor Bahru': 'Genesis Life Care — 新山',
+  'This box promotes our services. We are a maid agency,': '本框内容为我们的服务推广。我们是一家女佣中介，',
+  'Home Elder Care': '居家长者看护',
+  'Bahasa Malaysia': '马来语',
+  Mandarin: '华语',
+  Cantonese: '广东话',
+  Hokkien: '福建话',
+  Tamil: '泰米尔语',
+  'A hiring guide for families in Malaysia': '为马来西亚家庭准备的聘请指南',
+  Guides: '指南',
+  'Domestic Maid': '家庭女佣',
+  Pakistani: '巴基斯坦籍',
+  Nepalese: '尼泊尔籍',
+  Cambodian: '柬埔寨籍',
+  Indian: '印度籍',
+  Vietnamese: '越南籍',
+  Myanmar: '缅甸籍',
   // costs
   'What it costs to hire a maid': '聘请女佣的费用',
   'Check if your family can apply': '检查您的家庭是否可以申请',
@@ -176,6 +204,9 @@ export function useIsZh() {
 
 export function LangToggle({ className = '' }: { className?: string }) {
   const [lang, setLang] = useLangToggle();
+  useEffect(() => {
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : 'en';
+  }, [lang]);
   return (
     <button
       type="button"
