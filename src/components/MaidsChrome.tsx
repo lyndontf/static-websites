@@ -150,7 +150,6 @@ export function MaidsFooter({
       </div>
       <div className="container site-footer__legal">
         {footerText ? <p className="site-footer__note">{footerText}</p> : null}
-        <p>maidsinmalaysia.com · Photos: Genesis Life Care image bank (AI-generated) and Unsplash</p>
       </div>
     </footer>
   );

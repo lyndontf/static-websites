@@ -995,3 +995,11 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 .helper-card__facts dt { font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-ink-soft); }
 .helper-card__facts dd { margin: 0; color: var(--color-ink); font-weight: var(--fw-semibold); }
 .helper-card { flex-basis: 272px; }
+
+/* Footer: the about block and the three link columns sit side by side on one row */
+.site-footer__main { display: grid; grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr); gap: var(--space-6) var(--space-8); align-items: start; }
+.site-footer__about { max-width: 380px; }
+.site-footer__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5) var(--space-6); }
+.site-footer__col { min-width: 0; max-width: none; }
+@media (max-width: 899px) { .site-footer__main { grid-template-columns: 1fr; } .site-footer__about { max-width: none; } }
+@media (max-width: 560px) { .site-footer__cols { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
