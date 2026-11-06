@@ -101,7 +101,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
         {(loop ? [...helpers, ...helpers] : helpers).map((h, idx) => {
           const copy = loop && idx >= helpers.length;
           const msg = `Hi, I'd like to ask about ${h.name}${h.nationality ? ` (${h.nationality}${h.age ? `, ${h.age}` : ''})` : ''}. Ref: ${code}`;
-          const pills = [h.age ? (tr('years old') === '岁' ? `${h.age}岁` : `${h.age} years old`) : null, h.marital ? tr(h.marital) : null, h.salary, h.languages.length ? h.languages.map((l) => tr(l)).join(tr('years old') === '岁' ? '、' : ', ') : null].filter(Boolean) as string[];
+          const pills = [h.age ? (tr('years old') === '岁' ? `${h.age}岁` : `${h.age} years old`) : null, h.marital ? tr(h.marital) : null, h.salary ? (tr('years old') === '岁' ? h.salary.replace(/^(RMs?[d,]+)s+a month$/, '每月 $1') : h.salary) : null, h.languages.length ? h.languages.map((l) => tr(l)).join(tr('years old') === '岁' ? '、' : ', ') : null].filter(Boolean) as string[];
           return (
             <li key={`${h.id}-${idx}`} className="helper-card" aria-hidden={copy ? true : undefined}>
               <div className="helper-card__photo">
