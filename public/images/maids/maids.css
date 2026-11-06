@@ -384,15 +384,12 @@ a:hover { color: var(--color-primary-hover); }
 .brand__name {
   font-size: 1.1875rem;
   font-weight: var(--fw-heavy);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
 }
 
-/* Logo mark colours follow the theme */
-.logo-square { fill: var(--color-primary); }
-.logo-house  { fill: #FFFFFF; }
-.logo-door   { fill: var(--color-accent); }
-.logo--reverse .logo-square { fill: #FFFFFF; }
-.logo--reverse .logo-house  { fill: var(--color-primary); }
+/* The Doorway bloom logo has its colours built in (teal and sand), whatever the theme. */
+.brand__accent { color: #0E5A52; }
+.site-footer .brand__accent { color: inherit; }
 
 .nav {
   display: flex;
