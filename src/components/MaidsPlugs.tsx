@@ -41,9 +41,9 @@ function BodyText({ text }: { text: string }) {
 export function DisclosureShort() {
   return (
     <p className="mt-3 text-xs text-[color:var(--color-ink-soft)]">
-      {MAIDS_DISCLOSURE_SHORT.text}{' '}
+      <T>{MAIDS_DISCLOSURE_SHORT.text}</T>{' '}
       <Link href={MAIDS_DISCLOSURE_SHORT.link.href} className="underline">
-        {MAIDS_DISCLOSURE_SHORT.link.label}
+        <T>{MAIDS_DISCLOSURE_SHORT.link.label}</T>
       </Link>
       .
     </p>
@@ -94,8 +94,12 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
                 <img src={c.image} alt={`The ${c.name} building`} loading="lazy" width={600} height={400} />
               ) : null}
               <div className="centre-card__body">
-                <span className="centre-card__name">{c.name}</span>
-                <span className="centre-card__town">{c.town}</span>
+                <span className="centre-card__name">
+                  <T>{c.name}</T>
+                </span>
+                <span className="centre-card__town">
+                  <T>{c.town}</T>
+                </span>
                 <a href={withCode(c.whatsapp, code)} className="centre-card__cta">
                   <T>WhatsApp this centre</T>
                 </a>
