@@ -30,10 +30,10 @@ async function isFullHtmlOverride(siteId: string | undefined, siteSlug: string, 
 export const revalidate = 30;
 
 const inter = Inter({ subsets: ['latin'] });
-const hanken = Hanken_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'] });
+const hanken = Hanken_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'], variable: '--font-hanken' });
 
-// Maids in Malaysia: Plus Jakarta Sans, self-hosted by next/font (no render-blocking request to Google). maids.css uses --font-jakarta.
-const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['500', '600', '700', '800'], display: 'swap', variable: '--font-jakarta' });
+// Maids in Malaysia: Maids in Malaysia: Hanken Grotesk for text (the genesiscare.com.my font) and Plus Jakarta Sans 800 for the logo wordmark only (logo guide), both self-hosted by next/font.
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['800'], display: 'swap', variable: '--font-jakarta' });
 
 export async function generateMetadata(): Promise<Metadata> {
   const [siteId] = await Promise.all([getCurrentSiteId(), getCurrentSiteSlug()]);
@@ -111,12 +111,12 @@ export default async function RootLayout({
   const isZhRoute = pathname === '/zh' || pathname.startsWith('/zh/');
 
   return (
-    <html lang="en" suppressHydrationWarning {...(siteSlug === 'maids' ? { 'data-theme': 'navy' } : {})}>
+    <html lang="en" suppressHydrationWarning {...(siteSlug === 'maids' ? { 'data-theme': 'bloom' } : {})}>
       <head suppressHydrationWarning>
         {siteSlug === 'maids' && (
           <>
             {/* Maids in Malaysia: Teal and Sand site template (public/images/maids/maids.css). Change the colours by editing data-theme on <html> above. */}
-            <link rel="stylesheet" href="/images/maids/maids.css?v=9" />
+            <link rel="stylesheet" href="/images/maids/maids.css?v=11" />
           </>
         )}
         {/* custom_head_html is injected from <body> below — placing this inline script in <head> via the App Router renders it as visible text */}
@@ -134,7 +134,7 @@ export default async function RootLayout({
           </>
         )}
       </head>
-      <body className={siteSlug === 'maids' ? `mim ${jakarta.variable} flex flex-col min-h-screen` : `${isFullHtmlPage ? '' : isBloom ? hanken.className : inter.className} flex flex-col min-h-screen`}>
+      <body className={siteSlug === 'maids' ? `mim ${hanken.variable} ${jakarta.variable} flex flex-col min-h-screen` : `${isFullHtmlPage ? '' : isBloom ? hanken.className : inter.className} flex flex-col min-h-screen`}>
         {siteSlug === 'gta' && <GtaOrgSchema />}
         {siteSlug === 'maids' && <MaidsSiteSchema />}
         <LangProvider initialLang={isZhRoute ? 'zh' : 'en'}>
