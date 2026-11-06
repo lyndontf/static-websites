@@ -312,7 +312,7 @@ export default async function DynamicPage({ params }: PageProps) {
     return (
       <>
         <MaidsPageSchema page={page} />
-        <MaidsPage page={page} blocks={transformMaidsBlocks(page.slug, page.content as any) as any} />
+        <MaidsPage page={page} blocks={transformMaidsBlocks(page.slug, page.content as any) as any} blocksZh={Array.isArray((page as any).content_zh) && (page as any).content_zh.length ? (transformMaidsBlocks(page.slug, (page as any).content_zh) as any) : undefined} />
       </>
     );
   }

@@ -20,7 +20,7 @@ export type MaidsHelper = {
 
 type Rule = { helpers?: 'maid' | 'elder'; helpersAfter?: RegExp; centres?: boolean; eligibility?: boolean; flow?: boolean; route?: boolean; cards?: boolean; caregiversEnd?: boolean; costs?: boolean };
 const RULES: Record<string, Rule> = {
-  home: { helpers: 'maid', helpersAfter: /where do you want to start/i, centres: true, route: true, cards: true, caregiversEnd: true },
+  home: { helpers: 'maid', helpersAfter: /where do you want to start|您想从哪里开始/i, centres: true, route: true, cards: true, caregiversEnd: true },
   'rules-and-fees': { costs: true },
   'hire-a-maid': { helpers: 'maid', eligibility: true, flow: true },
   'elderly-caregiver': { helpers: 'elder' },
@@ -69,26 +69,26 @@ function toHelper(r: Record<string, any>): MaidsHelper {
 }
 
 /** Adds the extra sections for a page: returns the blocks unchanged when the page has none. */
-export async function withMaidsExtras<T extends { type: string; key?: string }>(slug: string, blocks: T[]): Promise<T[]> {
+export async function withMaidsExtras<T extends { type: string; key?: string }>(slug: string, blocks: T[], zh = false): Promise<T[]> {
   const rule = RULES[slug];
   if (!rule) return blocks;
-  if (rule.eligibility) blocks = replaceSection(blocks, /does your family qualify/i, (n) => [{ type: 'maids_eligibility', code: maidsPageCode(slug) } as any]) as T[];
-  if (rule.flow) blocks = replaceSection(blocks, /what happens next/i, (inner) => flowBlock(inner)) as T[];
+  if (rule.eligibility) blocks = replaceSection(blocks, /does your family qualify|您的家庭符合资格吗/i, (n) => [{ type: 'maids_eligibility', code: maidsPageCode(slug) } as any]) as T[];
+  if (rule.flow) blocks = replaceSection(blocks, /what happens next|接下来怎么做/i, (inner) => flowBlock(inner)) as T[];
   if (rule.costs) {
     // "What it costs" before "Who can hire", and a copy of the who-can-apply form before "Who can be hired"
     const code = maidsPageCode(slug);
     const at = (re: RegExp) => blocks.findIndex((b: any) => b.type === 'heading' && re.test((b as any).content || ''));
-    const a = at(/^who can hire$/i);
-    const b = at(/^who can be hired$/i);
-    const costs = [{ type: 'heading', level: 2, content: 'What it costs to hire a maid' }, { type: 'maids_costs', code }] as any[];
-    const form = [{ type: 'heading', level: 2, content: 'Check if your family can apply' }, { type: 'maids_eligibility', code }] as any[];
+    const a = at(/^(who can hire|谁可以聘请)$/i);
+    const b = at(/^(who can be hired|谁可以被聘请)$/i);
+    const costs = [{ type: 'heading', level: 2, content: zh ? '聘请女佣的费用' : 'What it costs to hire a maid' }, { type: 'maids_costs', code }] as any[];
+    const form = [{ type: 'heading', level: 2, content: zh ? '检查您的家庭是否可以申请' : 'Check if your family can apply' }, { type: 'maids_eligibility', code }] as any[];
     if (b >= 0) blocks = [...blocks.slice(0, b), ...form, ...blocks.slice(b)] as T[];
-    const a2 = at(/^who can hire$/i);
+    const a2 = at(/^(who can hire|谁可以聘请)$/i);
     if (a2 >= 0) blocks = [...blocks.slice(0, a2), ...costs, ...blocks.slice(a2)] as T[];
     else if (a < 0) blocks = [...blocks, ...costs, ...form] as T[];
   }
-  if (rule.route) blocks = replaceSection(blocks, /the route, step by step/i, (inner) => routeBlock(inner)) as T[];
-  if (rule.cards) blocks = replaceSection(blocks, /where do you want to start/i, (inner) => cardsBlock(inner)) as T[];
+  if (rule.route) blocks = replaceSection(blocks, /the route, step by step|官方流程，一步一步来/i, (inner) => routeBlock(inner)) as T[];
+  if (rule.cards) blocks = replaceSection(blocks, /where do you want to start|您想从哪里开始/i, (inner) => cardsBlock(inner)) as T[];
   if (rule.caregiversEnd) {
     const list = await fetchCaregivers();
     if (list.length) {
