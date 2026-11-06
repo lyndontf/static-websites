@@ -146,7 +146,9 @@ export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }
       <section className="hero">
         <div className="container hero__inner split split--center">
           <div className="split__half hero__copy">
-            <span className="eyebrow">A hiring guide for families in Malaysia</span>
+            <span className="eyebrow">
+              <T>A hiring guide for families in Malaysia</T>
+            </span>
             <h1 className="display">{title}</h1>
             {lead ? <p className="lead">{lead}</p> : null}
             <div className="btn-row">

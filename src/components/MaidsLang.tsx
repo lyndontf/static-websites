@@ -141,6 +141,7 @@ export const ZH: Record<string, string> = {
   Cantonese: '广东话',
   Hokkien: '福建话',
   Tamil: '泰米尔语',
+  'A hiring guide for families in Malaysia': '为马来西亚家庭准备的聘请指南',
   // costs
   'What it costs to hire a maid': '聘请女佣的费用',
   'Check if your family can apply': '检查您的家庭是否可以申请',
