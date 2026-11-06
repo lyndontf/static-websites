@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Hanken_Grotesk } from 'next/font/google';
+import { Inter, Hanken_Grotesk, Plus_Jakarta_Sans } from 'next/font/google';
 import { headers } from 'next/headers';
 import './globals.css';
 import Header from '@/components/Header';
@@ -31,6 +31,9 @@ export const revalidate = 30;
 
 const inter = Inter({ subsets: ['latin'] });
 const hanken = Hanken_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'] });
+
+// Maids in Malaysia: Plus Jakarta Sans, self-hosted by next/font (no render-blocking request to Google). maids.css uses --font-jakarta.
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['500', '600', '700', '800'], display: 'swap', variable: '--font-jakarta' });
 
 export async function generateMetadata(): Promise<Metadata> {
   const [siteId] = await Promise.all([getCurrentSiteId(), getCurrentSiteSlug()]);
@@ -109,10 +112,7 @@ export default async function RootLayout({
         {siteSlug === 'maids' && (
           <>
             {/* Maids in Malaysia: Teal and Sand site template (public/images/maids/maids.css). Change the colours by editing data-theme on <html> above. */}
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-            <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-            <link rel="stylesheet" href="/images/maids/maids.css?v=6" />
+            <link rel="stylesheet" href="/images/maids/maids.css?v=8" />
           </>
         )}
         {/* custom_head_html is injected from <body> below — placing this inline script in <head> via the App Router renders it as visible text */}
@@ -130,7 +130,7 @@ export default async function RootLayout({
           </>
         )}
       </head>
-      <body className={siteSlug === 'maids' ? 'mim flex flex-col min-h-screen' : `${isFullHtmlPage ? '' : isBloom ? hanken.className : inter.className} flex flex-col min-h-screen`}>
+      <body className={siteSlug === 'maids' ? `mim ${jakarta.variable} flex flex-col min-h-screen` : `${isFullHtmlPage ? '' : isBloom ? hanken.className : inter.className} flex flex-col min-h-screen`}>
         {siteSlug === 'gta' && <GtaOrgSchema />}
         {siteSlug === 'maids' && <MaidsSiteSchema />}
         <LangProvider initialLang={isZhRoute ? 'zh' : 'en'}>

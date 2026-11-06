@@ -129,7 +129,7 @@
 
 :root {
   /* Font */
-  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
@@ -811,7 +811,7 @@ a:hover { color: var(--color-primary-hover); }
 /* 16. Site additions ---------------------------------------------------- */
 
 /* The body font must beat next/font's class on <body> */
-body.mim { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-ink); font-size: var(--fs-ui); font-weight: var(--fw-medium); line-height: 1.5; }
+body.mim { --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-family: var(--font-sans); background: var(--color-bg); color: var(--color-ink); font-size: var(--fs-ui); font-weight: var(--fw-medium); line-height: 1.5; }
 
 /* Header: desktop nav, mobile menu, WhatsApp button */
 .header-actions { display: flex; align-items: center; gap: var(--space-4); }
@@ -932,3 +932,12 @@ body.mim { font-family: var(--font-sans); background: var(--color-bg); color: va
   .header-actions > .licence-tag { display: none; }
   .menu-mobile__panel .licence-tag { display: block; }
 }
+
+@media (max-width: 720px) {
+  .page-hero .photo--4x3 { aspect-ratio: 16 / 9; }
+  .page-hero__inner { padding-block: 20px var(--space-6); }
+}
+.nav__link[aria-current="page"], .menu-mobile__panel a[aria-current="page"] { color: var(--color-primary); font-weight: var(--fw-heavy); }
+.mim-prose table tbody tr:nth-child(even) td { background: var(--color-surface); }
+.mim-prose table { margin-bottom: var(--space-5); }
+.mim-prose a[href^="http"] { overflow-wrap: anywhere; }
