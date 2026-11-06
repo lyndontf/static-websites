@@ -36,8 +36,10 @@ const LEARN = [
 const ABOUT = [
   { href: '/licence', label: 'Our licence' },
   { href: '/contact', label: 'Contact' },
-  { href: '/privacy-notice', label: 'Privacy notice' },
 ];
+
+// Bottom bar, right side. There is no Terms of service page yet: add it here when the page exists.
+const LEGAL = [{ href: '/privacy-notice', label: 'Privacy notice' }];
 
 // Doorway bloom logo (maids-in-malaysia-logo-guide.md v1.0): five arched doorways form a bunga raya. Teal petals on light
 // backgrounds (4a), white petals on dark (4b); the centre is always sand. Do not recolour or restyle.
@@ -106,29 +108,12 @@ export function MaidsFooter({
   footerText?: string | null;
   email?: string | null;
 }) {
-  const name = siteName || 'Maids in Malaysia';
+  void siteName;
+  void footerText;
+  void email;
   return (
     <footer className="site-footer" id="about">
       <div className="container site-footer__main">
-        <div className="site-footer__about">
-          <Link className="brand" href="/" aria-label={`${name} home`}>
-            <LogoMark reverse />
-            <BrandName name={name} />
-          </Link>
-          <p>Licensed maid and caregiver placement.</p>
-          <p>
-            <strong>Maids in Malaysia, PEA Licence B No. 1681</strong>
-          </p>
-          <p>
-            <a href={WHATSAPP}>Ask us on WhatsApp</a>
-            {email ? (
-              <>
-                {' · '}
-                <a href={`mailto:${email}`}>{email}</a>
-              </>
-            ) : null}
-          </p>
-        </div>
         <div className="site-footer__cols">
           {[
             { title: 'Learn', items: LEARN },
@@ -149,7 +134,14 @@ export function MaidsFooter({
         </div>
       </div>
       <div className="container site-footer__legal">
-        {footerText ? <p className="site-footer__note">{footerText}</p> : null}
+        <p>© {new Date().getFullYear()} Maids in Malaysia. All rights reserved.</p>
+        <ul className="site-footer__legal-links">
+          {LEGAL.map((l) => (
+            <li key={l.href}>
+              <Link href={l.href}>{l.label}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </footer>
   );

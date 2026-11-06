@@ -1003,3 +1003,10 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 .site-footer__col { min-width: 0; max-width: none; }
 @media (max-width: 899px) { .site-footer__main { grid-template-columns: 1fr; } .site-footer__about { max-width: none; } }
 @media (max-width: 560px) { .site-footer__cols { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
+
+/* Footer without the about block: the three link columns take the row */
+.site-footer__main { display: block; }
+.site-footer__cols { max-width: 900px; }
+.site-footer__legal { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-6); }
+.site-footer__legal-links { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin: 0; padding: 0; list-style: none; }
+.site-footer__legal-links a { text-decoration: underline; }
