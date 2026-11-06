@@ -39,14 +39,26 @@ const ABOUT = [
   { href: '/privacy-notice', label: 'Privacy notice' },
 ];
 
+// Doorway bloom logo (maids-in-malaysia-logo-guide.md v1.0): five arched doorways form a bunga raya. Teal petals on light
+// backgrounds (4a), white petals on dark (4b); the centre is always sand. Do not recolour or restyle.
+const PETAL = 'M24 28 V15 A8 8 0 0 1 40 15 V28 Z';
 export function LogoMark({ reverse = false }: { reverse?: boolean }) {
   return (
-    <svg className={`brand__mark${reverse ? ' logo--reverse' : ''}`} viewBox="0 0 64 64" aria-hidden="true">
-      <rect className="logo-square" width="64" height="64" rx="16" />
-      <path className="logo-house" d="M32 13 L51 29 V50 H13 V29 Z" />
-      <path className="logo-door" d="M26 50 V39 a6 6 0 0 1 12 0 V50 Z" />
+    <svg className="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+      <g fill={reverse ? '#FFFFFF' : '#0E5A52'}>
+        {[0, 72, 144, 216, 288].map((r) => (
+          <path key={r} d={PETAL} transform={r ? `rotate(${r} 32 33)` : undefined} />
+        ))}
+      </g>
+      <circle cx="32" cy="33" r="8" fill="#E9B872" />
     </svg>
   );
+}
+
+// Horizontal lockup text: "Malaysia" may be teal (logo guide 5b); the footer version stays white via CSS.
+function BrandName({ name }: { name: string }) {
+  const m = /^(.*s)(Malaysia)$/.exec(name);
+  return <span className="brand__name">{m ? <>{m[1]}<span className="brand__accent">{m[2]}</span></> : name}</span>;
 }
 
 export function MaidsHeader({ siteName }: { siteName?: string | null }) {
@@ -60,7 +72,7 @@ export function MaidsHeader({ siteName }: { siteName?: string | null }) {
         <div className="container site-header__inner">
           <Link className="brand" href="/" aria-label={`${name} home`}>
             <LogoMark />
-            <span className="brand__name">{name}</span>
+            <BrandName name={name} />
           </Link>
           <NavLinks items={NAV} variant="desktop" />
           <div className="header-actions">
@@ -101,9 +113,9 @@ export function MaidsFooter({
         <div className="site-footer__about">
           <Link className="brand" href="/" aria-label={`${name} home`}>
             <LogoMark reverse />
-            <span className="brand__name">{name}</span>
+            <BrandName name={name} />
           </Link>
-          <p>Licensed maid and caregiver placement in the Klang Valley.</p>
+          <p>Licensed maid and caregiver placement.</p>
           <p>
             <strong>Maids in Malaysia, PEA Licence B No. 1681</strong>
           </p>

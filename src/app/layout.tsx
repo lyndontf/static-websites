@@ -58,7 +58,11 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${siteName}`,
     },
     description,
-    icons: settings?.favicon_url ? [{ url: settings.favicon_url }] : undefined,
+    icons: settings?.favicon_url
+      ? settings.favicon_url.includes('/images/maids/')
+        ? { icon: [{ url: settings.favicon_url }], apple: [{ url: '/images/maids/apple-touch-icon.png', sizes: '180x180' }] }
+        : [{ url: settings.favicon_url }]
+      : undefined,
     openGraph: {
       siteName,
       title: siteName,
@@ -112,7 +116,7 @@ export default async function RootLayout({
         {siteSlug === 'maids' && (
           <>
             {/* Maids in Malaysia: Teal and Sand site template (public/images/maids/maids.css). Change the colours by editing data-theme on <html> above. */}
-            <link rel="stylesheet" href="/images/maids/maids.css?v=8" />
+            <link rel="stylesheet" href="/images/maids/maids.css?v=9" />
           </>
         )}
         {/* custom_head_html is injected from <body> below — placing this inline script in <head> via the App Router renders it as visible text */}
