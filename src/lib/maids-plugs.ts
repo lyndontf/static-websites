@@ -10,7 +10,7 @@ export type MaidsPlug = {
   ctaLabel: string;
   ctaHref: string;
   moreLink?: { label: string; href: string };
-  centres?: { name: string; town: string; whatsapp: string }[];
+  centres?: { name: string; town: string; whatsapp: string; image?: string }[];
 };
 
 export const MAIDS_PLUGS: Record<string, MaidsPlug> = {
@@ -61,33 +61,38 @@ export const MAIDS_PLUGS: Record<string, MaidsPlug> = {
   "centres": {
     "key": "centres",
     "label": "From our group",
-    "heading": "When your parent needs more care",
+    "heading": "Need short term care for your parents?",
     "body": "Our group, Genesis Life Care, runs five care centres offering residential nursing home care, short respite stays and senior day care. They are care centres, not branches of our agency. Message the nearest one on WhatsApp.",
     "ctaLabel": "Visit genesiscare.com.my",
     "ctaHref": "https://genesiscare.com.my",
     "centres": [
       {
         "name": "Genesis Life Care — Kajang",
+        "image": "/images/kajang-centre.jpeg",
         "town": "Kajang, Selangor",
         "whatsapp": "https://api.whatsapp.com/send?phone=60193340457&text=Hi%2C%20I%27d%20like%20to%20ask%20about%20care%20for%20my%20parent.%20Ref%3A%20{PAGE_CODE}"
       },
       {
         "name": "Genesis Life Care — Klang",
+        "image": "/images/klang-centre.jpg",
         "town": "Klang, Selangor",
         "whatsapp": "https://api.whatsapp.com/send?phone=60123210457&text=Hi%2C%20I%27d%20like%20to%20ask%20about%20care%20for%20my%20parent.%20Ref%3A%20{PAGE_CODE}"
       },
       {
         "name": "Genesis Life Care — Petaling Jaya",
+        "image": "/images/pj-centre.jpg",
         "town": "Petaling Jaya, Selangor",
         "whatsapp": "https://api.whatsapp.com/send?phone=60192950457&text=Hi%2C%20I%27d%20like%20to%20ask%20about%20care%20for%20my%20parent.%20Ref%3A%20{PAGE_CODE}"
       },
       {
         "name": "Genesis Life Care — Puchong",
+        "image": "/images/puchong-centre.jpeg",
         "town": "Puchong, Selangor",
         "whatsapp": "https://api.whatsapp.com/send?phone=60197590457&text=Hi%2C%20I%27d%20like%20to%20ask%20about%20care%20for%20my%20parent.%20Ref%3A%20{PAGE_CODE}"
       },
       {
         "name": "Genesis Life Care — Johor Bahru",
+        "image": "/images/jb-centre.jpeg",
         "town": "Johor Bahru, Johor",
         "whatsapp": "https://api.whatsapp.com/send?phone=60192820457&text=Hi%2C%20I%27d%20like%20to%20ask%20about%20care%20for%20my%20parent.%20Ref%3A%20{PAGE_CODE}"
       }
