@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { DisclosureShort } from '@/components/MaidsPlugs';
-import { T } from '@/components/MaidsLang';
+import { T, useT } from '@/components/MaidsLang';
 import type { MaidsHelper } from '@/lib/maids-extras';
 
 // "Helpers available now" carousel (Maids in Malaysia). Shows the published profiles from public.carer_showcase() (the one list
@@ -17,6 +17,7 @@ const WHATSAPP = 'https://api.whatsapp.com/send?phone=60192240457&text=';
 const SPEED = 28; // pixels per second
 
 export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpers: MaidsHelper[]; variant: string; code: string }) {
+  const tr = useT();
   const track = useRef<HTMLUListElement>(null);
   const paused = useRef(false);
   const loop = helpers.length >= 4;
@@ -100,7 +101,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
         {(loop ? [...helpers, ...helpers] : helpers).map((h, idx) => {
           const copy = loop && idx >= helpers.length;
           const msg = `Hi, I'd like to ask about ${h.name}${h.nationality ? ` (${h.nationality}${h.age ? `, ${h.age}` : ''})` : ''}. Ref: ${code}`;
-          const pills = [h.age ? `${h.age} years old` : null, h.marital, h.salary, h.languages.length ? h.languages.join(', ') : null].filter(Boolean) as string[];
+          const pills = [h.age ? (tr('years old') === '岁' ? `${h.age}岁` : `${h.age} years old`) : null, h.marital ? tr(h.marital) : null, h.salary, h.languages.length ? h.languages.map((l) => tr(l)).join(tr('years old') === '岁' ? '、' : ', ') : null].filter(Boolean) as string[];
           return (
             <li key={`${h.id}-${idx}`} className="helper-card" aria-hidden={copy ? true : undefined}>
               <div className="helper-card__photo">
@@ -116,7 +117,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
                   <i aria-hidden="true" /> <T>Available</T>
                 </p>
                 <p className="helper-card__name">{h.name}</p>
-                {h.category || h.nationality ? <p className="helper-card__cat">{[h.category, h.nationality].filter(Boolean).join(' · ')}</p> : null}
+                {h.category || h.nationality ? <p className="helper-card__cat">{[h.category, h.nationality].filter(Boolean).map((x) => tr(String(x))).join(' · ')}</p> : null}
                 <ul className="helper-card__pills" aria-label={`Details of ${h.name}`}>
                   {pills.map((p) => (
                     <li key={p}>{p}</li>

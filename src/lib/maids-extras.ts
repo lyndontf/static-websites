@@ -18,9 +18,10 @@ export type MaidsHelper = {
   photo: string | null;
 };
 
-type Rule = { helpers?: 'maid' | 'elder'; helpersAfter?: RegExp; centres?: boolean; eligibility?: boolean; flow?: boolean; route?: boolean; cards?: boolean; caregiversEnd?: boolean };
+type Rule = { helpers?: 'maid' | 'elder'; helpersAfter?: RegExp; centres?: boolean; eligibility?: boolean; flow?: boolean; route?: boolean; cards?: boolean; caregiversEnd?: boolean; costs?: boolean };
 const RULES: Record<string, Rule> = {
   home: { helpers: 'maid', helpersAfter: /where do you want to start/i, centres: true, route: true, cards: true, caregiversEnd: true },
+  'rules-and-fees': { costs: true },
   'hire-a-maid': { helpers: 'maid', eligibility: true, flow: true },
   'elderly-caregiver': { helpers: 'elder' },
   'guides/does-my-family-qualify-to-hire-a-maid': { centres: true },
@@ -73,6 +74,19 @@ export async function withMaidsExtras<T extends { type: string; key?: string }>(
   if (!rule) return blocks;
   if (rule.eligibility) blocks = replaceSection(blocks, /does your family qualify/i, (n) => [{ type: 'maids_eligibility', code: maidsPageCode(slug) } as any]) as T[];
   if (rule.flow) blocks = replaceSection(blocks, /what happens next/i, (inner) => flowBlock(inner)) as T[];
+  if (rule.costs) {
+    // "What it costs" before "Who can hire", and a copy of the who-can-apply form before "Who can be hired"
+    const code = maidsPageCode(slug);
+    const at = (re: RegExp) => blocks.findIndex((b: any) => b.type === 'heading' && re.test((b as any).content || ''));
+    const a = at(/^who can hire$/i);
+    const b = at(/^who can be hired$/i);
+    const costs = [{ type: 'heading', level: 2, content: 'What it costs to hire a maid' }, { type: 'maids_costs', code }] as any[];
+    const form = [{ type: 'heading', level: 2, content: 'Check if your family can apply' }, { type: 'maids_eligibility', code }] as any[];
+    if (b >= 0) blocks = [...blocks.slice(0, b), ...form, ...blocks.slice(b)] as T[];
+    const a2 = at(/^who can hire$/i);
+    if (a2 >= 0) blocks = [...blocks.slice(0, a2), ...costs, ...blocks.slice(a2)] as T[];
+    else if (a < 0) blocks = [...blocks, ...costs, ...form] as T[];
+  }
   if (rule.route) blocks = replaceSection(blocks, /the route, step by step/i, (inner) => routeBlock(inner)) as T[];
   if (rule.cards) blocks = replaceSection(blocks, /where do you want to start/i, (inner) => cardsBlock(inner)) as T[];
   if (rule.caregiversEnd) {

@@ -52,11 +52,15 @@ function Breadcrumb({ slug, title }: { slug: string; title: string }) {
     <nav className="breadcrumb" aria-label="Breadcrumb">
       <ol>
         <li>
-          <Link href="/">Home</Link>
+          <Link href="/">
+            <T>Home</T>
+          </Link>
         </li>
         {section ? (
           <li>
-            <Link href={section.href}>{section.label}</Link>
+            <Link href={section.href}>
+              <T>{section.label}</T>
+            </Link>
           </li>
         ) : null}
         <li aria-current="page">{title}</li>
@@ -82,7 +86,11 @@ export default async function MaidsPage({ page, blocks }: { page: any; blocks: B
           <Breadcrumb slug={slug} title={title} />
           <div className="page-hero__body split split--center">
             <div className="split__main page-hero__copy">
-              {section ? <span className="eyebrow">{section.label === 'FAQ' ? 'Questions answered' : 'Step by step'}</span> : null}
+              {section ? (
+                <span className="eyebrow">
+                  <T>{section.label === 'FAQ' ? 'Questions answered' : 'Step by step'}</T>
+                </span>
+              ) : null}
               <h1 className="h1">{title}</h1>
               {lead ? <p className="lead">{lead}</p> : null}
             </div>
@@ -99,7 +107,7 @@ export default async function MaidsPage({ page, blocks }: { page: any; blocks: B
           <aside className="split__aside">
             <nav className="toc" aria-labelledby="toc-label">
               <p className="eyebrow toc__label" id="toc-label">
-                On this page
+                <T>On this page</T>
               </p>
               <ul className="toc__list">
                 {toc.map((t) => (

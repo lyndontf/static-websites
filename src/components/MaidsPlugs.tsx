@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { MAIDS_PLUGS, MAIDS_DISCLOSURE_SHORT } from '@/lib/maids-plugs';
+import { T } from '@/components/MaidsLang';
 
 // Renders one signed plug block (lib/maids-plugs.ts) in a labelled box, with the short disclosure beside it.
 // Text comes from the signed Deliverable; this component only lays it out. Never edit the wording here.
@@ -56,11 +57,13 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
   if (plugKey === 'disclosure') {
     return (
       <aside aria-label={p.heading} className="my-8 rounded-xl border border-[color:var(--color-line)] bg-white p-5 text-sm leading-relaxed text-[color:var(--color-ink)]">
-        <h2 className="text-base font-extrabold text-[color:var(--color-ink)] mb-1">{p.heading}</h2>
+        <h2 className="text-base font-extrabold text-[color:var(--color-ink)] mb-1">
+          <T>{p.heading}</T>
+        </h2>
         <p>{p.body}</p>
         <p className="mt-2">
           <Link href={p.ctaHref} className="font-bold text-[color:var(--color-primary)] underline">
-            {p.ctaLabel}
+            <T>{p.ctaLabel}</T>
           </Link>
         </p>
       </aside>
@@ -72,10 +75,12 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
     <aside aria-label={`${p.label ?? ''}: ${p.heading}`} className="my-8 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 sm:p-6">
       {p.label && (
         <span className="inline-block rounded-full bg-[color:var(--color-ink)] px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
-          {p.label}
+          <T>{p.label}</T>
         </span>
       )}
-      <h2 className="mt-3 text-xl font-extrabold text-[color:var(--color-ink)]">{p.heading}</h2>
+      <h2 className="mt-3 text-xl font-extrabold text-[color:var(--color-ink)]">
+        <T>{p.heading}</T>
+      </h2>
       <div className="mt-2 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
         <BodyText text={p.body} />
       </div>
@@ -92,7 +97,7 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
                 <span className="centre-card__name">{c.name}</span>
                 <span className="centre-card__town">{c.town}</span>
                 <a href={withCode(c.whatsapp, code)} className="centre-card__cta">
-                  WhatsApp this centre
+                  <T>WhatsApp this centre</T>
                 </a>
               </div>
             </li>
@@ -110,16 +115,16 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
                 : 'rounded-lg bg-[color:var(--color-primary)] px-5 py-2.5 text-sm font-bold text-white hover:opacity-90'
             }
           >
-            {p.ctaLabel}
+            <T>{p.ctaLabel}</T>
           </a>
         ) : (
           <Link href={p.ctaHref} className="rounded-lg bg-[color:var(--color-primary)] px-5 py-2.5 text-sm font-bold text-white hover:opacity-90">
-            {p.ctaLabel}
+            <T>{p.ctaLabel}</T>
           </Link>
         )}
         {p.moreLink && (
           <Link href={p.moreLink.href} className="text-sm font-bold text-[color:var(--color-primary)] underline">
-            {p.moreLink.label}
+            <T>{p.moreLink.label}</T>
           </Link>
         )}
       </div>
