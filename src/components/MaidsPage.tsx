@@ -132,9 +132,12 @@ export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }
               <Link className="btn btn--primary" href="/guides/how-to-hire-a-maid-malaysia">
                 Start the guide
               </Link>
-              <Link className="btn btn--outline" href="/official-links">
-                Official links
-              </Link>
+              <a
+                className="btn btn--outline"
+                href="https://api.whatsapp.com/send?phone=60192240457&text=Hi%2C%20I%27d%20like%20to%20speak%20to%20a%20consultant.%20Ref%3A%20IAPG2611-WB"
+              >
+                Speak to a consultant
+              </a>
             </div>
           </div>
           <div className="split__half">

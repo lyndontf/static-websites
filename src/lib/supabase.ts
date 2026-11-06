@@ -16,7 +16,7 @@ export function createClient() {
 // ─── Content Types ───
 
 export interface ContentBlock {
-  type: 'heading' | 'paragraph' | 'image' | 'list' | 'quote' | 'html' | 'divider' | 'cta' | 'job_listings' | 'maids_plug' | 'maids_faq' | 'maids_helpers';
+  type: 'heading' | 'paragraph' | 'image' | 'list' | 'quote' | 'html' | 'divider' | 'cta' | 'job_listings' | 'maids_plug' | 'maids_faq' | 'maids_helpers' | 'maids_eligibility' | 'maids_flow';
   content?: string;
   text?: string;
   level?: number;

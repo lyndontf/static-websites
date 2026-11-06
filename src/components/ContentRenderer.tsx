@@ -6,6 +6,8 @@ import { ContentBlock } from '@/lib/supabase';
 import { useSiteLang } from '@/lib/useSiteLang';
 import MaidsPlugBox from '@/components/MaidsPlugs';
 import MaidsHelpersCarousel from '@/components/MaidsHelpersCarousel';
+import MaidsEligibility from '@/components/MaidsEligibility';
+import MaidsFlow from '@/components/MaidsFlow';
 
 const JobListingsEmbed = dynamic(() => import('./JobListingsEmbed'), { ssr: false });
 
@@ -141,6 +143,12 @@ export default function ContentRenderer({
           // Maids in Malaysia: a signed plug box, and expandable FAQ questions (all answers are in the HTML)
           case 'maids_plug':
             return <MaidsPlugBox key={i} plugKey={block.key || ''} code={block.code || ''} />;
+
+          case 'maids_eligibility':
+            return <MaidsEligibility key={i} code={block.code || ''} />;
+
+          case 'maids_flow':
+            return <MaidsFlow key={i} items={block.items || []} note={block.content} />;
 
           case 'maids_helpers':
             return <MaidsHelpersCarousel key={i} helpers={block.helpers || []} variant={block.variant || 'maid'} code={block.code || ''} />;
