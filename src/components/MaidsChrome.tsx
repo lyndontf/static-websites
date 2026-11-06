@@ -30,7 +30,6 @@ const LEARN = [
   { href: '/faq/process', label: 'FAQ: the hiring process' },
   { href: '/faq/eligibility-and-rules', label: 'FAQ: eligibility and rules' },
   { href: '/faq/scams-and-pitfalls', label: 'FAQ: scams and pitfalls' },
-  { href: '/official-links', label: 'Official links' },
 ];
 const ABOUT = [
   { href: '/licence', label: 'Our licence' },
@@ -38,7 +37,10 @@ const ABOUT = [
 ];
 
 // Bottom bar, right side. There is no Terms of service page yet: add it here when the page exists.
-const LEGAL = [{ href: '/privacy-notice', label: 'Privacy notice' }];
+const LEGAL = [
+  { href: '/official-links', label: 'Official links' },
+  { href: '/privacy-notice', label: 'Privacy notice' },
+];
 
 // Doorway bloom logo (maids-in-malaysia-logo-guide.md v1.0): five arched doorways form a bunga raya. Teal petals on light
 // backgrounds (4a), white petals on dark (4b); the centre is always sand. Do not recolour or restyle.
