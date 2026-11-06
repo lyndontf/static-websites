@@ -1058,3 +1058,11 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
   /* the flowchart uses the full page width (the reading column is narrower) */
   .mim-prose .flowchart { width: min(1152px, calc(100vw - 48px)); }
 }
+
+/* Eligibility form: two columns on laptop and desktop widths */
+@media (min-width: 1000px) {
+  .mim-prose .elig { width: min(1152px, calc(100vw - 48px)); padding: var(--space-6); }
+  .elig form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-7); align-items: start; }
+  .elig form > .btn { grid-column: 1 / -1; justify-self: start; }
+  .elig select, .elig input[type="number"] { max-width: none; }
+}

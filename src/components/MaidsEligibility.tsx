@@ -6,16 +6,11 @@ import { useState } from 'react';
 // Rules and fees page (last checked 5 November 2026) to the visitor's answers, on the page only: nothing is sent or stored.
 // It is a guide, not JIM's decision; the result says so.
 
+// Only the two countries families ask about most are offered here (Lyndon, 6 Nov 2026). JIM's figures for the other
+// seven countries are on the Rules and fees page.
 const INCOME: Record<string, number> = {
   Indonesia: 7000,
   Philippines: 5000,
-  'Sri Lanka': 5000,
-  India: 5000,
-  Nepal: 5000,
-  Thailand: 3000,
-  Cambodia: 3000,
-  Laos: 3000,
-  Vietnam: 3000,
 };
 const COUNTRIES = Object.keys(INCOME);
 const money = (n: number) => 'RM' + n.toLocaleString('en-MY');

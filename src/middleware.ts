@@ -20,6 +20,8 @@ const DOMAIN_TO_SITE: Record<string, string> = {
   'www.strokerehab.my': 'stroke',
   'maidsinmalaysia.com': 'maids',
   'www.maidsinmalaysia.com': 'maids',
+  // Local preview with working links: open http://maids.localhost:4300 (the /maids path prefix breaks root-relative links)
+  'maids.localhost': 'maids',
 };
 
 // Canonical (non-www) domain for each www variant — used for 301 redirects
