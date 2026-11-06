@@ -104,7 +104,7 @@ export default async function RootLayout({
   const isZhRoute = pathname === '/zh' || pathname.startsWith('/zh/');
 
   return (
-    <html lang="en" suppressHydrationWarning {...(siteSlug === 'maids' ? { 'data-theme': 'teal' } : {})}>
+    <html lang="en" suppressHydrationWarning {...(siteSlug === 'maids' ? { 'data-theme': 'navy' } : {})}>
       <head suppressHydrationWarning>
         {siteSlug === 'maids' && (
           <>
@@ -112,7 +112,7 @@ export default async function RootLayout({
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
             <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-            <link rel="stylesheet" href="/images/maids/maids.css?v=5" />
+            <link rel="stylesheet" href="/images/maids/maids.css?v=6" />
           </>
         )}
         {/* custom_head_html is injected from <body> below — placing this inline script in <head> via the App Router renders it as visible text */}
