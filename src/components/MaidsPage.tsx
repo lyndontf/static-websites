@@ -64,7 +64,7 @@ export default function MaidsPage({ page, blocks }: { page: any; blocks: Block[]
   const { title, body, toc } = prepare(page, blocks);
   const section = sectionFor(slug);
   const photo = page.featured_image_url
-    ? { src: page.featured_image_url as string, alt: '' }
+    ? { src: page.featured_image_url as string, alt: '', pos: undefined as string | undefined }
     : heroPhotoFor(slug);
   const lead: string = page.meta_description || '';
   const showToc = toc.length >= 3;
@@ -82,7 +82,7 @@ export default function MaidsPage({ page, blocks }: { page: any; blocks: Block[]
             </div>
             <div className="split__media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="photo photo--4x3" src={photo.src} alt={photo.alt} width={1000} height={750} fetchPriority="high" />
+              <img className="photo photo--4x3" src={photo.src} alt={photo.alt} width={1000} height={750} fetchPriority="high" style={{ objectPosition: photo.pos }} />
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function MaidsPage({ page, blocks }: { page: any; blocks: Block[]
 
 const SITUATIONS = [
   { href: '/guides/how-to-hire-a-maid-malaysia', title: 'Hiring from abroad', text: 'The steps from the first decision to the helper’s arrival.', photo: MAIDS_PHOTOS.travel },
-  { href: '/transfer-a-maid', title: 'Transferring a helper', text: 'Taking on a helper who already works in Malaysia.', photo: MAIDS_PHOTOS.papers },
+  { href: '/transfer-a-maid', title: 'Transferring a helper', text: 'Taking on a helper who already works in Malaysia.', photo: MAIDS_PHOTOS.family },
   { href: '/elderly-caregiver', title: 'Elderly care at home', text: 'Help for an older family member who needs daily care.', photo: MAIDS_PHOTOS.hands },
   { href: '/guides/vdr-fomema-special-pass-explained', title: 'Permits and paperwork', text: 'The medical check, the Special Pass and the forms.', photo: MAIDS_PHOTOS.form },
 ];
@@ -123,7 +123,7 @@ const SITUATIONS = [
 export function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }) {
   const { title, body } = prepare(page, blocks);
   const lead: string = page.meta_description || '';
-  const photo = page.featured_image_url ? { src: page.featured_image_url as string, alt: '' } : MAIDS_PHOTOS.care;
+  const photo = page.featured_image_url ? { src: page.featured_image_url as string, alt: '', pos: undefined as string | undefined } : MAIDS_PHOTOS.care;
 
   return (
     <article>
@@ -144,7 +144,7 @@ export function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }) {
           </div>
           <div className="split__half">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="photo photo--4x3" src={photo.src} alt={photo.alt} width={1400} height={1050} fetchPriority="high" />
+            <img className="photo photo--4x3" src={photo.src} alt={photo.alt} width={1400} height={1050} fetchPriority="high" style={{ objectPosition: photo.pos }} />
           </div>
         </div>
       </section>
@@ -170,7 +170,7 @@ export function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }) {
             {SITUATIONS.map((s) => (
               <Link key={s.href} className="photo-card" href={s.href}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.photo.src} alt={s.photo.alt} width={800} height={533} loading="lazy" />
+                <img src={s.photo.src} alt={s.photo.alt} width={800} height={533} loading="lazy" style={{ objectPosition: (s.photo as any).pos }} />
                 <span className="photo-card__title">{s.title}</span>
                 <span className="photo-card__text">{s.text}</span>
               </Link>
