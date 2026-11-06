@@ -33,7 +33,29 @@
 
 /* 1. Colour themes ------------------------------------------------------- */
 
-/* Teal and Sand (default): calm, warm, healthcare-adjacent */
+/* Bloom: the genesiscare.com.my palette (tailwind bloom-* and gold), the default for maidsinmalaysia.com.
+   Primary is bloom-900 (#0E5A72) so white text on buttons and the footer passes WCAG AA; bloom-700 (#2C88A2) is the
+   decorative accent (hover, borders, markers), as on the Genesis Life Care site. */
+/* (:root prefix so it beats the default theme block below) */
+:root[data-theme="bloom"] {
+  --color-ink: #173039;
+  --color-ink-soft: #33424A;
+  --color-bg: #FFFFFF;
+  --color-surface: #EAF3F6;
+  --color-primary: #0E5A72;
+  --color-primary-hover: #0B4A5E;
+  --color-on-primary: #FFFFFF;
+  --color-primary-tint: #DCEDF2;
+  --color-accent: #FAB515;
+  --color-on-accent: #173039;
+  --color-line: #E4EAED;
+  --color-bloom: #2C88A2;
+  --color-footer-bg: #0E5A72;
+  --color-footer-text: #FFFFFF;
+  --color-footer-line: #2C7A94;
+}
+
+/* Teal and Sand: calm, warm, healthcare-adjacent */
 :root,
 [data-theme="teal"] {
   --color-ink: #1B2A27;
@@ -382,6 +404,8 @@ a:hover { color: var(--color-primary-hover); }
 .brand:hover { color: var(--color-ink); }
 .brand__mark { width: 38px; height: 38px; flex-shrink: 0; }
 .brand__name {
+  white-space: nowrap;
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", var(--font-sans);
   font-size: 1.1875rem;
   font-weight: var(--fw-heavy);
   letter-spacing: -0.03em;
@@ -808,7 +832,7 @@ a:hover { color: var(--color-primary-hover); }
 /* 16. Site additions ---------------------------------------------------- */
 
 /* The body font must beat next/font's class on <body> */
-body.mim { --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-family: var(--font-sans); background: var(--color-bg); color: var(--color-ink); font-size: var(--fs-ui); font-weight: var(--fw-medium); line-height: 1.5; }
+body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-family: var(--font-sans); background: var(--color-bg); color: var(--color-ink); font-size: var(--fs-ui); font-weight: var(--fw-medium); line-height: 1.5; }
 
 /* Header: desktop nav, mobile menu, WhatsApp button */
 .header-actions { display: flex; align-items: center; gap: var(--space-4); }
@@ -938,3 +962,12 @@ body.mim { --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, -ap
 .mim-prose table tbody tr:nth-child(even) td { background: var(--color-surface); }
 .mim-prose table { margin-bottom: var(--space-5); }
 .mim-prose a[href^="http"] { overflow-wrap: anywhere; }
+
+/* Genesis Life Care (Bloom) shapes: pill buttons and chips, soft hover on menu links */
+.btn { border-radius: 999px; }
+.chip, .chip--rule, .chip--service, .chip--group { border-radius: 999px; }
+.nav__link { padding-inline: var(--space-2); border-radius: var(--radius-md); white-space: nowrap; }
+.nav__link:hover { background: var(--color-surface); text-decoration: none; }
+.step-card:hover, .photo-card:hover { border-color: var(--color-bloom, var(--color-primary)); }
+.toc__list a:hover { border-left-color: var(--color-bloom, var(--color-primary)); }
+.steps__num, .step-card__num { color: var(--color-primary); }
