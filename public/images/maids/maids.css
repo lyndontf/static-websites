@@ -1138,3 +1138,13 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 /* Helper card buttons alternate navy and gold */
 .helper-card__cta--gold { background: var(--color-accent); color: #000; }
 .helper-card__cta--gold:hover { background: #E3A200; color: #000; }
+
+/* Button text stays readable on hover (the global a:hover colour must not win over button text colours) */
+.mim a.text-white, .mim a.text-white:hover, .mim a.text-white:focus { color: #fff; }
+.mim .btn--primary, .mim .btn--primary:hover, .mim .btn--primary:focus { color: var(--color-on-primary); }
+.mim .btn--outline:hover { color: var(--color-bg); }
+.mim .hero .btn--outline, .mim .hero .btn--outline:hover { color: #000; }
+.mim .menu-mobile__panel .btn, .mim .menu-mobile__panel .btn:hover { color: var(--color-on-primary); }
+.mim .helper-card__cta { color: var(--color-on-primary); }
+.mim .helper-card__cta--gold, .mim .helper-card__cta--gold:hover { color: #000; }
+.mim .centre-card__cta, .mim .centre-card__cta:hover { color: var(--color-on-primary); }
