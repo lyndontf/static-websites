@@ -18,7 +18,7 @@ export default function LayoutWrapper({ children, footer, isCmsSite, isFullHtmlP
   const hideFooter = isLandingPage || isCmsSite || isFullHtmlPage;
   return (
     <>
-      <main className="flex-1 bg-white">{children}</main>
+      <main id="main" className="flex-1 bg-white">{children}</main>
       {!hideFooter && <div id="site-footer">{footer}</div>}
     </>
   );

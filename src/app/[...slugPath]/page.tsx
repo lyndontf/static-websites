@@ -6,6 +6,7 @@ import ContentRenderer from '@/components/ContentRenderer';
 import { CmsRawBlocks } from '@/components/CmsHtmlPage';
 import { isRawBlockSequence } from '@/lib/cms-blocks';
 import CmsContentPage from '@/components/CmsContentPage';
+import MaidsPage from '@/components/MaidsPage';
 import { transformMaidsBlocks } from '@/lib/maids-blocks';
 import { MaidsPageSchema } from '@/components/MaidsSchema';
 
@@ -310,7 +311,7 @@ export default async function DynamicPage({ params }: PageProps) {
     return (
       <>
         <MaidsPageSchema page={page} />
-        <CmsContentPage page={{ ...page, content: transformMaidsBlocks(page.slug, page.content as any) as any }} plainHero />
+        <MaidsPage page={page} blocks={transformMaidsBlocks(page.slug, page.content as any) as any} />
       </>
     );
   }

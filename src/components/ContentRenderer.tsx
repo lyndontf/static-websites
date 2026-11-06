@@ -43,7 +43,7 @@ export default function ContentRenderer({
               6: 'text-base font-bold text-[#173039] mb-2 mt-4',
             };
             return (
-              <Tag key={i} className={classes[block.level || 2] || classes[2]}>
+              <Tag key={i} id={(block as any).anchor} className={classes[block.level || 2] || classes[2]}>
                 {block.content}
               </Tag>
             );
@@ -143,12 +143,12 @@ export default function ContentRenderer({
 
           case 'maids_faq':
             return (
-              <div key={i} className="my-6 divide-y divide-[#D5E0EB] rounded-xl border border-[#D5E0EB] bg-white">
+              <div key={i} className="my-6 divide-y divide-[color:var(--color-line)] rounded-xl border border-[color:var(--color-line)] bg-white">
                 {(block.faq || []).map((q, j) => (
                   <details key={j} className="group px-4 py-1 sm:px-5">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-4 text-lg font-extrabold text-[#0F2A43]">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-4 text-lg font-extrabold text-[color:var(--color-ink)]">
                       <span>{q.question}</span>
-                      <span aria-hidden="true" className="text-2xl font-normal text-[#1F5FA8] group-open:rotate-45 transition-transform">+</span>
+                      <span aria-hidden="true" className="text-2xl font-normal text-[color:var(--color-primary)] group-open:rotate-45 transition-transform">+</span>
                     </summary>
                     <div className="pb-4">
                       <ContentRenderer blocks={q.blocks} />
