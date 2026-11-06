@@ -70,7 +70,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
 
   if (!helpers.length) return null;
   const elder = variant === 'elder';
-  const step = (dir: 1 | -1) => track.current?.scrollBy({ left: dir * 288, behavior: 'smooth' });
+  const step = (dir: 1 | -1) => track.current?.scrollBy({ left: dir * 324, behavior: 'smooth' });
   const heading = elder ? 'Caregivers available for hire' : 'Helpers available for hire';
   return (
     <aside aria-label={`Our service: ${heading}`} className="helpers my-8 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 sm:p-6">
@@ -95,13 +95,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
         {(loop ? [...helpers, ...helpers] : helpers).map((h, idx) => {
           const copy = loop && idx >= helpers.length;
           const msg = `Hi, I'd like to ask about ${h.name}${h.nationality ? ` (${h.nationality}${h.age ? `, ${h.age}` : ''})` : ''}. Ref: ${code}`;
-          const rows: [string, string | null][] = [
-            ['Age', h.age ? `${h.age} years old` : null],
-            ['Status', h.marital],
-            ['Nationality', h.nationality],
-            ['Languages', h.languages.length ? h.languages.join(', ') : null],
-            [elder ? 'Rate' : 'Salary', h.salary],
-          ];
+          const pills = [h.age ? `${h.age} years old` : null, h.marital, h.salary, h.languages.length ? h.languages.join(', ') : null].filter(Boolean) as string[];
           return (
             <li key={`${h.id}-${idx}`} className="helper-card" aria-hidden={copy ? true : undefined}>
               <div className="helper-card__photo">
@@ -113,16 +107,16 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
                 )}
               </div>
               <div className="helper-card__body">
+                <p className="helper-card__avail">
+                  <i aria-hidden="true" /> Available
+                </p>
                 <p className="helper-card__name">{h.name}</p>
-                {h.category ? <p className="helper-card__cat">{h.category}</p> : null}
-                <dl className="helper-card__facts">
-                  {rows.filter(([, v]) => v).map(([k, v]) => (
-                    <div key={k}>
-                      <dt>{k}</dt>
-                      <dd>{v}</dd>
-                    </div>
+                {h.category || h.nationality ? <p className="helper-card__cat">{[h.category, h.nationality].filter(Boolean).join(' · ')}</p> : null}
+                <ul className="helper-card__pills" aria-label={`Details of ${h.name}`}>
+                  {pills.map((p) => (
+                    <li key={p}>{p}</li>
                   ))}
-                </dl>
+                </ul>
                 <a className={`helper-card__cta${helpers.length && idx % helpers.length % 2 === 1 ? ' helper-card__cta--gold' : ''}`} href={WHATSAPP + encodeURIComponent(msg)} tabIndex={copy ? -1 : undefined}>
                   Ask about {elder ? 'this caregiver' : 'her'}
                 </a>
