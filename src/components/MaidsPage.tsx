@@ -37,7 +37,8 @@ function prepare(page: any, blocks: Block[]) {
       return b;
     });
   const title = textOf(h1) || page.title;
-  return { title, body, toc };
+  const words = body.reduce((n, b) => n + textOf(b).split(' ').length + (Array.isArray(b.items) ? b.items.join(' ').split(' ').length : 0), 0);
+  return { title, body, toc, words };
 }
 
 function Breadcrumb({ slug, title }: { slug: string; title: string }) {
@@ -61,13 +62,13 @@ function Breadcrumb({ slug, title }: { slug: string; title: string }) {
 
 export default function MaidsPage({ page, blocks }: { page: any; blocks: Block[] }) {
   const slug: string = page.slug || '';
-  const { title, body, toc } = prepare(page, blocks);
+  const { title, body, toc, words } = prepare(page, blocks);
   const section = sectionFor(slug);
   const photo = page.featured_image_url
     ? { src: page.featured_image_url as string, alt: '', pos: undefined as string | undefined }
     : heroPhotoFor(slug);
   const lead: string = page.meta_description || '';
-  const showToc = toc.length >= 3;
+  const showToc = toc.length >= 5 && words >= 700;
 
   return (
     <article>
@@ -113,13 +114,6 @@ export default function MaidsPage({ page, blocks }: { page: any; blocks: Block[]
   );
 }
 
-const SITUATIONS = [
-  { href: '/guides/how-to-hire-a-maid-malaysia', title: 'Hiring from abroad', text: 'The steps from the first decision to the helper’s arrival.', photo: MAIDS_PHOTOS.travel },
-  { href: '/transfer-a-maid', title: 'Transferring a helper', text: 'Taking on a helper who already works in Malaysia.', photo: MAIDS_PHOTOS.family },
-  { href: '/elderly-caregiver', title: 'Elderly care at home', text: 'Help for an older family member who needs daily care.', photo: MAIDS_PHOTOS.hands },
-  { href: '/guides/vdr-fomema-special-pass-explained', title: 'Permits and paperwork', text: 'The medical check, the Special Pass and the forms.', photo: MAIDS_PHOTOS.form },
-];
-
 export function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }) {
   const { title, body } = prepare(page, blocks);
   const lead: string = page.meta_description || '';
@@ -156,26 +150,6 @@ export function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }) {
             <li className="trust__item">Pages show when we last checked them</li>
             <li className="trust__item">Published by a licensed agency, PEA Licence B No. 1681</li>
           </ul>
-        </div>
-      </section>
-
-      <section className="section section--surface" aria-labelledby="situations">
-        <div className="container">
-          <div className="section-head">
-            <h2 className="h2" id="situations">
-              Find the guide for your situation
-            </h2>
-          </div>
-          <div className="grid situations">
-            {SITUATIONS.map((s) => (
-              <Link key={s.href} className="photo-card" href={s.href}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.photo.src} alt={s.photo.alt} width={800} height={533} loading="lazy" style={{ objectPosition: (s.photo as any).pos }} />
-                <span className="photo-card__title">{s.title}</span>
-                <span className="photo-card__text">{s.text}</span>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 

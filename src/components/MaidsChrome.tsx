@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import NavLinks from '@/components/MaidsNavLinks';
 
 // Header and footer for maidsinmalaysia.com (site slug `maids`), built on the Teal and Sand site template
 // (public/images/maids/maids.css). CMS sites hide the shared Header/Footer (LayoutWrapper), and the Maids pages carry no
@@ -17,35 +18,25 @@ const NAV = [
   { href: '/hire-a-maid', label: 'Our services' },
 ];
 
-// Footer: the agency's own pages (labelled as ours), and the FAQ topics.
+// Footer: three short columns. The nine question guides are reached from the Home page and the FAQ pages.
 const SERVICES = [
   { href: '/hire-a-maid', label: 'Hire a maid from abroad' },
   { href: '/transfer-a-maid', label: 'Transfer a maid' },
   { href: '/elderly-caregiver', label: 'Elderly care' },
-  { href: '/replacement-guarantee', label: 'Guarantee' },
-  { href: '/licence', label: 'Our licence' },
-  { href: '/contact', label: 'Contact' },
-  { href: '/privacy-notice', label: 'Privacy notice' },
+  { href: '/replacement-guarantee', label: 'Replacement guarantee' },
 ];
-const FAQS = [
+const LEARN = [
+  { href: '/guides/how-to-hire-a-maid-malaysia', label: 'How to hire, step by step' },
   { href: '/faq/process', label: 'FAQ: the hiring process' },
   { href: '/faq/eligibility-and-rules', label: 'FAQ: eligibility and rules' },
   { href: '/faq/scams-and-pitfalls', label: 'FAQ: scams and pitfalls' },
   { href: '/rules-and-fees', label: 'Rules and fees' },
   { href: '/official-links', label: 'Official links' },
 ];
-
-const GUIDES = [
-  { href: '/guides/how-to-hire-a-maid-malaysia', label: 'How to hire a maid, step by step' },
-  { href: '/guides/does-my-family-qualify-to-hire-a-maid', label: 'Does my family qualify?' },
-  { href: '/guides/which-countries-can-maids-come-from-malaysia', label: 'Which countries can a maid come from?' },
-  { href: '/guides/maid-age-limit-malaysia', label: 'How old can a foreign maid be?' },
-  { href: '/guides/when-is-maid-salary-due', label: "When is a maid's salary due?" },
-  { href: '/guides/vdr-fomema-special-pass-explained', label: 'VDR, FOMEMA and the Special Pass' },
-  { href: '/guides/can-i-hire-more-than-one-maid', label: 'Can I hire more than one maid?' },
-  { href: '/guides/can-a-bankrupt-hire-a-maid', label: 'Can I hire a maid if I am bankrupt?' },
-  { href: '/guides/can-muslim-family-hire-non-muslim-maid', label: 'Can a Muslim family hire a non-Muslim maid?' },
-  { href: '/guides/maid-faq', label: 'All your questions answered' },
+const ABOUT = [
+  { href: '/licence', label: 'Our licence' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/privacy-notice', label: 'Privacy notice' },
 ];
 
 export function LogoMark({ reverse = false }: { reverse?: boolean }) {
@@ -71,13 +62,7 @@ export function MaidsHeader({ siteName }: { siteName?: string | null }) {
             <LogoMark />
             <span className="brand__name">{name}</span>
           </Link>
-          <nav className="nav nav--desktop" aria-label="Main">
-            {NAV.map((n) => (
-              <Link key={n.href} className="nav__link" href={n.href}>
-                {n.label}
-              </Link>
-            ))}
-          </nav>
+          <NavLinks items={NAV} variant="desktop" />
           <div className="header-actions">
             <span className="licence-tag">PEA Licence B No. 1681</span>
             <a className="btn btn--primary btn--sm" href={WHATSAPP}>
@@ -86,11 +71,7 @@ export function MaidsHeader({ siteName }: { siteName?: string | null }) {
             <details className="menu-mobile">
               <summary>Menu</summary>
               <nav className="menu-mobile__panel" aria-label="Menu">
-                {NAV.map((n) => (
-                  <Link key={n.href} href={n.href}>
-                    {n.label}
-                  </Link>
-                ))}
+                <NavLinks items={NAV} variant="mobile" />
                 <a className="btn btn--primary btn--sm" href={WHATSAPP}>
                   Ask us on WhatsApp
                 </a>
@@ -137,31 +118,22 @@ export function MaidsFooter({
           </p>
         </div>
         <div className="site-footer__cols">
-          <nav className="site-footer__col" aria-label="Our services">
-            <h2>Our services</h2>
-            <ul className="site-footer__nav">
-              {SERVICES.map((n) => (
-                <li key={n.href}>
-                  <Link href={n.href}>{n.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <nav className="site-footer__col" aria-label="Guides and answers">
-            <h2>Guides</h2>
-            <ul className="site-footer__nav">
-              {FAQS.map((g) => (
-                <li key={g.href}>
-                  <Link href={g.href}>{g.label}</Link>
-                </li>
-              ))}
-              {GUIDES.map((g) => (
-                <li key={g.href}>
-                  <Link href={g.href}>{g.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {[
+            { title: 'Learn', items: LEARN },
+            { title: 'Our services', items: SERVICES },
+            { title: 'About', items: ABOUT },
+          ].map((col) => (
+            <nav key={col.title} className="site-footer__col" aria-label={col.title}>
+              <h2>{col.title}</h2>
+              <ul className="site-footer__nav">
+                {col.items.map((n) => (
+                  <li key={n.href}>
+                    <Link href={n.href}>{n.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
       </div>
       <div className="container site-footer__legal">

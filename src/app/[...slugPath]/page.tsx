@@ -157,7 +157,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // A meta title that already ends with the site name (Maids in Malaysia's do) must not get the layout's
   // " | Site name" template added a second time.
   const siteName = settings?.site_name?.trim();
-  const titleMeta = siteSlug === 'maids' && siteName && title.trim().toLowerCase().endsWith(siteName.toLowerCase()) ? { absolute: title } : title;
+  // Maids in Malaysia: titles are written to fit 60 characters on their own, so the layout never adds a suffix.
+  const titleMeta = siteSlug === 'maids' ? { absolute: title } : siteName && title.trim().toLowerCase().endsWith(siteName.toLowerCase()) ? { absolute: title } : title;
 
   return {
     title: titleMeta,
