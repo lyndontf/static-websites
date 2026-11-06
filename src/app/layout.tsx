@@ -116,7 +116,7 @@ export default async function RootLayout({
         {siteSlug === 'maids' && (
           <>
             {/* Maids in Malaysia: Teal and Sand site template (public/images/maids/maids.css). Change the colours by editing data-theme on <html> above. */}
-            <link rel="stylesheet" href="/images/maids/maids.css?v=11" />
+            <link rel="stylesheet" href="/images/maids/maids.css?v=12" />
           </>
         )}
         {/* custom_head_html is injected from <body> below — placing this inline script in <head> via the App Router renders it as visible text */}
