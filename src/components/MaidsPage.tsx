@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import ContentRenderer from '@/components/ContentRenderer';
 import { heroPhotoFor, sectionFor, MAIDS_PHOTOS } from '@/lib/maids-photos';
+import { withMaidsExtras } from '@/lib/maids-extras';
 
 // Page layouts for maidsinmalaysia.com, from the Teal and Sand site template (public/images/maids/maids.css):
 // MaidsPage = the article layout (breadcrumb, hero with photo, contents list, reading column);
@@ -60,9 +61,9 @@ function Breadcrumb({ slug, title }: { slug: string; title: string }) {
   );
 }
 
-export default function MaidsPage({ page, blocks }: { page: any; blocks: Block[] }) {
+export default async function MaidsPage({ page, blocks }: { page: any; blocks: Block[] }) {
   const slug: string = page.slug || '';
-  const { title, body, toc, words } = prepare(page, blocks);
+  const { title, body, toc, words } = prepare(page, await withMaidsExtras(slug, blocks));
   const section = sectionFor(slug);
   const photo = page.featured_image_url
     ? { src: page.featured_image_url as string, alt: '', pos: undefined as string | undefined }
@@ -114,8 +115,8 @@ export default function MaidsPage({ page, blocks }: { page: any; blocks: Block[]
   );
 }
 
-export function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }) {
-  const { title, body } = prepare(page, blocks);
+export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }) {
+  const { title, body } = prepare(page, await withMaidsExtras('home', blocks));
   const lead: string = page.meta_description || '';
   const photo = page.featured_image_url ? { src: page.featured_image_url as string, alt: '', pos: undefined as string | undefined } : MAIDS_PHOTOS.care;
 

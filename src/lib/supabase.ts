@@ -16,7 +16,7 @@ export function createClient() {
 // ─── Content Types ───
 
 export interface ContentBlock {
-  type: 'heading' | 'paragraph' | 'image' | 'list' | 'quote' | 'html' | 'divider' | 'cta' | 'job_listings' | 'maids_plug' | 'maids_faq';
+  type: 'heading' | 'paragraph' | 'image' | 'list' | 'quote' | 'html' | 'divider' | 'cta' | 'job_listings' | 'maids_plug' | 'maids_faq' | 'maids_helpers';
   content?: string;
   text?: string;
   level?: number;
@@ -32,6 +32,9 @@ export interface ContentBlock {
   code?: string;
   /** Maids in Malaysia: expandable questions (maids_faq) */
   faq?: { question: string; blocks: ContentBlock[] }[];
+  /** Maids in Malaysia: helpers carousel (maids_helpers) */
+  helpers?: any[];
+  variant?: string;
 }
 
 export interface CmsPage {
