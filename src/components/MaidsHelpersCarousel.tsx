@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { DisclosureShort } from '@/components/MaidsPlugs';
 import type { MaidsHelper } from '@/lib/maids-extras';
 
-// "Helpers available now" carousel (Maids in Malaysia). Shows published candidates only, with the public fields the
-// candidate_public_profile view allows (public name, age, nationality, experience, photo). Each card opens WhatsApp
-// with the helper's reference number and the page's campaign code. Native scroll-snap; the arrow buttons only help
-// desktop mice. No salary, religion or family details are shown.
+// "Helpers available now" carousel (Maids in Malaysia). Shows the published profiles from public.carer_showcase() (the one list
+// every Genesis carousel uses) with the fields each candidate agreed to show: public name, photo, age, marital status,
+// nationality, languages and salary. Each card opens WhatsApp with the helper's name and the page's campaign code.
+// Native scroll-snap; the arrow buttons only help desktop mice. No religion, family details or documents are shown.
 
 const WHATSAPP = 'https://api.whatsapp.com/send?phone=60192240457&text=';
 
@@ -16,7 +16,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
   const track = useRef<HTMLUListElement>(null);
   if (!helpers.length) return null;
   const elder = variant === 'elder';
-  const step = (dir: 1 | -1) => track.current?.scrollBy({ left: dir * 252, behavior: 'smooth' });
+  const step = (dir: 1 | -1) => track.current?.scrollBy({ left: dir * 288, behavior: 'smooth' });
   const heading = elder ? 'Caregivers you can ask about' : 'Helpers you can ask about';
   return (
     <aside aria-label={`Our service: ${heading}`} className="helpers my-8 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 sm:p-6">
@@ -39,8 +39,14 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
       </div>
       <ul ref={track} className="helpers__track" aria-label={heading}>
         {helpers.map((h) => {
-          const msg = `Hi, I'd like to ask about ${h.ref ? `helper ${h.ref}` : h.name}. Ref: ${code}`;
-          const bits = [h.age ? `${h.age} years old` : null, h.nationality, h.years].filter(Boolean) as string[];
+          const msg = `Hi, I'd like to ask about ${h.name}${h.nationality ? ` (${h.nationality}${h.age ? `, ${h.age}` : ''})` : ''}. Ref: ${code}`;
+          const rows: [string, string | null][] = [
+            ['Age', h.age ? `${h.age} years old` : null],
+            ['Status', h.marital],
+            ['Nationality', h.nationality],
+            ['Languages', h.languages.length ? h.languages.join(', ') : null],
+            [elder ? 'Rate' : 'Salary', h.salary],
+          ];
           return (
             <li key={h.id} className="helper-card">
               <div className="helper-card__photo">
@@ -54,8 +60,14 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
               <div className="helper-card__body">
                 <p className="helper-card__name">{h.name}</p>
                 {h.category ? <p className="helper-card__cat">{h.category}</p> : null}
-                {bits.length ? <p className="helper-card__meta">{bits.join(' · ')}</p> : null}
-                {h.ref ? <p className="helper-card__ref">Ref {h.ref}</p> : null}
+                <dl className="helper-card__facts">
+                  {rows.filter(([, v]) => v).map(([k, v]) => (
+                    <div key={k}>
+                      <dt>{k}</dt>
+                      <dd>{v}</dd>
+                    </div>
+                  ))}
+                </dl>
                 <a className="helper-card__cta" href={WHATSAPP + encodeURIComponent(msg)}>
                   Ask about {elder ? 'this caregiver' : 'her'}
                 </a>

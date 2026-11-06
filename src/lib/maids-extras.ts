@@ -1,4 +1,4 @@
-import { getAvailableBiodata, type BiodataCandidate } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { maidsPageCode } from '@/lib/maids-blocks';
 
 // Extra sections the Maids in Malaysia site adds to some pages, outside the signed page text:
@@ -8,12 +8,13 @@ import { maidsPageCode } from '@/lib/maids-blocks';
 
 export type MaidsHelper = {
   id: string;
-  ref: string | null;
   name: string;
   age: number | null;
+  marital: string | null;
   nationality: string | null;
+  languages: string[];
+  salary: string | null;
   category: string;
-  years: string | null;
   photo: string | null;
 };
 
@@ -26,19 +27,6 @@ const RULES: Record<string, Rule> = {
   contact: { centres: true },
 };
 
-function experienceYears(exp: Record<string, string>): string | null {
-  let months = 0;
-  for (const v of Object.values(exp || {})) {
-    const y = String(v).match(/(\d+)\s*year/i);
-    const m = String(v).match(/(\d+)\s*month/i);
-    if (y) months += parseInt(y[1], 10) * 12;
-    if (m) months += parseInt(m[1], 10);
-  }
-  if (!months) return null;
-  const years = Math.floor(months / 12);
-  return years >= 1 ? `${years} year${years === 1 ? '' : 's'} of experience` : `${months} months of experience`;
-}
-
 const titleCase = (s: string) => s.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase());
 const demonym = (n: string | null) => {
   if (!n) return null;
@@ -48,16 +36,27 @@ const demonym = (n: string | null) => {
   return titleCase(n.trim());
 };
 
-function toHelper(c: BiodataCandidate): MaidsHelper {
+const money = (n: number) => 'RM ' + Math.round(n).toLocaleString('en-MY');
+
+// One list for every carousel (Lyndon, 4 Nov 2026): the database function public.carer_showcase() applies the "complete
+// profile" rule (name, real photo, a rate, some work history) and returns published profiles only, with the fields the
+// candidate agreed to show: age, marital status, nationality, languages and rate.
+function toHelper(r: Record<string, any>): MaidsHelper {
+  const langs = (Array.isArray(r.languages) ? r.languages : []).map((l: any) => (typeof l === 'string' ? l : l?.name)).filter(Boolean);
+  let salary: string | null = null;
+  if (r.kind === 'maid' && Number(r.monthly_salary) > 0) salary = money(Number(r.monthly_salary)) + ' a month';
+  else if (Number(r.hourly_rate_min) > 0) salary = money(Number(r.hourly_rate_min)) + (Number(r.hourly_rate_max) > Number(r.hourly_rate_min) ? ' to ' + money(Number(r.hourly_rate_max)) : '') + ' an hour';
+  else if (Number(r.monthly_rate_min) > 0) salary = money(Number(r.monthly_rate_min)) + ' a month';
   return {
-    id: c.id,
-    ref: c.reference_no,
-    name: c.full_name,
-    age: c.age,
-    nationality: demonym(c.nationality),
-    category: c.job_category || '',
-    years: experienceYears(c.helper_experience),
-    photo: c.photo_url,
+    id: r.id,
+    name: r.full_name,
+    age: r.age ?? null,
+    marital: r.marital_status ? titleCase(String(r.marital_status).trim()) : null,
+    nationality: demonym(r.nationality ?? null),
+    languages: langs,
+    salary,
+    category: r.job_category || '',
+    photo: r.profile_photo_url ?? null,
   };
 }
 
@@ -69,13 +68,25 @@ export async function withMaidsExtras<T extends { type: string; key?: string }>(
   const code = maidsPageCode(slug);
   if (rule.helpers) {
     try {
-      const all = (await getAvailableBiodata()).filter((c) => c.status === 'available');
-      const wanted = all.filter((c) => {
-        const cat = (c.job_category || '').toLowerCase();
-        return rule.helpers === 'elder' ? cat.includes('elder') : cat.includes('maid') || cat.includes('domestic');
-      });
-      // photos first, newest first (the query is already newest first), at most 12
-      const helpers = [...wanted.filter((c) => c.photo_url), ...wanted.filter((c) => !c.photo_url)].slice(0, 12).map(toHelper);
+      const kind = rule.helpers === 'elder' ? 'caregiver' : 'maid';
+      const { data } = await supabase.rpc('carer_showcase', { p_per_kind: 12 });
+      let rows = ((data as any[]) || []).filter((r) => r.kind === kind);
+      if (kind === 'maid') {
+        // A card should show age, status, nationality, languages and salary, so prefer the maids whose profile has all of them
+        // (the showcase rule itself does not require age or languages), newest first; top up from the showcase list.
+        const { data: all } = await supabase
+          .from('caregiver_public_profiles')
+          .select('id, full_name, age, languages, marital_status, nationality, monthly_salary, profile_photo_url, job_category, created_at')
+          .order('created_at', { ascending: false })
+          .limit(200);
+        const complete = ((all as any[]) || [])
+          .filter((r) => /maid|helper|domestic/i.test(r.job_category || '') && !/care/i.test(r.job_category || ''))
+          .filter((r) => r.age && Array.isArray(r.languages) && r.languages.length && r.marital_status && Number(r.monthly_salary) > 0 && String(r.profile_photo_url || '').startsWith('http'))
+          .map((r) => ({ ...r, kind: 'maid' }));
+        const ids = new Set(complete.map((r) => r.id));
+        rows = [...complete, ...rows.filter((r) => !ids.has(r.id))];
+      }
+      const helpers = rows.slice(0, 12).map(toHelper);
       if (helpers.length) extra.push({ type: 'maids_helpers', variant: rule.helpers, helpers, code });
     } catch {
       /* no carousel if the list cannot be read */
