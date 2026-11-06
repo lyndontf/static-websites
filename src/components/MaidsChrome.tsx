@@ -80,7 +80,6 @@ export function MaidsHeader({ siteName }: { siteName?: string | null }) {
           </Link>
           <NavLinks items={NAV} variant="desktop" />
           <div className="header-actions">
-            <span className="licence-tag">PEA Licence B No. 1681</span>
             <LangToggle />
             <a className="btn btn--primary btn--sm" href={WHATSAPP}>
               <T>Ask us on WhatsApp</T>
@@ -94,7 +93,6 @@ export function MaidsHeader({ siteName }: { siteName?: string | null }) {
                 <a className="btn btn--primary btn--sm" href={WHATSAPP}>
                   <T>Ask us on WhatsApp</T>
                 </a>
-                <span className="licence-tag">PEA Licence B No. 1681</span>
               </nav>
             </details>
           </div>
