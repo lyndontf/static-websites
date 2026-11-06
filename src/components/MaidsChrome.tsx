@@ -30,7 +30,6 @@ const LEARN = [
   { href: '/faq/process', label: 'FAQ: the hiring process' },
   { href: '/faq/eligibility-and-rules', label: 'FAQ: eligibility and rules' },
   { href: '/faq/scams-and-pitfalls', label: 'FAQ: scams and pitfalls' },
-  { href: '/rules-and-fees', label: 'Rules and fees' },
   { href: '/official-links', label: 'Official links' },
 ];
 const ABOUT = [
