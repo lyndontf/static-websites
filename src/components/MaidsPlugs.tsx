@@ -81,19 +81,20 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
       </div>
 
       {p.centres && (
-        <ul className="mt-3 divide-y divide-[color:var(--color-line)] rounded-lg border border-[color:var(--color-line)] bg-white">
+        <ul className="centres" role="list">
           {p.centres.map((c) => (
-            <li key={c.name} className="flex flex-wrap items-center justify-between gap-2 px-4 py-3">
-              <span>
-                <span className="block font-bold text-[color:var(--color-ink)]">{c.name}</span>
-                <span className="block text-sm text-[color:var(--color-ink-soft)]">{c.town}</span>
-              </span>
-              <a
-                href={withCode(c.whatsapp, code)}
-                className="rounded-lg bg-[color:var(--color-primary)] px-4 py-2 text-sm font-bold text-white hover:opacity-90"
-              >
-                WhatsApp this centre
-              </a>
+            <li key={c.name} className="centre-card">
+              {c.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={c.image} alt={`The ${c.name} building`} loading="lazy" width={600} height={400} />
+              ) : null}
+              <div className="centre-card__body">
+                <span className="centre-card__name">{c.name}</span>
+                <span className="centre-card__town">{c.town}</span>
+                <a href={withCode(c.whatsapp, code)} className="centre-card__cta">
+                  WhatsApp this centre
+                </a>
+              </div>
             </li>
           ))}
         </ul>

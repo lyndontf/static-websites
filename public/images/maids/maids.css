@@ -1078,3 +1078,15 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 .trustbar__icon { flex: 0 0 48px; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--color-primary-tint); color: var(--color-primary); }
 .trustbar__item strong { display: block; font-size: 1.0625rem; font-weight: var(--fw-heavy); color: var(--color-ink); }
 .trustbar__item span > span { display: block; margin-top: 2px; font-size: var(--fs-small); color: var(--color-ink-soft); }
+
+/* Care centres (Need short term care for your parents?) */
+.centres { margin: var(--space-4) 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: var(--space-4); }
+.centre-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--color-line); border-radius: var(--radius-lg); background: var(--color-bg); }
+.centre-card img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+.centre-card__body { display: flex; flex: 1; flex-direction: column; gap: 2px; padding: var(--space-4); }
+.centre-card__name { font-size: 1.0625rem; font-weight: var(--fw-heavy); color: var(--color-ink); line-height: 1.3; }
+.centre-card__town { font-size: var(--fs-small); color: var(--color-ink-soft); }
+.centre-card__cta { margin-top: auto; padding-top: var(--space-3); }
+.centre-card__cta { display: inline-flex; align-items: center; justify-content: center; min-height: var(--tap); margin-top: var(--space-3); padding: 0 16px; border-radius: 999px; background: var(--color-primary); color: var(--color-on-primary); font-weight: var(--fw-bold); text-decoration: none; text-align: center; }
+.centre-card__cta:hover { background: var(--color-primary-hover); color: var(--color-on-primary); }
+.mim .mim-prose .centres a { text-decoration: none; }
