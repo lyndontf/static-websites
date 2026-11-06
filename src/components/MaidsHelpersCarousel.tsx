@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { DisclosureShort } from '@/components/MaidsPlugs';
+import { T } from '@/components/MaidsLang';
 import type { MaidsHelper } from '@/lib/maids-extras';
 
 // "Helpers available now" carousel (Maids in Malaysia). Shows the published profiles from public.carer_showcase() (the one list
@@ -76,10 +77,14 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
     <aside aria-label={`Our service: ${heading}`} className="helpers my-8 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 sm:p-6">
       <div className="helpers__head">
         <div>
-          <span className="inline-block rounded-full bg-[color:var(--color-ink)] px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">Our service</span>
-          <h2 className="mt-3 text-xl font-extrabold text-[color:var(--color-ink)]">{heading}</h2>
+          <span className="inline-block rounded-full bg-[color:var(--color-ink)] px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
+            <T>Our service</T>
+          </span>
+          <h2 className="mt-3 text-xl font-extrabold text-[color:var(--color-ink)]">
+            <T>{heading}</T>
+          </h2>
           <p className="mt-1 text-[15px] leading-relaxed text-[color:var(--color-ink)]">
-            Profiles of {elder ? 'caregivers' : 'helpers'} on our books. Ask a consultant on WhatsApp about any of them.
+            <T>{`Profiles of ${elder ? 'caregivers' : 'helpers'} on our books. Ask a consultant on WhatsApp about any of them.`}</T>
           </p>
         </div>
         <div className="helpers__arrows" aria-hidden="true">
@@ -108,7 +113,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
               </div>
               <div className="helper-card__body">
                 <p className="helper-card__avail">
-                  <i aria-hidden="true" /> Available
+                  <i aria-hidden="true" /> <T>Available</T>
                 </p>
                 <p className="helper-card__name">{h.name}</p>
                 {h.category || h.nationality ? <p className="helper-card__cat">{[h.category, h.nationality].filter(Boolean).join(' · ')}</p> : null}
@@ -118,7 +123,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
                   ))}
                 </ul>
                 <a className={`helper-card__cta${helpers.length && idx % helpers.length % 2 === 1 ? ' helper-card__cta--gold' : ''}`} href={WHATSAPP + encodeURIComponent(msg)} tabIndex={copy ? -1 : undefined}>
-                  Ask about {elder ? 'this caregiver' : 'her'}
+                  <T>{elder ? 'Ask about this caregiver' : 'Ask about her'}</T>
                 </a>
               </div>
             </li>

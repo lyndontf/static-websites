@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import NavLinks from '@/components/MaidsNavLinks';
+import { LangToggle, T } from '@/components/MaidsLang';
 
 // Header and footer for maidsinmalaysia.com (site slug `maids`), built on the Teal and Sand site template
 // (public/images/maids/maids.css). CMS sites hide the shared Header/Footer (LayoutWrapper), and the Maids pages carry no
@@ -69,7 +70,7 @@ export function MaidsHeader({ siteName }: { siteName?: string | null }) {
   return (
     <>
       <a className="skip-link" href="#main">
-        Skip to content
+        <T>Skip to content</T>
       </a>
       <header className="site-header">
         <div className="container site-header__inner">
@@ -80,15 +81,18 @@ export function MaidsHeader({ siteName }: { siteName?: string | null }) {
           <NavLinks items={NAV} variant="desktop" />
           <div className="header-actions">
             <span className="licence-tag">PEA Licence B No. 1681</span>
+            <LangToggle />
             <a className="btn btn--primary btn--sm" href={WHATSAPP}>
-              Ask us on WhatsApp
+              <T>Ask us on WhatsApp</T>
             </a>
             <details className="menu-mobile">
-              <summary>Menu</summary>
+              <summary>
+                <T>Menu</T>
+              </summary>
               <nav className="menu-mobile__panel" aria-label="Menu">
                 <NavLinks items={NAV} variant="mobile" />
                 <a className="btn btn--primary btn--sm" href={WHATSAPP}>
-                  Ask us on WhatsApp
+                  <T>Ask us on WhatsApp</T>
                 </a>
                 <span className="licence-tag">PEA Licence B No. 1681</span>
               </nav>
@@ -122,11 +126,15 @@ export function MaidsFooter({
             { title: 'About', items: ABOUT },
           ].map((col) => (
             <nav key={col.title} className="site-footer__col" aria-label={col.title}>
-              <h2>{col.title}</h2>
+              <h2>
+                <T>{col.title}</T>
+              </h2>
               <ul className="site-footer__nav">
                 {col.items.map((n) => (
                   <li key={n.href}>
-                    <Link href={n.href}>{n.label}</Link>
+                    <Link href={n.href}>
+                      <T>{n.label}</T>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -135,11 +143,15 @@ export function MaidsFooter({
         </div>
       </div>
       <div className="container site-footer__legal">
-        <p>© {new Date().getFullYear()} Maids in Malaysia. All rights reserved.</p>
+        <p>
+          © {new Date().getFullYear()} Maids in Malaysia. <T>All rights reserved.</T>
+        </p>
         <ul className="site-footer__legal-links">
           {LEGAL.map((l) => (
             <li key={l.href}>
-              <Link href={l.href}>{l.label}</Link>
+              <Link href={l.href}>
+                <T>{l.label}</T>
+              </Link>
             </li>
           ))}
         </ul>

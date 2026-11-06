@@ -2,6 +2,7 @@ import Link from 'next/link';
 import ContentRenderer from '@/components/ContentRenderer';
 import { heroPhotoFor, sectionFor, MAIDS_PHOTOS } from '@/lib/maids-photos';
 import { withMaidsExtras } from '@/lib/maids-extras';
+import { T } from '@/components/MaidsLang';
 
 // Page layouts for maidsinmalaysia.com, from the Teal and Sand site template (public/images/maids/maids.css):
 // MaidsPage = the article layout (breadcrumb, hero with photo, contents list, reading column);
@@ -142,13 +143,13 @@ export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }
             {lead ? <p className="lead">{lead}</p> : null}
             <div className="btn-row">
               <Link className="btn btn--primary" href="/guides/how-to-hire-a-maid-malaysia">
-                Start the guide
+                <T>Start the guide</T>
               </Link>
               <a
                 className="btn btn--outline"
                 href="https://api.whatsapp.com/send?phone=60192240457&text=Hi%2C%20I%27d%20like%20to%20speak%20to%20a%20consultant.%20Ref%3A%20IAPG2611-WB"
               >
-                Speak to a consultant
+                <T>Speak to a consultant</T>
               </a>
             </div>
           </div>
@@ -170,8 +171,12 @@ export async function MaidsHome({ page, blocks }: { page: any; blocks: Block[] }
                   </svg>
                 </span>
                 <span>
-                  <strong>{t.title}</strong>
-                  <span>{t.text}</span>
+                  <strong>
+                    <T>{t.title}</T>
+                  </strong>
+                  <span>
+                    <T>{t.text}</T>
+                  </span>
                 </span>
               </li>
             ))}

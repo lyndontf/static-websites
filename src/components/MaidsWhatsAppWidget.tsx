@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { MAIDS_DEFAULT_PAGE_CODE, MAIDS_PAGE_CODES } from '@/lib/maids-plugs';
+import { T, useT } from '@/components/MaidsLang';
 
 // Floating WhatsApp callout for every Maids in Malaysia page, in the style of the agency site's chat card.
 // The lines in the bubble are all confirmed facts (a named Agensi consultant answers; the rules are explained and a quote
@@ -37,6 +38,7 @@ function PetalMark() {
 export default function MaidsWhatsAppWidget({ phone }: { phone: string }) {
   const path = (usePathname() || '/').replace(/^\/maids(?=\/|$)/, '').replace(/^\//, '') || 'home';
   const code = MAIDS_PAGE_CODES[path] || MAIDS_DEFAULT_PAGE_CODE;
+  const tr = useT();
   const [dismissed, setDismissed] = useState(false);
   const [idx, setIdx] = useState(0);
   const [input, setInput] = useState('');
@@ -75,11 +77,15 @@ export default function MaidsWhatsAppWidget({ phone }: { phone: string }) {
           </span>
           <span>
             <span className="mwa__name">Maids in Malaysia</span>
-            <span className="mwa__status">Agensi consultant</span>
+            <span className="mwa__status">
+              <T>Agensi consultant</T>
+            </span>
           </span>
         </a>
         <div className="mwa__chat" role="status" aria-live="polite">
-          <p className="mwa__bubble">{MESSAGES[idx]}</p>
+          <p className="mwa__bubble">
+            <T>{MESSAGES[idx]}</T>
+          </p>
         </div>
         <div className="mwa__type">
           <input
@@ -92,7 +98,7 @@ export default function MaidsWhatsAppWidget({ phone }: { phone: string }) {
                 send();
               }
             }}
-            placeholder="Type a message"
+            placeholder={tr('Type a message')}
             aria-label="Type a message to a consultant"
             tabIndex={dismissed ? -1 : 0}
           />
