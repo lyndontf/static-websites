@@ -123,7 +123,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code }: { helpe
                     </div>
                   ))}
                 </dl>
-                <a className="helper-card__cta" href={WHATSAPP + encodeURIComponent(msg)} tabIndex={copy ? -1 : undefined}>
+                <a className={`helper-card__cta${helpers.length && idx % helpers.length % 2 === 1 ? ' helper-card__cta--gold' : ''}`} href={WHATSAPP + encodeURIComponent(msg)} tabIndex={copy ? -1 : undefined}>
                   Ask about {elder ? 'this caregiver' : 'her'}
                 </a>
               </div>
