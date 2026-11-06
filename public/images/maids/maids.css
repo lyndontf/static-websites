@@ -1134,3 +1134,7 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 .mwa__fab:hover { background: #178a45; }
 @media (max-width: 560px) { .mwa { right: 12px; bottom: 12px; } .mwa__card { width: min(280px, calc(100vw - 24px)); } }
 @media print { .mwa { display: none; } }
+
+/* Helper card buttons alternate navy and gold */
+.helper-card__cta--gold { background: var(--color-accent); color: #000; }
+.helper-card__cta--gold:hover { background: #E3A200; color: #000; }
