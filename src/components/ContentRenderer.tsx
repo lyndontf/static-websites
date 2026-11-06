@@ -8,6 +8,7 @@ import MaidsPlugBox from '@/components/MaidsPlugs';
 import MaidsHelpersCarousel from '@/components/MaidsHelpersCarousel';
 import MaidsEligibility from '@/components/MaidsEligibility';
 import MaidsFlow from '@/components/MaidsFlow';
+import MaidsCards from '@/components/MaidsCards';
 
 const JobListingsEmbed = dynamic(() => import('./JobListingsEmbed'), { ssr: false });
 
@@ -148,7 +149,10 @@ export default function ContentRenderer({
             return <MaidsEligibility key={i} code={block.code || ''} />;
 
           case 'maids_flow':
-            return <MaidsFlow key={i} items={block.items || []} note={block.content} />;
+            return <MaidsFlow key={i} items={block.items || []} note={block.content} variant={block.variant} />;
+
+          case 'maids_cards':
+            return <MaidsCards key={i} items={block.items || []} />;
 
           case 'maids_helpers':
             return <MaidsHelpersCarousel key={i} helpers={block.helpers || []} variant={block.variant || 'maid'} code={block.code || ''} />;

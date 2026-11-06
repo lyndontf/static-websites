@@ -17,18 +17,19 @@ function Arrow({ dashed }: { dashed?: boolean }) {
 
 import { Fragment } from 'react';
 
-export default function MaidsFlow({ items, note }: { items: string[]; note?: string }) {
+export default function MaidsFlow({ items, note, variant }: { items: string[]; note?: string; variant?: string }) {
+  const route = variant === 'route';
   const steps = items.map((html) => {
     const m = /^\s*<strong>(.*?)<\/strong>\s*([\s\S]*)$/i.exec(html);
     return { title: m ? m[1] : '', body: m ? m[2] : html };
   });
   return (
-    <div className="flowchart">
-      <ol className="flow">
+    <div className={`flowchart${route ? ' flowchart--route' : ''}`}>
+      <ol className="flow" style={{ ['--flow-cols' as any]: items.map(() => '1fr').join(route ? ' 40px ' : ' 56px ') }}>
         {steps.map((s, i) => (
           <Fragment key={i}>
-            {i > 0 ? <Arrow key={`a${i}`} dashed={i === steps.length - 1 && steps.length > 2} /> : null}
-            <li key={`s${i}`} className={`flow__step${i === steps.length - 1 && steps.length > 2 ? ' flow__step--alt' : ''}`}>
+            {i > 0 ? <Arrow key={`a${i}`} dashed={!route && i === steps.length - 1 && steps.length > 2} /> : null}
+            <li key={`s${i}`} className={`flow__step${!route && i === steps.length - 1 && steps.length > 2 ? ' flow__step--alt' : ''}`}>
               <span className="flow__num" aria-hidden="true">
                 {i + 1}
               </span>
