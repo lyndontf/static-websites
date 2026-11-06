@@ -10,6 +10,7 @@ import TrackingScript from '@/components/TrackingScript';
 import GtaOrgSchema from '@/components/GtaOrgSchema';
 import { MaidsSiteSchema } from '@/components/MaidsSchema';
 import { MaidsHeader, MaidsFooter } from '@/components/MaidsChrome';
+import MaidsWhatsAppWidget from '@/components/MaidsWhatsAppWidget';
 import Script from 'next/script';
 import { centreNavEN } from '@/lib/nav';
 import { getSiteSettings, getPageBySlug } from '@/lib/supabase';
@@ -116,7 +117,7 @@ export default async function RootLayout({
         {siteSlug === 'maids' && (
           <>
             {/* Maids in Malaysia: Teal and Sand site template (public/images/maids/maids.css). Change the colours by editing data-theme on <html> above. */}
-            <link rel="stylesheet" href="/images/maids/maids.css?v=22" />
+            <link rel="stylesheet" href="/images/maids/maids.css?v=25" />
           </>
         )}
         {/* custom_head_html is injected from <body> below — placing this inline script in <head> via the App Router renders it as visible text */}
@@ -152,6 +153,7 @@ export default async function RootLayout({
           {siteSlug === 'maids' && (
             <MaidsFooter siteName={settings?.site_name} footerText={settings?.footer_text} email={settings?.contact_email} />
           )}
+          {siteSlug === 'maids' && <MaidsWhatsAppWidget phone="60192240457" />}
           {!isCmsSite && !isFullHtmlPage && (
             <WhatsAppWidget phone={(settings?.contact_phone || '60193250457').replace(/[^\d]/g, '')} />
           )}

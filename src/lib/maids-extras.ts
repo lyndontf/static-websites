@@ -18,9 +18,9 @@ export type MaidsHelper = {
   photo: string | null;
 };
 
-type Rule = { helpers?: 'maid' | 'elder'; helpersAfter?: RegExp; centres?: boolean; eligibility?: boolean; flow?: boolean };
+type Rule = { helpers?: 'maid' | 'elder'; helpersAfter?: RegExp; centres?: boolean; eligibility?: boolean; flow?: boolean; route?: boolean; cards?: boolean; caregiversEnd?: boolean };
 const RULES: Record<string, Rule> = {
-  home: { helpers: 'maid', helpersAfter: /where do you want to start/i, centres: true },
+  home: { helpers: 'maid', helpersAfter: /where do you want to start/i, centres: true, route: true, cards: true, caregiversEnd: true },
   'hire-a-maid': { helpers: 'maid', eligibility: true, flow: true },
   'elderly-caregiver': { helpers: 'elder' },
   'guides/does-my-family-qualify-to-hire-a-maid': { centres: true },
@@ -43,6 +43,13 @@ const money = (n: number) => 'RM ' + Math.round(n).toLocaleString('en-MY');
 // candidate agreed to show: age, marital status, nationality, languages and rate.
 function toHelper(r: Record<string, any>): MaidsHelper {
   const langs = (Array.isArray(r.languages) ? r.languages : []).map((l: any) => (typeof l === 'string' ? l : l?.name)).filter(Boolean);
+  const nat = demonym(r.nationality ?? null);
+  if (!langs.length) {
+    // no languages on file: default by nationality (Lyndon, 6 Nov 2026)
+    if (nat === 'Filipino') langs.push('English', 'Tagalog');
+    else if (nat === 'Indonesian') langs.push('English', 'Bahasa Indonesia');
+    else if (nat === 'Malaysian') langs.push('English', 'Bahasa Melayu');
+  }
   let salary: string | null = null;
   if (r.kind === 'maid' && Number(r.monthly_salary) > 0) salary = money(Number(r.monthly_salary)) + ' a month';
   else if (Number(r.hourly_rate_min) > 0) salary = money(Number(r.hourly_rate_min)) + (Number(r.hourly_rate_max) > Number(r.hourly_rate_min) ? ' to ' + money(Number(r.hourly_rate_max)) : '') + ' an hour';
@@ -52,7 +59,7 @@ function toHelper(r: Record<string, any>): MaidsHelper {
     name: r.full_name,
     age: r.age ?? null,
     marital: r.marital_status ? titleCase(String(r.marital_status).trim()) : null,
-    nationality: demonym(r.nationality ?? null),
+    nationality: nat,
     languages: langs,
     salary,
     category: r.job_category || '',
@@ -66,6 +73,17 @@ export async function withMaidsExtras<T extends { type: string; key?: string }>(
   if (!rule) return blocks;
   if (rule.eligibility) blocks = replaceSection(blocks, /does your family qualify/i, (n) => [{ type: 'maids_eligibility', code: maidsPageCode(slug) } as any]) as T[];
   if (rule.flow) blocks = replaceSection(blocks, /what happens next/i, (inner) => flowBlock(inner)) as T[];
+  if (rule.route) blocks = replaceSection(blocks, /the route, step by step/i, (inner) => routeBlock(inner)) as T[];
+  if (rule.cards) blocks = replaceSection(blocks, /where do you want to start/i, (inner) => cardsBlock(inner)) as T[];
+  if (rule.caregiversEnd) {
+    const list = await fetchCaregivers();
+    if (list.length) {
+      const cg = { type: 'maids_helpers', variant: 'elder', helpers: list, code: maidsPageCode(slug) } as any;
+      const d = blocks.findIndex((b) => b.type === 'maids_plug' && (b as any).key === 'disclosure');
+      if (d >= 0) blocks = [...blocks.slice(0, d), cg as T, ...blocks.slice(d + 1)];
+      else blocks = [...blocks, cg as T];
+    }
+  }
   const extra: any[] = [];
   let helpersBlock: any = null;
   const code = maidsPageCode(slug);
@@ -74,6 +92,7 @@ export async function withMaidsExtras<T extends { type: string; key?: string }>(
       const kind = rule.helpers === 'elder' ? 'caregiver' : 'maid';
       const { data } = await supabase.rpc('carer_showcase', { p_per_kind: 12 });
       let rows = ((data as any[]) || []).filter((r) => r.kind === kind);
+      if (kind === 'caregiver') rows = await fetchCaregiverRows();
       if (kind === 'maid') {
         // A card should show age, status, nationality, languages and salary, so prefer the maids whose profile has all of them
         // (the showcase rule itself does not require age or languages), newest first; top up from the showcase list.
@@ -134,4 +153,37 @@ function flowBlock(inner: AnyBlock[]): AnyBlock[] {
   if (!list) return inner;
   const note = inner.find((b) => b.type === 'paragraph');
   return [{ type: 'maids_flow', items: list.items, content: note?.content }];
+}
+
+const CG_COLS = 'id, full_name, age, languages, marital_status, nationality, profile_photo_url, job_category, hourly_rate_min, hourly_rate_max, monthly_rate_min, created_at';
+
+/** Every published caregiver with a name and a photo, newest first. */
+async function fetchCaregiverRows(): Promise<any[]> {
+  try {
+    const { data } = await supabase.from('caregiver_public_profiles').select(CG_COLS).order('created_at', { ascending: false }).limit(200);
+    return ((data as any[]) || [])
+      .filter((r) => /care/i.test(r.job_category || '') && String(r.full_name || '').trim() && String(r.profile_photo_url || '').startsWith('http'))
+      .map((r) => ({ ...r, kind: 'caregiver' }));
+  } catch {
+    return [];
+  }
+}
+
+async function fetchCaregivers(): Promise<MaidsHelper[]> {
+  return (await fetchCaregiverRows()).slice(0, 12).map(toHelper);
+}
+
+/** "The route, step by step": keep the lead-in line and turn the signed list into a flowchart. */
+function routeBlock(inner: AnyBlock[]): AnyBlock[] {
+  const list = inner.find((b) => b.type === 'list' && Array.isArray(b.items));
+  if (!list) return inner;
+  const lead = inner.filter((b) => b.type === 'paragraph');
+  return [...lead, { type: 'maids_flow', variant: 'route', items: list.items }];
+}
+
+/** "Where do you want to start?": the signed list becomes clickable cards. */
+function cardsBlock(inner: AnyBlock[]): AnyBlock[] {
+  const list = inner.find((b) => b.type === 'list' && Array.isArray(b.items));
+  if (!list) return inner;
+  return [{ type: 'maids_cards', items: list.items }];
 }
