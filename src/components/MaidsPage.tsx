@@ -28,6 +28,9 @@ function prepare(page: any, blocks: Block[]) {
   const toc: { id: string; label: string }[] = [];
   const body = blocks
     .filter((b) => b !== h1)
+    // The closing "Maids in Malaysia is a trading name of ... PEA Licence B No. 1681 (valid ...)" line is not shown (Lyndon,
+    // 6 Nov 2026). The licence stays in the header, the labelled boxes and the Our licence page.
+    .filter((b) => !(b.type === 'paragraph' && /^\s*Maids in Malaysia is a trading name of/i.test(String(b.content ?? b.text ?? ''))))
     .map((b) => {
       if (b.type === 'heading' && Number(b.level || 2) === 2) {
         const label = textOf(b);
