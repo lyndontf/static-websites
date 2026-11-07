@@ -14,7 +14,7 @@ import {
   type SlotConfig,
   type CareType,
 } from '@/lib/supabase';
-import { sendEnquiryEmail, buildBookingEmail, buildBookingConfirmationEmail } from '@/lib/email';
+import { sendBookingEmails } from '@/lib/email';
 
 /* ─── helpers ─────────────────────────────────────────────────── */
 
@@ -367,20 +367,13 @@ export default function BookingFormClient({ lang = 'en', defaultCentreSlug }: Pr
         careType: careTypeName,
       };
 
-      // 1. Admin notification → enquiries@genesiscare.com.my
-      const { subject, html } = buildBookingEmail(bookingEmailData);
-      sendEnquiryEmail(subject, html);
-
-      // 2. Submitter confirmation (only if visitor provided their email)
-      const visitorEmail = form.email.trim();
-      if (visitorEmail) {
-        const { subject: confSubject, html: confHtml } = buildBookingConfirmationEmail({
-          ...bookingEmailData,
-          centrePhone: selectedCentre.marketing_phone_no,
-          centreAddress: parseAddress(selectedCentre.address),
-        });
-        sendEnquiryEmail(confSubject, confHtml, visitorEmail);
-      }
+      // The server builds the admin notification (enquiries@genesiscare.com.my) and, when the visitor gave an email,
+      // their confirmation. The browser sends only the booking details.
+      sendBookingEmails({
+        ...bookingEmailData,
+        centrePhone: selectedCentre.marketing_phone_no,
+        centreAddress: parseAddress(selectedCentre.address),
+      });
     } else if (result.full || result.duplicate) {
       setError(l.duplicateError);
       handleDateSelect(selectedDate);

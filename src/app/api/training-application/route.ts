@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase';
-import { getCurrentSiteSlug, getCurrentSiteBaseUrl } from '@/lib/site-context';
+import { getCurrentSiteSlug } from '@/lib/site-context';
 import { isRequestRegionBlocked } from '@/lib/geo-block';
+import { sendMail } from '@/lib/mailer';
 
 interface TrainingApplicationRequestBody {
   full_name?: string;
@@ -93,15 +94,10 @@ export async function POST(request: NextRequest) {
         contactEmail = settings?.contact_email || undefined;
       }
 
-      const baseUrl = await getCurrentSiteBaseUrl();
-      await fetch(`${baseUrl}/api/send-email`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await sendMail({
           subject: `New training application from ${full_name}`,
           html: `<p><strong>Name:</strong> ${full_name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Phone:</strong> ${phone || '-'}</p><p><strong>Residency status:</strong> ${residency_status || '-'}</p><p><strong>Programme interest:</strong> ${programme_interest || '-'}</p><p><strong>Wants scholarship:</strong> ${wants_scholarship ? 'Yes' : 'No'}</p><p><strong>Background notes:</strong></p><p>${background_notes || '-'}</p><p><strong>Page:</strong> ${source_page || '-'}</p>`,
           to: contactEmail,
-        }),
       });
     } catch (notifyErr) {
       console.error('training application notification email failed:', notifyErr);
