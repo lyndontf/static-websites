@@ -1211,3 +1211,8 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 .mim .mim-prose a.doc-card__btn--primary, .doc-card__btn--primary { background: var(--color-primary); color: var(--color-on-primary); }
 .mim .mim-prose a.doc-card__btn:hover { text-decoration: none; background: var(--color-primary-tint); }
 .mim .mim-prose a.doc-card__btn--primary:hover { background: var(--color-primary-hover); color: var(--color-on-primary); }
+
+/* Header "WhatsApp now" button: gold with black text (desktop header and mobile menu) */
+.mim .site-header .btn--primary, .mim .menu-mobile__panel .btn--primary { background: var(--color-accent); border-color: var(--color-accent); color: #000; }
+.mim .site-header .btn--primary:hover, .mim .menu-mobile__panel .btn--primary:hover { background: #E3A200; border-color: #E3A200; color: #000; }
+.mim .menu-mobile__panel .btn, .mim .menu-mobile__panel .btn:hover { color: #000; }
