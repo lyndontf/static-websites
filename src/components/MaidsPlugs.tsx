@@ -82,7 +82,7 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
 
   const external = /^https?:/i.test(p.ctaHref);
   return (
-    <aside aria-label={`${p.label ?? ''}: ${p.heading}`} className={`my-8 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 sm:p-6${p.centres ? ' plug--centres' : ''}`}>
+    <aside aria-label={`${p.label ?? ''}: ${p.heading}`} className={`my-8 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 sm:p-6 plug--wide${p.centres ? ' plug--centres' : ''}`}>
       {p.label && (
         <span className="inline-block rounded-full bg-[color:var(--color-ink)] px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
           <T>{p.label}</T>
