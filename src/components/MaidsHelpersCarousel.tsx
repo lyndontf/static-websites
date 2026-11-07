@@ -20,6 +20,8 @@ export default function MaidsHelpersCarousel({ helpers, variant, code, phone, ag
   const tr = useT();
   const track = useRef<HTMLUListElement>(null);
   const paused = useRef(false);
+  const posRef = useRef(0);
+  const resumeRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const loop = helpers.length >= 4;
 
   useEffect(() => {
@@ -28,22 +30,21 @@ export default function MaidsHelpersCarousel({ helpers, variant, code, phone, ag
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let raf = 0;
     let last = 0;
-    let pos = el.scrollLeft;
-    let resume: ReturnType<typeof setTimeout> | undefined;
+    posRef.current = el.scrollLeft;
     const half = () => el.scrollWidth / 2;
     const tick = (t: number) => {
       if (last && !paused.current && !document.hidden) {
-        pos += ((t - last) / 1000) * SPEED;
-        if (pos >= half()) pos -= half();
-        el.scrollLeft = pos;
+        posRef.current += ((t - last) / 1000) * SPEED;
+        if (posRef.current >= half()) posRef.current -= half();
+        el.scrollLeft = posRef.current;
       }
       last = t;
       raf = requestAnimationFrame(tick);
     };
     const stop = () => { paused.current = true; };
-    const go = () => { pos = el.scrollLeft; paused.current = false; };
-    const touchStart = () => { stop(); clearTimeout(resume); };
-    const touchEnd = () => { clearTimeout(resume); resume = setTimeout(go, 3000); };
+    const go = () => { posRef.current = el.scrollLeft; paused.current = false; };
+    const touchStart = () => { stop(); clearTimeout(resumeRef.current); };
+    const touchEnd = () => { clearTimeout(resumeRef.current); resumeRef.current = setTimeout(go, 3000); };
     const onScroll = () => {
       // keep the loop seamless when the visitor scrolls by hand
       if (el.scrollLeft >= half()) el.scrollLeft -= half();
@@ -59,7 +60,7 @@ export default function MaidsHelpersCarousel({ helpers, variant, code, phone, ag
     raf = requestAnimationFrame(tick);
     return () => {
       cancelAnimationFrame(raf);
-      clearTimeout(resume);
+      clearTimeout(resumeRef.current);
       el.removeEventListener('mouseenter', stop);
       el.removeEventListener('mouseleave', go);
       el.removeEventListener('focusin', stop);
@@ -72,7 +73,18 @@ export default function MaidsHelpersCarousel({ helpers, variant, code, phone, ag
 
   if (!helpers.length) return null;
   const elder = variant === 'elder';
-  const step = (dir: 1 | -1) => track.current?.scrollBy({ left: dir * 324, behavior: 'smooth' });
+  // The arrows pause the slow auto-scroll (which rewrites scrollLeft every frame and would undo the move), slide one card, and let the auto-scroll carry on a few seconds later.
+  const step = (dir: 1 | -1) => {
+    const el = track.current;
+    if (!el) return;
+    paused.current = true;
+    clearTimeout(resumeRef.current);
+    el.scrollBy({ left: dir * 324, behavior: 'smooth' });
+    resumeRef.current = setTimeout(() => {
+      posRef.current = el.scrollLeft;
+      paused.current = false;
+    }, 3500);
+  };
   const heading = elder ? 'Caregivers available for hire' : 'Helpers available for hire';
   return (
     <aside aria-label={`Our service: ${heading}`} className="helpers my-8 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 sm:p-6">
