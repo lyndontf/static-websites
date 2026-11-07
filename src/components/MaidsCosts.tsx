@@ -10,13 +10,17 @@ const GROUPS: Group[] = [
   {
     title: 'Paid to the authorities after approval',
     rows: [
-      { label: 'Levy', amount: 'Not shown yet', pending: true },
-      { label: 'PLKS', amount: 'Not shown yet', pending: true },
-      { label: 'Visa', amount: 'Not shown yet', note: 'Applied for through MyVISA before she enters Malaysia', pending: true },
-      { label: 'Processing', amount: 'Not shown yet', pending: true },
-      { label: 'FOMEMA medical', amount: 'Not shown yet', note: 'Within 30 days of arrival', pending: true },
+      { label: 'Levy', amount: 'RM410 a year', note: 'Indicative', },
+      { label: 'PLKS', amount: 'RM60', note: 'Indicative' },
+      {
+        label: 'Visa',
+        amount: 'RM13 to RM50',
+        note: 'By nationality; confirm for your helper. Vietnam RM13, Indonesia and Sri Lanka RM15, Nepal RM20, India RM50, countries not listed RM20. Applied for before she enters Malaysia.',
+      },
+      { label: 'Processing', amount: 'RM125', note: 'Indicative' },
+      { label: 'FOMEMA medical', amount: 'About RM220 to RM235', note: 'Indicative. Within 30 days of arrival' },
     ],
-    note: 'We are checking the current official amounts and will add each one with its source when it is confirmed.',
+    note: 'Levy, PLKS and processing match the Immigration Department’s MAID Online user guide (sample payment screen, 2018) and a pass issued in 2016. The FOMEMA amount comes from published guides. All four are indicative and subject to change. Please check the Immigration Department (imi.gov.my) and FOMEMA (fomema2u.com.my) portals for the latest figures.',
   },
   {
     title: 'Personal bond, by the helper’s home country',

@@ -18,10 +18,11 @@ export type MaidsHelper = {
   photo: string | null;
 };
 
-type Rule = { helpers?: 'maid' | 'elder'; helpersAfter?: RegExp; centres?: boolean; eligibility?: boolean; flow?: boolean; route?: boolean; cards?: boolean; caregiversEnd?: boolean; costs?: boolean };
+type Rule = { helpers?: 'maid' | 'elder'; helpersAfter?: RegExp; centres?: boolean; eligibility?: boolean; flow?: boolean; route?: boolean; cards?: boolean; caregiversEnd?: boolean; costs?: boolean; docs?: boolean };
 const RULES: Record<string, Rule> = {
   home: { helpers: 'maid', helpersAfter: /where do you want to start|您想从哪里开始/i, centres: true, route: true, cards: true, caregiversEnd: true },
   'rules-and-fees': { costs: true },
+  'guides/how-to-hire-a-maid-malaysia': { docs: true },
   'hire-a-maid': { helpers: 'maid', eligibility: true, flow: true },
   'elderly-caregiver': { helpers: 'elder' },
   'guides/does-my-family-qualify-to-hire-a-maid': { centres: true },
@@ -153,6 +154,9 @@ export async function withMaidsExtras<T extends { type: string; key?: string }>(
     } catch {
       /* no carousel if the list cannot be read */
     }
+  }
+  if (rule.docs) {
+    extra.push({ type: 'heading', level: 2, content: zh ? '您会看到的官方表格' : 'The official forms you will see' }, { type: 'maids_docs' });
   }
   if (rule.centres && !blocks.some((b) => b.type === 'maids_plug' && b.key === 'centres')) {
     extra.push({ type: 'maids_plug', key: 'centres', code });
