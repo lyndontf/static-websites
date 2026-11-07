@@ -59,7 +59,8 @@ function categoryLabel(cat: string | null): string {
 export default function BiodataListClient({ candidates }: { candidates: BiodataCandidate[] }) {
   const [activeFilter, setActiveFilter] = useState<string>('All Candidates');
 
-  const filtered = candidates.filter((c) => matchesCategory(c, activeFilter));
+  // Candidates without a profile picture are not listed (their profile page still opens from a direct link).
+  const filtered = candidates.filter((c) => !!c.photo_url && c.photo_url.trim() !== '' && matchesCategory(c, activeFilter));
 
   return (
     <>
