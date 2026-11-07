@@ -162,6 +162,8 @@ export const ZH: Record<string, string> = {
   Processing: '处理费',
   'FOMEMA medical': 'FOMEMA 体检',
   'Not shown yet': '暂未列出',
+  Address: '地址',
+  Phone: '电话',
   "RM410 a year": "每年 RM410",
   "RM60": "RM60",
   "RM125": "RM125",
