@@ -5,9 +5,17 @@ import { T } from '@/components/MaidsLang';
 // blank forms, not anyone's filled-in document. Specimens of the issued documents (visa, Special Pass, PL(KS) sticker,
 // Section 60K letter, FOMEMA result) are not published by the authorities and are not shown until we have genuine ones.
 
-type Doc = { file: string; title: string; text: string; source: string; pages: number };
+type Doc = { file: string; title: string; text: string; source: string; pages: number; tag?: string };
 
 const DOCS: Doc[] = [
+  {
+    file: 'approval-letter-specimen',
+    title: 'Approval letter for the helper’s pass (specimen)',
+    text: 'What the immigration approval letter looks like after the VDR application: it lists the payments, the visa step and the entry rules. Names, reference number and the agency are blacked out.',
+    source: 'Immigration Department (JIM), Perak, example for a Filipino helper',
+    pages: 2,
+    tag: 'Specimen',
+  },
   {
     file: 'new-application-pra1',
     title: 'New application form for a foreign domestic helper (PRA1)',
@@ -49,7 +57,7 @@ export default function MaidsDocs() {
   return (
     <div className="docs">
       <p className="docs__intro">
-        <T>These are the blank forms published by the authorities. They are examples of what you will be asked to fill in, not anyone’s completed document.</T>
+        <T>Blank forms are published by the authorities. The specimen shows what an approval letter looks like, with personal details and the agency blacked out. None is anyone’s completed document.</T>
       </p>
       <ul className="docs__grid" role="list">
         {DOCS.map((d) => (
@@ -58,7 +66,7 @@ export default function MaidsDocs() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={`/docs/maids/${d.file}.jpg`} alt="" loading="lazy" width={640} height={880} />
               <span className="doc-card__tag">
-                <T>Blank form</T>
+                <T>{d.tag || 'Blank form'}</T>
               </span>
             </a>
             <div className="doc-card__body">
