@@ -475,6 +475,8 @@ export interface BiodataCandidate {
   full_name: string;
   nationality: string | null;
   age: number | null;
+  marital_status: string | null;
+  years_experience: number | null;
   education_level: string | null;
   monthly_salary_myr: number | null;
   rest_days_per_month: number | null;
@@ -489,7 +491,7 @@ export interface BiodataCandidate {
 // `public.candidates`, public fields only (`name` is the public name, never the full name). Signed-out visitors cannot read `candidates` itself (PDPA,
 // lyndontf/lcs map #1283). Approved resume submissions become published candidates via approve_biodata().
 const CAREGIVER_COLUMNS =
-  'id, name, profile_pic_url, nationality_text, age, education_level, created_at, reference_no, job_category, ' +
+  'id, name, profile_pic_url, nationality_text, age, marital_status, years_experience, education_level, created_at, reference_no, job_category, ' +
   'monthly_salary_myr, rest_days_per_month, off_day_compensation_myr, languages, skills, experience';
 
 function mapUserToCandidate(u: Record<string, any>): BiodataCandidate {
@@ -502,6 +504,8 @@ function mapUserToCandidate(u: Record<string, any>): BiodataCandidate {
     full_name: u.name ?? '',
     nationality: u.nationality_text ?? null,
     age: u.age ?? null,
+    marital_status: u.marital_status ?? null,
+    years_experience: u.years_experience ?? null,
     education_level: u.education_level ?? null,
     monthly_salary_myr: u.monthly_salary_myr ?? null,
     rest_days_per_month: u.rest_days_per_month ?? null,

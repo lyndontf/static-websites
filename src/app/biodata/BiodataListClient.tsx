@@ -32,6 +32,19 @@ function totalExperience(exp: Record<string, string>): string {
   return `${years} year${years !== 1 ? 's' : ''}`;
 }
 
+// Photos that are not framed like a normal portrait (for example a tall phone screenshot with a grey banner on top): where the face sits,
+// as a vertical object-position for the card photo. Keyed by candidate id.
+const PHOTO_FOCUS: Record<string, string> = {
+  'ed791c9f-45b1-470d-8155-f914ebc27771': '50% 46%', // Michael
+};
+
+function experienceLabel(c: BiodataCandidate): string | null {
+  const fromRecord = totalExperience(c.helper_experience || {});
+  if (fromRecord !== '—') return `${fromRecord} experience`;
+  if (c.years_experience && c.years_experience > 0) return `${c.years_experience} year${c.years_experience !== 1 ? 's' : ''} experience`;
+  return null;
+}
+
 function languageSummary(languages: BiodataCandidate['languages']): string {
   if (!languages || languages.length === 0) return '—';
   return languages.map((l) => l.name).join(', ');
@@ -46,7 +59,8 @@ function categoryLabel(cat: string | null): string {
 export default function BiodataListClient({ candidates }: { candidates: BiodataCandidate[] }) {
   const [activeFilter, setActiveFilter] = useState<string>('All Candidates');
 
-  const filtered = candidates.filter((c) => matchesCategory(c, activeFilter));
+  // Candidates without a profile picture are not listed (their profile page still opens from a direct link).
+  const filtered = candidates.filter((c) => !!c.photo_url && c.photo_url.trim() !== '' && matchesCategory(c, activeFilter));
 
   return (
     <>
@@ -86,7 +100,7 @@ export default function BiodataListClient({ candidates }: { candidates: BiodataC
             return (
               <Link key={c.id} href={`/biodata/${c.id}`} className="glc-card glc-card--hover glc-biodata-card" style={{ display: 'block' }}>
                 {c.photo_url ? (
-                  <img src={c.photo_url} alt={name} className="glc-biodata-card__img" />
+                  <img src={c.photo_url} alt={name} className="glc-biodata-card__img" style={PHOTO_FOCUS[c.id] ? { objectPosition: PHOTO_FOCUS[c.id] } : undefined} />
                 ) : (
                   <div className="glc-biodata-card__img" style={{ background: 'var(--glc-teal-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <svg width="48" height="48" fill="none" stroke="var(--glc-teal)" viewBox="0 0 24 24">
@@ -99,20 +113,36 @@ export default function BiodataListClient({ candidates }: { candidates: BiodataC
                   <h3 style={{ margin: '10px 0 2px' }}>{name}</h3>
                   <p style={{ margin: 0, fontSize: 'var(--glc-fs-sm)' }}>{categoryLabel(c.job_category)}</p>
                   <div className="glc-biodata-card__meta">
-                    <span className="glc-tag">{c.nationality || '—'}</span>
-                    <span className="glc-tag">{c.age != null ? `${c.age} yrs` : '—'}</span>
-                    <span className="glc-tag">{totalExperience(c.helper_experience || {})} experience</span>
+                    {[
+                      c.nationality,
+                      c.age != null ? `${c.age} yrs` : null,
+                      c.marital_status,
+                      experienceLabel(c),
+                    ]
+                      .filter(Boolean)
+                      .map((t) => (
+                        <span key={t as string} className="glc-tag">{t}</span>
+                      ))}
                   </div>
-                  <p style={{ margin: '0 0 12px', fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)' }}>
-                    Languages: {languageSummary(c.languages)}
-                  </p>
+                  {c.languages && c.languages.length > 0 ? (
+                    <p style={{ margin: '0 0 6px', fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)' }}>
+                      Languages: {languageSummary(c.languages)}
+                    </p>
+                  ) : null}
+                  {c.monthly_salary_myr ? (
+                    <p style={{ margin: '0 0 12px', fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)' }}>
+                      Salary: RM{Number(c.monthly_salary_myr).toLocaleString('en-MY')} a month
+                    </p>
+                  ) : (
+                    <div style={{ marginBottom: 12 }} />
+                  )}
                   <div
                     style={{
                       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                       paddingTop: 12, borderTop: '1px solid var(--glc-line)',
                     }}
                   >
-                    <span style={{ fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)' }}>Ref: {c.reference_no || '—'}</span>
+                    <span style={{ fontSize: 'var(--glc-fs-xs)', color: 'var(--glc-slate-soft)' }}>{c.reference_no ? `Ref: ${c.reference_no}` : ''}</span>
                     <span style={{ fontSize: 'var(--glc-fs-sm)', fontWeight: 700, color: 'var(--glc-teal)' }}>View Profile →</span>
                   </div>
                 </div>
