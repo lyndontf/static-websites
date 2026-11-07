@@ -1223,3 +1223,6 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 .centre-card__facts dt { font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-ink-soft); }
 .centre-card__facts dd { margin: 0; line-height: 1.4; }
 .mim .mim-prose .centre-card__facts a { color: var(--color-primary); font-weight: var(--fw-bold); text-decoration: none; }
+
+/* Labelled "Our service" / "From our group" boxes: full width on laptop and desktop, like the care centres box */
+@media (min-width: 1000px) { .page-body--single .mim-prose .plug--wide { width: min(1152px, calc(100vw - 48px)); padding: var(--space-6); } }
