@@ -82,7 +82,7 @@ export function MaidsHeader({ siteName }: { siteName?: string | null }) {
           <div className="header-actions">
             <LangToggle />
             <a className="btn btn--primary btn--sm" href={WHATSAPP}>
-              <T>Ask us on WhatsApp</T>
+              <T>WhatsApp now</T>
             </a>
             <details className="menu-mobile">
               <summary>
@@ -91,7 +91,7 @@ export function MaidsHeader({ siteName }: { siteName?: string | null }) {
               <nav className="menu-mobile__panel" aria-label="Menu">
                 <NavLinks items={NAV} variant="mobile" />
                 <a className="btn btn--primary btn--sm" href={WHATSAPP}>
-                  <T>Ask us on WhatsApp</T>
+                  <T>WhatsApp now</T>
                 </a>
               </nav>
             </details>

@@ -18,6 +18,7 @@ export const ZH: Record<string, string> = {
   'Our services': '我们的服务',
   Menu: '菜单',
   'Ask us on WhatsApp': 'WhatsApp 咨询',
+  'WhatsApp now': '立即 WhatsApp',
   Learn: '了解',
   About: '关于',
   'How to hire, step by step': '如何聘请女佣：逐步指南',
