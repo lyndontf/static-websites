@@ -12,7 +12,11 @@ const GROUPS: Group[] = [
     rows: [
       { label: 'Levy', amount: 'Not shown yet', pending: true },
       { label: 'PLKS', amount: 'Not shown yet', pending: true },
-      { label: 'Visa', amount: 'Not shown yet', note: 'Applied for through MyVISA before she enters Malaysia', pending: true },
+      {
+        label: 'Visa',
+        amount: 'RM13 to RM50',
+        note: 'By nationality; confirm for your helper. Vietnam RM13, Indonesia and Sri Lanka RM15, Nepal RM20, India RM50, countries not listed RM20. Applied for before she enters Malaysia.',
+      },
       { label: 'Processing', amount: 'Not shown yet', pending: true },
       { label: 'FOMEMA medical', amount: 'Not shown yet', note: 'Within 30 days of arrival', pending: true },
     ],
