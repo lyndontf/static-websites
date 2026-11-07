@@ -50,6 +50,16 @@ export function DisclosureShort() {
   );
 }
 
+// Address and phone of each care centre, from the centre records (public details; the phone is the WhatsApp number on the button).
+// Beds = beds in the LCS app that are not retired (retired beds are never counted), checked 7 Nov 2026. Update when the bed list changes.
+const CENTRE_INFO: Record<string, { address: string; phone: string; tel: string; beds: number }> = {
+  'Genesis Life Care — Kajang': { address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor', phone: '+60 19-334 0457', tel: '+60193340457', beds: 73 },
+  'Genesis Life Care — Klang': { address: 'Majlis Perbandaran Klang, 3, Jalan Istana, Kawasan 1, 41000 Klang, Selangor', phone: '+60 12-321 0457', tel: '+60123210457', beds: 110 },
+  'Genesis Life Care — Petaling Jaya': { address: '1, Petaling Utama Avenue, PJS 1, 58200 Petaling Jaya, Selangor', phone: '+60 19-295 0457', tel: '+60192950457', beds: 51 },
+  'Genesis Life Care — Puchong': { address: '16, Jalan TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor', phone: '+60 19-759 0457', tel: '+60197590457', beds: 54 },
+  'Genesis Life Care — Johor Bahru': { address: 'Jalan Dato Sulaiman, Taman Century, 80250 Johor Bahru, Johor', phone: '+60 19-282 0457', tel: '+60192820457', beds: 52 },
+};
+
 export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code: string }) {
   const p = MAIDS_PLUGS[plugKey];
   if (!p) return null;
@@ -72,7 +82,7 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
 
   const external = /^https?:/i.test(p.ctaHref);
   return (
-    <aside aria-label={`${p.label ?? ''}: ${p.heading}`} className="my-8 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 sm:p-6">
+    <aside aria-label={`${p.label ?? ''}: ${p.heading}`} className={`my-8 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-surface)] p-5 sm:p-6${p.centres ? ' plug--centres' : ''}`}>
       {p.label && (
         <span className="inline-block rounded-full bg-[color:var(--color-ink)] px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
           <T>{p.label}</T>
@@ -100,6 +110,24 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
                 <span className="centre-card__town">
                   <T>{c.town}</T>
                 </span>
+                {CENTRE_INFO[c.name] ? (
+                  <dl className="centre-card__facts">
+                    <div>
+                      <dt><T>Address</T></dt>
+                      <dd>{CENTRE_INFO[c.name].address}</dd>
+                    </div>
+                    <div>
+                      <dt><T>Bed capacity</T></dt>
+                      <dd>{CENTRE_INFO[c.name].beds} <T>beds</T></dd>
+                    </div>
+                    <div>
+                      <dt><T>Phone</T></dt>
+                      <dd>
+                        <a href={`tel:${CENTRE_INFO[c.name].tel}`}>{CENTRE_INFO[c.name].phone}</a>
+                      </dd>
+                    </div>
+                  </dl>
+                ) : null}
                 <a href={withCode(c.whatsapp, code)} className="centre-card__cta">
                   <T>WhatsApp this centre</T>
                 </a>

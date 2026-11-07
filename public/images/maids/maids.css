@@ -1216,3 +1216,10 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 .mim .site-header .btn--primary, .mim .menu-mobile__panel .btn--primary { background: var(--color-accent); border-color: var(--color-accent); color: #000; }
 .mim .site-header .btn--primary:hover, .mim .menu-mobile__panel .btn--primary:hover { background: #E3A200; border-color: #E3A200; color: #000; }
 .mim .menu-mobile__panel .btn, .mim .menu-mobile__panel .btn:hover { color: #000; }
+
+/* Care centres plug: full width on laptop and desktop, with address and phone on each card */
+@media (min-width: 1000px) { .page-body--single .mim-prose .plug--centres { width: min(1152px, calc(100vw - 48px)); padding: var(--space-6); } }
+.centre-card__facts { margin: var(--space-3) 0 0; display: grid; gap: var(--space-2); font-size: var(--fs-small); color: var(--color-ink); }
+.centre-card__facts dt { font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-ink-soft); }
+.centre-card__facts dd { margin: 0; line-height: 1.4; }
+.mim .mim-prose .centre-card__facts a { color: var(--color-primary); font-weight: var(--fw-bold); text-decoration: none; }
