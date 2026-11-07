@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase';
-import { getCurrentSiteBaseUrl } from '@/lib/site-context';
 import { isRequestRegionBlocked } from '@/lib/geo-block';
+import { sendMail } from '@/lib/mailer';
 
 interface WaitlistLocation {
   location_name?: string;
@@ -97,19 +97,14 @@ export async function POST(request: NextRequest) {
 
     // Best-effort notification email — never blocks the success response
     try {
-      const baseUrl = await getCurrentSiteBaseUrl();
       const totalBeds = cleanedLocations.reduce((sum, l) => sum + (l.bed_capacity || 0), 0);
       const locationsHtml = cleanedLocations
         .map((l) => `<li>${l.location_name || 'Location'}: ${l.bed_capacity} beds</li>`)
         .join('');
-      await fetch(`${baseUrl}/api/send-email`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await sendMail({
           subject: `New waitlist signup: ${centre_name}`,
           html: `<p><strong>Centre name:</strong> ${centre_name}</p><p><strong>Registration type:</strong> ${registration_type}</p><p><strong>Registration number:</strong> ${registration_number}</p><p><strong>Website:</strong> ${website || '-'}</p><p><strong>PIC name:</strong> ${pic_name}</p><p><strong>PIC contact:</strong> ${pic_contact}</p><p><strong>PIC email:</strong> ${pic_email}</p><p><strong>Locations (${totalBeds} beds total):</strong></p><ul>${locationsHtml}</ul><p><strong>Page:</strong> ${page_url || '-'}</p>`,
           to: 'hello@lifecaresystems.com.my',
-        }),
       });
     } catch (notifyErr) {
       console.error('waitlist notification email failed:', notifyErr);

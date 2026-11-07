@@ -1,25 +1,26 @@
 /**
- * Fire-and-forget helper — sends an email via /api/send-email.
- * Pass `to` to override the default admin inbox (enquiries@genesiscare.com.my).
- * Never throws; failures are logged to console (visible in Vercel function logs).
+ * Fire-and-forget: asks the server to send the two booking emails (admin notification and visitor confirmation).
+ * The browser sends only the booking details; the server builds the emails and picks the recipients (/api/send-email).
+ * Never throws; failures are logged to console.
  */
-export async function sendEnquiryEmail(subject: string, html: string, to?: string): Promise<void> {
-  const recipient = to ?? 'enquiries@genesiscare.com.my';
+export async function sendBookingEmails(booking: BookingConfirmationEmailData): Promise<void> {
   try {
     const res = await fetch('/api/send-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ subject, html, ...(to ? { to } : {}) }),
+      body: JSON.stringify({ kind: 'booking', booking }),
     });
     if (!res.ok) {
       const errText = await res.text().catch(() => '(unreadable)');
-      console.error(`[sendEnquiryEmail] FAILED (HTTP ${res.status}) to=${recipient} subject="${subject}" body=${errText}`);
-    } else {
-      console.log(`[sendEnquiryEmail] sent OK to=${recipient} subject="${subject}"`);
+      console.error(`[sendBookingEmails] FAILED (HTTP ${res.status}) body=${errText}`);
     }
   } catch (err) {
-    console.error(`[sendEnquiryEmail] NETWORK ERROR to=${recipient} subject="${subject}"`, err);
+    console.error('[sendBookingEmails] NETWORK ERROR', err);
   }
+}
+
+function esc(v: string | null | undefined): string {
+  return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 // ─── Email HTML builders ─────────────────────────────────────────────────────
@@ -29,7 +30,7 @@ function row(label: string, value: string | null | undefined) {
   return `
     <tr>
       <td style="padding:6px 12px;background:#f8fafc;font-weight:600;color:#475569;white-space:nowrap;width:160px;">${label}</td>
-      <td style="padding:6px 12px;color:#1e293b;">${value}</td>
+      <td style="padding:6px 12px;color:#1e293b;">${esc(value)}</td>
     </tr>`;
 }
 
@@ -45,7 +46,7 @@ function emailWrapper(title: string, badge: string, color: string, tableRows: st
       <tr>
         <td style="background:linear-gradient(135deg,#2E72B8,#09B7D3);padding:24px 28px;">
           <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">New Enquiry</div>
-          <div style="font-size:20px;font-weight:800;color:#ffffff;">${title}</div>
+          <div style="font-size:20px;font-weight:800;color:#ffffff;">${esc(title)}</div>
           <div style="display:inline-block;margin-top:8px;padding:3px 10px;background:${color};border-radius:20px;font-size:11px;font-weight:700;color:#fff;">${badge}</div>
         </td>
       </tr>
@@ -126,7 +127,7 @@ export function buildBookingConfirmationEmail(d: BookingConfirmationEmailData) {
       <tr>
         <td style="padding:24px 28px;">
           <p style="margin:0 0 16px;font-size:14px;color:#1e293b;">
-            Dear <strong>${d.visitorName}</strong>, thank you for booking a free visit with us. We look forward to welcoming you!
+            Dear <strong>${esc(d.visitorName)}</strong>, thank you for booking a free visit with us. We look forward to welcoming you!
           </p>
           <!-- Booking details table -->
           <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:20px;">
@@ -146,8 +147,8 @@ export function buildBookingConfirmationEmail(d: BookingConfirmationEmailData) {
           ${d.centrePhone || d.centreAddress ? `
           <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:16px;margin-bottom:20px;">
             <div style="font-size:12px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Centre Contact</div>
-            ${d.centrePhone ? `<p style="margin:0 0 4px;font-size:13px;color:#1e293b;">📞 <a href="tel:${d.centrePhone.replace(/\s+/g, '')}" style="color:#2E72B8;text-decoration:none;font-weight:600;">${d.centrePhone}</a></p>` : ''}
-            ${d.centreAddress ? `<p style="margin:0;font-size:13px;color:#475569;">📍 ${d.centreAddress}</p>` : ''}
+            ${d.centrePhone ? `<p style="margin:0 0 4px;font-size:13px;color:#1e293b;">📞 <a href="tel:${esc(d.centrePhone.replace(/[^+\d]/g, ''))}" style="color:#2E72B8;text-decoration:none;font-weight:600;">${esc(d.centrePhone)}</a></p>` : ''}
+            ${d.centreAddress ? `<p style="margin:0;font-size:13px;color:#475569;">📍 ${esc(d.centreAddress)}</p>` : ''}
           </div>` : ''}
           <p style="margin:0;font-size:12px;color:#94a3b8;">
             Need to reschedule? Call us or visit <a href="https://genesiscare.com.my/booking" style="color:#2E72B8;">genesiscare.com.my/booking</a> to make a new booking.<br/>
