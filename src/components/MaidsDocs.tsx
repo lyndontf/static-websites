@@ -9,6 +9,14 @@ type Doc = { file: string; title: string; text: string; source: string; pages: n
 
 const DOCS: Doc[] = [
   {
+    file: 'fomema-medical-form-specimen',
+    title: 'FOMEMA medical examination form (specimen)',
+    text: 'The form printed from the FOMEMA portal after registration and payment: copies for the employer, the doctor, the laboratory and the X-ray facility. Sample details, from FOMEMA’s own user guide (2017 sample).',
+    source: 'FOMEMA user guide, Immigration Department',
+    pages: 1,
+    tag: 'Specimen',
+  },
+  {
     file: 'approval-letter-specimen',
     title: 'Approval letter for the helper’s pass (specimen)',
     text: 'What the immigration approval letter looks like after the VDR application: it lists the payments, the visa step and the entry rules. Names, reference number and the agency are blacked out.',
