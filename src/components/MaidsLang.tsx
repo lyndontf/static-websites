@@ -167,7 +167,7 @@ export const ZH: Record<string, string> = {
   "About RM220 to RM235": "约 RM220 至 RM235",
   "Indicative": "参考金额",
   "Indicative. Within 30 days of arrival": "参考金额。抵达后30天内办理",
-  "Levy, PLKS, processing and FOMEMA are indicative amounts from published guides and a pass issued in 2016. They are subject to change and are not yet confirmed by the authorities. Please check the Immigration Department (imi.gov.my) and FOMEMA (fomema2u.com.my) portals for the latest figures.": "人头税、PLKS、手续费和 FOMEMA 体检费为参考金额，来自已公布的指南和一张2016年签发的准证。金额可能变动，官方尚未确认。请到移民局 (imi.gov.my) 和 FOMEMA (fomema2u.com.my) 网站查看最新金额。",
+  "Levy, PLKS and processing match the Immigration Department’s MAID Online user guide (sample payment screen, 2018) and a pass issued in 2016. The FOMEMA amount comes from published guides. All four are indicative and subject to change. Please check the Immigration Department (imi.gov.my) and FOMEMA (fomema2u.com.my) portals for the latest figures.": "人头税、PLKS 和手续费与移民局 MAID Online 使用指南（2018年样本付款画面）及一张2016年签发的准证相符。FOMEMA 体检费来自已公布的指南。四项均为参考金额，可能变动。请到移民局 (imi.gov.my) 和 FOMEMA (fomema2u.com.my) 网站查看最新金额。",
   "FOMEMA medical examination form (specimen)": "FOMEMA 体检表（样本）",
   "The form printed from the FOMEMA portal after registration and payment: copies for the employer, the doctor, the laboratory and the X-ray facility. Sample details, from FOMEMA’s own user guide (2017 sample).": "在 FOMEMA 网站完成登记和付款后打印的表格，分别供雇主、医生、化验室和 X 光中心使用。数据为样本，取自 FOMEMA 官方使用指南（2017 年样本）。",
   "FOMEMA user guide, Immigration Department": "FOMEMA 使用指南，移民局",

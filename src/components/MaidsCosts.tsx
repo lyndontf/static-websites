@@ -20,7 +20,7 @@ const GROUPS: Group[] = [
       { label: 'Processing', amount: 'RM125', note: 'Indicative' },
       { label: 'FOMEMA medical', amount: 'About RM220 to RM235', note: 'Indicative. Within 30 days of arrival' },
     ],
-    note: 'Levy, PLKS, processing and FOMEMA are indicative amounts from published guides and a pass issued in 2016. They are subject to change and are not yet confirmed by the authorities. Please check the Immigration Department (imi.gov.my) and FOMEMA (fomema2u.com.my) portals for the latest figures.',
+    note: 'Levy, PLKS and processing match the Immigration Department’s MAID Online user guide (sample payment screen, 2018) and a pass issued in 2016. The FOMEMA amount comes from published guides. All four are indicative and subject to change. Please check the Immigration Department (imi.gov.my) and FOMEMA (fomema2u.com.my) portals for the latest figures.',
   },
   {
     title: 'Personal bond, by the helper’s home country',
