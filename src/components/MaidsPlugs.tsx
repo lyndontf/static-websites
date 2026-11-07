@@ -51,12 +51,13 @@ export function DisclosureShort() {
 }
 
 // Address and phone of each care centre, from the centre records (public details; the phone is the WhatsApp number on the button).
-const CENTRE_INFO: Record<string, { address: string; phone: string; tel: string }> = {
-  'Genesis Life Care — Kajang': { address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor', phone: '+60 19-334 0457', tel: '+60193340457' },
-  'Genesis Life Care — Klang': { address: 'Majlis Perbandaran Klang, 3, Jalan Istana, Kawasan 1, 41000 Klang, Selangor', phone: '+60 12-321 0457', tel: '+60123210457' },
-  'Genesis Life Care — Petaling Jaya': { address: '1, Petaling Utama Avenue, PJS 1, 58200 Petaling Jaya, Selangor', phone: '+60 19-295 0457', tel: '+60192950457' },
-  'Genesis Life Care — Puchong': { address: '16, Jalan TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor', phone: '+60 19-759 0457', tel: '+60197590457' },
-  'Genesis Life Care — Johor Bahru': { address: 'Jalan Dato Sulaiman, Taman Century, 80250 Johor Bahru, Johor', phone: '+60 19-282 0457', tel: '+60192820457' },
+// Beds = beds in the LCS app that are not retired (retired beds are never counted), checked 7 Nov 2026. Update when the bed list changes.
+const CENTRE_INFO: Record<string, { address: string; phone: string; tel: string; beds: number }> = {
+  'Genesis Life Care — Kajang': { address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor', phone: '+60 19-334 0457', tel: '+60193340457', beds: 73 },
+  'Genesis Life Care — Klang': { address: 'Majlis Perbandaran Klang, 3, Jalan Istana, Kawasan 1, 41000 Klang, Selangor', phone: '+60 12-321 0457', tel: '+60123210457', beds: 110 },
+  'Genesis Life Care — Petaling Jaya': { address: '1, Petaling Utama Avenue, PJS 1, 58200 Petaling Jaya, Selangor', phone: '+60 19-295 0457', tel: '+60192950457', beds: 51 },
+  'Genesis Life Care — Puchong': { address: '16, Jalan TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor', phone: '+60 19-759 0457', tel: '+60197590457', beds: 54 },
+  'Genesis Life Care — Johor Bahru': { address: 'Jalan Dato Sulaiman, Taman Century, 80250 Johor Bahru, Johor', phone: '+60 19-282 0457', tel: '+60192820457', beds: 52 },
 };
 
 export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code: string }) {
@@ -114,6 +115,10 @@ export default function MaidsPlugBox({ plugKey, code }: { plugKey: string; code:
                     <div>
                       <dt><T>Address</T></dt>
                       <dd>{CENTRE_INFO[c.name].address}</dd>
+                    </div>
+                    <div>
+                      <dt><T>Bed capacity</T></dt>
+                      <dd>{CENTRE_INFO[c.name].beds} <T>beds</T></dd>
                     </div>
                     <div>
                       <dt><T>Phone</T></dt>

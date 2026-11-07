@@ -164,6 +164,8 @@ export const ZH: Record<string, string> = {
   'Not shown yet': '暂未列出',
   Address: '地址',
   Phone: '电话',
+  'Bed capacity': '床位',
+  beds: '张床',
   "RM410 a year": "每年 RM410",
   "RM60": "RM60",
   "RM125": "RM125",
