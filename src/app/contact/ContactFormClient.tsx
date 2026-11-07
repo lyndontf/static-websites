@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { submitContactForm } from '@/lib/supabase';
+import { GuardFields, useFormGuard } from '@/lib/formGuard';
 import { useSiteLang } from '@/lib/useSiteLang';
 
 const t = {
@@ -87,6 +88,7 @@ export default function ContactFormClient() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const guard = useFormGuard();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,6 +100,7 @@ export default function ContactFormClient() {
     setSubmitting(true);
     setError('');
 
+    const checked = await guard.collect();
     const success = await submitContactForm({
       name: form.name.trim(),
       email: form.email.trim(),
@@ -106,7 +109,8 @@ export default function ContactFormClient() {
       page_url: '/contact',
       lang,
       centre: isGenesis ? form.centre : undefined,
-    });
+    }, checked);
+    guard.reset(); // a Turnstile token works once
 
     setSubmitting(false);
 
@@ -155,7 +159,7 @@ export default function ContactFormClient() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} onFocus={guard.start} className="space-y-5">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-[#33424a] mb-1">
                     {l.fullName} <span className="text-[#c1493f]">*</span>
@@ -226,6 +230,7 @@ export default function ContactFormClient() {
                     placeholder={l.messagePlaceholder}
                   />
                 </div>
+                <GuardFields guard={guard} />
                 {error && (
                   <p className="text-sm text-[#c1493f] bg-[#fbe9e9] px-3 py-2 rounded-lg">{error}</p>
                 )}

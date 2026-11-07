@@ -1,6 +1,7 @@
 import { cache } from 'react';
 import { missingForCandidate, normaliseMyMobile } from './candidateRules';
 import { formMetadata } from './attribution';
+import type { GuardFields } from './formGuard';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { isVisitorRegionBlocked } from './geo-block';
 
@@ -553,18 +554,35 @@ export async function submitContactForm(formData: {
   household?: string;
   nationality?: string;
   marketing_consent?: boolean;
-}): Promise<boolean> {
+}, guard: GuardFields | null): Promise<boolean> {
   if (isVisitorRegionBlocked()) return false;
+  // No bot-check token (the Cloudflare script was blocked or timed out): the form shows its normal error.
+  if (!guard) return false;
 
+  // The form no longer inserts into cms_forms itself. It posts to the submit-website-form edge function, which checks the
+  // origin, a hidden trap field, the rate, the fields and Cloudflare Turnstile, then writes the row. The host and site stored with
+  // the row come from the verified request origin there, so they are not sent. LCS turns Genesis website forms into enquiries
+  // from that row (lyndontf/lcs#974).
   const { lang, centre, service, area, household, nationality, marketing_consent, ...row } = formData;
-  const { error } = await supabase.from('cms_forms').insert({
-    ...row,
-    form_type: 'contact',
-    status: 'new',
-    // LCS turns Genesis website forms into enquiries from this (lyndontf/lcs#974)
-    metadata: formMetadata({ lang, centre, service, area, household, nationality, marketing_consent }),
-  });
-  return !error;
+  const meta = formMetadata({ lang, centre, service, area, household, nationality, marketing_consent });
+  try {
+    const res = await fetch(`${supabaseUrl}/functions/v1/submit-website-form`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        form_type: 'contact',
+        ...row,
+        lang, centre, service, area, household, nationality, marketing_consent,
+        code: meta.code, utm: meta.utm, landing: meta.landing, referrer: meta.referrer, path: meta.path,
+        ...guard,
+      }),
+    });
+    if (!res.ok) return false;
+    const out = await res.json().catch(() => null);
+    return out?.ok === true;
+  } catch {
+    return false;
+  }
 }
 
 // ─── Booking ───
