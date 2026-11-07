@@ -835,10 +835,15 @@ a:hover { color: var(--color-primary-hover); }
 body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-family: var(--font-sans); background: var(--color-bg); color: var(--color-ink); font-size: var(--fs-ui); font-weight: var(--fw-medium); line-height: 1.5; }
 
 /* Header: desktop nav, mobile menu, WhatsApp button */
-.header-actions { display: flex; align-items: center; gap: var(--space-4); }
-.site-header__inner { flex-wrap: nowrap; }
-.nav--desktop { gap: 0 var(--space-5); }
+.header-actions { display: flex; align-items: center; flex-shrink: 0; gap: var(--space-3); }
+.header-actions .btn, .header-actions .lang-toggle { white-space: nowrap; flex-shrink: 0; }
+.site-header__inner { flex-wrap: nowrap; gap: var(--space-4) clamp(16px, 2vw, 32px); }
+.site-header .brand { flex-shrink: 0; }
+/* One line: brand left, menu centred in the space between, language + WhatsApp right, all the same 44px height */
+.nav--desktop { flex: 1 1 auto; flex-wrap: nowrap; justify-content: center; gap: 0 clamp(14px, 1.7vw, 28px); min-width: 0; }
+.nav--desktop .nav__link { white-space: nowrap; font-size: 1rem; }
 .btn--sm { min-height: 44px; padding: 0 18px; font-size: var(--fs-ui); }
+.site-header .lang-toggle { min-height: 44px; padding: 0 14px; }
 .menu-mobile { display: none; position: relative; }
 .menu-mobile summary {
   display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 16px; list-style: none; cursor: pointer;
@@ -855,8 +860,9 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 .menu-mobile__panel a:hover { color: var(--color-primary); }
 .menu-mobile__panel .btn { margin-top: var(--space-2); color: var(--color-on-primary); }
 .menu-mobile__panel .licence-tag { padding: var(--space-3) var(--space-3) var(--space-1); }
-@media (max-width: 1279px) {
+@media (max-width: 1359px) {
   .nav--desktop, .header-actions > .btn { display: none; }
+  .site-header__inner { justify-content: space-between; }
   .menu-mobile { display: block; }
 }
 @media (max-width: 1320px) { .nav--desktop + .header-actions > .licence-tag { display: none; } }
