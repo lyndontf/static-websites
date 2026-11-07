@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import LayoutWrapper from '@/components/LayoutWrapper';
 import TrackingScript from '@/components/TrackingScript';
+import PageTransitionLoader from '@/components/PageTransitionLoader';
 import GtaOrgSchema from '@/components/GtaOrgSchema';
 import { MaidsSiteSchema } from '@/components/MaidsSchema';
 import { MaidsHeader, MaidsFooter } from '@/components/MaidsChrome';
@@ -158,6 +159,7 @@ export default async function RootLayout({
             <WhatsAppWidget phone={(settings?.contact_phone || '60193250457').replace(/[^\d]/g, '')} />
           )}
         </LangProvider>
+        <PageTransitionLoader />
         <TrackingScript />
         {/* Hides phone numbers, email addresses, and the WhatsApp widget for
             visitors from countries flagged in middleware.ts (scam-call-origin
