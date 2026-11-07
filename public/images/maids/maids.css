@@ -1160,8 +1160,8 @@ body.mim { --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, -apple-
 
 /* Candidate cards in the design of the agency site: big photo, green Available dot, name, role and nationality, pills */
 .helper-card { flex: 0 0 300px; border: 0; border-radius: 20px; box-shadow: 0 4px 24px rgb(0 0 0 / 0.08); }
-.helper-card__photo { aspect-ratio: 1 / 1; font-size: 72px; }
-.helper-card__photo img { object-position: center top; }
+.helper-card__photo { aspect-ratio: 4 / 5; font-size: 72px; background: var(--color-surface); }
+.helper-card__photo img { object-position: 50% 22%; }
 .helper-card__body { padding: var(--space-5); gap: 6px; }
 .helper-card__avail { margin: 0; display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-small); font-weight: var(--fw-bold); color: #1A7F4B; }
 .helper-card__avail i { width: 9px; height: 9px; border-radius: 50%; background: #1A7F4B; }
