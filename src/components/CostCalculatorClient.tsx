@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { submitContactForm } from '@/lib/supabase';
+import { GuardFields, useFormGuard } from '@/lib/formGuard';
 import { useSiteLang } from '@/lib/useSiteLang';
 import {
   centreSlugFor, formatRM, getCostCentres, getCostOptions, getCostQuote, quoteSummary, shortCentreName,
@@ -66,6 +67,7 @@ export default function CostCalculatorClient() {
   const [lead, setLead] = useState({ name: '', phone: '', email: '' });
   const [leadState, setLeadState] = useState<'idle' | 'sending' | 'sent' | 'error' | 'missing'>('idle');
   const seq = useRef(0);
+  const guard = useFormGuard();
 
   useEffect(() => { getCostCentres().then(setCentres); }, []);
 
@@ -102,12 +104,14 @@ export default function CostCalculatorClient() {
     e.preventDefault();
     if (!lead.name.trim() || !lead.phone.trim() || !lead.email.trim() || !quote) { setLeadState('missing'); return; }
     setLeadState('sending');
+    const checked = await guard.collect();
     const ok = await submitContactForm({
       name: lead.name.trim(), email: lead.email.trim(), phone: lead.phone.trim(),
       message: quoteSummary(centreName, quote, short),
       page_url: typeof window !== 'undefined' ? window.location.href : undefined,
       lang, centre: centreSlugFor(centreName),
-    });
+    }, checked);
+    guard.reset(); // a Turnstile token works once
     setLeadState(ok ? 'sent' : 'error');
   }
 
@@ -206,7 +210,7 @@ export default function CostCalculatorClient() {
           </div>
 
           {quote && (
-            <form onSubmit={sendLead} className={`${CARD} space-y-3`}>
+            <form onSubmit={sendLead} onFocus={guard.start} className={`${CARD} space-y-3`}>
               <h3 className="text-sm font-bold text-[#173039]">{t.callTitle}</h3>
               {leadState === 'sent' ? (
                 <p className="text-sm text-[#1e9e6a] font-semibold">{t.sent}</p>
@@ -215,6 +219,7 @@ export default function CostCalculatorClient() {
                   <input className={INPUT} placeholder={t.name} value={lead.name} onChange={(e) => setLead((l) => ({ ...l, name: e.target.value }))} autoComplete="name" />
                   <input className={INPUT} type="tel" placeholder={t.phone} value={lead.phone} onChange={(e) => setLead((l) => ({ ...l, phone: e.target.value }))} autoComplete="tel" />
                   <input className={INPUT} type="email" placeholder={t.email} value={lead.email} onChange={(e) => setLead((l) => ({ ...l, email: e.target.value }))} autoComplete="email" />
+                  <GuardFields guard={guard} />
                   {leadState === 'missing' && <p className="text-xs text-[#c1493f]">{t.need}</p>}
                   {leadState === 'error' && <p className="text-xs text-[#c1493f]">{t.failed}</p>}
                   <button type="submit" className="w-full bg-[#FAB515] text-[#173039] py-3 rounded-xl font-bold text-sm hover:bg-[#E5A20C] transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md" disabled={leadState === 'sending'}>{leadState === 'sending' ? t.sending : t.send}</button>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { submitContactForm } from '@/lib/supabase';
+import { GuardFields, useFormGuard } from '@/lib/formGuard';
 
 interface Props {
   centreName: string;
@@ -69,6 +70,7 @@ export default function HeroEnquiryForm({
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const guard = useFormGuard();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,6 +82,7 @@ export default function HeroEnquiryForm({
     setSubmitting(true);
     setError('');
 
+    const checked = await guard.collect();
     const success = await submitContactForm({
       name: form.name.trim(),
       email: '', // phone-first form, email optional
@@ -87,7 +90,8 @@ export default function HeroEnquiryForm({
       message: form.message.trim() || `Enquiry from ${centreName} old folks home page`,
       page_url: pageUrl,
       lang,
-    });
+    }, checked);
+    guard.reset(); // a Turnstile token works once
 
     setSubmitting(false);
 
@@ -128,7 +132,7 @@ export default function HeroEnquiryForm({
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-3.5">
+          <form onSubmit={handleSubmit} onFocus={guard.start} className="space-y-3.5">
             {/* Name */}
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1">
@@ -170,6 +174,8 @@ export default function HeroEnquiryForm({
                 placeholder={l.messagePh}
               />
             </div>
+
+            <GuardFields guard={guard} />
 
             {error && (
               <p className="text-xs text-red-600 bg-red-50 px-3 py-2 rounded-lg">{error}</p>
