@@ -14,7 +14,7 @@ import {
   type SlotConfig,
   type CareType,
 } from '@/lib/supabase';
-import { sendBookingEmails } from '@/lib/email';
+import { GuardFields, useFormGuard } from '@/lib/formGuard';
 
 /* ─── helpers ─────────────────────────────────────────────────── */
 
@@ -181,6 +181,7 @@ export default function BookingFormClient({ lang = 'en', defaultCentreSlug }: Pr
     careTypeId: '',
   });
   const [submitting, setSubmitting] = useState(false);
+  const guard = useFormGuard();
   const [submitted, setSubmitted] = useState(false);
   const [confirmedDate, setConfirmedDate] = useState('');
   const [confirmedTime, setConfirmedTime] = useState('');
@@ -327,6 +328,7 @@ export default function BookingFormClient({ lang = 'en', defaultCentreSlug }: Pr
     setSubmitting(true);
     setError('');
 
+    const checked = await guard.collect();
     const result = await submitBooking({
       centre_id: selectedCentre.id,
       booking_slot_config_id: selectedSlot.id,
@@ -340,7 +342,8 @@ export default function BookingFormClient({ lang = 'en', defaultCentreSlug }: Pr
       relationship_to_resident: form.relationship.trim() || null,
       type_of_care_id: form.careTypeId || null,
       booking_status_id: pendingStatusId,
-    });
+    }, checked);
+    guard.reset(); // a Turnstile token works once
 
     setSubmitting(false);
 
@@ -350,30 +353,7 @@ export default function BookingFormClient({ lang = 'en', defaultCentreSlug }: Pr
       setSubmitted(true);
       setConfirmedDate(displayDate);
       setConfirmedTime(displayTime);
-
-      // Fire-and-forget email notifications
-      const careTypeName = form.careTypeId
-        ? careTypes.find((ct) => ct.id === form.careTypeId)?.display_text
-        : undefined;
-      const bookingEmailData = {
-        centre: selectedCentre.name,
-        date: displayDate,
-        time: displayTime,
-        visitorName: form.name.trim(),
-        visitorPhone: form.phone.trim(),
-        visitorEmail: form.email.trim() || null,
-        residentName: form.residentName.trim() || null,
-        relationship: form.relationship.trim() || null,
-        careType: careTypeName,
-      };
-
-      // The server builds the admin notification (enquiries@genesiscare.com.my) and, when the visitor gave an email,
-      // their confirmation. The browser sends only the booking details.
-      sendBookingEmails({
-        ...bookingEmailData,
-        centrePhone: selectedCentre.marketing_phone_no,
-        centreAddress: parseAddress(selectedCentre.address),
-      });
+      // The two emails (the enquiries inbox and the visitor's confirmation) are sent by the booking function itself.
     } else if (result.full || result.duplicate) {
       setError(l.duplicateError);
       handleDateSelect(selectedDate);
@@ -680,7 +660,7 @@ export default function BookingFormClient({ lang = 'en', defaultCentreSlug }: Pr
 
         {/* ═══ STEP 4: Visitor Details Form ═══ */}
         {selectedSlot && (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} onFocus={guard.start}>
             <label className="block text-[11px] font-bold text-[#9aa8ae] uppercase tracking-wider mb-3">
               {l.step4}
             </label>
@@ -789,6 +769,8 @@ export default function BookingFormClient({ lang = 'en', defaultCentreSlug }: Pr
                   ))}
                 </select>
               </div>
+
+              <GuardFields guard={guard} />
 
               {error && (
                 <p className="text-xs text-[#c1493f] bg-[#fbe9e9] px-3 py-2 rounded-lg">{error}</p>
