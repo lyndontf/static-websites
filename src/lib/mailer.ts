@@ -1,10 +1,10 @@
 /**
  * Server-only: the one place that talks to Resend.
  *
- * The notification routes (/api/contact, /api/training-application, /api/waitlist) call sendMail() directly.
- * They used to POST to /api/send-email on their own site, which left that route open to anyone on the internet
- * (any recipient, any subject, any HTML) as a mail relay. /api/send-email now accepts only a booking, with
- * recipients chosen on the server.
+ * Its remaining caller is /api/send-email (the booking confirmation). The contact, demo, waitlist and training forms now post to the
+ * submit-website-form Supabase function, which sends its own notifications; the website routes that used to call sendMail() for them
+ * (/api/contact, /api/training-application, /api/waitlist) are gone. /api/send-email accepts only a booking, with recipients chosen on
+ * the server, so it cannot be used as a mail relay.
  */
 const FROM_EMAIL = 'noreply@lifecaresystems.com.my';
 
