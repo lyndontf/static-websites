@@ -1,0 +1,25 @@
+// Self-check for src/lib/site-schema.ts (run: node scripts/test-site-schema.mjs)
+import { readFileSync } from 'node:fs';
+import ts from 'typescript';
+const js = ts.transpileModule(readFileSync('src/lib/site-schema.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2019 } }).outputText;
+const mod = { exports: {} }; new Function('module', 'exports', 'require', js)(mod, mod.exports, () => ({})); 
+const { buildSiteJsonLd, buildBlogPostingJsonLd, jsonLdString } = mod.exports;
+let bad = 0; const ok = (n, c) => { console.log(c ? 'ok  ' : 'FAIL', n); if (!c) bad++; };
+const settings = { site_name: 'Example Co', tagline: null, logo_url: 'https://x.test/logo.png', contact_phone: '+60 1', contact_email: 'a@b.my', contact_address: '1 Jalan A, KL', social_links: { facebook: 'https://fb.test/x', bad: 'javascript:alert(1)', empty: '' }, seo_defaults: { default_description: 'Does things.' } };
+const [org, site] = buildSiteJsonLd(settings, 'https://x.test');
+ok('organization from settings', org['@type'] === 'Organization' && org.name === 'Example Co' && org.url === 'https://x.test' && org.telephone === '+60 1');
+ok('sameAs keeps only http(s) links', JSON.stringify(org.sameAs) === JSON.stringify(['https://fb.test/x']));
+ok('address is a PostalAddress in MY', org.address.addressCountry === 'MY' && org.address.streetAddress === '1 Jalan A, KL');
+ok('website links its publisher', site['@type'] === 'WebSite' && site.publisher['@id'] === 'https://x.test/#organization');
+const bare = buildSiteJsonLd({ site_name: 'Bare', social_links: {}, seo_defaults: {} }, 'https://b.test')[0];
+ok('absent fields are omitted, not empty', !('telephone' in bare) && !('address' in bare) && !('sameAs' in bare) && !('logo' in bare) && !('description' in bare));
+ok('no settings or no name: nothing emitted', buildSiteJsonLd(null, 'https://b.test').length === 0 && buildSiteJsonLd({ site_name: '  ', social_links: {}, seo_defaults: {} }, 'https://b.test').length === 0);
+const post = { slug: 'hello', title: 'Hello', meta_title: null, meta_description: null, excerpt: 'Short.', featured_image_url: 'https://x.test/i.jpg', category: 'News', tags: ['a', ' b '], author_name: 'Dr A', published_at: '2026-01-02T00:00:00Z', updated_at: '2026-02-03T00:00:00Z' };
+const p = buildBlogPostingJsonLd(post, settings, 'https://x.test');
+ok('post headline, url and dates', p.headline === 'Hello' && p.mainEntityOfPage === 'https://x.test/blog/hello' && p.datePublished === '2026-01-02T00:00:00Z' && p.dateModified === '2026-02-03T00:00:00Z');
+ok('post author is the named person, publisher the site', p.author.name === 'Dr A' && p.publisher.name === 'Example Co');
+ok('post description falls back to the excerpt; tags joined', p.description === 'Short.' && p.keywords === 'a, b' && p.image[0] === 'https://x.test/i.jpg');
+const p2 = buildBlogPostingJsonLd({ ...post, author_name: null, featured_image_url: 'not a url', published_at: null }, settings, 'https://x.test');
+ok('no named author: the site is the author; bad image dropped; modified date kept', p2.author['@type'] === 'Organization' && !('image' in p2) && !('datePublished' in p2) && p2.dateModified === '2026-02-03T00:00:00Z');
+ok('"<" cannot close the script tag', !jsonLdString({ a: '</script><b>' }).includes('<'));
+process.exit(bad ? 1 : 0);
