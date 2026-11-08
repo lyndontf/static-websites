@@ -2,48 +2,19 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
 import { captureAttribution } from '@/lib/attribution';
 
+// Remembers the landing page's UTM tags / campaign code so the enquiry forms can send them (lcs#974).
+//
+// This used to also insert a row into page_visits (on every page) and page_sessions (when the tab was hidden) with the public key. Those inserts were
+// never awaited, and a Supabase query only runs when it is awaited, so not one row was ever written (both tables were empty on 8 Nov 2026). The
+// tables no longer accept anonymous inserts (lyndontf/lcs migration 20271108100000). If page tracking is wanted for real, it should post to the
+// submit-website-form function (origin, rate limit and a consent decision), not write to the database from the browser.
 export default function TrackingScript() {
   const pathname = usePathname();
 
   useEffect(() => {
-    captureAttribution();   // UTM tags / campaign code of the visit's landing page, for enquiry forms (lcs#974)
-    // Generate or retrieve session ID
-    let sessionId = sessionStorage.getItem('_sid');
-    if (!sessionId) {
-      sessionId = Date.now() + '-' + Math.random().toString(36).slice(2);
-      sessionStorage.setItem('_sid', sessionId);
-    }
-
-    // Track page visit
-    supabase.from('page_visits').insert({
-      page_url: pathname,
-      page_title: document.title,
-      referrer: document.referrer,
-      session_id: sessionId,
-      timestamp: new Date().toISOString(),
-      user_agent: navigator.userAgent,
-    });
-
-    // Track time on page
-    const t0 = Date.now();
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        const seconds = Math.round((Date.now() - t0) / 1000);
-        supabase.from('page_sessions').insert({
-          page_url: pathname,
-          time_on_page_seconds: seconds,
-          bounced: seconds < 10,
-        });
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
+    captureAttribution();
   }, [pathname]);
 
   return null;
