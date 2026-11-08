@@ -1,5 +1,6 @@
 import { cache } from 'react';
 import { missingForCandidate } from './candidateRules';
+import { problemText } from './applicantErrors';
 import { formMetadata } from './attribution';
 import type { GuardFields } from './formGuard';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
@@ -371,7 +372,7 @@ export async function submitBiodataApplication(formData: {
     });
     const upload = (step1.out?.uploads as Array<{ purpose: string; path: string; token: string }> | undefined)?.find((u) => u.purpose === 'photo');
     if (step1.status !== 200 || step1.out?.ok !== true || !upload) {
-      return { success: false, message: step1.status === 429 ? 'Too many attempts. Please try again in an hour.' : SOMETHING_WRONG };
+      return { success: false, message: step1.status === 429 ? 'Too many attempts. Please try again in an hour.' : (step1.status === 400 && problemText(step1.out)) || SOMETHING_WRONG };
     }
     const { error: uploadError } = await supabase.storage.from('biodata-photos').uploadToSignedUrl(upload.path, upload.token, photo, { contentType: photo.type });
     if (uploadError) return { success: false, message: 'Failed to upload your photo. Please try again.' };
@@ -390,7 +391,7 @@ export async function submitBiodataApplication(formData: {
       trackLead('application');
       return { success: true };
     }
-    const message = typeof step2.out?.message === 'string' && step2.status === 400 ? step2.out.message : SOMETHING_WRONG;
+    const message = (step2.status === 400 && problemText(step2.out)) || SOMETHING_WRONG;
     return { success: false, message };
   } catch {
     return { success: false, message: SOMETHING_WRONG };
