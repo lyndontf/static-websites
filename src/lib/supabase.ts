@@ -4,6 +4,7 @@ import { formMetadata } from './attribution';
 import type { GuardFields } from './formGuard';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { isVisitorRegionBlocked } from './geo-block';
+import { trackLead } from './track';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -385,7 +386,10 @@ export async function submitBiodataApplication(formData: {
       siblings_count: formData.siblings_count, sibling_position: formData.sibling_position, languages: formData.languages,
       previous_employers: formData.previous_employers, cover_letter: formData.cover_letter, job_listing_id: formData.job_listing_id,
     });
-    if (step2.out?.ok === true) return { success: true };
+    if (step2.out?.ok === true) {
+      trackLead('application');
+      return { success: true };
+    }
     const message = typeof step2.out?.message === 'string' && step2.status === 400 ? step2.out.message : SOMETHING_WRONG;
     return { success: false, message };
   } catch {
@@ -544,7 +548,11 @@ export async function submitContactForm(formData: {
     });
     if (!res.ok) return false;
     const out = await res.json().catch(() => null);
-    return out?.ok === true;
+    if (out?.ok === true) {
+      trackLead('contact');
+      return true;
+    }
+    return false;
   } catch {
     return false;
   }
@@ -669,7 +677,11 @@ export async function submitBooking(booking: {
     if (res.status === 409) return { success: false, full: true, duplicate: true };
     if (!res.ok) return { success: false };
     const out = await res.json().catch(() => null);
-    return out?.ok === true ? { success: true } : { success: false };
+    if (out?.ok === true) {
+      trackLead('booking');
+      return { success: true };
+    }
+    return { success: false };
   } catch {
     return { success: false };
   }

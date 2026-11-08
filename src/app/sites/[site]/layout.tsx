@@ -23,6 +23,11 @@ import { getFullHtmlSlugs } from '@/lib/full-html';
 // is a cache hit until the page is revalidated (60 s, or at once via /api/revalidate).
 export const revalidate = 60;
 export const dynamicParams = true;
+
+// The WhatsApp-click conversion below belongs to one Google Ads conversion action of the Genesis Life Care account
+// (a family asking a care centre). Only the sites whose visitors that action describes may report it; the agency site
+// shares the Ads and Analytics ids but its WhatsApp clicks (workers and employers) are not that conversion.
+const ADS_WHATSAPP_CONVERSION_SITES = ['centre'];
 export function generateStaticParams() {
   return [];
 }
@@ -171,7 +176,7 @@ export default async function RootLayout({
             }}
           />
         )}
-        {settings?.google_ads_id && (
+        {settings?.google_ads_id && ADS_WHATSAPP_CONVERSION_SITES.includes(siteSlug) && (
           <Script
             id="wa-conversion"
             strategy="afterInteractive"
