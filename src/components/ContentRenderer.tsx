@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { safeHref } from '@/lib/safe-url';
 import { ContentBlock } from '@/lib/supabase';
 import { useSiteLang } from '@/lib/useSiteLang';
 import MaidsPlugBox from '@/components/MaidsPlugs';
@@ -120,7 +121,7 @@ export default function ContentRenderer({
             return (
               <div key={i} className="my-8 text-center">
                 <a
-                  href={block.url || '#'}
+                  href={safeHref(block.url)}
                   className="inline-block bg-[#2c88a2] text-white px-8 py-3.5 rounded-full font-bold text-[15px] hover:bg-[#0b4a5e] transition-colors"
                 >
                   {block.label || block.content || 'Learn More'}

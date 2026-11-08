@@ -16,6 +16,19 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Security headers on every page of every site.
+        // The Content-Security-Policy is REPORT-ONLY for now: it blocks nothing, and every violation is logged by
+        // /api/csp-report, so it can be tightened from real traffic before it is enforced. 'unsafe-inline' stays in
+        // script-src because the CMS pages carry their own inline scripts (see A5 notes in the PR).
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=()' },
+          { key: 'Content-Security-Policy-Report-Only', value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https://hztfeqfnvwzkaeiwldmd.supabase.co; connect-src 'self' https://hztfeqfnvwzkaeiwldmd.supabase.co https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com https://www.youtube.com https://www.google.com https://maps.google.com https://www.facebook.com; frame-ancestors 'self' https://web.genesiscare.com.my https://web.lifecaresystems.com.my; base-uri 'self'; form-action 'self' https://hztfeqfnvwzkaeiwldmd.supabase.co https://wa.me https://api.whatsapp.com; object-src 'none'; report-uri /api/csp-report" },
+        ],
+      },
+      {
         source: '/images/:path*',
         headers: [
           { key: 'Access-Control-Allow-Origin', value: '*' },
