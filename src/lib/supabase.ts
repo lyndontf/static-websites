@@ -687,29 +687,25 @@ export async function submitBooking(booking: {
   relationship_to_resident?: string | null;
   type_of_care_id?: string | null;
   booking_status_id?: string | null;
-}): Promise<{ success: boolean; duplicate?: boolean; full?: boolean }> {
+}, guard: GuardFields | null): Promise<{ success: boolean; duplicate?: boolean; full?: boolean }> {
   if (isVisitorRegionBlocked()) return { success: false };
+  // No bot-check token (the Cloudflare script was blocked or timed out): the form shows its normal error.
+  if (!guard) return { success: false };
 
-  const { data, error } = await supabase.rpc('submit_booking_safe', {
-    p_centre_id: booking.centre_id,
-    p_booking_slot_config_id: booking.booking_slot_config_id,
-    p_booking_date: booking.booking_date,
-    p_start_time: booking.start_time,
-    p_end_time: booking.end_time,
-    p_visitor_name: booking.visitor_name,
-    p_visitor_phone: booking.visitor_phone,
-    p_visitor_email: booking.visitor_email ?? null,
-    p_resident_name: booking.resident_name ?? null,
-    p_relationship_to_resident: booking.relationship_to_resident ?? null,
-    p_type_of_care_id: booking.type_of_care_id ?? null,
-    p_booking_status_id: booking.booking_status_id ?? null,
-  });
-  if (error) {
-    console.error('[submitBooking]', error.message);
+  // The booking goes through the submit-website-form function: origin, trap field, rate, fields and Cloudflare Turnstile are checked there,
+  // then submit_booking_safe runs with the server key (it keeps its own 3-per-phone-per-day limit and its full-slot check), and the function
+  // sends the enquiries-inbox notification and the visitor's confirmation itself.
+  try {
+    const res = await fetch(`${supabaseUrl}/functions/v1/submit-website-form`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ form_type: 'booking', ...booking, ...guard }),
+    });
+    if (res.status === 409) return { success: false, full: true, duplicate: true };
+    if (!res.ok) return { success: false };
+    const out = await res.json().catch(() => null);
+    return out?.ok === true ? { success: true } : { success: false };
+  } catch {
     return { success: false };
   }
-  const result = data as { success: boolean; full?: boolean; error?: string };
-  if (result?.full) return { success: false, full: true, duplicate: true };
-  if (!result?.success) return { success: false };
-  return { success: true };
 }
