@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { lazyLoadImages } from '@/lib/lazy-images';
 
 // Browsers never execute <script> tags that arrive via innerHTML (which is what
 // dangerouslySetInnerHTML does under the hood) — only tags parsed directly by
@@ -49,7 +50,7 @@ export default function CmsHtmlRenderer({ html }: { html: string }) {
       ref={ref}
       className="cms-html-page"
       suppressHydrationWarning
-      dangerouslySetInnerHTML={{ __html: html }}
+      dangerouslySetInnerHTML={{ __html: lazyLoadImages(html) }}
     />
   );
 }
