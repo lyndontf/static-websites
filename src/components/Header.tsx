@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useSitePathname } from '@/lib/useSitePathname';
 import { MenuItem, SiteSettings } from '@/lib/supabase';
 import { useLangToggle } from '@/lib/useSiteLang';
 
@@ -69,7 +69,7 @@ export default function Header({ settings, menuItems }: HeaderProps) {
   // own nav labels match the page body's language on first paint, not just after
   // a client-side toggle.
   const [lang, toggleLangTo] = useLangToggle();
-  const pathname = usePathname();
+  const pathname = useSitePathname();
 
   const toggleLang = () => toggleLangTo(lang === 'en' ? 'zh' : 'en');
 

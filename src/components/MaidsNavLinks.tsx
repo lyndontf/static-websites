@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useSitePathname } from '@/lib/useSitePathname';
 import { T } from '@/components/MaidsLang';
 
 // Main menu links with aria-current on the page the visitor is on (also gives the CSS an "active" style).
@@ -9,7 +9,7 @@ import { T } from '@/components/MaidsLang';
 type Item = { href: string; label: string };
 
 export default function NavLinks({ items, variant }: { items: Item[]; variant: 'desktop' | 'mobile' }) {
-  const path = (usePathname() || '/').replace(/^\/maids(?=\/|$)/, '') || '/';
+  const path = (useSitePathname() || '/').replace(/^\/maids(?=\/|$)/, '') || '/';
   const links = items.map((n) => {
     const current = n.href === '/' ? path === '/' : path === n.href || path.startsWith(n.href + '/');
     return (

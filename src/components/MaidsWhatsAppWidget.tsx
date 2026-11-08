@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useSitePathname } from '@/lib/useSitePathname';
 import { MAIDS_DEFAULT_PAGE_CODE, MAIDS_PAGE_CODES } from '@/lib/maids-plugs';
 import { T, useT } from '@/components/MaidsLang';
 
@@ -36,7 +36,7 @@ function PetalMark() {
 }
 
 export default function MaidsWhatsAppWidget({ phone }: { phone: string }) {
-  const path = (usePathname() || '/').replace(/^\/maids(?=\/|$)/, '').replace(/^\//, '') || 'home';
+  const path = (useSitePathname() || '/').replace(/^\/maids(?=\/|$)/, '').replace(/^\//, '') || 'home';
   const code = MAIDS_PAGE_CODES[path] || MAIDS_DEFAULT_PAGE_CODE;
   const tr = useT();
   const [dismissed, setDismissed] = useState(false);

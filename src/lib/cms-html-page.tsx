@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPageBySlug } from '@/lib/supabase';
-import { getCurrentSiteId, getCurrentSiteBaseUrl } from '@/lib/site-context';
+import { getSiteIdBySlug, getSiteBaseUrlBySlug } from '@/lib/site-context';
 import CmsHtmlRenderer from '@/components/CmsHtmlRenderer';
 
-export async function generateCmsMetadata(slug: string): Promise<Metadata> {
-  const [siteId, baseUrl] = await Promise.all([getCurrentSiteId(), getCurrentSiteBaseUrl()]);
+export async function generateCmsMetadata(site: string, slug: string): Promise<Metadata> {
+  const [siteId, baseUrl] = await Promise.all([getSiteIdBySlug(site), getSiteBaseUrlBySlug(site)]);
   const page = await getPageBySlug(slug, siteId || undefined);
   if (!page) return {};
   return {
@@ -15,8 +15,8 @@ export async function generateCmsMetadata(slug: string): Promise<Metadata> {
   };
 }
 
-export async function CmsHtmlPage({ slug }: { slug: string }) {
-  const siteId = await getCurrentSiteId();
+export async function CmsHtmlPage({ site, slug }: { site: string; slug: string }) {
+  const siteId = await getSiteIdBySlug(site);
   const page = await getPageBySlug(slug, siteId || undefined);
   if (!page || page.content?.length !== 1 || page.content[0].type !== 'html') {
     notFound();
