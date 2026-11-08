@@ -3,6 +3,8 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import styles from './contact.module.css';
+import { submitLeadForm } from '@/lib/supabase';
+import { GuardFields, useFormGuard } from '@/lib/formGuard';
 
 /* ── Hero Tech Background SVG ── */
 function HeroTechBg() {
@@ -94,6 +96,9 @@ export default function ContactPageClient() {
   const [selectedDays, setSelectedDays] = useState<Set<string>>(new Set());
   const [selectedTimes, setSelectedTimes] = useState<Set<string>>(new Set(['11:00 AM \u2013 1:00 PM']));
   const [openFaqIdx, setOpenFaqIdx] = useState(0);
+  const guard = useFormGuard();
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleTypeSelect = useCallback((type: string, tab: 'demo' | 'message') => {
     setActiveType(type);
@@ -145,15 +150,63 @@ export default function ContactPageClient() {
     setFn(next);
   }, []);
 
-  const submitDemo = useCallback(() => {
-    setSuccessMessage('Thank you for booking a demo. Our team will be in touch within one business day to confirm your slot and send a calendar invite.');
-    setShowSuccess(true);
-  }, []);
+  // These forms read their fields from the page (uncontrolled inputs). All four demo steps stay mounted, so earlier answers are still there.
+  const val = (id: string) =>
+    (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null)?.value?.trim() ?? '';
 
-  const submitMessage = useCallback(() => {
-    setSuccessMessage('Thank you for your message. Our team will get back to you within a few hours during business hours.');
-    setShowSuccess(true);
-  }, []);
+  const SEND_FAILED = 'We could not send your request. Please try again in a moment, or email us directly.';
+
+  const submitDemo = useCallback(async () => {
+    if (submitting) return;
+    // the visitor may have jumped back: check the required steps again
+    if (!validateStep(1)) { setCurrentStep(1); return; }
+    if (!validateStep(2)) { setCurrentStep(2); return; }
+    setSubmitting(true);
+    setSubmitError('');
+    const checked = await guard.collect();
+    const ok = await submitLeadForm('demo', {
+      request_type: activeType,
+      fname: val('s1-fname'), lname: val('s1-lname'), email: val('s1-email'), phone: val('s1-phone'), role: val('s1-role'),
+      facility: val('s2-facility'), state: val('s2-state'), residents: val('s2-residents'),
+      current_system: val('s2-current'), facilities: val('s2-facilities'),
+      timeline: val('s3-timeline'), challenge: val('s3-challenge'),
+      interests: Array.from(selectedInterests), days: Array.from(selectedDays), times: Array.from(selectedTimes),
+      format: val('s4-format'), attendees: val('s4-attendees'),
+      lang: 'en',
+    }, checked);
+    guard.reset(); // a Turnstile token works once
+    setSubmitting(false);
+    if (ok) {
+      setSuccessMessage('Thank you. Our team has your request and will be in touch within one business day to confirm your slot.');
+      setShowSuccess(true);
+    } else {
+      setSubmitError(SEND_FAILED);
+    }
+  }, [submitting, validateStep, guard, activeType, selectedInterests, selectedDays, selectedTimes]);
+
+  const submitMessage = useCallback(async () => {
+    if (submitting) return;
+    const email = val('m-email');
+    if (!val('m-fname') || !val('m-lname') || !email.includes('@') || !val('m-subject') || !val('m-message')) {
+      setSubmitError('Please fill in your name, a valid email, a topic and your message.');
+      return;
+    }
+    setSubmitting(true);
+    setSubmitError('');
+    const checked = await guard.collect();
+    const ok = await submitLeadForm('message', {
+      fname: val('m-fname'), lname: val('m-lname'), email, phone: val('m-phone'), subject: val('m-subject'), message: val('m-message'),
+      lang: 'en',
+    }, checked);
+    guard.reset();
+    setSubmitting(false);
+    if (ok) {
+      setSuccessMessage('Thank you for your message. Our team will get back to you within a few hours during business hours.');
+      setShowSuccess(true);
+    } else {
+      setSubmitError(SEND_FAILED);
+    }
+  }, [submitting, guard]);
 
   const progressStepClass = (step: number) => {
     if (step < currentStep) return `${styles.progressStep} ${styles.progressStepDone}`;
@@ -308,7 +361,7 @@ export default function ContactPageClient() {
             </div>
 
             {/* FORM PANEL */}
-            <div className={styles.formPanel} id="form-panel">
+            <div className={styles.formPanel} id="form-panel" onFocus={guard.start}>
               <div className={styles.formTabs}>
                 <button
                   className={`${styles.formTab} ${activeTab === 'demo' && !showSuccess ? styles.formTabActive : ''}`}
@@ -326,6 +379,8 @@ export default function ContactPageClient() {
                 </button>
               </div>
 
+              <GuardFields guard={guard} />
+
               {showSuccess ? (
                 <div className={styles.formSuccess}>
                   <div className={styles.confettiRow}>{'\uD83C\uDF89 \uD83C\uDF3F \u2705'}</div>
@@ -338,8 +393,8 @@ export default function ContactPageClient() {
                     <div className={styles.successNextItem}>
                       <div className={styles.sniIcon}>{'\uD83D\uDCE7'}</div>
                       <div>
-                        <div className={styles.sniLabel}>Check your inbox</div>
-                        <div className={styles.sniDesc}>A confirmation email is on its way with next steps.</div>
+                        <div className={styles.sniLabel}>We have your details</div>
+                        <div className={styles.sniDesc}>Our team will email you with next steps.</div>
                       </div>
                     </div>
                     <div className={styles.successNextItem}>
@@ -574,11 +629,12 @@ export default function ContactPageClient() {
                         <strong>What to expect:</strong> A 45-min personalised walkthrough using a demo environment set up to match your facility size. No hard sell — just honest answers to your questions.
                       </div>
                     </div>
+                    {submitError && <div role="alert" className={`${styles.fieldError} ${styles.fieldErrorShow}`}>{submitError}</div>}
                     <div className={styles.formNav}>
                       <button className={styles.formNavBack} onClick={() => goStep(3)} type="button"><ArrowLeft /> Back</button>
-                      <button className="btn btn-accent" onClick={submitDemo} type="button">
+                      <button className="btn btn-accent" onClick={submitDemo} type="button" disabled={submitting}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
-                        Confirm Demo Request
+                        {submitting ? 'Sending…' : 'Confirm Demo Request'}
                       </button>
                     </div>
                   </div>
@@ -625,9 +681,10 @@ export default function ContactPageClient() {
                     <label htmlFor="m-message">Message *</label>
                     <textarea id="m-message" placeholder="Tell us what's on your mind..." />
                   </div>
-                  <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={submitMessage} type="button">
+                  {submitError && <div role="alert" className={`${styles.fieldError} ${styles.fieldErrorShow}`} style={{ marginBottom: '0.5rem' }}>{submitError}</div>}
+                  <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={submitMessage} type="button" disabled={submitting}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
-                    Send Message
+                    {submitting ? 'Sending…' : 'Send Message'}
                   </button>
                   <p style={{ fontSize: '0.74rem', textAlign: 'center', marginTop: '0.75rem', color: 'var(--text-light)' }}>We typically respond within 4 hours during business hours.</p>
                 </div>

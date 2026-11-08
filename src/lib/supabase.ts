@@ -585,6 +585,33 @@ export async function submitContactForm(formData: {
   }
 }
 
+/**
+ * The lifecaresystems.com.my "Book a demo" and "Send a message" forms. Same function and checks as submitContactForm; the
+ * server only accepts these two types from the lcs site, stores them, and emails the sales inbox.
+ */
+export async function submitLeadForm(kind: 'demo' | 'message', fields: Record<string, unknown>, guard: GuardFields | null): Promise<boolean> {
+  if (isVisitorRegionBlocked()) return false;
+  if (!guard) return false;
+  try {
+    const res = await fetch(`${supabaseUrl}/functions/v1/submit-website-form`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...fields,
+        form_type: kind,
+        page_url: typeof window !== 'undefined' ? window.location.pathname : undefined,
+        path: typeof window !== 'undefined' ? window.location.pathname : undefined,
+        ...guard,
+      }),
+    });
+    if (!res.ok) return false;
+    const out = await res.json().catch(() => null);
+    return out?.ok === true;
+  } catch {
+    return false;
+  }
+}
+
 // ─── Booking ───
 
 export interface BookingCentre {
