@@ -1,6 +1,6 @@
 import { getPublishedPosts, getPageBySlug } from '@/lib/supabase';
-import { getCurrentSiteId, getCurrentSiteSlug } from '@/lib/site-context';
-import BlogClient from '@/app/blog/BlogClient';
+import { getSiteIdBySlug } from '@/lib/site-context';
+import BlogClient from '@/app/sites/[site]/blog/BlogClient';
 import Bilingual from '@/components/Bilingual';
 
 /* ─── Page Component ────────────────────────────────────────────────── */
@@ -11,14 +11,13 @@ import Bilingual from '@/components/Bilingual';
 // Lives outside src/app so both /blog/page.tsx and /zh/blog/page.tsx can
 // import it — a Next.js route file (page.tsx) is only allowed to export the
 // whitelisted route exports (default, metadata, revalidate, ...), so this
-// can't live in either one. Site context (getCurrentSiteSlug/getCurrentSiteId)
-// is resolved from the request's `x-site-slug` header, which middleware sets
-// from the hostname regardless of the /zh path prefix, so this data-fetching
-// logic behaves identically under both routes.
+// can't live in either one. The site is the [site] route param, which the
+// caller passes in; it is the same under the /zh path prefix, so this
+// data-fetching logic behaves identically under both routes.
 
-export async function BlogContent({ locale = 'en' }: { locale?: 'en' | 'zh' } = {}) {
+export async function BlogContent({ site: siteSlug, locale = 'en' }: { site: string; locale?: 'en' | 'zh' }) {
   void locale;
-  const [siteId, siteSlug] = await Promise.all([getCurrentSiteId(), getCurrentSiteSlug()]);
+  const siteId = await getSiteIdBySlug(siteSlug);
 
   // For non-centre sites, serve CMS content from the database
   if (siteSlug !== 'centre') {

@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-cacheable.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check:cacheable": "node scripts/check-cacheable.mjs",
+    "smoke:snap": "node scripts/smoke-snapshot.mjs snap",
+    "smoke:diff": "node scripts/smoke-snapshot.mjs diff"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

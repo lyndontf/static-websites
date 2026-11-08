@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useSitePathname } from '@/lib/useSitePathname';
 import { ReactNode } from 'react';
 
 interface LayoutWrapperProps {
@@ -11,7 +11,7 @@ interface LayoutWrapperProps {
 }
 
 export default function LayoutWrapper({ children, footer, isCmsSite, isFullHtmlPage }: LayoutWrapperProps) {
-  const pathname = usePathname();
+  const pathname = useSitePathname();
   const isLandingPage = pathname.startsWith('/lp/');
   // CMS sites embed their own nav/footer in the HTML content
   // isFullHtmlPage: a centre page rebuilt with its own embedded header/footer

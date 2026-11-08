@@ -8,11 +8,31 @@ import { isVisitorRegionBlocked } from './geo-block';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-export const supabase = createSupabaseClient(supabaseUrl, supabaseAnonKey);
+// Server-side reads go through Next's data cache, explicitly, so how long CMS content can be stale is a
+// decision made here and not an accident of Next's defaults:
+//  - entries expire after CMS_DATA_REVALIDATE_SECONDS on their own, and
+//  - every entry carries the tag "cms" plus "site:<site_id>" (taken from the site_id=eq.<id> filter the
+//    query already has), so /api/revalidate can drop everything for one site, or for all, at once.
+// Writes are never cached (Next only caches GETs).
+export const CMS_DATA_REVALIDATE_SECONDS = 60;
+
+function serverFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+  const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+  const tags = ['cms'];
+  const site = url.match(/site_id=eq\.([0-9a-f-]{36})/i);
+  if (site) tags.push(`site:${site[1].toLowerCase()}`);
+  return fetch(input, { ...init, next: { revalidate: CMS_DATA_REVALIDATE_SECONDS, tags } } as RequestInit);
+}
 
 export function createClient() {
-  return createSupabaseClient(supabaseUrl, supabaseAnonKey);
+  if (typeof window !== 'undefined') return createSupabaseClient(supabaseUrl, supabaseAnonKey);
+  return createSupabaseClient(supabaseUrl, supabaseAnonKey, { global: { fetch: serverFetch } });
 }
+
+// Browser code keeps the plain client. On the server this carries the same cache policy as createClient(),
+// so every getter in this file (they all use `supabase`) follows the policy above instead of Next's
+// default of caching fetches forever.
+export const supabase = createClient();
 
 // ─── Content Types ───
 

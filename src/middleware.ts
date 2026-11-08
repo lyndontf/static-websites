@@ -83,6 +83,12 @@ export function middleware(request: NextRequest) {
 
   let siteSlug = DOMAIN_TO_SITE[hostname];
 
+  // Local preview of any site: http://<slug>.localhost:3000 (slugs are the values of DOMAIN_TO_SITE).
+  if (!siteSlug && hostname.endsWith('.localhost')) {
+    const candidate = hostname.slice(0, -'.localhost'.length);
+    if (Object.values(DOMAIN_TO_SITE).includes(candidate)) siteSlug = candidate;
+  }
+
   // If no domain match, check path prefix (e.g. /lcs/features → 'lcs')
   if (!siteSlug) {
     for (const [prefix, slug] of Object.entries(PATH_TO_SITE)) {
@@ -95,33 +101,35 @@ export function middleware(request: NextRequest) {
 
   const effectiveSlug = siteSlug || 'centre';
 
-  // For path-prefix access in dev (e.g. /lcs/features), strip the prefix
-  // and rewrite to the generic route (/ or /[slug]) so CMS content is served.
-  // e.g. /lcs → / (home), /lcs/features → /features (dynamic [slug] route)
+  // Strip a path-prefix site marker (e.g. /lcs/features -> /features) when the request came in that way.
+  let sitePath = pathname;
   if (siteSlug) {
     const matchedPrefix = Object.entries(PATH_TO_SITE).find(([, s]) => s === siteSlug)?.[0];
     if (matchedPrefix && (pathname === matchedPrefix || pathname.startsWith(matchedPrefix + '/'))) {
-      const stripped = pathname.slice(matchedPrefix.length) || '/';
-      const url = request.nextUrl.clone();
-      url.pathname = stripped;
-      // Set on request headers so server components can read it via headers()
-      const reqHeaders = new Headers(request.headers);
-      reqHeaders.set('x-site-slug', effectiveSlug);
-      reqHeaders.set('x-pathname', pathname);
-      const response = NextResponse.rewrite(url, { request: { headers: reqHeaders } });
-      response.headers.set('x-site-slug', effectiveSlug);
-      response.cookies.set('glc-contact-blocked', contactBlocked ? '1' : '0', { path: '/', maxAge: 86400, sameSite: 'lax' });
-      return response;
+      sitePath = pathname.slice(matchedPrefix.length) || '/';
     }
   }
 
-  // Set on BOTH request headers (readable by server components via headers())
-  // AND response headers (for compatibility with other consumers)
-  const reqHeaders = new Headers(request.headers);
-  reqHeaders.set('x-site-slug', effectiveSlug);
-  reqHeaders.set('x-pathname', pathname);
-  const response = NextResponse.next({ request: { headers: reqHeaders } });
+  // The /sites/<slug>/... tree is internal. A visitor must never reach it by typing the URL, or the
+  // same page would exist twice under a second address.
+  if (pathname === '/sites' || pathname.startsWith('/sites/')) {
+    return new NextResponse('Not Found', { status: 404 });
+  }
+
+  // API routes are not site pages: leave them where they are.
+  if (pathname === '/api' || pathname.startsWith('/api/')) {
+    return NextResponse.next();
+  }
+
+  // Every other request is rewritten to the route tree of its own site: /sites/<slug><path>. The site
+  // is now part of the route, not a request header, so Next can render each page once and cache it
+  // (ISR) instead of rendering it on every request. See src/app/sites/[site]/layout.tsx.
+  const url = request.nextUrl.clone();
+  url.pathname = `/sites/${effectiveSlug}${sitePath === '/' ? '' : sitePath}`;
+  const response = NextResponse.rewrite(url);
   response.headers.set('x-site-slug', effectiveSlug);
+  // Written here, on the response, so it reaches every visitor even when the page itself comes from the
+  // cache. The HTML never depends on it: it is read by the browser (geo-block.ts, contact-region-gate).
   response.cookies.set('glc-contact-blocked', contactBlocked ? '1' : '0', { path: '/', maxAge: 86400, sameSite: 'lax' });
   return response;
 }
