@@ -2,6 +2,15 @@ import { Metadata } from 'next';
 import { StrokeRehabilitationJohorBahruContent } from '@/components/pages/StrokeRehabilitationJohorBahru';
 
 export const metadata: Metadata = {
+  // Canonical + reciprocal hreflang: the Chinese twin already points back at this page.
+  alternates: {
+    canonical: 'https://genesiscare.com.my/stroke-rehabilitation-in-johor-bahru',
+    languages: {
+      en: 'https://genesiscare.com.my/stroke-rehabilitation-in-johor-bahru',
+      zh: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-johor-bahru',
+      'x-default': 'https://genesiscare.com.my/stroke-rehabilitation-in-johor-bahru',
+    },
+  },
   title: "Stroke Rehabilitation in Johor Bahru",
   description:
     'Professional stroke rehabilitation in Johor Bahru. Physiotherapy, occupational therapy & speech therapy for stroke recovery. Personalised rehab plans at Genesis Life Care JB. Rated 4.8★. Book a free consultation.',

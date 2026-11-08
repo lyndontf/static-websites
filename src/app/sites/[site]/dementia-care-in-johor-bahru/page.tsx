@@ -2,6 +2,15 @@ import { Metadata } from 'next';
 import { DementiaCareJBContent } from '@/components/pages/DementiaCareJohorBahru';
 
 export const metadata: Metadata = {
+  // Canonical + reciprocal hreflang: the Chinese twin already points back at this page.
+  alternates: {
+    canonical: 'https://genesiscare.com.my/dementia-care-in-johor-bahru',
+    languages: {
+      en: 'https://genesiscare.com.my/dementia-care-in-johor-bahru',
+      zh: 'https://genesiscare.com.my/zh/dementia-care-in-johor-bahru',
+      'x-default': 'https://genesiscare.com.my/dementia-care-in-johor-bahru',
+    },
+  },
   title: "Dementia Care in Johor Bahru",
   description:
     'Specialised dementia care in Johor Bahru. Psychologist-led memory care programmes, cognitive stimulation, safe environment & personalised care plans. Rated 4.8★. Book a free tour at Genesis Life Care JB.',

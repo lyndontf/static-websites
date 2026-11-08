@@ -1,0 +1,32 @@
+// Centre pages that have a hardcoded Chinese twin at /zh/<slug> (the folders under src/app/sites/[site]/zh).
+// The sitemap uses this to list both URLs and link them with hreflang. scripts/check-zh-twins.mjs (run by
+// `prebuild`) fails the build if this list and the folders disagree.
+export const ZH_TWIN_SLUGS = [
+  'blog',
+  'cost-calculator',
+  'dementia-care-in-johor-bahru',
+  'dementia-care-in-kajang',
+  'dementia-care-in-klang',
+  'dementia-care-in-petaling-jaya',
+  'dementia-care-in-puchong',
+  'elderly-care-in-bangsar',
+  'elderly-care-in-bukit-jalil',
+  'elderly-care-in-cheras',
+  'elderly-care-in-damansara',
+  'elderly-care-in-johor',
+  'elderly-care-in-selangor',
+  'elderly-care-in-shah-alam',
+  'elderly-care-in-subang-jaya',
+  'old-folks-home-in-johor-bahru',
+  'old-folks-home-in-kajang',
+  'old-folks-home-in-klang',
+  'old-folks-home-in-petaling-jaya',
+  'old-folks-home-in-puchong',
+  'our-locations',
+  'our-services',
+  'stroke-rehabilitation-in-johor-bahru',
+  'stroke-rehabilitation-in-kajang',
+  'stroke-rehabilitation-in-klang',
+  'stroke-rehabilitation-in-petaling-jaya',
+  'stroke-rehabilitation-in-puchong',
+] as const;

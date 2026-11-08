@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import BookingFormClient from '@/components/BookingFormClient';
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: true },
   title: "Book a Visit",
   description:
     'Schedule a free tour of our nursing home and elderly care centres in Klang, PJ, Kajang, Puchong, and Johor Bahru. Choose your preferred date and time.',

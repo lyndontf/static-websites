@@ -2,6 +2,15 @@ import { Metadata } from 'next';
 import { StrokeRehabilitationKajangContent } from '@/components/pages/StrokeRehabilitationKajang';
 
 export const metadata: Metadata = {
+  // Canonical + reciprocal hreflang: the Chinese twin already points back at this page.
+  alternates: {
+    canonical: 'https://genesiscare.com.my/stroke-rehabilitation-in-kajang',
+    languages: {
+      en: 'https://genesiscare.com.my/stroke-rehabilitation-in-kajang',
+      zh: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-kajang',
+      'x-default': 'https://genesiscare.com.my/stroke-rehabilitation-in-kajang',
+    },
+  },
   title: "Stroke Rehabilitation in Kajang",
   description:
     'Professional stroke rehabilitation in Kajang. Physiotherapy, occupational therapy & speech therapy for stroke recovery. Personalised rehab plans at Genesis Life Care Kajang. Rated 4.7★. Book a free consultation.',

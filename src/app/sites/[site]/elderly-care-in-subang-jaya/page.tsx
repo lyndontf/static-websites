@@ -2,6 +2,15 @@ import { Metadata } from 'next';
 import { ElderlyCareSubangJayaContent } from '@/components/pages/ElderlyCareSubangJaya';
 
 export const metadata: Metadata = {
+  // Canonical + reciprocal hreflang: the Chinese twin already points back at this page.
+  alternates: {
+    canonical: 'https://genesiscare.com.my/elderly-care-in-subang-jaya',
+    languages: {
+      en: 'https://genesiscare.com.my/elderly-care-in-subang-jaya',
+      zh: 'https://genesiscare.com.my/zh/elderly-care-in-subang-jaya',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-subang-jaya',
+    },
+  },
   title: "Elderly Care in Subang Jaya",
   description:
     'Looking for elderly care near Subang Jaya? Genesis Life Care has two centres nearby — Petaling Jaya (~20 min) and Puchong (~15 min). 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Rated 4.9★. Book a free tour.',

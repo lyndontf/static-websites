@@ -34,6 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt || '',
+    // Ad landing pages: reachable by link, never listed in search results.
+    robots: { index: false, follow: true },
   };
 }
 
