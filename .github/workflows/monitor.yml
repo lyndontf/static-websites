@@ -15,8 +15,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check every host in src/generated/site-domains.json
         env:
-          # hosts known to be down; remove a host from this list as soon as it is back
-          EXPECTED_DOWN: 'projectdeo.com.my'
+          # hosts known to be down; list them here (space separated) so the run stays green, and remove them when they are back
+          EXPECTED_DOWN: ''
         run: |
           failed=0
           for host in $(node -e "console.log(Object.keys(require('./src/generated/site-domains.json').hosts).join(' '))"); do
