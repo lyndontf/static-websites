@@ -1,41 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CONTACT_BLOCKED_COUNTRIES } from '@/lib/blocked-countries';
+import siteDomains from '@/generated/site-domains.json';
 
-const DOMAIN_TO_SITE: Record<string, string> = {
-  'genesiscare.com.my': 'centre',
-  'www.genesiscare.com.my': 'centre',
-  'lifecaresystems.com.my': 'lcs',
-  'www.lifecaresystems.com.my': 'lcs',
-  'gtacademy.com.my': 'gta',
-  'www.gtacademy.com.my': 'gta',
-  'glchire.com': 'glc-hire',
-  'www.glchire.com': 'glc-hire',
-  'agency.genesiscare.com.my': 'glc-hire',
-  'www.agency.genesiscare.com.my': 'glc-hire',
-  'projectdeo.com.my': 'project-deo',
-  'www.projectdeo.com.my': 'project-deo',
-  'dementia.my': 'dementia',
-  'www.dementia.my': 'dementia',
-  'strokerehab.my': 'stroke',
-  'www.strokerehab.my': 'stroke',
-  'maidsinmalaysia.com': 'maids',
-  'www.maidsinmalaysia.com': 'maids',
-  // Local preview with working links: open http://maids.localhost:4300 (the /maids path prefix breaks root-relative links)
-  'maids.localhost': 'maids',
+// Which host serves which site comes from the CMS (cms_sites + cms_site_settings.website_url), written into
+// src/generated/site-domains.json by scripts/gen-site-domains.mjs at build time. Adding a site is a CMS edit plus a
+// domain on the Vercel project. Only the canonical (non-www) hosts are listed there; each gets its www twin here.
+// Hosts that are not any site's own website_url but must still resolve to one are listed by hand:
+const EXTRA_HOSTS: Record<string, string> = {
+  'glchire.com': 'glc-hire', // old agency domain, kept so existing links and the redirect to www-less still work
 };
 
-// Canonical (non-www) domain for each www variant — used for 301 redirects
-const WWW_TO_CANONICAL: Record<string, string> = {
-  'www.lifecaresystems.com.my': 'lifecaresystems.com.my',
-  'www.gtacademy.com.my': 'gtacademy.com.my',
-  'www.glchire.com': 'glchire.com',
-  'www.agency.genesiscare.com.my': 'agency.genesiscare.com.my',
-  'www.projectdeo.com.my': 'projectdeo.com.my',
-  'www.genesiscare.com.my': 'genesiscare.com.my',
-  'www.dementia.my': 'dementia.my',
-  'www.strokerehab.my': 'strokerehab.my',
-  'www.maidsinmalaysia.com': 'maidsinmalaysia.com',
-};
+const CANONICAL_HOST_TO_SITE: Record<string, string> = { ...siteDomains.hosts, ...EXTRA_HOSTS };
+
+const DOMAIN_TO_SITE: Record<string, string> = {};
+// Canonical (non-www) domain for each www variant, used for 301 redirects
+const WWW_TO_CANONICAL: Record<string, string> = {};
+for (const [host, slug] of Object.entries(CANONICAL_HOST_TO_SITE)) {
+  DOMAIN_TO_SITE[host] = slug;
+  DOMAIN_TO_SITE['www.' + host] = slug;
+  WWW_TO_CANONICAL['www.' + host] = host;
+}
 
 // Path prefix to site slug mapping (for shared-domain hosting / dev)
 const PATH_TO_SITE: Record<string, string> = {
