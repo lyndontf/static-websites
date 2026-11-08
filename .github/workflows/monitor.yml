@@ -1,0 +1,28 @@
+name: monitor
+
+# Every 6 hours: does each public site answer 200 with a page title? A failed run emails the repository watchers.
+# Read-only: one GET per host.
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  uptime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check every host in src/generated/site-domains.json
+        env:
+          # hosts known to be down; list them here (space separated) so the run stays green, and remove them when they are back
+          EXPECTED_DOWN: ''
+        run: |
+          failed=0
+          for host in $(node -e "console.log(Object.keys(require('./src/generated/site-domains.json').hosts).join(' '))"); do
+            if echo " $EXPECTED_DOWN " | grep -q " $host "; then echo "skip $host (expected down)"; continue; fi
+            code=$(curl -s -o page.html -w '%{http_code}' --max-time 30 "https://$host/")
+            title=$(grep -o '<title>[^<]*' page.html | head -1 | sed 's/<title>//')
+            if [ "$code" != "200" ] || [ -z "$title" ]; then echo "::error::$host -> HTTP $code, title='$title'"; failed=1; else echo "ok $host -> $code '$title'"; fi
+          done
+          exit $failed

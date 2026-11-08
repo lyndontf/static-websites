@@ -1,0 +1,29 @@
+name: ci
+
+# Checks that run on every pull request and on main. The Vercel build is a separate check (it deploys the preview);
+# these catch the things that silently make the sites slow or wrong without breaking the build.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      # No page may read request headers/cookies/searchParams: that turns caching off for the whole site.
+      - run: node scripts/check-cacheable.mjs
+      # The list of Chinese twin pages used by the sitemap must match the folders.
+      - run: node scripts/check-zh-twins.mjs
+      - run: node scripts/test-lazy-images.mjs
+      - run: node scripts/test-safe-url.mjs
+      - run: node scripts/test-track.mjs
+      - run: npx tsc --noEmit
+      - run: npx next lint

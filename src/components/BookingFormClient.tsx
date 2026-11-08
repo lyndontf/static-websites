@@ -299,7 +299,6 @@ export default function BookingFormClient({ lang = 'en', defaultCentreSlug }: Pr
   useEffect(() => {
     if (!selectedCentre || !selectedDate) return;
     const dateStr = fmtISO(selectedDate);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const channel = (supabase.channel(`booking-signals-${selectedCentre.id}-${dateStr}`) as any)
       .on('postgres_changes', {
         event: 'INSERT',
