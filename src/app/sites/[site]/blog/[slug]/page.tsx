@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getPostBySlug, getPublishedPosts, CmsPost } from '@/lib/supabase';
+import { getPostBySlug, getPublishedPosts, getSiteSettings, CmsPost } from '@/lib/supabase';
 import { getSiteIdBySlug, getSiteBaseUrlBySlug, type SiteParams } from '@/lib/site-context';
 import ContentRenderer from '@/components/ContentRenderer';
+import JsonLd from '@/components/JsonLd';
+import { buildBlogPostingJsonLd } from '@/lib/site-schema';
 
 interface PostPageProps {
   params: Promise<SiteParams & { slug: string }>;
@@ -110,9 +112,11 @@ export default async function BlogPostPage({ params }: PostPageProps) {
 
   const allPosts = await getPublishedPosts(siteId || undefined);
   const relatedPosts = pickRelatedPosts(allPosts, post);
+  const [settings, baseUrl] = await Promise.all([getSiteSettings(siteId || undefined), getSiteBaseUrlBySlug(site)]);
 
   return (
     <article className="pb-16">
+      <JsonLd data={buildBlogPostingJsonLd(post, settings, baseUrl)} />
       <div className="max-w-[1100px] mx-auto px-5 sm:px-8 grid lg:grid-cols-[1fr_300px] gap-12 items-start">
         <div className="max-w-[720px]">
           {/* Breadcrumb */}

@@ -8,9 +8,11 @@ import { MaidsSiteSchema } from '@/components/MaidsSchema';
 import { MaidsHeader, MaidsFooter } from '@/components/MaidsChrome';
 import MaidsWhatsAppWidget from '@/components/MaidsWhatsAppWidget';
 import SiteShell from '@/components/SiteShell';
+import JsonLd from '@/components/JsonLd';
+import { buildSiteJsonLd } from '@/lib/site-schema';
 import Script from 'next/script';
 import { getSiteSettings } from '@/lib/supabase';
-import { getSiteIdBySlug, type SiteParams } from '@/lib/site-context';
+import { getSiteIdBySlug, getSiteBaseUrlBySlug, type SiteParams } from '@/lib/site-context';
 import { getFullHtmlSlugs } from '@/lib/full-html';
 
 // This is the ONLY root layout, and it sits under the [site] route segment: middleware rewrites every
@@ -28,6 +30,10 @@ export const dynamicParams = true;
 // (a family asking a care centre). Only the sites whose visitors that action describes may report it; the agency site
 // shares the Ads and Analytics ids but its WhatsApp clicks (workers and employers) are not that conversion.
 const ADS_WHATSAPP_CONVERSION_SITES = ['centre'];
+
+// Sites that had no structured data at all get Organization + WebSite generated from their CMS settings. The centre, Genesis
+// Training Academy, Maids in Malaysia and dementia.my already carry their own markup and are left alone.
+const GENERATED_ORG_SCHEMA_SITES = ['lcs', 'glc-hire', 'project-deo', 'stroke'];
 export function generateStaticParams() {
   return [];
 }
@@ -94,6 +100,7 @@ export default async function RootLayout({
   const siteId = await getSiteIdBySlug(siteSlug);
   const sid = siteId || undefined;
   const [settings, fullHtmlSlugs] = await Promise.all([getSiteSettings(sid), getFullHtmlSlugs(sid, siteSlug)]);
+  const orgSchema = GENERATED_ORG_SCHEMA_SITES.includes(siteSlug) ? buildSiteJsonLd(settings, await getSiteBaseUrlBySlug(siteSlug)) : [];
 
   // Only the centre site's font depends on the page (see SiteShell); every other site sets it here, once.
   const bodyClass =
@@ -130,6 +137,7 @@ export default async function RootLayout({
       <body className={bodyClass}>
         {siteSlug === 'gta' && <GtaOrgSchema />}
         {siteSlug === 'maids' && <MaidsSiteSchema />}
+        <JsonLd data={orgSchema} />
         <SiteShell
           siteSlug={siteSlug}
           settings={settings}
