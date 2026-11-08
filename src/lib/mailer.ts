@@ -1,7 +1,7 @@
 /**
  * Server-only: the one place that talks to Resend.
  *
- * The notification routes (/api/contact, /api/training-application, /api/waitlist) call sendMail() directly.
+ * The notification routes (/api/training-application, /api/waitlist) call sendMail() directly.
  * They used to POST to /api/send-email on their own site, which left that route open to anyone on the internet
  * (any recipient, any subject, any HTML) as a mail relay. /api/send-email now accepts only a booking, with
  * recipients chosen on the server.

@@ -1,7 +1,7 @@
 import { CONTACT_BLOCKED_COUNTRIES } from './blocked-countries';
 
 // Client-side check for the group of components that write straight to
-// Supabase from the browser (submitContactForm, submitBooking, etc. in
+// Supabase from the browser (submitBooking, etc. in
 // supabase.ts) — they never pass through this Next.js server, so the
 // x-vercel-ip-country header isn't available to them. Reads the
 // glc-contact-blocked cookie middleware.ts already sets on every request.
@@ -12,7 +12,7 @@ export function isVisitorRegionBlocked(): boolean {
   return document.cookie.split('; ').some((c) => c === 'glc-contact-blocked=1');
 }
 
-// Server-side check for API routes (/api/contact, /api/training-application,
+// Server-side check for API routes (/api/training-application,
 // /api/waitlist) — reads the same edge-injected header middleware.ts uses, so
 // it can't be bypassed by clearing cookies.
 export function isRequestRegionBlocked(request: Request): boolean {
