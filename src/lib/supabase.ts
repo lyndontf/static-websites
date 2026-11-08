@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { missingForCandidate, normaliseMyMobile } from './candidateRules';
+import { missingForCandidate } from './candidateRules';
 import { formMetadata } from './attribution';
 import type { GuardFields } from './formGuard';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
@@ -296,68 +296,22 @@ export async function getJobListingById(id: string): Promise<JobListing | null> 
   return data as JobListing | null;
 }
 
-export async function submitJobApplication(formData: {
-  job_listing_id: string;
-  organization_id?: string;
-  job_title?: string;
-  applicant_name: string;
-  applicant_email: string;
-  applicant_phone?: string;
-  resume_url?: string;
-  cover_letter?: string;
-  current_employer?: string;
-  years_experience?: number;
-  expected_salary?: string;
-  photo_url?: string;
-  lives_in_malaysia?: boolean;
-  malaysia_state?: string;
-}): Promise<boolean> {
-  // Professional/internal-hire applications (e.g. Resident Medical Officer)
-  // now live in the unified `candidates` table alongside GLC Hire marketplace
-  // candidates. `organization_id` has no equivalent column here — candidates
-  // are centre-scoped instead, so `centre_id` is left unset and an admin
-  // assigns it later in the Biodata Pool screen.
-  if (isVisitorRegionBlocked()) return false;
-  // #1774: a photo, a Malaysian mobile and "lives in Malaysia now" with a state, on every route
-  if (missingForCandidate({ photo: formData.photo_url, phone: formData.applicant_phone, livesInMalaysia: formData.lives_in_malaysia, state: formData.malaysia_state }).length) return false;
+/** The result of an applicant form: success, or a plain sentence to show the person. */
+export interface ApplicantResult { success: boolean; message?: string }
 
-  const notes = [
-    formData.current_employer ? `Current employer: ${formData.current_employer}` : null,
-    formData.years_experience != null ? `Experience: ${formData.years_experience} yr(s)` : null,
-    formData.expected_salary ? `Expected salary: ${formData.expected_salary}` : null,
-  ].filter(Boolean).join(' | ') || null;
-
-  const { error } = await supabase.from('candidates').insert({
-    name: formData.applicant_name,
-    email: formData.applicant_email,
-    phone: normaliseMyMobile(formData.applicant_phone),
-    profile_pic_url: formData.photo_url ?? null,
-    lives_in_malaysia: true,
-    malaysia_state: formData.malaysia_state ?? null,
-    pdf_url: formData.resume_url ?? null,
-    cover_letter: formData.cover_letter ?? null,
-    job_listing_id: formData.job_listing_id,
-    job_category: formData.job_title || 'Job Application',
-    status: 'pending review',
-    is_published: false,
-    application_type: 'internal',
-    application_source: 'careers_form',
-    notes,
+// The biodata form posts to the submit-website-form function in two steps (it can no longer write to the database or the bucket with the public key):
+//   1. "applicant_upload": bot check, then one signed upload address per file;  the files go straight to storage with those addresses;
+//   2. "biodata_application": the fields plus the paths of the files just uploaded. The uploaded file's ticket is the proof of the bot check.
+async function postApplicantStep(body: Record<string, unknown>): Promise<{ status: number; out: Record<string, unknown> | null }> {
+  const res = await fetch(`${supabaseUrl}/functions/v1/submit-website-form`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
   });
-  return !error;
+  return { status: res.status, out: await res.json().catch(() => null) };
 }
 
-export async function uploadBiodataPhoto(file: File): Promise<string | null> {
-  if (isVisitorRegionBlocked()) return null;
-  const ext = file.name.split('.').pop() || 'jpg';
-  const filename = `applications/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-  const { error } = await supabase.storage
-    .from('biodata-photos')
-    .upload(filename, file, { contentType: file.type, upsert: false });
-  if (error) return null;
-  const { data: urlData } = supabase.storage.from('biodata-photos').getPublicUrl(filename);
-  return urlData?.publicUrl || null;
-}
+const SOMETHING_WRONG = 'Something went wrong. Please try again or contact us directly.';
 
 export async function submitBiodataApplication(formData: {
   full_name: string;
@@ -366,7 +320,6 @@ export async function submitBiodataApplication(formData: {
   job_category?: string;
   nationality?: string;
   date_of_birth?: string;
-  age?: number;
   marital_status?: string;
   education_level?: string;
   religion?: string;
@@ -379,53 +332,45 @@ export async function submitBiodataApplication(formData: {
   languages?: { name: string; level: string }[];
   previous_employers?: BiodataPreviousEmployer[];
   cover_letter?: string;
-  photo_url?: string;
   lives_in_malaysia?: boolean;
   malaysia_state?: string;
   job_listing_id?: string;
-  organization_id?: string;
-}): Promise<boolean> {
-  if (isVisitorRegionBlocked()) return false;
+}, photo: File | null, guard: GuardFields | null): Promise<ApplicantResult> {
+  if (isVisitorRegionBlocked()) return { success: false, message: SOMETHING_WRONG };
   // #1774: the form says what is missing; this is the last check before anything is sent
-  if (missingForCandidate({ photo: formData.photo_url, phone: formData.applicant_phone, livesInMalaysia: formData.lives_in_malaysia, state: formData.malaysia_state }).length) return false;
+  const missing = missingForCandidate({ photo, phone: formData.applicant_phone, livesInMalaysia: formData.lives_in_malaysia, state: formData.malaysia_state });
+  if (missing.length) return { success: false, message: missing.join(' ') };
+  // No bot-check token (the Cloudflare script was blocked or timed out): the form shows its normal error.
+  if (!guard || !photo) return { success: false, message: SOMETHING_WRONG };
 
-  // GLC Hire marketplace biodata applications now insert directly into the
-  // unified `candidates` table. `age` (derived elsewhere from dob) and
-  // `organization_id` (candidates is centre-scoped, not org-scoped) have no
-  // destination column and are intentionally not passed through.
-  const { error } = await supabase.from('candidates').insert({
-    name: formData.full_name,
-    email: formData.applicant_email,
-    phone: normaliseMyMobile(formData.applicant_phone),
-    lives_in_malaysia: true,
-    malaysia_state: formData.malaysia_state ?? null,
-    job_category: formData.job_category ?? null,
-    nationality_text: formData.nationality ?? null,
-    dob: formData.date_of_birth ?? null,
-    marital_status_text: formData.marital_status ?? null,
-    education_level: formData.education_level ?? null,
-    religion: formData.religion ?? null,
-    height_cm: formData.height_cm ?? null,
-    weight_kg: formData.weight_kg ?? null,
-    food_preference: formData.food_preference ?? null,
-    diet: formData.diet ?? null,
-    siblings_count: formData.siblings_count ?? null,
-    sibling_position: formData.sibling_position ?? null,
-    languages: formData.languages || [],
-    cover_letter: formData.cover_letter ?? null,
-    profile_pic_url: formData.photo_url ?? null,
-    job_listing_id: formData.job_listing_id ?? null,
-    status: 'pending review',
-    is_published: false,
-    application_type: 'marketplace',
-    application_source: 'website',
-    skills: [],
-    experience: {},
-    previous_employers: formData.previous_employers || [],
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  });
-  return !error;
+  try {
+    const step1 = await postApplicantStep({
+      form_type: 'applicant_upload', ...guard,
+      files: [{ purpose: 'photo', content_type: photo.type, size: photo.size }],
+    });
+    const upload = (step1.out?.uploads as Array<{ purpose: string; path: string; token: string }> | undefined)?.find((u) => u.purpose === 'photo');
+    if (step1.status !== 200 || step1.out?.ok !== true || !upload) {
+      return { success: false, message: step1.status === 429 ? 'Too many attempts. Please try again in an hour.' : SOMETHING_WRONG };
+    }
+    const { error: uploadError } = await supabase.storage.from('biodata-photos').uploadToSignedUrl(upload.path, upload.token, photo, { contentType: photo.type });
+    if (uploadError) return { success: false, message: 'Failed to upload your photo. Please try again.' };
+
+    const step2 = await postApplicantStep({
+      form_type: 'biodata_application', elapsed_ms: guard.elapsed_ms, website: guard.website,
+      name: formData.full_name, email: formData.applicant_email, phone: formData.applicant_phone,
+      lives_in_malaysia: formData.lives_in_malaysia, malaysia_state: formData.malaysia_state, photo_path: upload.path,
+      job_category: formData.job_category, nationality: formData.nationality, date_of_birth: formData.date_of_birth,
+      marital_status: formData.marital_status, education_level: formData.education_level, religion: formData.religion,
+      height_cm: formData.height_cm, weight_kg: formData.weight_kg, food_preference: formData.food_preference, diet: formData.diet,
+      siblings_count: formData.siblings_count, sibling_position: formData.sibling_position, languages: formData.languages,
+      previous_employers: formData.previous_employers, cover_letter: formData.cover_letter, job_listing_id: formData.job_listing_id,
+    });
+    if (step2.out?.ok === true) return { success: true };
+    const message = typeof step2.out?.message === 'string' && step2.status === 400 ? step2.out.message : SOMETHING_WRONG;
+    return { success: false, message };
+  } catch {
+    return { success: false, message: SOMETHING_WRONG };
+  }
 }
 
 export async function getPublishedJobListingsForSite(orgId: string): Promise<JobListing[]> {

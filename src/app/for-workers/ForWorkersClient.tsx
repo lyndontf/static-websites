@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { submitBiodataApplication, uploadBiodataPhoto, type BiodataPreviousEmployer } from '@/lib/supabase';
+import { submitBiodataApplication, type BiodataPreviousEmployer } from '@/lib/supabase';
 import { MALAYSIA_STATES, missingForCandidate } from '@/lib/candidateRules';
-
-const GLC_ORG_ID = '09db6826-ee70-4e6a-a8b6-f19667cfd025';
+import { GuardFields, useFormGuard } from '@/lib/formGuard';
 
 const CATEGORIES = [
   { value: '', label: 'Select a category...' },
@@ -26,6 +25,7 @@ const INPUT_CLASS = 'glc-input';
 const LABEL_CLASS = 'glc-label';
 
 export default function ForWorkersClient() {
+  const guard = useFormGuard();
   // Personal info
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -106,16 +106,6 @@ export default function ForWorkersClient() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   }
 
-  function calculateAge(dobStr: string): number | undefined {
-    if (!dobStr) return undefined;
-    const birth = new Date(dobStr);
-    const today = new Date();
-    let age = today.getFullYear() - birth.getFullYear();
-    const m = today.getMonth() - birth.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-    return age > 0 ? age : undefined;
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) {
@@ -131,29 +121,21 @@ export default function ForWorkersClient() {
     setSubmitting(true);
     setError('');
 
-    // Upload photo first if provided
-    let photoUrl: string | undefined;
-    if (photoFile) {
-      const url = await uploadBiodataPhoto(photoFile);
-      if (url) {
-        photoUrl = url;
-      } else {
-        setError('Failed to upload photo. Please try again.');
-        setSubmitting(false);
-        return;
-      }
+    // The bot check (Cloudflare Turnstile, normally invisible) runs before the photo is uploaded; the photo and the form then go through the server function.
+    const checked = await guard.collect();
+    if (!checked) {
+      setError('We could not confirm you are not a robot. Please reload the page and try again.');
+      setSubmitting(false);
+      return;
     }
 
-    const age = calculateAge(dob);
-
-    const success = await submitBiodataApplication({
+    const result = await submitBiodataApplication({
       full_name: name.trim(),
       applicant_email: email.trim(),
       applicant_phone: phone.trim(),
       job_category: category || undefined,
       nationality: nationality.trim() || undefined,
       date_of_birth: dob || undefined,
-      age,
       marital_status: maritalStatus || undefined,
       education_level: educationLevel || undefined,
       religion: religion || undefined,
@@ -166,17 +148,16 @@ export default function ForWorkersClient() {
       languages: languages.length > 0 ? languages : undefined,
       previous_employers: previousEmployers.length > 0 ? previousEmployers : undefined,
       cover_letter: coverLetter.trim() || undefined,
-      photo_url: photoUrl,
       lives_in_malaysia: livesInMalaysia,
       malaysia_state: malaysiaState,
-      organization_id: GLC_ORG_ID,
-    });
+    }, photoFile, checked);
 
+    guard.reset(); // a Turnstile token works once
     setSubmitting(false);
-    if (success) {
+    if (result.success) {
       setSubmitted(true);
     } else {
-      setError('Something went wrong. Please try again or contact us directly.');
+      setError(result.message || 'Something went wrong. Please try again or contact us directly.');
     }
   };
 
@@ -203,7 +184,8 @@ export default function ForWorkersClient() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glc-card space-y-6">
+    <form onSubmit={handleSubmit} onFocus={guard.start} className="glc-card space-y-6">
+      <GuardFields guard={guard} />
       {error && (
         <div style={{ background: '#FBEAE7', border: '1px solid #F3C7BF', color: 'var(--glc-danger)', fontSize: 'var(--glc-fs-sm)', borderRadius: 'var(--glc-r)', padding: '12px 16px' }}>
           {error}
