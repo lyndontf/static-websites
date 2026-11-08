@@ -391,7 +391,7 @@ export async function submitBiodataApplication(formData: {
       trackLead('application');
       return { success: true };
     }
-    const message = (step2.status === 400 && problemText(step2.out)) || SOMETHING_WRONG;
+    const message = step2.status === 429 ? 'Too many attempts. Please try again in an hour.' : (step2.status === 400 && problemText(step2.out)) || SOMETHING_WRONG;
     return { success: false, message };
   } catch {
     return { success: false, message: SOMETHING_WRONG };
