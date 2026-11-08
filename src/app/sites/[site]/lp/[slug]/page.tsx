@@ -21,7 +21,7 @@ async function getLandingPost(slug: string): Promise<CmsPost | null> {
     .select('*')
     .eq('slug', slug)
     .eq('template', 'landing-page')
-    .in('status', ['published', 'draft'])
+    .eq('status', 'published')
     .limit(1)
     .single();
   return data as CmsPost | null;
