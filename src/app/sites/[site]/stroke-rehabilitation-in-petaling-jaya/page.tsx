@@ -2,6 +2,15 @@ import { Metadata } from 'next';
 import { StrokeRehabilitationPetalingJayaContent } from '@/components/pages/StrokeRehabilitationPetalingJaya';
 
 export const metadata: Metadata = {
+  // Canonical + reciprocal hreflang: the Chinese twin already points back at this page.
+  alternates: {
+    canonical: 'https://genesiscare.com.my/stroke-rehabilitation-in-petaling-jaya',
+    languages: {
+      en: 'https://genesiscare.com.my/stroke-rehabilitation-in-petaling-jaya',
+      zh: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-petaling-jaya',
+      'x-default': 'https://genesiscare.com.my/stroke-rehabilitation-in-petaling-jaya',
+    },
+  },
   title: "Stroke Rehabilitation in Petaling Jaya",
   description:
     'Professional stroke rehabilitation in Petaling Jaya. Physiotherapy, occupational therapy & speech therapy for stroke recovery. Personalised rehab plans at Genesis Life Care PJ. Rated 4.9★. Book a free consultation.',

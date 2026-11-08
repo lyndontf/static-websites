@@ -2,6 +2,15 @@ import { Metadata } from 'next';
 import { ElderlyCareBangsarContent } from '@/components/pages/ElderlyCareBangsar';
 
 export const metadata: Metadata = {
+  // Canonical + reciprocal hreflang: the Chinese twin already points back at this page.
+  alternates: {
+    canonical: 'https://genesiscare.com.my/elderly-care-in-bangsar',
+    languages: {
+      en: 'https://genesiscare.com.my/elderly-care-in-bangsar',
+      zh: 'https://genesiscare.com.my/zh/elderly-care-in-bangsar',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-bangsar',
+    },
+  },
   title: "Elderly Care in Bangsar",
   description:
     'Looking for elderly care near Bangsar? Genesis Life Care Petaling Jaya is just minutes away — offering 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Rated 4.9★. Book a free tour.',

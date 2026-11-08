@@ -185,7 +185,7 @@ export function generateStaticParams() {
   return [];
 }
 
-export default async function DynamicPage({ params }: PageProps) {
+async function renderPage({ params }: PageProps) {
   const { slugPath, site: siteSlug } = await params;
   const siteId = await getSiteIdBySlug(siteSlug);
 
@@ -312,4 +312,16 @@ export default async function DynamicPage({ params }: PageProps) {
   }
 
   return <CmsContentPage page={page} />;
+}
+
+export default async function DynamicPage({ params }: PageProps) {
+  const { slugPath, site } = await params;
+  const siteId = await getSiteIdBySlug(site);
+  const [content, route] = await Promise.all([renderPage({ params }), resolveRoute(slugPath, siteId || undefined)]);
+  if (!route || route.locale === 'en') return content;
+  return (
+    <div lang={route.locale} className="contents">
+      {content}
+    </div>
+  );
 }

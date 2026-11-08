@@ -2,6 +2,15 @@ import { Metadata } from 'next';
 import { DementiaCarePuchongContent } from '@/components/pages/DementiaCarePuchong';
 
 export const metadata: Metadata = {
+  // Canonical + reciprocal hreflang: the Chinese twin already points back at this page.
+  alternates: {
+    canonical: 'https://genesiscare.com.my/dementia-care-in-puchong',
+    languages: {
+      en: 'https://genesiscare.com.my/dementia-care-in-puchong',
+      zh: 'https://genesiscare.com.my/zh/dementia-care-in-puchong',
+      'x-default': 'https://genesiscare.com.my/dementia-care-in-puchong',
+    },
+  },
   title: "Dementia Care in Puchong",
   description:
     'Specialised dementia care in Puchong. Psychologist-led memory care programmes, cognitive stimulation, safe environment & personalised care plans. Rated 4.8★. Book a free tour at Genesis Life Care Puchong.',
