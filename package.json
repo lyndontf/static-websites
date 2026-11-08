@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/check-cacheable.mjs && node scripts/check-zh-twins.mjs",
+    "prebuild": "node scripts/gen-site-domains.mjs && node scripts/check-cacheable.mjs && node scripts/check-zh-twins.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
