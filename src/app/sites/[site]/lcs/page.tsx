@@ -669,7 +669,7 @@ export default function LCSPage() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                 Submit Demo Request
               </button>
-              <p style={{ fontSize: '0.76rem', textAlign: 'center', marginTop: '0.75rem' }}>By submitting, you agree to our Privacy Policy. We never share your data.</p>
+              <p style={{ fontSize: '0.76rem', textAlign: 'center', marginTop: '0.75rem' }}>By submitting, you agree to our <Link href="/website-privacy-notice">Privacy Policy</Link>. We never share your data.</p>
             </div>
           </div>
         </div>

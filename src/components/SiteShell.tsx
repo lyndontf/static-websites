@@ -9,6 +9,7 @@ import { centreNavEN } from '@/lib/nav';
 import { LangProvider } from '@/lib/LangContext';
 import { useSitePathname } from '@/lib/useSitePathname';
 import type { SiteSettings } from '@/lib/supabase';
+import { PRIVACY_PATH } from '@/lib/privacy-path';
 
 interface SiteShellProps {
   siteSlug: string;
@@ -68,7 +69,7 @@ export default function SiteShell({
           isFullHtmlPage={isFullHtmlPage}
           // Agency-branded pages render their own GLC Hire footer: suppress the site footer so visitors
           // don't see two stacked footers.
-          footer={isAgencyPage ? <></> : <Footer settings={settings} />}
+          footer={isAgencyPage ? <></> : <Footer settings={settings} privacyHref={PRIVACY_PATH[siteSlug]} />}
         >
           {children}
         </LayoutWrapper>

@@ -4,6 +4,7 @@ import './globals.css';
 import TrackingScript from '@/components/TrackingScript';
 import AnalyticsNotice from '@/components/AnalyticsNotice';
 import ConversionEvents from '@/components/ConversionEvents';
+import { PRIVACY_PATH } from '@/lib/privacy-path';
 import PageTransitionLoader from '@/components/PageTransitionLoader';
 import GtaOrgSchema from '@/components/GtaOrgSchema';
 import { MaidsSiteSchema } from '@/components/MaidsSchema';
@@ -33,14 +34,6 @@ export const dynamicParams = true;
 // shares the Ads and Analytics ids but its WhatsApp clicks (workers and employers) are not that conversion.
 const ADS_WHATSAPP_CONVERSION_SITES = ['centre'];
 
-// Where each site's privacy policy page lives, for the analytics notice. A site with no entry shows the notice without a link: these
-// four sites (gta, project-deo, stroke, dementia) have no privacy page yet, so there is nothing honest to link to.
-const PRIVACY_PATH: Record<string, string> = {
-  centre: '/legal/privacy-policy',
-  'glc-hire': '/privacy',
-  lcs: '/privacy',
-  maids: '/privacy-notice',
-};
 
 // Sites that had no structured data at all get Organization + WebSite generated from their CMS settings. The centre, Genesis
 // Training Academy, Maids in Malaysia and dementia.my already carry their own markup and are left alone.

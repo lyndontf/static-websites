@@ -8,9 +8,11 @@ import { useSiteLang } from '@/lib/useSiteLang';
 
 interface FooterProps {
   settings: SiteSettings | null;
+  /** The site's privacy page (see lib/privacy-path.ts); the old shared address when a site has none yet. */
+  privacyHref?: string;
 }
 
-export default function Footer({ settings }: FooterProps) {
+export default function Footer({ settings, privacyHref = '/legal/privacy-policy' }: FooterProps) {
   const lang = useSiteLang();
   const social = settings?.social_links || {};
   const hasSocial = ['facebook', 'instagram', 'youtube', 'tiktok', 'xiaohongshu', 'linkedin'].some((k) => social[k]);
@@ -141,7 +143,7 @@ export default function Footer({ settings }: FooterProps) {
                 : `© ${new Date().getFullYear()} ${settings?.site_name || 'Genesis Life Care'}. All rights reserved.`)}
           </p>
           <div className="flex gap-4 text-xs text-[#cfe6ec]">
-            <Link href="/legal/privacy-policy" className="hover:text-white">{tr('Privacy Policy', lang)}</Link>
+            <Link href={privacyHref} className="hover:text-white">{tr('Privacy Policy', lang)}</Link>
             <Link href="/legal/terms-of-service" className="hover:text-white">{tr('Terms of Service', lang)}</Link>
           </div>
         </div>
