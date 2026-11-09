@@ -3,6 +3,7 @@ import { Inter, Hanken_Grotesk, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import TrackingScript from '@/components/TrackingScript';
 import AnalyticsNotice from '@/components/AnalyticsNotice';
+import ConversionEvents from '@/components/ConversionEvents';
 import PageTransitionLoader from '@/components/PageTransitionLoader';
 import GtaOrgSchema from '@/components/GtaOrgSchema';
 import { MaidsSiteSchema } from '@/components/MaidsSchema';
@@ -166,6 +167,7 @@ export default async function RootLayout({
         </SiteShell>
         <PageTransitionLoader />
         {settings?.google_analytics_id && <AnalyticsNotice privacyHref={PRIVACY_PATH[siteSlug]} />}
+        {settings?.google_analytics_id && <ConversionEvents />}
         <TrackingScript />
         {/* Hides phone numbers, email addresses, and the WhatsApp widget for
             visitors from countries flagged in middleware.ts (scam-call-origin
