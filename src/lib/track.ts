@@ -5,6 +5,8 @@ export type LeadKind = 'contact' | 'booking' | 'application';
 
 export function trackLead(kind: LeadKind): void {
   if (typeof window === 'undefined') return;
+  // ConversionEvents (src/components/ConversionEvents.tsx) already reports every accepted form on the sites that load it; do not count twice.
+  if ((window as unknown as { __gaLeadWatcher?: boolean }).__gaLeadWatcher) return;
   const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
   if (typeof gtag !== 'function') return;
   try {
