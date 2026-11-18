@@ -292,6 +292,35 @@ const nextConfig = {
       },
       // Dev-preview path-prefix equivalent (e.g. localhost/gta/why-choose-us)
       { source: '/gta/why-choose-us', destination: '/gta/about', permanent: true },
+
+      // Life Care Systems site refresh: lifecaresystems.com.my only (these paths are ordinary pages on the other sites).
+      // The old waitlist and features pages become drafts when the refreshed site goes live (PUBLISH_PLAN step 6). Merge this
+      // after that, never before, or /waitlist would point at a page that is not live. The www variants go straight to the
+      // canonical host: one hop, not a hop plus the www redirect in middleware.ts.
+      {
+        source: '/waitlist',
+        destination: '/start-free-test-account',
+        permanent: true,
+        has: [{ type: 'host', value: 'lifecaresystems.com.my' }],
+      },
+      {
+        source: '/waitlist',
+        destination: 'https://lifecaresystems.com.my/start-free-test-account',
+        permanent: true,
+        has: [{ type: 'host', value: 'www.lifecaresystems.com.my' }],
+      },
+      {
+        source: '/features',
+        destination: '/modules',
+        permanent: true,
+        has: [{ type: 'host', value: 'lifecaresystems.com.my' }],
+      },
+      {
+        source: '/features',
+        destination: 'https://lifecaresystems.com.my/modules',
+        permanent: true,
+        has: [{ type: 'host', value: 'www.lifecaresystems.com.my' }],
+      },
     ];
   },
 };
