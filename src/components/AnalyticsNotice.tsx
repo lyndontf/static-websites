@@ -67,6 +67,7 @@ export default function AnalyticsNotice({ privacyHref }: { privacyHref?: string 
   return (
     <div
       role="region"
+      data-analytics-notice
       aria-label={t.label}
       style={{
         position: 'fixed',
