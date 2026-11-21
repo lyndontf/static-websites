@@ -124,19 +124,7 @@ export default async function RootLayout({
           </>
         )}
         {/* custom_head_html is injected from <body> below — placing this inline script in <head> via the App Router renders it as visible text */}
-        {settings?.google_analytics_id && (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${settings.google_analytics_id}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${settings.google_analytics_id}');${settings.google_ads_id ? `gtag('config','${settings.google_ads_id}');gtag('config','AW-837607499');` : ''}`,
-              }}
-            />
-          </>
-        )}
+        {/* Google Analytics is not added here: AnalyticsNotice loads it only after the visitor accepts (it used to be a <head> script on every page). */}
       </head>
       <body className={bodyClass}>
         {siteSlug === 'gta' && <GtaOrgSchema />}
@@ -159,7 +147,9 @@ export default async function RootLayout({
           {children}
         </SiteShell>
         <PageTransitionLoader />
-        {settings?.google_analytics_id && <AnalyticsNotice privacyHref={PRIVACY_PATH[siteSlug]} />}
+        {settings?.google_analytics_id && (
+          <AnalyticsNotice gaId={settings.google_analytics_id} adsId={settings.google_ads_id || undefined} privacyHref={PRIVACY_PATH[siteSlug]} />
+        )}
         {settings?.google_analytics_id && <ConversionEvents />}
         <TrackingScript />
         {/* Hides phone numbers, email addresses, and the WhatsApp widget for
