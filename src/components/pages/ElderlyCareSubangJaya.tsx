@@ -114,11 +114,11 @@ const faqs = [
   },
   {
     q: 'Can I visit the nursing homes near Subang Jaya before committing?',
-    a: 'Absolutely. We encourage families to book a free tour of either our Puchong or Petaling Jaya facility. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
+    a: 'Absolutely. We encourage families to book a visit to either our Puchong or Petaling Jaya facility. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Subang Jaya?',
-    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our PJ centre is rated 4.9 stars and our Puchong centre is rated 4.8 stars on Google from satisfied families.',
+    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our PJ centre has a Google rating of 4.9 from 155 reviews and our Puchong centre 4.8 from 58 reviews.',
   },
 ];
 
@@ -142,11 +142,11 @@ const faqsZh = [
   },
   {
     q: '在承诺之前，我可以参观梳邦再也附近的养老院吗？',
-    a: '当然可以。我们鼓励家庭预订我们Puchong或Petaling Jaya设施的免费参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
+    a: '当然可以。我们鼓励家庭预订我们Puchong或Petaling Jaya设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
   },
   {
     q: 'Genesis Life Care与梳邦再也附近的其他养老院有什么不同？',
-    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的PJ中心在Google上被评为4.9星，Puchong中心被评为4.8星，深受满意家庭好评。',
+    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的PJ中心Google评分4.9（155条评价），Puchong中心Google评分4.8（58条评价）。',
   },
 ];
 
@@ -250,7 +250,7 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                   <Bilingual en="Near Subang Jaya" zh="梳邦再也附近" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ 4.9 <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en="Google rating 4.9 from 155 reviews" zh="Google 评分 4.9（155 条评价）" />
                 </span>
               </div>
 
@@ -275,7 +275,7 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                  <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -351,10 +351,9 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                 <Bilingual
                   en={<>Whether your loved one needs long-term residential care, post-surgery recovery, or
                   specialised dementia support, our nearby centres offer safe and nurturing environments
-                  with affordable rates. Our PJ centre is rated {pjCentre.rating} stars with over{' '}
-                  {pjCentre.reviews} reviews, and our Puchong centre is rated {puchongCentre.rating} stars
-                  with {puchongCentre.reviews} reviews on Google.</>}
-                  zh={<>无论您的家人需要长期住宿护理、术后康复，或是专业的失智症支持，我们附近的中心都能提供安全、温馨的环境与实惠的收费。我们的PJ中心在Google上获得{pjCentre.rating}星评分，评价超过{pjCentre.reviews}则；Puchong中心则获得{puchongCentre.rating}星评分，评价达{puchongCentre.reviews}则。</>}
+                  with affordable rates. Our PJ centre has a Google rating of {pjCentre.rating} from {pjCentre.reviews} reviews,
+                  and our Puchong centre {puchongCentre.rating} from {puchongCentre.reviews} reviews.</>}
+                  zh={<>无论您的家人需要长期住宿护理、术后康复，或是专业的失智症支持，我们附近的中心都能提供安全、温馨的环境与实惠的收费。我们的PJ中心Google评分为{pjCentre.rating}，评价超过{pjCentre.reviews}则；Puchong中心则获得Google评分 {puchongCentre.rating}，评价达{puchongCentre.reviews}则。</>}
                 />
               </p>
             </div>
@@ -435,7 +434,7 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en={puchongCentre.badge} zh="最近的中心" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {puchongCentre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {puchongCentre.rating} from {puchongCentre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{puchongCentre.reviews} reviews</>} zh={zhCommon.reviews(puchongCentre.reviews)} />)</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{puchongCentre.fullName}</h3>
@@ -457,7 +456,7 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-4 py-2.5 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                    <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -486,7 +485,7 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en={pjCentre.badge} zh="旗舰中心" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {pjCentre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {pjCentre.rating} from {pjCentre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{pjCentre.reviews} reviews</>} zh={zhCommon.reviews(pjCentre.reviews)} />)</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{pjCentre.fullName}</h3>
@@ -508,7 +507,7 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-4 py-2.5 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                    <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -576,9 +575,9 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our Puchong or Petaling Jaya centre for a free tour. See our care spaces,
+              en="Visit our Puchong or Petaling Jaya centre for a guided tour. See our care spaces,
             meet the team, and discover why families across Subang Jaya trust Genesis Life Care."
-              zh="欢迎参观我们的Puchong或Petaling Jaya中心，免费导览。看看我们的护理空间，认识我们的团队，了解为何梳邦再也各地家庭都信赖Genesis Life Care。"
+              zh="欢迎参观我们的Puchong或Petaling Jaya中心，导览参观。看看我们的护理空间，认识我们的团队，了解为何梳邦再也各地家庭都信赖Genesis Life Care。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -586,7 +585,7 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+              <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '马来西亚护理院地点',
   description:
-    '寻找离您最近的Genesis Life Care护理院。5间中心分布于八打灵再也、巴生、加影、蒲种（雪兰莪）及新山。提供24/7护理服务，收费实惠，每月起价RM 2,500。立即预约免费参观。',
+    '寻找离您最近的Genesis Life Care护理院。5间中心分布于八打灵再也、巴生、加影、蒲种（雪兰莪）及新山。提供24/7护理服务，收费实惠，每月起价RM 2,500。立即预约参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/our-locations',
     languages: {

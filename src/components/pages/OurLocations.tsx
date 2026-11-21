@@ -110,7 +110,7 @@ const trustSignals = [
 const trustSignalsZh = [
   { label: '实惠价格', sub: '各中心' },
   { label: '24/7护理服务', sub: '全天候' },
-  { label: '免费云端导览', sub: '线上与实体皆可' },
+  { label: '云端导览', sub: '线上与实体皆可' },
   { label: '无绑约合同', sub: '灵活安排' },
 ];
 
@@ -284,8 +284,8 @@ export function OurLocationsContent({ locale = 'en' }: { locale?: 'en' | 'zh' } 
           </h2>
           <p className="text-lg text-white/85 mb-8 max-w-xl mx-auto">
             <Bilingual
-              en={<>Our care consultants can help you find the best fit for your loved one. Book a free tour at any of our centres &mdash; no obligations, no pressure.</>}
-              zh="我们的护理顾问能协助您为家人找到最合适的中心。欢迎预约任何一间中心的免费参观——无需承诺，零压力。"
+              en={<>Our care consultants can help you find the best fit for your loved one. Book a visit at any of our centres &mdash; no obligations, no pressure.</>}
+              zh="我们的护理顾问能协助您为家人找到最合适的中心。欢迎预约任何一间中心的参观——无需承诺，零压力。"
             />
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -293,7 +293,7 @@ export function OurLocationsContent({ locale = 'en' }: { locale?: 'en' | 'zh' } 
               href="/booking"
               className="inline-flex items-center gap-2 bg-[#f5b942] text-[#111] px-6 py-3.5 rounded-full font-bold text-base hover:bg-[#eaa92a] transition-colors shadow-lg whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+              <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

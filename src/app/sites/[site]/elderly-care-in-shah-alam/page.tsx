@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Elderly Care in Shah Alam",
   description:
-    'Looking for elderly care near Shah Alam? Genesis Life Care Klang is just ~10 minutes away via Federal Route 2 — offering 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a free tour.',
+    'Looking for elderly care near Shah Alam? Genesis Life Care Klang is just ~10 minutes away via Federal Route 2 — offering 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
   openGraph: {
     title: 'Elderly Care Near Shah Alam - Genesis Life Care Klang',
     description:

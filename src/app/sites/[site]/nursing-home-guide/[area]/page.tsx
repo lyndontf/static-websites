@@ -25,7 +25,7 @@ const AREAS: Record<string, Area> = {
       ],
     },
     extraFaqs: [
-      { q: 'How long has Genesis Life Care been operating in Klang?', a: 'Genesis Life Care Klang is our original, longest-running centre — operating since 2018, with 4.8★ from 45 reviews and published pricing from RM2,500/month.' },
+      { q: 'How long has Genesis Life Care been operating in Klang?', a: 'Genesis Life Care Klang is our original, longest-running centre — operating since 2018, with a Google rating of 4.8 from 45 reviews and published pricing from RM2,500/month.' },
     ],
   },
   puchong: {
@@ -53,7 +53,7 @@ const AREAS: Record<string, Area> = {
       ],
     },
     extraFaqs: [
-      { q: 'Are there nursing homes in other parts of Johor Bahru, like Austin Heights or Tebrau?', a: 'Johor Bahru has nursing homes across different neighbourhoods. Genesis Life Care’s centre is based in Taman Century and welcomes families from across JB and the wider southern region for a free assessment — so you can compare options no matter where in JB you’re located.' },
+      { q: 'Are there nursing homes in other parts of Johor Bahru, like Austin Heights or Tebrau?', a: 'Johor Bahru has nursing homes across different neighbourhoods. Genesis Life Care’s centre is based in Taman Century and welcomes families from across JB and the wider southern region for a care needs review — so you can compare options no matter where in JB you’re located.' },
     ],
   },
 };
@@ -239,7 +239,7 @@ export default function NursingHomeGuide({ params }: { params: { area: string } 
       {/* CTA */}
       <section className="hero-dark bg-gradient-to-br from-primary to-secondary">
         <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4" style={{ color: 'white' }}>Book a free visit in {a.name}</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4" style={{ color: 'white' }}>Book a visit in {a.name}</h2>
           <p className="text-lg text-white/90 mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.9)' }}>See our {a.name} centre, meet the team, and get a care needs review and a free quote — with no obligation.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 bg-gold hover:bg-yellow-500 text-gray-900 font-bold px-8 py-4 rounded-full transition shadow-lg hover:shadow-xl">
             Book a Free Visit

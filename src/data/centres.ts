@@ -35,7 +35,7 @@ export const centres: Record<string, CentreData> = {
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.3!2d101.4484!3d3.0456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4c3a1f5e5b1d%3A0x2e5f5c8b7a8d9e3f!2sGenesis+Life+Care!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.8 ★', sub: '45 reviews' },
+      { label: 'Google Rating', value: '4.8', sub: '45 reviews' },
       { label: 'Beds', value: '120+', sub: 'Capacity' },
       { label: 'Established', value: '2018', sub: 'Our Original Centre' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -106,7 +106,7 @@ export const centres: Record<string, CentreData> = {
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.0!2d101.6168!3d3.0936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4bdc8b9d5c1d%3A0x5e3f7c8a6b4d2e1a!2sGenesis+Life+Care+Petaling+Jaya!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.9 ★', sub: '58 reviews' },
+      { label: 'Google Rating', value: '4.9', sub: '58 reviews' },
       { label: 'Beds', value: '50+', sub: 'Capacity' },
       { label: 'Established', value: '2020', sub: 'Flagship Centre' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -177,7 +177,7 @@ export const centres: Record<string, CentreData> = {
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.5!2d101.6200!3d3.0300!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4e8a5c7d3b1f%3A0x4d2e1a8b6c5f7e3d!2sGenesis+Life+Care+Puchong!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.8 ★', sub: '38 reviews' },
+      { label: 'Google Rating', value: '4.8', sub: '38 reviews' },
       { label: 'Beds', value: '120+', sub: 'Capacity' },
       { label: 'Established', value: '2022', sub: 'Modern Facility' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -248,7 +248,7 @@ export const centres: Record<string, CentreData> = {
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.6!2d101.7900!3d2.9900!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4f9e5b7a3d1c%3A0x8e3f2a4b6c5d7e1a!2sGenesis+Life+Care+Kajang!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.9 ★', sub: '32 reviews' },
+      { label: 'Google Rating', value: '4.9', sub: '32 reviews' },
       { label: 'Beds', value: '120', sub: 'Capacity' },
       { label: 'Established', value: '2021', sub: 'Southern KV' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -319,7 +319,7 @@ export const centres: Record<string, CentreData> = {
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.2!2d103.7600!3d1.4800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1ec8a5b7d3f1%3A0x6e2f4a8b5c7d3e1a!2sGenesis+Life+Care+Johor+Bahru!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.8 ★', sub: '24 reviews' },
+      { label: 'Google Rating', value: '4.8', sub: '24 reviews' },
       { label: 'Beds', value: '120+', sub: 'Capacity' },
       { label: 'Established', value: '2023', sub: 'Southern Region' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -379,11 +379,11 @@ export const centres: Record<string, CentreData> = {
 /* ─── Helper to get "other centres" excluding the current one ────────── */
 
 export const allCentreCards = [
-  { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: '4.9', tag: 'Flagship Centre', img: '/images/pj-centre.jpg' },
-  { name: 'Klang', slug: 'nursing-home-in-klang', rating: '4.8', tag: 'Original Centre', img: '/images/klang-centre.jpg' },
-  { name: 'Kajang', slug: 'nursing-home-kajang', rating: '4.9', tag: 'Southern KV', img: '/images/kajang-centre.jpeg' },
-  { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: '4.8', tag: 'Modern Facility', img: '/images/puchong-centre.jpeg' },
-  { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: '4.8', tag: 'Southern Region', img: '/images/jb-centre.jpeg' },
+  { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: '4.9', reviews: 155, tag: 'Flagship Centre', img: '/images/pj-centre.jpg' },
+  { name: 'Klang', slug: 'nursing-home-in-klang', rating: '4.8', reviews: 45, tag: 'Original Centre', img: '/images/klang-centre.jpg' },
+  { name: 'Kajang', slug: 'nursing-home-kajang', rating: '4.9', reviews: 32, tag: 'Southern KV', img: '/images/kajang-centre.jpeg' },
+  { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: '4.8', reviews: 58, tag: 'Modern Facility', img: '/images/puchong-centre.jpeg' },
+  { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: '4.8', reviews: 40, tag: 'Southern Region', img: '/images/jb-centre.jpeg' },
 ];
 
 export function getOtherCentres(excludeName: string) {

@@ -245,11 +245,11 @@ const highlightsZh = [
 ];
 
 const centres = [
-  { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: '4.9', tag: 'Flagship Centre', img: '/images/pj-centre.jpg' },
-  { name: 'Klang', slug: 'nursing-home-in-klang', rating: '4.8', tag: 'Original Centre', img: '/images/klang-centre.jpg' },
-  { name: 'Kajang', slug: 'nursing-home-kajang', rating: '4.7', tag: 'Southern KV', img: '/images/kajang-centre.jpeg' },
-  { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: '4.8', tag: 'Modern Facility', img: '/images/puchong-centre.jpeg' },
-  { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: '4.8', tag: 'Southern Region', img: '/images/jb-centre.jpeg' },
+  { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: '4.9', reviews: 155, tag: 'Flagship Centre', img: '/images/pj-centre.jpg' },
+  { name: 'Klang', slug: 'nursing-home-in-klang', rating: '4.8', reviews: 45, tag: 'Original Centre', img: '/images/klang-centre.jpg' },
+  { name: 'Kajang', slug: 'nursing-home-kajang', rating: '4.7', reviews: 32, tag: 'Southern KV', img: '/images/kajang-centre.jpeg' },
+  { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: '4.8', reviews: 58, tag: 'Modern Facility', img: '/images/puchong-centre.jpeg' },
+  { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: '4.8', reviews: 40, tag: 'Southern Region', img: '/images/jb-centre.jpeg' },
 ];
 
 const CENTRE_NAME_ZH: Record<string, string> = {
@@ -540,7 +540,7 @@ export function OurServicesContent({ locale = 'en' }: { locale?: 'en' | 'zh' } =
                     <Bilingual en={c.name} zh={CENTRE_NAME_ZH[c.name] || c.name} />
                   </p>
                   <div className="flex items-center justify-center gap-1 mt-1 text-gold text-xs">
-                    ★ {c.rating}
+                    Google rating {c.rating} from {c.reviews} reviews
                   </div>
                   <span className="inline-block mt-1 bg-primary/8 text-primary text-[10px] font-semibold px-2 py-0.5 rounded-full">
                     <Bilingual en={c.tag} zh={CENTRE_TAG_ZH[c.tag] || c.tag} />

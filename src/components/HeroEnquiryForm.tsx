@@ -17,7 +17,7 @@ interface Props {
 
 const t = {
   en: {
-    heading: 'Book a Free Tour',
+    heading: 'Book a Visit',
     subheading: 'Our care advisors will get back to you within 24 hours.',
     name: 'Full Name',
     namePh: 'Your name',
@@ -37,7 +37,7 @@ const t = {
     trust2: '100% confidential',
   },
   zh: {
-    heading: '预约免费参观',
+    heading: '预约参观',
     subheading: '我们的护理顾问将在24小时内回复您。',
     name: '姓名',
     namePh: '您的姓名',

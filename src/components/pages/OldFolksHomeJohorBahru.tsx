@@ -553,7 +553,7 @@ export function OldFolksHomeJohorBahruContent({ locale = 'en' }: { locale?: 'en'
           <p className="text-lg text-white/90 mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.9)' }}>
             <Bilingual
               en="Schedule a free walkthrough of our Johor Bahru centre. Meet the team, see the facilities, and find out if we are the right home for your loved one. No obligations."
-              zh="预约免费参观我们的新山中心，认识团队、了解设施，看看我们是否适合您的亲人——完全不设任何义务。"
+              zh="预约参观我们的新山中心，认识团队、了解设施，看看我们是否适合您的亲人——完全不设任何义务。"
             />
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

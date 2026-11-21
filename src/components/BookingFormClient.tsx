@@ -57,7 +57,7 @@ const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const t = {
   en: {
     title: 'Book a Visit',
-    subtitle: 'Schedule a free tour of our care centre. Choose your preferred location, date and time.',
+    subtitle: 'Schedule a visit to our care centre. Choose your preferred location, date and time.',
     step1: 'Select Centre',
     step2: 'Choose Date',
     step3: 'Pick a Time',
@@ -94,13 +94,13 @@ const t = {
     today: 'Today',
     prev: '‹',
     next: '›',
-    trust1: 'Free tour',
+    trust1: 'Visits by appointment',
     trust2: 'No obligations',
     trust3: '100% confidential',
   },
   zh: {
     title: '预约参观',
-    subtitle: '安排免费参观我们的护理中心。选择您喜欢的地点、日期和时间。',
+    subtitle: '安排参观我们的护理中心。选择您喜欢的地点、日期和时间。',
     step1: '选择中心',
     step2: '选择日期',
     step3: '选择时间',
@@ -137,7 +137,7 @@ const t = {
     today: '今天',
     prev: '‹',
     next: '›',
-    trust1: '免费参观',
+    trust1: '预约参观',
     trust2: '无任何义务',
     trust3: '100%保密',
   },

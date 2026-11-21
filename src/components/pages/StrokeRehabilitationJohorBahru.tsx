@@ -254,7 +254,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                   <Bilingual en="Stroke Rehabilitation" zh="中风康复" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -356,10 +356,9 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                   en={<>Located at Taman Century, our Johor Bahru centre serves families across
                   JB, Skudai, Iskandar Puteri, Pasir Gudang, and the wider Johor region. With
                   {centre.beds} beds and dedicated rehabilitation facilities, we provide the
-                  southern region with professional stroke recovery care. Genesis Life Care JB is
-                  rated {centre.rating} stars on Google with {centre.reviews} reviews from families
+                  southern region with professional stroke recovery care. Genesis Life Care JB has a Google rating of {centre.rating} from {centre.reviews} reviews from families
                   who have entrusted us with their loved ones&apos; care.</>}
-                  zh={<>我们位于Taman Century的新山中心，服务范围涵盖JB、Skudai、Iskandar Puteri、Pasir Gudang及柔佛全境的家庭。凭借{centre.beds}张床位及专属康复设施，我们为南部地区提供专业的中风康复护理。Genesis Life Care JB在Google上获得{centre.rating}星评分，共{centre.reviews}则来自信赖我们照顾挚亲家庭的评价。</>}
+                  zh={<>我们位于Taman Century的新山中心，服务范围涵盖JB、Skudai、Iskandar Puteri、Pasir Gudang及柔佛全境的家庭。凭借{centre.beds}张床位及专属康复设施，我们为南部地区提供专业的中风康复护理。Genesis Life Care JBGoogle评分为{centre.rating}，共{centre.reviews}则来自信赖我们照顾挚亲家庭的评价。</>}
                 />
               </p>
             </div>
@@ -477,7 +476,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Southern Region" zh="南部地区" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '蕉赖附近的老年人护理',
   description:
-    '蕉赖附近的老年人护理，Genesis Life Care Kajang中心经由蕉赖—加影大道车程仅约15分钟。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。立即预约免费参观。',
+    '蕉赖附近的老年人护理，Genesis Life Care Kajang中心经由蕉赖—加影大道车程仅约15分钟。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。立即预约参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/elderly-care-in-cheras',
     languages: {

@@ -253,7 +253,7 @@ export function StrokeRehabilitationKajangContent({ locale = 'en' }: { locale?: 
                   <Bilingual en="Stroke Rehabilitation" zh="中风康复" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -354,9 +354,9 @@ export function StrokeRehabilitationKajangContent({ locale = 'en' }: { locale?: 
                   en={<>Our Kajang centre at Kawasan Perindustrian Ria serves families from Kajang, Bangi, Semenyih,
                   and surrounding areas. With {centre.beds} beds and round-the-clock nursing care,
                   we provide a comfortable and supportive environment for stroke recovery. Genesis
-                  Life Care Kajang is rated {centre.rating} stars on Google with {centre.reviews} reviews
+                  Life Care Kajang has a Google rating of {centre.rating} from {centre.reviews} reviews
                   from families who trust us with their loved ones.</>}
-                  zh={<>我们位于Kawasan Perindustrian Ria的加影中心，服务来自加影、Bangi、Semenyih及周边地区的家庭。凭借{centre.beds}张床位及全天候护理服务，我们为中风康复提供舒适且具支持性的环境。Genesis Life Care加影在Google上获得{centre.rating}星评分，共{centre.reviews}则来自信赖我们照顾挚亲家庭的评价。</>}
+                  zh={<>我们位于Kawasan Perindustrian Ria的加影中心，服务来自加影、Bangi、Semenyih及周边地区的家庭。凭借{centre.beds}张床位及全天候护理服务，我们为中风康复提供舒适且具支持性的环境。Genesis Life Care加影Google评分为{centre.rating}，共{centre.reviews}则来自信赖我们照顾挚亲家庭的评价。</>}
                 />
               </p>
             </div>
@@ -474,7 +474,7 @@ export function StrokeRehabilitationKajangContent({ locale = 'en' }: { locale?: 
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Southern KV" zh="南巴生谷" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>

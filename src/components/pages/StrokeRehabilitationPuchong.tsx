@@ -253,7 +253,7 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
                   <Bilingual en="Stroke Rehabilitation" zh="中风康复" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -355,9 +355,9 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
                   easily accessible from Puchong, Subang Jaya, Sri Kembangan, and surrounding areas.
                   With {centre.beds} beds, 24-hour nursing care, and a dedicated rehabilitation
                   department, we provide everything needed for effective stroke recovery. Genesis
-                  Life Care Puchong is rated {centre.rating} stars on Google with {centre.reviews} reviews
+                  Life Care Puchong has a Google rating of {centre.rating} from {centre.reviews} reviews
                   from satisfied families.</>}
-                  zh={<>我们的蒲种中心是一座位于Taman Perindustrian Puchong的现代化设施，从蒲种、Subang Jaya、Sri Kembangan及周边地区皆可轻松抵达。凭借{centre.beds}张床位、24小时护理服务及专属康复部门，我们提供有效中风康复所需的一切。Genesis Life Care蒲种在Google上获得{centre.rating}星评分，共{centre.reviews}则满意家庭的好评。</>}
+                  zh={<>我们的蒲种中心是一座位于Taman Perindustrian Puchong的现代化设施，从蒲种、Subang Jaya、Sri Kembangan及周边地区皆可轻松抵达。凭借{centre.beds}张床位、24小时护理服务及专属康复部门，我们提供有效中风康复所需的一切。Genesis Life Care蒲种Google评分为{centre.rating}，共{centre.reviews}则满意家庭的好评。</>}
                 />
               </p>
             </div>
@@ -475,7 +475,7 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Modern Facility" zh="现代化设施" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>

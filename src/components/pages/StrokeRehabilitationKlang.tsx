@@ -253,7 +253,7 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
                   <Bilingual en="Stroke Rehabilitation" zh="中风康复" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -353,10 +353,9 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
                 <Bilingual
                   en={<>Genesis Life Care Klang is our original centre, located at Amverton Business Centre
                   with over {centre.beds} beds and 24-hour nursing care. We serve families across
-                  the Klang district, Port Klang, Shah Alam, and surrounding areas. Our centre is
-                  rated {centre.rating} stars on Google with {centre.reviews} reviews from families
+                  the Klang district, Port Klang, Shah Alam, and surrounding areas. Our centre has a Google rating of {centre.rating} from {centre.reviews} reviews from families
                   who have trusted us with their loved ones&apos; recovery.</>}
-                  zh={<>Genesis Life Care巴生是我们的首间中心，位于Amverton Business Centre，设有超过{centre.beds}张床位及24小时护理服务。我们服务巴生地区、Port Klang、Shah Alam及周边地区的家庭。我们的中心在Google上获得{centre.rating}星评分，共{centre.reviews}则来自信赖我们照顾挚亲康复的家庭评价。</>}
+                  zh={<>Genesis Life Care巴生是我们的首间中心，位于Amverton Business Centre，设有超过{centre.beds}张床位及24小时护理服务。我们服务巴生地区、Port Klang、Shah Alam及周边地区的家庭。我们的中心Google评分为{centre.rating}，共{centre.reviews}则来自信赖我们照顾挚亲康复的家庭评价。</>}
                 />
               </p>
             </div>
@@ -474,7 +473,7 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Original Centre" zh="首间中心" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>

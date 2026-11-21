@@ -253,7 +253,7 @@ export function DementiaCareKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
             <div>
               <div className="flex items-center gap-3 mb-5">
                 <span className="bg-gold text-gray-900 text-xs font-bold tracking-wide px-3 py-1 rounded-full uppercase"><Bilingual en="Dementia Care" zh="痴呆症护理" /></span>
-                <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} /></span>
+                <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}><Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} /></span>
               </div>
 
               <p className="text-white text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: 'white' }}><Bilingual en="Dementia Care in Klang" zh="巴生痴呆症护理" /></p>
@@ -272,7 +272,7 @@ export function DementiaCareKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                  <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -458,7 +458,7 @@ export function DementiaCareKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Original Centre" zh="首间中心" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>
@@ -480,7 +480,7 @@ export function DementiaCareKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                    <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -548,8 +548,8 @@ export function DementiaCareKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our Klang centre for a free tour. See our dementia care spaces, meet the psychologist and care team, and learn how we support families living with dementia."
-              zh="欢迎参观我们的巴生中心，免费导览。了解我们的痴呆症护理空间，认识心理学家与护理团队，并了解我们如何支援与痴呆症共处的家庭。"
+              en="Visit our Klang centre for a guided tour. See our dementia care spaces, meet the psychologist and care team, and learn how we support families living with dementia."
+              zh="欢迎参观我们的巴生中心，导览参观。了解我们的痴呆症护理空间，认识心理学家与护理团队，并了解我们如何支援与痴呆症共处的家庭。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -557,7 +557,7 @@ export function DementiaCareKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+              <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

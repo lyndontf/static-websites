@@ -253,7 +253,7 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
                   <Bilingual en="Stroke Rehabilitation" zh="中风康复" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -356,9 +356,9 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
                   on-site doctor consultations, and a dedicated rehabilitation department. Whether
                   your loved one is in the early stages of post-stroke recovery or needs ongoing
                   rehabilitation, Genesis Life Care provides a safe and supportive environment.
-                  We are rated {centre.rating} stars on Google with over {centre.reviews} reviews
+                  We have a Google rating of {centre.rating} from {centre.reviews} reviews
                   from families across the Klang Valley.</>}
-                  zh={<>我们位于Kota Damansara的八打灵再也中心提供24小时护理服务、驻场医生会诊及专属康复部门。无论您的至亲正处于中风康复的早期阶段，或需要持续的康复治疗，Genesis Life Care都能提供安全且具支持性的环境。我们在Google上获得{centre.rating}星评分，共获得来自巴生谷各地超过{centre.reviews}则家庭好评。</>}
+                  zh={<>我们位于Kota Damansara的八打灵再也中心提供24小时护理服务、驻场医生会诊及专属康复部门。无论您的至亲正处于中风康复的早期阶段，或需要持续的康复治疗，Genesis Life Care都能提供安全且具支持性的环境。我们Google评分为{centre.rating}，共获得来自巴生谷各地超过{centre.reviews}则家庭好评。</>}
                 />
               </p>
             </div>
@@ -476,7 +476,7 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Flagship Centre" zh="旗舰中心" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>

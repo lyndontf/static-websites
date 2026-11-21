@@ -246,7 +246,7 @@ export function DementiaCareKajangContent({ locale = 'en' }: { locale?: 'en' | '
             <div>
               <div className="flex items-center gap-3 mb-5">
                 <span className="bg-gold text-gray-900 text-xs font-bold tracking-wide px-3 py-1 rounded-full uppercase"><Bilingual en="Dementia Care" zh="痴呆症护理" /></span>
-                <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} /></span>
+                <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}><Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} /></span>
               </div>
 
               <p className="text-white text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: 'white' }}><Bilingual en="Dementia Care in Kajang" zh="加影痴呆症护理" /></p>
@@ -262,7 +262,7 @@ export function DementiaCareKajangContent({ locale = 'en' }: { locale?: 'en' | '
 
               <div className="flex flex-wrap gap-4">
                 <Link href="/contact" className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap">
-                  <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                  <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </Link>
                 <a href={`tel:${centre.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 border-2 border-white/30 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/10 transition-colors text-sm whitespace-nowrap">
@@ -400,7 +400,7 @@ export function DementiaCareKajangContent({ locale = 'en' }: { locale?: 'en' | '
               <div className="p-8">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full"><Bilingual en="Southern KV" zh="南巴生谷" /></span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>
@@ -419,7 +419,7 @@ export function DementiaCareKajangContent({ locale = 'en' }: { locale?: 'en' | '
 
                 <div className="flex flex-wrap gap-3">
                   <Link href="/contact" className="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-lg hover:bg-primary-600 transition-colors text-sm">
-                    <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} /> <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                    <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} /> <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   </Link>
                   <Link href={`/${centre.slug}`} className="inline-flex items-center gap-2 border border-gray-200 text-gray-700 font-semibold px-5 py-3 rounded-lg hover:bg-gray-50 transition-colors text-sm">
                     <Bilingual en="View Centre Details" zh={zhCommon.viewCentreDetails} />
@@ -465,13 +465,13 @@ export function DementiaCareKajangContent({ locale = 'en' }: { locale?: 'en' | '
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4"><Bilingual en="Specialised Dementia Care in Kajang" zh="加影专业痴呆症护理" /></h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our Kajang centre for a free tour. See our dementia care spaces, meet the psychologist and care team, and learn how we support families living with dementia."
-              zh="欢迎参观我们的加影中心，免费导览。了解我们的痴呆症护理空间，认识心理学家与护理团队，并了解我们如何支援与痴呆症共处的家庭。"
+              en="Visit our Kajang centre for a guided tour. See our dementia care spaces, meet the psychologist and care team, and learn how we support families living with dementia."
+              zh="欢迎参观我们的加影中心，导览参观。了解我们的痴呆症护理空间，认识心理学家与护理团队，并了解我们如何支援与痴呆症共处的家庭。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/contact" className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap">
-              <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} /> <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} /> <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
             <a href={`tel:${centre.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 border-2 border-white/30 text-white font-bold px-6 py-4 rounded-xl hover:bg-white/10 transition-colors whitespace-nowrap">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>

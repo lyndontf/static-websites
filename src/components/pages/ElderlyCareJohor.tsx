@@ -91,7 +91,7 @@ const faqs = [
   },
   {
     q: 'Can I visit the Johor Bahru nursing home before committing?',
-    a: 'Absolutely. We encourage families to book a free tour of our Johor Bahru facility. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
+    a: 'Absolutely. We encourage families to book a visit to our Johor Bahru facility. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
   },
   {
     q: 'Which areas in Johor does Genesis Life Care serve?',
@@ -99,7 +99,7 @@ const faqs = [
   },
   {
     q: 'What makes Genesis Life Care JB different from other nursing homes in Johor?',
-    a: 'Genesis Life Care JB stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. We are rated 4.8 stars on Google and are part of a trusted network of 5 centres across Malaysia.',
+    a: 'Genesis Life Care JB stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our Google rating is 4.8 from 40 reviews, and we are part of a trusted network of 5 centres across Malaysia.',
   },
 ];
 
@@ -122,7 +122,7 @@ const faqsZh = [
   },
   {
     q: '在承诺之前，我可以参观新山养老院吗？',
-    a: '当然可以。我们鼓励家庭预订我们新山设施的免费参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
+    a: '当然可以。我们鼓励家庭预订我们新山设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
   },
   {
     q: 'Genesis Life Care在柔佛服务哪些地区？',
@@ -130,7 +130,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care JB与柔佛其他养老院有什么不同？',
-    a: 'Genesis Life Care JB以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们在Google上被评为4.8星，是马来西亚5间中心可信赖网络的一部分。',
+    a: 'Genesis Life Care JB以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Google评分为4.8（40条评价），是马来西亚5间中心可信赖网络的一部分。',
   },
 ];
 
@@ -216,7 +216,7 @@ export function ElderlyCareJohorContent({ locale = 'en' }: { locale?: 'en' | 'zh
                   <Bilingual en="Johor" zh="柔佛" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {nearestCentre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {nearestCentre.rating} from {nearestCentre.reviews} reviews</>} zh={<>Google 评分 {nearestCentre.rating}（{nearestCentre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -241,7 +241,7 @@ export function ElderlyCareJohorContent({ locale = 'en' }: { locale?: 'en' | 'zh
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                  <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -317,10 +317,9 @@ export function ElderlyCareJohorContent({ locale = 'en' }: { locale?: 'en' | 'zh
                 <Bilingual
                   en={<>Whether your loved one needs long-term residential care, post-surgery
                   recovery, or specialised dementia support, our Johor Bahru centre offers
-                  a safe and nurturing environment with affordable rates. We are rated{' '}
-                  {nearestCentre.rating} stars on Google with {nearestCentre.reviews} reviews
+                  a safe and nurturing environment with affordable rates. We have a Google rating of {nearestCentre.rating} from {nearestCentre.reviews} reviews
                   from families across Johor.</>}
-                  zh={<>无论您的家人需要长期住宿护理、术后康复，或是专业的失智症支持，我们的新山中心都能提供安全、温馨的环境与实惠的收费。我们在Google上获得{nearestCentre.rating}星评分，来自柔佛各地家庭的评价达{nearestCentre.reviews}则。</>}
+                  zh={<>无论您的家人需要长期住宿护理、术后康复，或是专业的失智症支持，我们的新山中心都能提供安全、温馨的环境与实惠的收费。我们Google评分为{nearestCentre.rating}，来自柔佛各地家庭的评价达{nearestCentre.reviews}则。</>}
                 />
               </p>
             </div>
@@ -400,7 +399,7 @@ export function ElderlyCareJohorContent({ locale = 'en' }: { locale?: 'en' | 'zh
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Johor Centre" zh="柔佛中心" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {nearestCentre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {nearestCentre.rating} from {nearestCentre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{nearestCentre.reviews} reviews</>} zh={zhCommon.reviews(nearestCentre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{nearestCentre.fullName}</h3>
@@ -422,7 +421,7 @@ export function ElderlyCareJohorContent({ locale = 'en' }: { locale?: 'en' | 'zh
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                    <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -490,9 +489,9 @@ export function ElderlyCareJohorContent({ locale = 'en' }: { locale?: 'en' | 'zh
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our Johor Bahru centre for a free tour. See our care spaces,
+              en="Visit our Johor Bahru centre for a guided tour. See our care spaces,
             meet the team, and discover why families across Johor trust Genesis Life Care."
-              zh="欢迎参观我们的新山中心，免费导览。看看我们的护理空间，认识我们的团队，了解为何柔佛各地家庭都信赖Genesis Life Care。"
+              zh="欢迎参观我们的新山中心，导览参观。看看我们的护理空间，认识我们的团队，了解为何柔佛各地家庭都信赖Genesis Life Care。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -500,7 +499,7 @@ export function ElderlyCareJohorContent({ locale = 'en' }: { locale?: 'en' | 'zh
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+              <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

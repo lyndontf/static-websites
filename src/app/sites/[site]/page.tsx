@@ -955,7 +955,7 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
                   },
                   {
                     q: 'Can I visit a Genesis Life Care centre before making a decision?',
-                    a: 'Absolutely. We encourage families to book a free tour and consultation at any of our 5 centres. Our care advisors will walk you through the facilities, explain our care programmes, and help you find the right solution.',
+                    a: 'Absolutely. We encourage families to book a visit at any of our 5 centres. Our care advisors will walk you through the facilities, explain our care programmes, and help you find the right solution.',
                   },
                 ].map((item, i) => (
                   <details key={i} className="group bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
@@ -971,7 +971,7 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
               {/* Still have questions? CTA */}
               <div className="bg-primary-50 rounded-2xl p-6 border border-primary/10 mt-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Still have questions?</h3>
-                <p className="text-sm text-gray-500 mb-4">Our care advisors are happy to help. Speak to us directly or schedule a free visit to any of our centres.</p>
+                <p className="text-sm text-gray-500 mb-4">Our care advisors are happy to help. Speak to us directly or schedule a visit to any of our centres.</p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
                     href="/contact"
