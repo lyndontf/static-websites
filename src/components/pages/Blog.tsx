@@ -2,6 +2,7 @@ import { getPublishedPosts, getPageBySlug } from '@/lib/supabase';
 import { getSiteIdBySlug } from '@/lib/site-context';
 import BlogClient from '@/app/sites/[site]/blog/BlogClient';
 import Bilingual from '@/components/Bilingual';
+import { getBlogChrome, parseBlogChrome } from '@/lib/blog-chrome';
 
 /* ─── Page Component ────────────────────────────────────────────────── */
 // `locale` is accepted for consistency with the other extracted page
@@ -20,9 +21,12 @@ export async function BlogContent({ site: siteSlug, locale = 'en' }: { site: str
   const siteId = await getSiteIdBySlug(siteSlug);
 
   // For non-centre sites, serve CMS content from the database
+  let chrome = null as Awaited<ReturnType<typeof getBlogChrome>>;
   if (siteSlug !== 'centre') {
     const page = await getPageBySlug('blog', siteId || undefined);
-    if (page?.content?.length === 1 && page.content[0].type === 'html') {
+    // A "blog" page with header, list and footer markers wraps the live post list in the site's own chrome (see lib/blog-chrome.ts)
+    chrome = page?.content?.length === 1 && page.content[0].type === 'html' ? parseBlogChrome(page.content[0].content) : null;
+    if (!chrome && page?.content?.length === 1 && page.content[0].type === 'html') {
       return (
         <div
           className="cms-html-page"
@@ -36,6 +40,21 @@ export async function BlogContent({ site: siteSlug, locale = 'en' }: { site: str
 
   // Get unique categories
   const categories = Array.from(new Set(posts.map((p) => p.category).filter(Boolean))) as string[];
+
+  if (chrome) {
+    return (
+      <>
+        <div className="cms-html-page" dangerouslySetInnerHTML={{ __html: chrome.header }} />
+        <div className="py-10 sm:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div dangerouslySetInnerHTML={{ __html: chrome.intro }} />
+            <BlogClient posts={posts} categories={categories} />
+          </div>
+        </div>
+        <div className="cms-html-page" dangerouslySetInnerHTML={{ __html: chrome.footer }} />
+      </>
+    );
+  }
 
   return (
     <div className="py-10 sm:py-16">

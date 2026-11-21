@@ -6,6 +6,7 @@ import { getSiteIdBySlug, getSiteBaseUrlBySlug, type SiteParams } from '@/lib/si
 import ContentRenderer from '@/components/ContentRenderer';
 import JsonLd from '@/components/JsonLd';
 import { buildBlogPostingJsonLd } from '@/lib/site-schema';
+import { getBlogChrome } from '@/lib/blog-chrome';
 
 interface PostPageProps {
   params: Promise<SiteParams & { slug: string }>;
@@ -113,8 +114,10 @@ export default async function BlogPostPage({ params }: PostPageProps) {
   const allPosts = await getPublishedPosts(siteId || undefined);
   const relatedPosts = pickRelatedPosts(allPosts, post);
   const [settings, baseUrl] = await Promise.all([getSiteSettings(siteId || undefined), getSiteBaseUrlBySlug(site)]);
+  // The site's own header and footer around the article, when its "blog" CMS page provides them (lib/blog-chrome.ts)
+  const chrome = site === 'centre' ? null : await getBlogChrome(siteId || undefined);
 
-  return (
+  const article = (
     <article className="pb-16">
       <JsonLd data={buildBlogPostingJsonLd(post, settings, baseUrl)} />
       <div className="max-w-[1100px] mx-auto px-5 sm:px-8 grid lg:grid-cols-[1fr_300px] gap-12 items-start">
@@ -208,5 +211,14 @@ export default async function BlogPostPage({ params }: PostPageProps) {
         )}
       </div>
     </article>
+  );
+
+  if (!chrome) return article;
+  return (
+    <>
+      <div className="cms-html-page" dangerouslySetInnerHTML={{ __html: chrome.header }} />
+      {article}
+      <div className="cms-html-page" dangerouslySetInnerHTML={{ __html: chrome.footer }} />
+    </>
   );
 }
