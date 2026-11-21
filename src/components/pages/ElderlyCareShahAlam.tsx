@@ -17,7 +17,7 @@ const nearestCentre = {
   slug: 'nursing-home-in-klang',
   phone: '+6019 325 0457',
   phoneCTA: '+6019-325-0457',
-  address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
+  address: '3, Jalan Istana, Kawasan 1, 41000 Klang, Selangor',
   rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
   beds: '120+',
   distance: '~10 minutes',
@@ -80,7 +80,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Shah Alam?',
-    a: 'Yes. Genesis Life Care Klang is located at Amverton Business Centre, Klang, approximately 10 minutes from Shah Alam via Federal Route 2. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care Klang is located on Jalan Istana, Klang, approximately 10 minutes from Shah Alam via Federal Route 2. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Shah Alam?',
@@ -96,7 +96,7 @@ const faqs = [
   },
   {
     q: 'How do I get to Genesis Life Care Klang from Shah Alam?',
-    a: 'Our Klang centre is easily accessible from Shah Alam via Federal Route 2 (Jalan Klang-Shah Alam). The drive typically takes about 10 minutes. The centre is located at Amverton Business Centre on Jalan Istana, Klang.',
+    a: 'Our Klang centre is easily accessible from Shah Alam via Federal Route 2 (Jalan Klang-Shah Alam). The drive typically takes about 10 minutes. The centre is located on Jalan Istana, Klang.',
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Shah Alam?',
@@ -108,7 +108,7 @@ const faqs = [
 const faqsZh = [
   {
     q: '莎阿南附近有养老院吗？',
-    a: '有。Genesis Life Care Klang位于Klang的Amverton Business Centre，经由联邦2号公路，距离莎阿南大约10分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care Klang位于Klang的Jalan Istana，经由联邦2号公路，距离莎阿南大约10分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '莎阿南附近的老年人护理费用是多少？',
@@ -124,7 +124,7 @@ const faqsZh = [
   },
   {
     q: '我如何从莎阿南前往Genesis Life Care Klang？',
-    a: '我们的Klang中心可经由联邦2号公路（Jalan Klang-Shah Alam）从莎阿南轻松抵达，车程通常约10分钟。中心位于Klang Jalan Istana的Amverton Business Centre。',
+    a: '我们的Klang中心可经由联邦2号公路（Jalan Klang-Shah Alam）从莎阿南轻松抵达，车程通常约10分钟。中心位于Klang Jalan Istana。',
   },
   {
     q: 'Genesis Life Care与莎阿南附近的其他养老院有什么不同？',
@@ -150,7 +150,7 @@ function buildJsonLd(locale: 'en' | 'zh') {
       telephone: '+60193250457',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'No.3, Jalan Istana, Amverton Business Centre',
+        streetAddress: '3, Jalan Istana, Kawasan 1',
         addressLocality: 'Klang',
         addressRegion: 'Selangor',
         postalCode: '41000',
@@ -301,11 +301,11 @@ export function ElderlyCareShahAlamContent({ locale = 'en' }: { locale?: 'en' | 
               <p>
                 <Bilingual
                   en={<>Genesis Life Care Klang is the nearest Genesis centre to Shah Alam — located at
-                  Amverton Business Centre on Jalan Istana, Klang, just a short drive via Federal
+                  Jalan Istana, Klang, just a short drive via Federal
                   Route 2. Our facility provides 24-hour nursing care, weekly on-site doctor
                   consultations, psychologist-led dementia programmes, and a full rehabilitation
                   department with physiotherapy and occupational therapy.</>}
-                  zh="Genesis Life Care Klang是距离莎阿南最近的Genesis中心——位于Klang Jalan Istana的Amverton Business Centre，经由联邦2号公路即可轻松抵达。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care Klang是距离莎阿南最近的Genesis中心——位于Klang Jalan Istana，经由联邦2号公路即可轻松抵达。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
@@ -376,8 +376,8 @@ export function ElderlyCareShahAlamContent({ locale = 'en' }: { locale?: 'en' | 
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
               <Bilingual
-                en={<>Just {nearestCentre.distance} from Shah Alam — our centre at Amverton Business Centre, Klang.</>}
-                zh={<>距莎阿南仅{nearestCentre.distanceZh}——我们位于Klang的Amverton Business Centre中心。</>}
+                en={<>Just {nearestCentre.distance} from Shah Alam — our centre on Jalan Istana, Klang.</>}
+                zh={<>距莎阿南仅{nearestCentre.distanceZh}——我们位于Klang的Jalan Istana中心。</>}
               />
             </p>
           </div>

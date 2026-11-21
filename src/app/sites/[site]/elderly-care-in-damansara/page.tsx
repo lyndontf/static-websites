@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Elderly Care in Damansara",
   description:
-    'Looking for elderly care near Damansara? Genesis Life Care Petaling Jaya in Kota Damansara is just minutes away — offering 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
+    'Looking for elderly care near Damansara? Genesis Life Care Petaling Jaya in Petaling Utama is just minutes away — offering 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
   openGraph: {
     title: 'Elderly Care Near Damansara - Genesis Life Care PJ',
     description:

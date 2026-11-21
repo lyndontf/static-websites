@@ -17,7 +17,7 @@ const nearestCentre = {
   slug: 'nursing-home-in-petaling-jaya',
   phone: '+6019 295 0457',
   phoneCTA: '+6019-295-0457',
-  address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
+  address: '1, Petaling Utama Ave, PJS 1, 58200 Petaling Jaya, Selangor',
   rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
   beds: '50+',
   distance: '~15 minutes',
@@ -81,7 +81,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Bangsar?',
-    a: 'Yes. Genesis Life Care Petaling Jaya is located in Kota Damansara, approximately 15 minutes from Bangsar. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care Petaling Jaya is located in Petaling Utama, approximately 15 minutes from Bangsar. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Bangsar?',
@@ -109,7 +109,7 @@ const faqs = [
 const faqsZh = [
   {
     q: 'Bangsar附近有养老院吗？',
-    a: '有。Genesis Life Care Petaling Jaya位于Kota Damansara，距离孟沙大约15分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care Petaling Jaya位于Petaling Utama，距离孟沙大约15分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '孟沙附近的老年人护理费用是多少？',
@@ -151,10 +151,10 @@ function buildJsonLd(locale: 'en' | 'zh') {
       telephone: '+60192950457',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama',
+        streetAddress: '1, Petaling Utama Ave, PJS 1',
         addressLocality: 'Petaling Jaya',
         addressRegion: 'Selangor',
-        postalCode: '46150',
+        postalCode: '58200',
         addressCountry: 'MY',
       },
       areaServed: [
@@ -302,11 +302,11 @@ export function ElderlyCareBangsarContent({ locale = 'en' }: { locale?: 'en' | '
               <p>
                 <Bilingual
                   en={<>Genesis Life Care Petaling Jaya is the nearest Genesis centre to Bangsar — located in
-                  Kota Damansara, just a short drive via the LDP or Sprint highways. Our facility
+                  Petaling Utama, just a short drive via the LDP or Sprint highways. Our facility
                   provides 24-hour nursing care, weekly on-site doctor consultations, psychologist-led
                   dementia programmes, and a full rehabilitation department with physiotherapy and
                   occupational therapy.</>}
-                  zh="Genesis Life Care Petaling Jaya是距离孟沙最近的Genesis中心——位于Kota Damansara，经由LDP或Sprint大道即可轻松抵达。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care Petaling Jaya是距离孟沙最近的Genesis中心——位于Petaling Utama，经由LDP或Sprint大道即可轻松抵达。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
@@ -377,8 +377,8 @@ export function ElderlyCareBangsarContent({ locale = 'en' }: { locale?: 'en' | '
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
               <Bilingual
-                en={<>Just {nearestCentre.distance} from Bangsar — our flagship centre in Kota Damansara.</>}
-                zh={<>距孟沙仅{nearestCentre.distanceZh}——我们位于Kota Damansara的旗舰中心。</>}
+                en={<>Just {nearestCentre.distance} from Bangsar — our flagship centre in Petaling Utama.</>}
+                zh={<>距孟沙仅{nearestCentre.distanceZh}——我们位于Petaling Utama的旗舰中心。</>}
               />
             </p>
           </div>
