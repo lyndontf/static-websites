@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect } from 'react';
+import { linkEventFor } from '@/lib/link-events';
 
-// Sends three GA4 events from every group site that has Google Analytics, so they can be marked as key events:
+// Sends four GA4 events from every group site that has Google Analytics, so they can be marked as key events:
 //   generate_lead   a form was sent and the server accepted it (lead_type: contact | booking | application)
 //   click_to_call   someone tapped a tel: link
 //   whatsapp_click  someone tapped a wa.me / api.whatsapp.com link
+//   email_click     someone tapped a mailto: link (page_path only, never the address)
 //
 // Why one watcher instead of a call in each form: the Training Academy, Project Deo and similar forms are written inside CMS pages and post
 // straight to the submit-website-form function, so there is no shared code to call trackLead from. This watches the browser's own requests and
@@ -65,8 +67,8 @@ export default function ConversionEvents() {
       const target = e.target as Element | null;
       const link = target?.closest?.('a');
       const href = link?.getAttribute('href') || '';
-      if (/^tel:/i.test(href)) send('click_to_call', { page_path: location.pathname });
-      else if (/(^|\/\/)(wa\.me|api\.whatsapp\.com)\//i.test(href) || href.includes('wa.me/')) send('whatsapp_click', { page_path: location.pathname });
+      const eventName = linkEventFor(href);
+      if (eventName) send(eventName, { page_path: location.pathname });
     };
     document.addEventListener('click', onClick, true);
   }, []);
