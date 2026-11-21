@@ -8,6 +8,7 @@ type CentreCard = {
   slug: string;
   img: string;
   rating: string;
+  reviews: number;
   tag: string;
 };
 
@@ -83,7 +84,7 @@ export default function OtherCentres({
                   {resolvedLang === 'zh' ? (CENTRE_NAME_ZH[c.name] || c.name) : c.name}
                 </p>
                 <div className="flex items-center justify-center gap-1 mt-1 text-gold text-sm">
-                  ★ {c.rating}
+                  Google rating {c.rating} from {c.reviews} reviews
                 </div>
                 <span className="inline-block mt-2 bg-primary/8 text-primary text-xs font-semibold px-3 py-1 rounded-full">
                   {c.tag}

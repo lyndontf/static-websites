@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '新山老年人之家',
   description:
-    '新山Holiday Plaza老年人之家，提供24小时护理、痴呆症护理、康复服务及营养膳食。价格实惠，Google评分4.8星。立即参观我们的新山中心。',
+    '新山Holiday Plaza老年人之家，提供24小时护理、痴呆症护理、康复服务及营养膳食。价格实惠。立即参观我们的新山中心。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/old-folks-home-in-johor-bahru',
     languages: {

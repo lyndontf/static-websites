@@ -32,7 +32,7 @@ const qT = {
     callLabel: '直接致电我们',
     waLabel: 'WhatsApp 联系我们',
     emailLabel: '电邮联系我们',
-    ctaBtn: '预约免费参观 →',
+    ctaBtn: '预约参观 →',
     trust: '无任何义务。100%保密。',
     contactLink: '/zh/booking',
   },

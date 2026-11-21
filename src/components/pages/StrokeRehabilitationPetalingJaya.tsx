@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Centre data ──────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const centre = {
   phone: '+6019 295 0457',
   phoneCTA: '+6019-295-0457',
   address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
-  rating: '4.9',
-  reviews: 155,
+  rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
   beds: '50+',
   img: '/images/pj-centre.jpg',
 };
@@ -200,20 +200,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
           addressCountry: 'MY',
         },
         areaServed: { '@type': 'City', name: 'Petaling Jaya' },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: '155',
-          bestRating: '5',
-        },
-      },
-      {
-        '@type': 'FAQPage',
-        mainEntity: faqs.map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
       },
     ],
   };
@@ -267,7 +253,7 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
                   <Bilingual en="Stroke Rehabilitation" zh="中风康复" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -292,7 +278,7 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                  <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -370,9 +356,9 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
                   on-site doctor consultations, and a dedicated rehabilitation department. Whether
                   your loved one is in the early stages of post-stroke recovery or needs ongoing
                   rehabilitation, Genesis Life Care provides a safe and supportive environment.
-                  We are rated {centre.rating} stars on Google with over {centre.reviews} reviews
+                  We have a Google rating of {centre.rating} from {centre.reviews} reviews
                   from families across the Klang Valley.</>}
-                  zh={<>我们位于Kota Damansara的八打灵再也中心提供24小时护理服务、驻场医生会诊及专属康复部门。无论您的至亲正处于中风康复的早期阶段，或需要持续的康复治疗，Genesis Life Care都能提供安全且具支持性的环境。我们在Google上获得{centre.rating}星评分，共获得来自巴生谷各地超过{centre.reviews}则家庭好评。</>}
+                  zh={<>我们位于Kota Damansara的八打灵再也中心提供24小时护理服务、驻场医生会诊及专属康复部门。无论您的至亲正处于中风康复的早期阶段，或需要持续的康复治疗，Genesis Life Care都能提供安全且具支持性的环境。我们Google评分为{centre.rating}，共获得来自巴生谷各地超过{centre.reviews}则家庭好评。</>}
                 />
               </p>
             </div>
@@ -490,7 +476,7 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Flagship Centre" zh="旗舰中心" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>
@@ -512,7 +498,7 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                    <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -580,9 +566,9 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our Petaling Jaya centre for a free consultation. Meet our rehabilitation team
+              en="Visit our Petaling Jaya centre and speak to our care advisors. Meet our rehabilitation team
             and discover how we can help your loved one recover from stroke."
-              zh="欢迎参观我们的八打灵再也中心，预约免费咨询。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
+              zh="欢迎参观我们的八打灵再也中心，咨询我们的护理顾问。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -590,7 +576,7 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+              <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '武吉加里尔附近的老年人护理',
   description:
-    '武吉加里尔附近的老年人护理，Genesis Life Care Puchong中心车程仅约15分钟。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。Google评分4.8星。立即预约免费参观。',
+    '武吉加里尔附近的老年人护理，Genesis Life Care Puchong中心车程仅约15分钟。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。立即预约参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/elderly-care-in-bukit-jalil',
     languages: {

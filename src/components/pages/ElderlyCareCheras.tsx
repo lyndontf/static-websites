@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Nearest centre data ──────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const nearestCentre = {
   phone: '+6019 334 0457',
   phoneCTA: '+6019-334-0457',
   address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor',
-  rating: '4.7',
-  reviews: 32,
+  rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews,
   beds: '120+',
   distance: '~15 minutes',
   distanceZh: '~15分钟',
@@ -92,7 +92,7 @@ const faqs = [
   },
   {
     q: 'Can I visit the nursing home near Cheras before committing?',
-    a: 'Absolutely. We encourage families to book a free tour of our Kajang facility. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
+    a: 'Absolutely. We encourage families to book a visit to our Kajang facility. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
   },
   {
     q: 'How do I get to Genesis Life Care Kajang from Cheras?',
@@ -100,7 +100,7 @@ const faqs = [
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Cheras?',
-    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our Kajang centre has 120+ beds and is rated 4.7 stars on Google with positive reviews from satisfied families.',
+    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our Kajang centre has 120+ beds and has a Google rating of ' + GOOGLE_RATINGS.kajang.rating + ' from ' + GOOGLE_RATINGS.kajang.reviews + ' reviews.',
   },
 ];
 
@@ -120,7 +120,7 @@ const faqsZh = [
   },
   {
     q: '在承诺之前，我可以参观蕉赖附近的养老院吗？',
-    a: '当然可以。我们鼓励家庭预订我们Kajang设施的免费参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
+    a: '当然可以。我们鼓励家庭预订我们Kajang设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
   },
   {
     q: '我如何从蕉赖前往Genesis Life Care Kajang？',
@@ -128,7 +128,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care与蕉赖附近的其他养老院有什么不同？',
-    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Kajang中心拥有120多张床位，在Google上被评为4.7星，深受满意家庭好评。',
+    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Kajang中心拥有120多张床位，Google评分' + GOOGLE_RATINGS.kajang.rating + '，来自' + GOOGLE_RATINGS.kajang.reviews + '条评价。',
   },
 ];
 
@@ -160,20 +160,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
         { '@type': 'City', name: 'Cheras' },
         { '@type': 'City', name: 'Kajang' },
       ],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.7',
-        reviewCount: '32',
-        bestRating: '5',
-      },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
     },
   ],
   };
@@ -226,7 +212,7 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
                   <Bilingual en="Near Cheras" zh="蕉赖附近" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {nearestCentre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {nearestCentre.rating} from {nearestCentre.reviews} reviews</>} zh={<>Google 评分 {nearestCentre.rating}（{nearestCentre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -251,7 +237,7 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                  <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -327,9 +313,8 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
                 <Bilingual
                   en={<>Whether your loved one needs long-term residential care, post-surgery recovery, or
                   specialised dementia support, our Kajang centre offers a safe and nurturing
-                  environment with affordable rates. We are rated {nearestCentre.rating} stars on Google
-                  with {nearestCentre.reviews} reviews from families across the Klang Valley.</>}
-                  zh={<>无论您的家人需要长期住宿护理、术后康复，或是专业的失智症支持，我们的Kajang中心都能提供安全、温馨的环境与实惠的收费。我们在Google上获得{nearestCentre.rating}星评分，来自巴生谷各地家庭的评价达{nearestCentre.reviews}则。</>}
+                  environment with affordable rates. We have a Google rating of {nearestCentre.rating} from {nearestCentre.reviews} reviews from families across the Klang Valley.</>}
+                  zh={<>无论您的家人需要长期住宿护理、术后康复，或是专业的失智症支持，我们的Kajang中心都能提供安全、温馨的环境与实惠的收费。我们Google评分为{nearestCentre.rating}，来自巴生谷各地家庭的评价达{nearestCentre.reviews}则。</>}
                 />
               </p>
             </div>
@@ -412,7 +397,7 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Kajang Centre" zh="Kajang中心" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {nearestCentre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {nearestCentre.rating} from {nearestCentre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{nearestCentre.reviews} reviews</>} zh={zhCommon.reviews(nearestCentre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{nearestCentre.fullName}</h3>
@@ -434,7 +419,7 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                    <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -502,9 +487,9 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our Kajang centre for a free tour. See our care spaces,
+              en="Visit our Kajang centre for a guided tour. See our care spaces,
             meet the team, and discover why families across Cheras trust Genesis Life Care."
-              zh="欢迎参观我们的Kajang中心，免费导览。看看我们的护理空间，认识我们的团队，了解为何蕉赖各地家庭都信赖Genesis Life Care。"
+              zh="欢迎参观我们的Kajang中心，导览参观。看看我们的护理空间，认识我们的团队，了解为何蕉赖各地家庭都信赖Genesis Life Care。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -512,7 +497,7 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+              <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

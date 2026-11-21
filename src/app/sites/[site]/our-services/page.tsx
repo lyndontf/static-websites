@@ -4,7 +4,7 @@ import { OurServicesContent } from '@/components/pages/OurServices';
 export const metadata: Metadata = {
   title: "Elderly Care Services in Malaysia",
   description:
-    'Comprehensive elderly care services across 5 centres: 24/7 nursing care, dementia & memory care, stroke rehabilitation, palliative care, post-op recovery, respite care & senior daycare. Government-approved. Book a free consultation.',
+    'Comprehensive elderly care services across 5 centres: 24/7 nursing care, dementia & memory care, stroke rehabilitation, palliative care, post-op recovery, respite care & senior daycare. Registered with JKM. Speak to our care advisors.',
   alternates: {
     canonical: 'https://genesiscare.com.my/our-services',
   },

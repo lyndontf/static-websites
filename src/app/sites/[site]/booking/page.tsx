@@ -4,11 +4,11 @@ import BookingFormClient from '@/components/BookingFormClient';
 export const metadata: Metadata = {
   title: "Book a Visit",
   description:
-    'Schedule a free tour of our nursing home and elderly care centres in Klang, PJ, Kajang, Puchong, and Johor Bahru. Choose your preferred date and time.',
+    'Schedule a visit to our nursing home and elderly care centres in Klang, PJ, Kajang, Puchong, and Johor Bahru. Choose your preferred date and time.',
   openGraph: {
     title: 'Book a Visit | Genesis Life Care',
     description:
-      'Schedule a free tour of our nursing home and elderly care centres. Choose your preferred location, date and time.',
+      'Schedule a visit to our nursing home and elderly care centres. Choose your preferred location, date and time.',
     type: 'website',
   },
 };
@@ -28,7 +28,7 @@ export default function BookingPage() {
         <div className="relative max-w-2xl mx-auto px-4 text-center">
           <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[.14em] uppercase text-white/90 mb-4">
             <span className="w-5 h-0.5 bg-white/50 rounded" />
-            Free Tour
+            Book a Visit
             <span className="w-5 h-0.5 bg-white/50 rounded" />
           </span>
           <h1 className="text-3xl sm:text-[40px] font-extrabold text-white leading-tight tracking-tight mb-4 text-balance">

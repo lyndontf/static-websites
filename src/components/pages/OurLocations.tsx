@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { zhCommon } from '@/data/zhCommon';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 const centres = [
   {
@@ -8,8 +9,7 @@ const centres = [
     slug: 'nursing-home-in-petaling-jaya',
     phone: '+6019 295 0457',
     address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
-    rating: '4.9',
-    reviews: 58,
+    rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
     img: '/images/pj-centre.jpg',
     tags: ['Flagship Centre', 'Memory Care Wing', 'Rehab Facilities'],
     desc: 'Our flagship centre in PJ, featuring a dedicated memory care wing and comprehensive rehabilitation facilities. Enhanced physio and occupational therapy services.',
@@ -19,8 +19,7 @@ const centres = [
     slug: 'nursing-home-in-klang',
     phone: '+6019 325 0457',
     address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
-    rating: '4.8',
-    reviews: 45,
+    rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
     img: '/images/klang-centre.jpg',
     tags: ['Est. 2018', 'Near Major Hospitals', 'Original Centre'],
     desc: 'Where it all began. Our original centre in Klang is conveniently located near major hospitals and serves families across the northern Klang Valley.',
@@ -30,8 +29,7 @@ const centres = [
     slug: 'nursing-home-kajang',
     phone: '+6019 334 0457',
     address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor',
-    rating: '4.7',
-    reviews: 32,
+    rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews,
     img: '/images/kajang-centre.jpeg',
     tags: ['Southern KV', 'Family-Friendly', 'Quality Dining'],
     desc: 'A warm, family-friendly environment with personalised care and quality dining.',
@@ -41,8 +39,7 @@ const centres = [
     slug: 'nursing-home-in-puchong',
     phone: '+6019 759 0457',
     address: '16, Jln TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor',
-    rating: '4.8',
-    reviews: 38,
+    rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
     img: '/images/puchong-centre.jpeg',
     tags: ['Convenient Access', 'Modern Facility', 'Quality Dining'],
     desc: 'Located in Taman Perindustrian Puchong with easy highway access. A modern facility offering our full range of services with quality dining and comfortable facilities.',
@@ -52,8 +49,7 @@ const centres = [
     slug: 'nursing-home-in-johor-bahru',
     phone: '+6019 282 0457',
     address: 'Level 6, Holiday Plaza Tower, Jalan Dato Sulaiman, Taman Century, 80250 Johor Bahru, Johor Darul Ta’zim',
-    rating: '4.8',
-    reviews: 24,
+    rating: GOOGLE_RATINGS.jb.rating, reviews: GOOGLE_RATINGS.jb.reviews,
     img: '/images/jb-centre.jpeg',
     tags: ['Southern Region', 'Newest Centre', 'Full Services'],
     desc: 'Our first centre outside the Klang Valley, bringing Genesis standards of care to families in Johor Bahru and the wider southern region.',
@@ -110,7 +106,7 @@ const trustSignals = [
 const trustSignalsZh = [
   { label: '实惠价格', sub: '各中心' },
   { label: '24/7护理服务', sub: '全天候' },
-  { label: '免费云端导览', sub: '线上与实体皆可' },
+  { label: '云端导览', sub: '线上与实体皆可' },
   { label: '无绑约合同', sub: '灵活安排' },
 ];
 
@@ -284,8 +280,8 @@ export function OurLocationsContent({ locale = 'en' }: { locale?: 'en' | 'zh' } 
           </h2>
           <p className="text-lg text-white/85 mb-8 max-w-xl mx-auto">
             <Bilingual
-              en={<>Our care consultants can help you find the best fit for your loved one. Book a free tour at any of our centres &mdash; no obligations, no pressure.</>}
-              zh="我们的护理顾问能协助您为家人找到最合适的中心。欢迎预约任何一间中心的免费参观——无需承诺，零压力。"
+              en={<>Our care consultants can help you find the best fit for your loved one. Book a visit at any of our centres &mdash; no obligations, no pressure.</>}
+              zh="我们的护理顾问能协助您为家人找到最合适的中心。欢迎预约任何一间中心的参观——无需承诺，零压力。"
             />
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -293,7 +289,7 @@ export function OurLocationsContent({ locale = 'en' }: { locale?: 'en' | 'zh' } 
               href="/booking"
               className="inline-flex items-center gap-2 bg-[#f5b942] text-[#111] px-6 py-3.5 rounded-full font-bold text-base hover:bg-[#eaa92a] transition-colors shadow-lg whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+              <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

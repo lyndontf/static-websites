@@ -68,7 +68,11 @@ export async function generateMetadata({ params }: { params: Promise<SiteParams>
   // small header wordmark (often a wide ~4:1 crop) — falls back to it only
   // when a site hasn't had a proper share image made yet, since a link
   // preview is still better with something than nothing.
-  const shareImageUrl = settings?.og_image_url || settings?.logo_url || undefined;
+  // The centre site (genesiscare.com.my) falls back to its Kajang centre photo, never the wordmark.
+  const shareImageUrl =
+    settings?.og_image_url ||
+    (siteSlug === 'centre' ? '/images/kajang-centre.jpeg' : settings?.logo_url) ||
+    undefined;
   const shareImage = shareImageUrl
     ? [{ url: shareImageUrl, width: 1200, height: 630, alt: siteName }]
     : undefined;

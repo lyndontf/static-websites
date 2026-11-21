@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Centre data ──────────────────────────────────────────── */
 
@@ -18,8 +19,7 @@ const centre = {
   phone: '+6019 282 0457',
   phoneCTA: '+6019-282-0457',
   address: 'Level 6, Holiday Plaza Tower, Jalan Dato Sulaiman, Taman Century, 80250 Johor Bahru, Johor Darul Ta’zim',
-  rating: '4.8',
-  reviews: 40,
+  rating: GOOGLE_RATINGS.jb.rating, reviews: GOOGLE_RATINGS.jb.reviews,
   beds: '120+',
   img: '/images/jb-centre.jpeg',
 };
@@ -201,20 +201,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
         addressCountry: 'MY',
       },
       areaServed: { '@type': 'City', name: 'Johor Bahru' },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.8',
-        reviewCount: '40',
-        bestRating: '5',
-      },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
     },
   ],
   };
@@ -268,7 +254,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                   <Bilingual en="Stroke Rehabilitation" zh="中风康复" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -293,7 +279,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                  <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -370,10 +356,9 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                   en={<>Located at Taman Century, our Johor Bahru centre serves families across
                   JB, Skudai, Iskandar Puteri, Pasir Gudang, and the wider Johor region. With
                   {centre.beds} beds and dedicated rehabilitation facilities, we provide the
-                  southern region with professional stroke recovery care. Genesis Life Care JB is
-                  rated {centre.rating} stars on Google with {centre.reviews} reviews from families
+                  southern region with professional stroke recovery care. Genesis Life Care JB has a Google rating of {centre.rating} from {centre.reviews} reviews from families
                   who have entrusted us with their loved ones&apos; care.</>}
-                  zh={<>我们位于Taman Century的新山中心，服务范围涵盖JB、Skudai、Iskandar Puteri、Pasir Gudang及柔佛全境的家庭。凭借{centre.beds}张床位及专属康复设施，我们为南部地区提供专业的中风康复护理。Genesis Life Care JB在Google上获得{centre.rating}星评分，共{centre.reviews}则来自信赖我们照顾挚亲家庭的评价。</>}
+                  zh={<>我们位于Taman Century的新山中心，服务范围涵盖JB、Skudai、Iskandar Puteri、Pasir Gudang及柔佛全境的家庭。凭借{centre.beds}张床位及专属康复设施，我们为南部地区提供专业的中风康复护理。Genesis Life Care JBGoogle评分为{centre.rating}，共{centre.reviews}则来自信赖我们照顾挚亲家庭的评价。</>}
                 />
               </p>
             </div>
@@ -491,7 +476,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Southern Region" zh="南部地区" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>
@@ -513,7 +498,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                    <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -581,9 +566,9 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our JB centre for a free consultation. Meet our rehabilitation team
+              en="Visit our JB centre and speak to our care advisors. Meet our rehabilitation team
             and discover how we can help your loved one recover from stroke."
-              zh="欢迎参观我们的新山中心，预约免费咨询。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
+              zh="欢迎参观我们的新山中心，咨询我们的护理顾问。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -591,7 +576,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+              <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

@@ -10,6 +10,7 @@ import QuickEnquiryCard from '@/components/QuickEnquiryCard';
 import CmsHtmlRenderer from '@/components/CmsHtmlRenderer';
 import { getLanguageAlternates } from '@/lib/seo-alternates';
 import { AgencyCandidates, AgencyEligibility } from '@/components/AgencyHomeSections';
+import { GOOGLE_RATINGS, GOOGLE_GROUP } from '@/data/centres';
 
 export async function generateMetadata({ params }: { params: Promise<SiteParams> }): Promise<Metadata> {
   const { site: siteSlug } = await params;
@@ -20,14 +21,14 @@ export async function generateMetadata({ params }: { params: Promise<SiteParams>
     return {
       title: { absolute: 'Nursing Home & Elderly Care in Malaysia | Genesis Life Care' },
       description:
-        '5 government-approved Genesis Life Care nursing homes across Klang Valley & Johor Bahru. 24/7 nursing, dementia & stroke care. Rated 4.8★. Book a free visit.',
+        '5 JKM-registered Genesis Life Care nursing homes across Klang Valley & Johor Bahru. 24/7 nursing, dementia & stroke care. Book a visit.',
       alternates: {
         canonical: 'https://genesiscare.com.my/',
       },
       openGraph: {
         title: 'Genesis Life Care — Nursing Home & Elderly Care in Malaysia',
         description:
-          '5 nursing homes across Klang Valley & Johor Bahru. 24/7 nursing care, dementia care, stroke rehabilitation. Rated 4.8★ on Google.',
+          '5 nursing homes across Klang Valley & Johor Bahru. 24/7 nursing care, dementia care, stroke rehabilitation.',
         url: 'https://genesiscare.com.my/',
         siteName: 'Genesis Life Care',
         locale: 'en_MY',
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<SiteParams>
         card: 'summary_large_image',
         title: 'Genesis Life Care — Nursing Home & Elderly Care in Malaysia',
         description:
-          '5 nursing homes across Klang Valley & Johor Bahru. 24/7 nursing care, dementia care, stroke rehabilitation. Rated 4.8★.',
+          '5 nursing homes across Klang Valley & Johor Bahru. 24/7 nursing care, dementia care, stroke rehabilitation.',
       },
       keywords: [
         'nursing home Malaysia',
@@ -275,12 +276,6 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
       'Rehabilitation',
       'Palliative Care',
     ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '197',
-      bestRating: '5',
-    },
     numberOfEmployees: { '@type': 'QuantitativeValue', value: 150, unitText: 'staff' },
     foundingDate: '2018',
     sameAs: [
@@ -289,53 +284,6 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
       'https://www.tiktok.com/@genesislifecaremalaysia',
       'https://www.youtube.com/@genesislifecarecentre1443',
       'https://xhslink.com/m/1QUVGpuQcFM',
-    ],
-  };
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'How much does a nursing home cost in Malaysia?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Genesis Life Care offers affordable nursing home packages starting from RM 2,500 per month. Rates vary by centre and level of care required. All pricing is transparent with no hidden charges. Contact us for a personalised quote.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Where are Genesis Life Care centres located?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Genesis Life Care has 5 centres across Malaysia: Petaling Jaya, Klang, Kajang, and Puchong in the Klang Valley (Selangor), plus Johor Bahru in the southern region. All centres are conveniently located and easily accessible.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What types of care does Genesis Life Care provide?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'We provide a comprehensive range of elderly care services including 24/7 nursing home care, dementia and memory care, stroke rehabilitation, post-operative recovery care, palliative care, and short-term respite care. Each resident receives a personalised care plan.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Is Genesis Life Care government-approved?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Yes, all Genesis Life Care centres are registered and approved by JKM (Jabatan Kebajikan Masyarakat / Department of Social Welfare Malaysia). We also hold AgeCope certification, meeting international standards of aged care quality.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Can I visit a Genesis Life Care centre before making a decision?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Absolutely. We encourage families to book a free tour and consultation at any of our 5 centres. Our care advisors will walk you through the facilities, explain our care programmes, and help you find the right solution. Call +6019-325 0457 or visit our contact page to schedule a visit.',
-        },
-      },
     ],
   };
 
@@ -352,11 +300,6 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       {/* ─── HERO ─── */}
       <section className="hp-hero relative overflow-hidden">
         {/* Background image */}
@@ -420,7 +363,7 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
                   </div>
                   <div>
                     <span className="block text-sm font-bold">Affordable Rates</span>
-                    <span className="hp-muted text-xs">Government Approved</span>
+                    <span className="hp-muted text-xs">Registered with JKM</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -428,8 +371,8 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
                     <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
                   </div>
                   <div>
-                    <span className="block text-sm font-bold">4.8 / 5.0</span>
-                    <span className="hp-muted text-xs">Google Reviews</span>
+                    <span className="block text-sm font-bold">Google rating {GOOGLE_GROUP.rating}</span>
+                    <span className="hp-muted text-xs">from {GOOGLE_GROUP.reviews} reviews</span>
                   </div>
                 </div>
               </div>
@@ -461,8 +404,8 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
             </div>
             <div className="hidden sm:block w-px h-12 bg-gray-200" />
             <div className="text-center flex-1 min-w-[120px]">
-              <span className="block text-4xl sm:text-5xl font-extrabold text-gray-700 leading-none">4.8</span>
-              <span className="text-xs text-gray-500 mt-1 font-medium">Google Rating ★</span>
+              <span className="block text-4xl sm:text-5xl font-extrabold text-gray-700 leading-none">{GOOGLE_GROUP.rating}</span>
+              <span className="text-xs text-gray-500 mt-1 font-medium">Google rating, {GOOGLE_GROUP.reviews} reviews</span>
             </div>
             <div className="hidden sm:block w-px h-12 bg-gray-200" />
             <div className="flex items-center justify-center gap-4 flex-1 min-w-[200px]">
@@ -473,7 +416,7 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
               />
               <img
                 src="/images/logos/agecope-logo.webp"
-                alt="AgeCope certification"
+                alt="AGECOPE member"
                 className="h-10 w-auto"
               />
             </div>
@@ -674,9 +617,9 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
                 { value: '10+', label: 'Years Experience', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', color: 'from-primary to-primary-700' },
                 { value: '150+', label: 'Care Staff', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z', color: 'from-secondary to-secondary-600' },
                 { value: '5', label: 'Care Centres', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4', color: 'from-primary to-primary-700' },
-                { value: '4.8★', label: 'Google Rating', icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z', color: 'from-gold to-gold-500', filled: true },
+                { value: GOOGLE_GROUP.rating, label: `Google rating (${GOOGLE_GROUP.reviews} reviews)`, icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z', color: 'from-gold to-gold-500', filled: true },
                 { value: '500+', label: 'Families Served', icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z', color: 'from-secondary to-secondary-600' },
-                { value: 'JKM', label: 'Govt Approved', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z', color: 'from-primary-700 to-primary-800' },
+                { value: 'JKM', label: 'JKM Registered', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z', color: 'from-primary-700 to-primary-800' },
               ].map((s, i) => (
                 <div key={i} className="bg-white rounded-xl p-4 text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                   <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${s.color} flex items-center justify-center mx-auto mb-2`}>
@@ -799,11 +742,11 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
-              { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: '4.9', img: '/images/pj-centre.jpg' },
-              { name: 'Klang', slug: 'nursing-home-in-klang', rating: '4.8', img: '/images/klang-centre.jpg' },
-              { name: 'Kajang', slug: 'nursing-home-kajang', rating: '4.7', img: '/images/kajang-centre.jpeg' },
-              { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: '4.8', img: '/images/puchong-centre.jpeg' },
-              { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: '4.8', img: '/images/jb-centre.jpeg' },
+              { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews, img: '/images/pj-centre.jpg' },
+              { name: 'Klang', slug: 'nursing-home-in-klang', rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews, img: '/images/klang-centre.jpg' },
+              { name: 'Kajang', slug: 'nursing-home-kajang', rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews, img: '/images/kajang-centre.jpeg' },
+              { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews, img: '/images/puchong-centre.jpeg' },
+              { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: GOOGLE_RATINGS.jb.rating, reviews: GOOGLE_RATINGS.jb.reviews, img: '/images/jb-centre.jpeg' },
             ].map((loc) => (
               <Link
                 key={loc.slug}
@@ -909,11 +852,10 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
                   </div>
                 ))}
               </div>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 {[
                   { value: 'GLC', label: 'Facility Trained', gold: false },
                   { value: 'JTKSM', label: 'Licensed', gold: false },
-                  { value: '5★', label: 'Satisfaction', gold: true },
                 ].map((s, i) => (
                   <div key={i} className={`rounded-xl p-4 text-center shadow-sm ${s.gold ? 'bg-gold' : 'bg-white'}`}>
                     <span className={`block text-xl font-extrabold ${s.gold ? 'text-white' : 'text-gray-900'}`}>{s.value}</span>
@@ -1009,12 +951,12 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
                     a: 'We provide a comprehensive range of elderly care services including 24/7 nursing home care, dementia and memory care, stroke rehabilitation, post-operative recovery care, palliative care, and short-term respite care. Each resident receives a personalised care plan.',
                   },
                   {
-                    q: 'Is Genesis Life Care government-approved?',
-                    a: 'Yes, all Genesis Life Care centres are registered and approved by JKM (Jabatan Kebajikan Masyarakat). We also hold AgeCope certification, meeting international standards of aged care quality.',
+                    q: 'Is Genesis Life Care registered with JKM?',
+                    a: 'Yes, all Genesis Life Care centres are registered with JKM (Jabatan Kebajikan Masyarakat). We are also an AGECOPE member.',
                   },
                   {
                     q: 'Can I visit a Genesis Life Care centre before making a decision?',
-                    a: 'Absolutely. We encourage families to book a free tour and consultation at any of our 5 centres. Our care advisors will walk you through the facilities, explain our care programmes, and help you find the right solution.',
+                    a: 'Absolutely. We encourage families to book a visit at any of our 5 centres. Our care advisors will walk you through the facilities, explain our care programmes, and help you find the right solution.',
                   },
                 ].map((item, i) => (
                   <details key={i} className="group bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
@@ -1030,7 +972,7 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
               {/* Still have questions? CTA */}
               <div className="bg-primary-50 rounded-2xl p-6 border border-primary/10 mt-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Still have questions?</h3>
-                <p className="text-sm text-gray-500 mb-4">Our care advisors are happy to help. Speak to us directly or schedule a free visit to any of our centres.</p>
+                <p className="text-sm text-gray-500 mb-4">Our care advisors are happy to help. Speak to us directly or schedule a visit to any of our centres.</p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
                     href="/contact"
@@ -1071,7 +1013,7 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Take the Next Step?</h2>
           <p className="hp-sub text-lg mb-8 max-w-2xl mx-auto">
-            Contact us today for a free consultation. Our care advisors speak to dozens of families every week and can help find the perfect care solution for your loved one.
+            Contact us today for a care needs review. Our care advisors speak to dozens of families every week and can help find the perfect care solution for your loved one.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

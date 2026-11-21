@@ -20,7 +20,7 @@ const t = {
     hoursVisit: 'Visits: 9:00 AM – 6:00 PM daily',
     hoursNursing: 'Nursing care: 24/7',
     email: 'Email',
-    bookTour: 'Book a Free Tour',
+    bookTour: 'Book a Visit',
     whatsapp: 'WhatsApp Us',
     contactLink: '/contact',
   },
@@ -33,7 +33,7 @@ const t = {
     hoursVisit: '探访时间：每日 9:00 AM – 6:00 PM',
     hoursNursing: '护理服务：全天候24/7',
     email: '电邮',
-    bookTour: '预约免费参观',
+    bookTour: '预约参观',
     whatsapp: 'WhatsApp 联系我们',
     // Same page, no separate /zh route — the toggle swaps text in place.
     contactLink: '/contact',

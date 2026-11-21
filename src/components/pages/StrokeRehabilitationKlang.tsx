@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Centre data ──────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const centre = {
   phone: '+6019 325 0457',
   phoneCTA: '+6019-325-0457',
   address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
-  rating: '4.8',
-  reviews: 45,
+  rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
   beds: '120+',
   img: '/images/klang-centre.jpg',
 };
@@ -200,20 +200,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
         addressCountry: 'MY',
       },
       areaServed: { '@type': 'City', name: 'Klang' },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.8',
-        reviewCount: '45',
-        bestRating: '5',
-      },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
     },
   ],
   };
@@ -267,7 +253,7 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
                   <Bilingual en="Stroke Rehabilitation" zh="中风康复" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -292,7 +278,7 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                  <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -367,10 +353,9 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
                 <Bilingual
                   en={<>Genesis Life Care Klang is our original centre, located at Amverton Business Centre
                   with over {centre.beds} beds and 24-hour nursing care. We serve families across
-                  the Klang district, Port Klang, Shah Alam, and surrounding areas. Our centre is
-                  rated {centre.rating} stars on Google with {centre.reviews} reviews from families
+                  the Klang district, Port Klang, Shah Alam, and surrounding areas. Our centre has a Google rating of {centre.rating} from {centre.reviews} reviews from families
                   who have trusted us with their loved ones&apos; recovery.</>}
-                  zh={<>Genesis Life Care巴生是我们的首间中心，位于Amverton Business Centre，设有超过{centre.beds}张床位及24小时护理服务。我们服务巴生地区、Port Klang、Shah Alam及周边地区的家庭。我们的中心在Google上获得{centre.rating}星评分，共{centre.reviews}则来自信赖我们照顾挚亲康复的家庭评价。</>}
+                  zh={<>Genesis Life Care巴生是我们的首间中心，位于Amverton Business Centre，设有超过{centre.beds}张床位及24小时护理服务。我们服务巴生地区、Port Klang、Shah Alam及周边地区的家庭。我们的中心Google评分为{centre.rating}，共{centre.reviews}则来自信赖我们照顾挚亲康复的家庭评价。</>}
                 />
               </p>
             </div>
@@ -488,7 +473,7 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Original Centre" zh="首间中心" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>
@@ -510,7 +495,7 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                    <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -578,9 +563,9 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our Klang centre for a free consultation. Meet our rehabilitation team
+              en="Visit our Klang centre and speak to our care advisors. Meet our rehabilitation team
             and discover how we can help your loved one recover from stroke."
-              zh="欢迎参观我们的巴生中心，预约免费咨询。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
+              zh="欢迎参观我们的巴生中心，咨询我们的护理顾问。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -588,7 +573,7 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+              <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

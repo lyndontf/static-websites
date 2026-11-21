@@ -4,7 +4,7 @@
 // narrative) lives inline in each page file instead, since it isn't reused
 // word-for-word across pages the way this chrome is.
 export const zhCommon = {
-  bookFreeTour: '预约免费参观',
+  bookFreeTour: '预约参观',
   learnMore: '了解更多',
   viewCentreDetails: '查看中心详情',
   bedCapacity: '床位容量',

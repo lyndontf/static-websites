@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Stroke Rehabilitation in Klang",
   description:
-    'Professional stroke rehabilitation in Klang. Physiotherapy, occupational therapy & speech therapy for stroke recovery. Personalised rehab plans at Genesis Life Care Klang. Rated 4.8★. Book a free consultation.',
+    'Professional stroke rehabilitation in Klang. Physiotherapy, occupational therapy & speech therapy for stroke recovery. Personalised rehab plans at Genesis Life Care Klang. Speak to our care advisors.',
   openGraph: {
     title: 'Stroke Rehabilitation in Klang - Genesis Life Care',
     description:

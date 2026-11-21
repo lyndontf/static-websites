@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { GOOGLE_RATINGS } from '@/data/centres';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -25,7 +26,7 @@ const AREAS: Record<string, Area> = {
       ],
     },
     extraFaqs: [
-      { q: 'How long has Genesis Life Care been operating in Klang?', a: 'Genesis Life Care Klang is our original, longest-running centre — operating since 2018, with 4.8★ from 45 reviews and published pricing from RM2,500/month.' },
+      { q: 'How long has Genesis Life Care been operating in Klang?', a: 'Genesis Life Care Klang is our original, longest-running centre — operating since 2018, with a Google rating of ' + GOOGLE_RATINGS.klang.rating + ' from ' + GOOGLE_RATINGS.klang.reviews + ' reviews and published pricing from RM2,500/month.' },
     ],
   },
   puchong: {
@@ -49,11 +50,11 @@ const AREAS: Record<string, Area> = {
       paragraphs: [
         'Johor Bahru’s eldercare options are growing, with new centres opening across the city. When comparing, look beyond location alone — check licensing, staff-to-resident ratios, and exactly what’s included in the monthly fee before deciding.',
         'Genesis Life Care Johor Bahru has been operating since 2023 in Taman Century, with published pricing from RM2,500/month and 24-hour nursing care.',
-        'Wherever in JB you’re located — including areas like Austin Heights, Tebrau or Skudai — a free, no-obligation assessment lets you compare care quality and cost against any home near you.',
+        'Wherever in JB you’re located — including areas like Austin Heights, Tebrau or Skudai — a no-obligation care needs review lets you compare care quality and cost against any home near you.',
       ],
     },
     extraFaqs: [
-      { q: 'Are there nursing homes in other parts of Johor Bahru, like Austin Heights or Tebrau?', a: 'Johor Bahru has nursing homes across different neighbourhoods. Genesis Life Care’s centre is based in Taman Century and welcomes families from across JB and the wider southern region for a free assessment — so you can compare options no matter where in JB you’re located.' },
+      { q: 'Are there nursing homes in other parts of Johor Bahru, like Austin Heights or Tebrau?', a: 'Johor Bahru has nursing homes across different neighbourhoods. Genesis Life Care’s centre is based in Taman Century and welcomes families from across JB and the wider southern region for a care needs review — so you can compare options no matter where in JB you’re located.' },
     ],
   },
 };
@@ -110,7 +111,7 @@ export default function NursingHomeGuide({ params }: { params: { area: string } 
   const faqs = [
     { q: `How much does a nursing home in ${a.name} cost?`, a: `Fees depend on the level of care, room type and facility. As a general guide, private nursing home fees in Malaysia typically range from around RM2,500 to RM5,000+ per month. Genesis Life Care fees start from RM2,500/month. See our full nursing home cost guide for details.` },
     { q: `Does Genesis have a nursing home in ${a.name}?`, a: `Yes. Genesis Life Care operates a centre serving ${a.blurb}, with 24-hour nursing, dementia and post-stroke care, and transparent pricing.` },
-    { q: `How do I know if a home is right for my parent?`, a: `Visit in person, use the checklist and questions on this page, and ask for a free assessment. A good home will welcome your questions and let you see the actual living areas.` },
+    { q: `How do I know if a home is right for my parent?`, a: `Visit in person, use the checklist and questions on this page, and ask for a care needs review. A good home will welcome your questions and let you see the actual living areas.` },
     ...(a.extraFaqs ?? []),
   ];
 
@@ -124,17 +125,6 @@ export default function NursingHomeGuide({ params }: { params: { area: string } 
         .hero-dark .text-white { color: #ffffff !important; }
         .hero-dark .text-gray-900 { color: rgb(17 24 39) !important; }
       ` }} />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-          }),
-        }}
-      />
 
       {/* HERO */}
       <section className="hero-dark relative bg-gradient-to-br from-primary-800 via-primary to-secondary overflow-hidden">
@@ -205,7 +195,7 @@ export default function NursingHomeGuide({ params }: { params: { area: string } 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6">Genesis Life Care in {a.name}</h2>
           <p className="text-lg text-gray-600 leading-relaxed mb-8">
             Genesis operates a trusted nursing home serving {a.blurb} — with 24-hour nursing, dementia and
-            post-stroke care, transparent pricing from RM2,500/month, and a free, no-obligation assessment.
+            post-stroke care, transparent pricing from RM2,500/month, and a no-obligation care needs review.
             Come and see it for yourself.
           </p>
           <Link href={a.centre} className="inline-flex items-center gap-2 bg-primary hover:bg-primary-600 text-white font-bold px-7 py-3.5 rounded-full transition shadow-lg hover:shadow-xl" style={{ color: 'white' }}>
@@ -250,8 +240,8 @@ export default function NursingHomeGuide({ params }: { params: { area: string } 
       {/* CTA */}
       <section className="hero-dark bg-gradient-to-br from-primary to-secondary">
         <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4" style={{ color: 'white' }}>Book a free visit in {a.name}</h2>
-          <p className="text-lg text-white/90 mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.9)' }}>See our {a.name} centre, meet the team, and get a free assessment and quote — with no obligation.</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4" style={{ color: 'white' }}>Book a visit in {a.name}</h2>
+          <p className="text-lg text-white/90 mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.9)' }}>See our {a.name} centre, meet the team, and get a care needs review and a free quote — with no obligation.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 bg-gold hover:bg-yellow-500 text-gray-900 font-bold px-8 py-4 rounded-full transition shadow-lg hover:shadow-xl">
             Book a Free Visit
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>

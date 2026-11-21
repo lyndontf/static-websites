@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Centre data ──────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const centre = {
   phone: '+6019 759 0457',
   phoneCTA: '+6019-759-0457',
   address: '16, Jln TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor',
-  rating: '4.8',
-  reviews: 58,
+  rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
   beds: '120+',
   img: '/images/puchong-centre.jpeg',
 };
@@ -200,20 +200,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
           addressCountry: 'MY',
         },
         areaServed: { '@type': 'City', name: 'Puchong' },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.8',
-          reviewCount: '58',
-          bestRating: '5',
-        },
-      },
-      {
-        '@type': 'FAQPage',
-        mainEntity: faqs.map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
       },
     ],
   };
@@ -267,7 +253,7 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
                   <Bilingual en="Stroke Rehabilitation" zh="中风康复" />
                 </span>
                 <span className="bg-white/15 text-white text-xs font-semibold px-3 py-1 rounded-full" style={{ color: 'white' }}>
-                  ★ {centre.rating} <Bilingual en="Google Rating" zh={zhCommon.googleRating} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -292,7 +278,7 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                  <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -369,9 +355,9 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
                   easily accessible from Puchong, Subang Jaya, Sri Kembangan, and surrounding areas.
                   With {centre.beds} beds, 24-hour nursing care, and a dedicated rehabilitation
                   department, we provide everything needed for effective stroke recovery. Genesis
-                  Life Care Puchong is rated {centre.rating} stars on Google with {centre.reviews} reviews
+                  Life Care Puchong has a Google rating of {centre.rating} from {centre.reviews} reviews
                   from satisfied families.</>}
-                  zh={<>我们的蒲种中心是一座位于Taman Perindustrian Puchong的现代化设施，从蒲种、Subang Jaya、Sri Kembangan及周边地区皆可轻松抵达。凭借{centre.beds}张床位、24小时护理服务及专属康复部门，我们提供有效中风康复所需的一切。Genesis Life Care蒲种在Google上获得{centre.rating}星评分，共{centre.reviews}则满意家庭的好评。</>}
+                  zh={<>我们的蒲种中心是一座位于Taman Perindustrian Puchong的现代化设施，从蒲种、Subang Jaya、Sri Kembangan及周边地区皆可轻松抵达。凭借{centre.beds}张床位、24小时护理服务及专属康复部门，我们提供有效中风康复所需的一切。Genesis Life Care蒲种Google评分为{centre.rating}，共{centre.reviews}则满意家庭的好评。</>}
                 />
               </p>
             </div>
@@ -489,7 +475,7 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
                   <span className="bg-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
                     <Bilingual en="Modern Facility" zh="现代化设施" />
                   </span>
-                  <span className="text-gold text-sm font-semibold">★ {centre.rating}</span>
+                  <span className="text-gold text-sm font-semibold">Google rating {centre.rating} from {centre.reviews} reviews</span>
                   <span className="text-gray-400 text-xs">(<Bilingual en={<>{centre.reviews} reviews</>} zh={zhCommon.reviews(centre.reviews)} />)</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{centre.fullName}</h3>
@@ -511,7 +497,7 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                    <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -579,9 +565,9 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our Puchong centre for a free consultation. Meet our rehabilitation team
+              en="Visit our Puchong centre and speak to our care advisors. Meet our rehabilitation team
             and discover how we can help your loved one recover from stroke."
-              zh="欢迎参观我们的蒲种中心，预约免费咨询。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
+              zh="欢迎参观我们的蒲种中心，咨询我们的护理顾问。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -589,7 +575,7 @@ export function StrokeRehabilitationPuchongContent({ locale = 'en' }: { locale?:
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+              <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

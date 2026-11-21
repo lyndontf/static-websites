@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '新山痴呆症护理',
   description:
-    '新山专业痴呆症护理。心理学家主导的记忆护理计划、认知刺激活动、安全环境及个人化护理计划。Google评分4.8星。立即预约Genesis Life Care新山中心的免费参观。',
+    '新山专业痴呆症护理。心理学家主导的记忆护理计划、认知刺激活动、安全环境及个人化护理计划。立即预约Genesis Life Care新山中心的参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/dementia-care-in-johor-bahru',
     languages: {
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: '新山痴呆症护理 - Genesis Life Care',
-    description: '新山专业痴呆症和记忆护理。心理学家主导计划、24小时护理、安全环境。立即预约免费参观。',
+    description: '新山专业痴呆症和记忆护理。心理学家主导计划、24小时护理、安全环境。立即预约参观。',
     images: [{ url: '/images/jb-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care 新山 — 痴呆症护理' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '新山痴呆症护理 - Genesis Life Care',
-    description: '新山专业痴呆症和记忆护理。心理学家主导计划、24小时护理、安全环境。立即预约免费参观。',
+    description: '新山专业痴呆症和记忆护理。心理学家主导计划、24小时护理、安全环境。立即预约参观。',
     images: ['/images/jb-centre.jpeg'],
   },
 };

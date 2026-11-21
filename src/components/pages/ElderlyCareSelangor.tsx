@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS, GOOGLE_SELANGOR } from '@/data/centres';
 
 /* ─── All Selangor centres ─────────────────────────────────────────── */
 
@@ -15,8 +16,7 @@ const selangorCentres = [
     name: 'Petaling Jaya',
     fullName: 'Genesis Life Care Petaling Jaya',
     slug: 'nursing-home-in-petaling-jaya',
-    rating: '4.9',
-    reviews: 155,
+    rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
     beds: '50+',
     tag: 'Flagship Centre',
     img: '/images/pj-centre.jpg',
@@ -27,8 +27,7 @@ const selangorCentres = [
     name: 'Klang',
     fullName: 'Genesis Life Care Klang',
     slug: 'nursing-home-in-klang',
-    rating: '4.8',
-    reviews: 45,
+    rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
     beds: '120+',
     tag: 'Original Centre',
     img: '/images/klang-centre.jpg',
@@ -39,8 +38,7 @@ const selangorCentres = [
     name: 'Kajang',
     fullName: 'Genesis Life Care Kajang',
     slug: 'nursing-home-kajang',
-    rating: '4.7',
-    reviews: 32,
+    rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews,
     beds: '120+',
     tag: 'Southern KV',
     img: '/images/kajang-centre.jpeg',
@@ -51,8 +49,7 @@ const selangorCentres = [
     name: 'Puchong',
     fullName: 'Genesis Life Care Puchong',
     slug: 'nursing-home-in-puchong',
-    rating: '4.8',
-    reviews: 58,
+    rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
     beds: '120+',
     tag: 'Modern Facility',
     img: '/images/puchong-centre.jpeg',
@@ -143,7 +140,7 @@ const faqs = [
   },
   {
     q: 'Which is the best nursing home in Selangor?',
-    a: 'Genesis Life Care is one of the highest-rated nursing home providers in Selangor, with Google ratings of 4.7 to 4.9 stars across all four centres. Our Petaling Jaya flagship centre is rated 4.9 stars with over 155 reviews. Each centre offers professional nursing, dementia care, and rehabilitation services.',
+    a: 'Genesis Life Care is one of the highest-rated nursing home providers in Selangor, with Google ratings from ' + GOOGLE_SELANGOR.min + ' to ' + GOOGLE_SELANGOR.max + ' across the four centres. Our Petaling Jaya centre has a Google rating of ' + GOOGLE_RATINGS.pj.rating + ' from ' + GOOGLE_RATINGS.pj.reviews + ' reviews. Each centre offers professional nursing, dementia care, and rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost in Selangor?',
@@ -155,7 +152,7 @@ const faqs = [
   },
   {
     q: 'Can I visit a Genesis Life Care centre before making a decision?',
-    a: 'Absolutely. We encourage families to book a free tour at any of our four Selangor centres. You can see the living spaces, meet the care team, and ask questions — with no obligations. Call us at +6019 295 0457 to arrange a visit.',
+    a: 'Absolutely. We encourage families to book a visit at any of our four Selangor centres. You can see the living spaces, meet the care team, and ask questions — with no obligations. Call us at +6019 295 0457 to arrange a visit.',
   },
   {
     q: 'What areas in Selangor does Genesis Life Care serve?',
@@ -173,7 +170,7 @@ const faqsZh = [
   },
   {
     q: '雪兰莪最好的养老院是哪一间？',
-    a: 'Genesis Life Care是雪兰莪评分最高的养老院提供商之一，四间中心在Google上的评分介于4.7至4.9星之间。我们的Petaling Jaya旗舰中心被评为4.9星，拥有超过155条评论。每间中心均提供专业护理、失智症护理及康复服务。',
+    a: 'Genesis Life Care是雪兰莪评分最高的养老院提供商之一，四间中心在Google上的评分介于' + GOOGLE_SELANGOR.min + '至' + GOOGLE_SELANGOR.max + '之间。我们的Petaling Jaya中心Google评分为' + GOOGLE_RATINGS.pj.rating + '，来自' + GOOGLE_RATINGS.pj.reviews + '条评价。每间中心均提供专业护理、失智症护理及康复服务。',
   },
   {
     q: '雪兰莪的老年人护理费用是多少？',
@@ -185,7 +182,7 @@ const faqsZh = [
   },
   {
     q: '我可以在做决定前参观Genesis Life Care中心吗？',
-    a: '当然可以。我们鼓励家庭预订我们雪兰莪4间中心中任何一间的免费参观。您可以看到生活空间、与护理团队见面并提出问题——无任何义务。请致电+6019-295-0457安排参观。',
+    a: '当然可以。我们鼓励家庭预订我们雪兰莪4间中心中任何一间的参观。您可以看到生活空间、与护理团队见面并提出问题——无任何义务。请致电+6019-295-0457安排参观。',
   },
   {
     q: 'Genesis Life Care在雪兰莪服务哪些地区？',
@@ -220,20 +217,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
           addressRegion: 'Selangor',
           addressCountry: 'MY',
         },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: c.rating,
-          reviewCount: String(c.reviews),
-          bestRating: '5',
-        },
-      })),
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
       })),
     },
   ],
@@ -312,7 +295,7 @@ export function ElderlyCareSelangorContent({ locale = 'en' }: { locale?: 'en' | 
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+                  <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -387,11 +370,11 @@ export function ElderlyCareSelangorContent({ locale = 'en' }: { locale?: 'en' | 
               </p>
               <p>
                 <Bilingual
-                  en={<>Our centres are rated between 4.7 and 4.9 stars on Google, with a combined
-                  total of over 290 reviews from satisfied families across Selangor. We offer
+                  en={<>Our centres have Google ratings from {GOOGLE_SELANGOR.min} to {GOOGLE_SELANGOR.max}, with a combined
+                  total of {GOOGLE_SELANGOR.reviews} reviews from satisfied families across Selangor. We offer
                   affordable rates without compromising on care quality, making professional
                   elderly care accessible to more Malaysian families.</>}
-                  zh="我们的中心在Google上的评分介于4.7至4.9星之间，来自雪兰莪各地满意家庭的评价总数超过290则。我们在不牺牲护理品质的前提下提供实惠的收费，让更多马来西亚家庭都能享有专业的老年人护理。"
+                  zh={`我们的中心在Google上的评分介于${GOOGLE_SELANGOR.min}至${GOOGLE_SELANGOR.max}之间，来自雪兰莪各地满意家庭的评价总数为${GOOGLE_SELANGOR.reviews}则。我们在不牺牲护理品质的前提下提供实惠的收费，让更多马来西亚家庭都能享有专业的老年人护理。`}
                 />
               </p>
             </div>
@@ -431,7 +414,7 @@ export function ElderlyCareSelangorContent({ locale = 'en' }: { locale?: 'en' | 
                     <span className="bg-gold text-gray-900 text-xs font-bold px-2.5 py-0.5 rounded-full">
                       <Bilingual en={c.tag} zh={selangorCentresZh[i].tag} />
                     </span>
-                    <span className="text-gold text-sm font-semibold">★ {c.rating}</span>
+                    <span className="text-gold text-sm font-semibold">Google rating {c.rating} from {c.reviews} reviews</span>
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors mb-1">
                     {c.fullName}
@@ -554,9 +537,9 @@ export function ElderlyCareSelangorContent({ locale = 'en' }: { locale?: 'en' | 
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit any of our 4 Selangor centres for a free tour. See our care spaces,
+              en="Visit any of our 4 Selangor centres for a guided tour. See our care spaces,
             meet the team, and discover why families across the Klang Valley trust Genesis Life Care."
-              zh="欢迎参观我们雪兰莪的4间中心中的任何一间，免费导览。看看我们的护理空间，认识我们的团队，了解为何巴生谷各地家庭都信赖Genesis Life Care。"
+              zh="欢迎参观我们雪兰莪的4间中心中的任何一间，导览参观。看看我们的护理空间，认识我们的团队，了解为何巴生谷各地家庭都信赖Genesis Life Care。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -564,7 +547,7 @@ export function ElderlyCareSelangorContent({ locale = 'en' }: { locale?: 'en' | 
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Tour" zh={zhCommon.bookFreeTour} />
+              <Bilingual en="Book a Visit" zh={zhCommon.bookFreeTour} />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

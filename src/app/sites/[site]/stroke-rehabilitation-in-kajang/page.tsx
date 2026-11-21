@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Stroke Rehabilitation in Kajang",
   description:
-    'Professional stroke rehabilitation in Kajang. Physiotherapy, occupational therapy & speech therapy for stroke recovery. Personalised rehab plans at Genesis Life Care Kajang. Rated 4.7★. Book a free consultation.',
+    'Professional stroke rehabilitation in Kajang. Physiotherapy, occupational therapy & speech therapy for stroke recovery. Personalised rehab plans at Genesis Life Care Kajang. Speak to our care advisors.',
   openGraph: {
     title: 'Stroke Rehabilitation in Kajang - Genesis Life Care',
     description:

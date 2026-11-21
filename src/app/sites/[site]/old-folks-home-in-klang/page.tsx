@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Old Folks Home in Klang",
   description:
-    'Trusted old folks home in Klang since 2018. Genesis Life Care offers 24/7 nursing, dementia care, rehabilitation & nutritious meals. Affordable rates. Rated 4.8★. Book a free tour.',
+    'Trusted old folks home in Klang since 2018. Genesis Life Care offers 24/7 nursing, dementia care, rehabilitation & nutritious meals. Affordable rates. Book a visit.',
 };
 
 export const revalidate = 60;

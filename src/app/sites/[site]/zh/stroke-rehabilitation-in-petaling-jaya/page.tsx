@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '八打灵再也中风康复',
   description:
-    '八打灵再也专业中风康复服务。物理治疗、职业治疗及言语治疗协助中风康复。Genesis Life Care八打灵再也提供个性化康复计划。Google评分4.9星。立即预约免费咨询。',
+    '八打灵再也专业中风康复服务。物理治疗、职业治疗及言语治疗协助中风康复。Genesis Life Care八打灵再也提供个性化康复计划。立即咨询我们的护理顾问。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-petaling-jaya',
     languages: {
