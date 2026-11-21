@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/our-locations',
       zh: 'https://genesiscare.com.my/zh/our-locations',
+      'x-default': 'https://genesiscare.com.my/our-locations',
     },
   },
   openGraph: {
@@ -26,6 +27,11 @@ export const metadata: Metadata = {
     siteName: 'Genesis Life Care',
     locale: 'zh_MY',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '马来西亚护理院地点 | Genesis Life Care',
+    description: '5间中心分布于八打灵再也、巴生、加影、蒲种及新山。收费实惠，每月起价RM 2,500。',
   },
 };
 

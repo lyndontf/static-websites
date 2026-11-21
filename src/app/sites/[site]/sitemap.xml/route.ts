@@ -1,7 +1,8 @@
-import { supabase } from '@/lib/supabase';
+import { supabase, getPublishedJobListings } from '@/lib/supabase';
 import { getSiteIdBySlug, getSiteBaseUrlBySlug, type SiteParams } from '@/lib/site-context';
 import { ZH_TWIN_SLUGS } from '@/lib/zh-twins';
 import { buildLanguageMap, isNoindexSlug, pageUrl } from '@/lib/seo';
+import { CENTRE_EXTRA_SITEMAP_PATHS } from '@/lib/centre-sitemap';
 
 // Domain-aware sitemap: only the URLs of the site being asked about (from the [site] route param), so each
 // domain's sitemap can be submitted to its own Search Console property without "URL not allowed" errors.
@@ -67,6 +68,10 @@ export async function GET(_req: Request, { params }: { params: Promise<SiteParam
       }
     }
 
+    // The English row's date, for the hardcoded Chinese twin of the same slug (the twin has no row of its own).
+    const enUpdatedBySlug = new Map<string, string>();
+    for (const p of pages || []) if ((p.locale || 'en') === 'en') enUpdatedBySlug.set(p.slug, p.updated_at);
+
     const alternatesFor = (slug: string) => buildLanguageMap(baseUrl, slug, Array.from(localesBySlug.get(slug) ?? [])) ?? {};
 
     for (const page of pages || []) {
@@ -89,8 +94,33 @@ export async function GET(_req: Request, { params }: { params: Promise<SiteParam
         if (isNoindexSlug(siteSlug, slug)) continue;
         for (const l of ['en', 'zh']) {
           const url = urlFor(l, slug);
-          if (!entries.has(url)) entries.set(url, { url, changeFrequency: 'weekly', priority: 0.8, alternates: alternatesFor(slug) });
+          if (!entries.has(url)) {
+            const updated = enUpdatedBySlug.get(slug);
+            entries.set(url, {
+              url,
+              ...(updated ? { lastModified: new Date(updated).toISOString() } : {}),
+              changeFrequency: 'weekly',
+              priority: 0.8,
+              alternates: alternatesFor(slug),
+            });
+          }
         }
+      }
+      // Live pages that are hand-written routes with no cms_pages row (decided 21 Nov 2026: every page is indexed and listed),
+      // the legal pages, and the open job listings.
+      for (const path of CENTRE_EXTRA_SITEMAP_PATHS) {
+        const url = `${baseUrl}/${path}`;
+        if (!entries.has(url)) entries.set(url, { url, changeFrequency: 'monthly', priority: 0.4, alternates: {} });
+      }
+      for (const job of await getPublishedJobListings()) {
+        const url = `${baseUrl}/careers/${job.id}`;
+        entries.set(url, {
+          url,
+          lastModified: new Date(job.updated_at || job.published_at || job.created_at).toISOString(),
+          changeFrequency: 'weekly',
+          priority: 0.3,
+          alternates: {},
+        });
       }
     }
     for (const post of posts || []) {

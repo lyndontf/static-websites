@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/stroke-rehabilitation-in-kajang',
       zh: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-kajang',
+      'x-default': 'https://genesiscare.com.my/stroke-rehabilitation-in-kajang',
     },
   },
   openGraph: {
     title: '加影中风康复 - Genesis Life Care',
     description: '加影专业中风康复。物理治疗、职业治疗、言语治疗及个性化康复计划。立即预约免费咨询。',
     images: [{ url: '/images/kajang-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care 加影' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '加影中风康复 - Genesis Life Care',
+    description: '加影专业中风康复。物理治疗、职业治疗、言语治疗及个性化康复计划。立即预约免费咨询。',
+    images: ['/images/kajang-centre.jpeg'],
   },
 };
 

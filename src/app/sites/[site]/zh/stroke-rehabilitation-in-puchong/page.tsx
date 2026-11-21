@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/stroke-rehabilitation-in-puchong',
       zh: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-puchong',
+      'x-default': 'https://genesiscare.com.my/stroke-rehabilitation-in-puchong',
     },
   },
   openGraph: {
     title: '蒲种中风康复 - Genesis Life Care',
     description: '蒲种全面的中风康复服务，包括物理治疗、职业治疗及言语治疗，并提供个性化康复计划。立即参观我们的蒲种中心。',
     images: [{ url: '/images/puchong-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care 蒲种' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '蒲种中风康复 - Genesis Life Care',
+    description: '蒲种全面的中风康复服务，包括物理治疗、职业治疗及言语治疗，并提供个性化康复计划。立即参观我们的蒲种中心。',
+    images: ['/images/puchong-centre.jpeg'],
   },
 };
 

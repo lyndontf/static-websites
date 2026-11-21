@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/dementia-care-in-petaling-jaya',
       zh: 'https://genesiscare.com.my/zh/dementia-care-in-petaling-jaya',
+      'x-default': 'https://genesiscare.com.my/dementia-care-in-petaling-jaya',
     },
   },
   openGraph: {
     title: '八打灵再也痴呆症护理 - Genesis Life Care',
     description: '八打灵再也专业痴呆症和记忆护理。心理学家主导计划、24小时护理、安全环境。立即预约免费参观。',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care 八打灵再也 — 痴呆症护理' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '八打灵再也痴呆症护理 - Genesis Life Care',
+    description: '八打灵再也专业痴呆症和记忆护理。心理学家主导计划、24小时护理、安全环境。立即预约免费参观。',
+    images: ['/images/pj-centre.jpg'],
   },
 };
 

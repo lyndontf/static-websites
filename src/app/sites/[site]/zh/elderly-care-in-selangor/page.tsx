@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/elderly-care-in-selangor',
       zh: 'https://genesiscare.com.my/zh/elderly-care-in-selangor',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-selangor',
     },
   },
   openGraph: {
     title: '雪兰莪老年人护理 - Genesis Life Care养老院',
     description: '雪兰莪专业老年人护理。PJ、Klang、Kajang及Puchong共4间中心。24/7护理、失智症护理、中风康复。立即预约免费参观。',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care 雪兰莪中心' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '雪兰莪老年人护理 - Genesis Life Care养老院',
+    description: '雪兰莪专业老年人护理。PJ、Klang、Kajang及Puchong共4间中心。24/7护理、失智症护理、中风康复。立即预约免费参观。',
+    images: ['/images/pj-centre.jpg'],
   },
 };
 

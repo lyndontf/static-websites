@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/stroke-rehabilitation-in-petaling-jaya',
       zh: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-petaling-jaya',
+      'x-default': 'https://genesiscare.com.my/stroke-rehabilitation-in-petaling-jaya',
     },
   },
   openGraph: {
     title: '八打灵再也中风康复 - Genesis Life Care',
     description: '八打灵再也全面的中风康复服务，包括物理治疗、职业治疗及言语治疗，并提供个性化康复计划。立即参观我们的八打灵再也中心。',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care 八打灵再也' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '八打灵再也中风康复 - Genesis Life Care',
+    description: '八打灵再也全面的中风康复服务，包括物理治疗、职业治疗及言语治疗，并提供个性化康复计划。立即参观我们的八打灵再也中心。',
+    images: ['/images/pj-centre.jpg'],
   },
 };
 

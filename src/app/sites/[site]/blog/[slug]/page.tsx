@@ -7,7 +7,7 @@ import ContentRenderer from '@/components/ContentRenderer';
 import JsonLd from '@/components/JsonLd';
 import { buildBlogPostingJsonLd } from '@/lib/site-schema';
 import { getBlogChrome } from '@/lib/blog-chrome';
-import { articleTimes } from '@/lib/seo';
+import { articleTimes, titleWithBrandOnce } from '@/lib/seo';
 
 interface PostPageProps {
   params: Promise<SiteParams & { slug: string }>;
@@ -16,13 +16,14 @@ interface PostPageProps {
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const { slug, site } = await params;
   const [siteId, baseUrl] = await Promise.all([getSiteIdBySlug(site), getSiteBaseUrlBySlug(site)]);
-  const post = await getPostBySlug(slug, siteId || undefined);
+  const [post, settings] = await Promise.all([getPostBySlug(slug, siteId || undefined), getSiteSettings(siteId || undefined)]);
   if (!post) return { title: 'Post Not Found' };
   const title = post.meta_title || post.title;
   const description = post.meta_description || post.excerpt || undefined;
   const url = `${baseUrl}/blog/${slug}`;
   return {
-    title,
+    // The layout adds " | <site name>" to a plain title; a title that already names the site is shown as it is.
+    title: titleWithBrandOnce(title, settings?.site_name),
     description,
     alternates: {
       canonical: url,
@@ -119,6 +120,13 @@ export default async function BlogPostPage({ params }: PostPageProps) {
   // The site's own header and footer around the article, when its "blog" CMS page provides them (lib/blog-chrome.ts)
   const chrome = site === 'centre' ? null : await getBlogChrome(siteId || undefined);
 
+  // The post template prints the title as the page's <h1>. A first content block that repeats it is dropped, and any other
+  // level-1 heading in the content is drawn as an <h2> (ContentRenderer demoteH1): one <h1> per page.
+  const normalise = (t: unknown) => String(t || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+  const contentBlocks = (post.content || []).filter(
+    (b, i) => !(i === 0 && b.type === 'heading' && (b.level || 2) === 1 && normalise(b.content) === normalise(post.title)),
+  );
+
   const article = (
     <article className="pb-16">
       <JsonLd data={buildBlogPostingJsonLd(post, settings, baseUrl)} />
@@ -170,7 +178,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           )}
 
           {/* Content */}
-          <ContentRenderer blocks={post.content} />
+          <ContentRenderer blocks={contentBlocks} demoteH1 />
 
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (

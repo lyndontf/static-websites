@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/old-folks-home-in-johor-bahru',
       zh: 'https://genesiscare.com.my/zh/old-folks-home-in-johor-bahru',
+      'x-default': 'https://genesiscare.com.my/old-folks-home-in-johor-bahru',
     },
   },
   openGraph: {
     title: '新山老年人之家 - Genesis Life Care',
     description: '一个温暖、家庭般的环境，您的亲人在这里获得尊严和同情心的专业护理。痴呆症护理计划、康复设施及全天候护理团队。',
     images: [{ url: '/images/jb-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care 新山 — 老年人之家' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '新山老年人之家 - Genesis Life Care',
+    description: '一个温暖、家庭般的环境，您的亲人在这里获得尊严和同情心的专业护理。痴呆症护理计划、康复设施及全天候护理团队。',
+    images: ['/images/jb-centre.jpeg'],
   },
 };
 

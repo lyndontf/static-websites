@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/our-services',
       zh: 'https://genesiscare.com.my/zh/our-services',
+      'x-default': 'https://genesiscare.com.my/our-services',
     },
   },
   openGraph: {
@@ -27,6 +28,12 @@ export const metadata: Metadata = {
     locale: 'zh_MY',
     type: 'website',
     images: [{ url: 'https://genesiscare.com.my/images/services/rehab-department.jpg', width: 1200, height: 630, alt: 'Genesis Life Care 康复与护理服务' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '马来西亚长者护理服务 | Genesis Life Care',
+    description: '5间中心提供24/7护理服务、失智症护理、中风康复、缓和医疗及更多服务，遍布雪兰莪及柔佛。',
+    images: ['https://genesiscare.com.my/images/services/rehab-department.jpg'],
   },
 };
 

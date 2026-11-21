@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/elderly-care-in-subang-jaya',
       zh: 'https://genesiscare.com.my/zh/elderly-care-in-subang-jaya',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-subang-jaya',
     },
   },
   openGraph: {
     title: '梳邦再也附近的老年人护理 - Genesis Life Care',
     description: '梳邦再也附近的专业老年人护理。PJ及Puchong两间邻近中心。24/7护理、失智症护理、中风康复。',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care Petaling Jaya' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '梳邦再也附近的老年人护理 - Genesis Life Care',
+    description: '梳邦再也附近的专业老年人护理。PJ及Puchong两间邻近中心。24/7护理、失智症护理、中风康复。',
+    images: ['/images/pj-centre.jpg'],
   },
 };
 

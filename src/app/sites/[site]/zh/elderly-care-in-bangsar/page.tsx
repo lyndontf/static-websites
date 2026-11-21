@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/elderly-care-in-bangsar',
       zh: 'https://genesiscare.com.my/zh/elderly-care-in-bangsar',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-bangsar',
     },
   },
   openGraph: {
     title: '孟沙附近老年人护理 - Genesis Life Care PJ',
     description: '专业老年人护理，靠近孟沙。24/7护理、失智症护理、中风康复。参观我们的Petaling Jaya中心——距孟沙仅数分钟车程。',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care Petaling Jaya — 孟沙附近老年人护理' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '孟沙附近老年人护理 - Genesis Life Care PJ',
+    description: '专业老年人护理，靠近孟沙。24/7护理、失智症护理、中风康复。参观我们的Petaling Jaya中心——距孟沙仅数分钟车程。',
+    images: ['/images/pj-centre.jpg'],
   },
 };
 

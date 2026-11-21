@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getPublishedJobListings, getPageBySlug } from '@/lib/supabase';
+import { getPublishedJobListings, getPageBySlug, getSiteSettings } from '@/lib/supabase';
+import { titleWithBrandOnce } from '@/lib/seo';
 import { getSiteIdBySlug, getSiteBaseUrlBySlug, type SiteParams } from '@/lib/site-context';
 import { CmsRawBlocks } from '@/components/CmsHtmlPage';
 import { isRawBlockSequence } from '@/lib/cms-blocks';
@@ -21,10 +22,12 @@ export async function generateMetadata({ params }: { params: Promise<SiteParams>
 
   if (cmsPage) {
     const title = cmsPage.meta_title || cmsPage.title;
+    const settings = await getSiteSettings(siteId || undefined);
     const description = cmsPage.meta_description || undefined;
     const url = `${baseUrl}/careers`;
     return {
-      title,
+      // The layout adds " | <site name>"; a title that already names the site is shown as it is.
+      title: titleWithBrandOnce(title, settings?.site_name),
       description,
       alternates: { canonical: url },
       openGraph: {

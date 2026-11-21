@@ -1,4 +1,18 @@
 /** @type {import('next').NextConfig} */
+/**
+ * Redirect rules that apply to genesiscare.com.my only. redirects() below is shared by every site on this deployment, so a bare
+ * '/companion-care' rule would also rewrite that path on the other sites. www.genesiscare.com.my never reaches these: it is
+ * redirected to the apex before (Vercel domain setting, middleware.ts).
+ */
+function centreOnly(pairs, permanent = true) {
+  return pairs.map(([source, destination]) => ({
+    source,
+    destination,
+    permanent,
+    has: [{ type: 'host', value: 'genesiscare.com.my' }],
+  }));
+}
+
 const nextConfig = {
   trailingSlash: false,
   images: {
@@ -58,6 +72,28 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // ── genesiscare.com.my only (21 Nov 2026, centre SEO map): these paths are ordinary pages on the other sites, so each rule
+      //    carries a host condition. One rule per path: Next strips a trailing slash with its own 308 first, so a second
+      //    '/x/' rule only adds a hop. ──
+      ...centreOnly([
+        // Old addresses that still get visits but answered 404 (Search Console and Analytics, Aug to Nov 2026). Permanent, then frozen.
+        ['/stroke-rehabilitation-kajang', '/stroke-rehabilitation-in-kajang'],
+        ['/dementia-care-centre-klang', '/dementia-care-in-klang'],
+        ['/companion-care', '/home-care'],
+        // WordPress sitemap names
+        ['/sitemap_index.xml', '/sitemap.xml'],
+        ['/sitemap-index.xml', '/sitemap.xml'],
+        ['/wp-sitemap.xml', '/sitemap.xml'],
+        ['/post-sitemap.xml', '/sitemap.xml'],
+        ['/page-sitemap.xml', '/sitemap.xml'],
+        // The real legal pages (the generic rules below send these to the home page on every other site)
+        ['/privacy-policy', '/legal/privacy-policy'],
+        ['/terms-of-service', '/legal/terms-of-service'],
+      ]),
+      // Temporary on purpose (307): the Johor Bahru "top 10" address is to be brought back as a compliant "how to choose" guide
+      // (see the centre SEO map, ticket about frozen URLs), so no browser or search engine may remember this as permanent.
+      ...centreOnly([['/top-10-nursing-homes-in-johor-bahru-2025', '/nursing-home-in-johor-bahru']], false),
+
       // ── lcs blog: the buyer's guide lost "best" from its address (21 Nov 2026) ──
       { source: '/blog/best-nursing-home-management-software-malaysia', destination: '/blog/how-to-choose-nursing-home-software-malaysia', permanent: true },
       { source: '/blog/best-nursing-home-management-software-malaysia/', destination: '/blog/how-to-choose-nursing-home-software-malaysia', permanent: true },
@@ -132,17 +168,17 @@ const nextConfig = {
       { source: '/activities-for-dementia', destination: '/dementia-care', permanent: true },
       { source: '/activities-for-dementia/', destination: '/dementia-care', permanent: true },
 
-      // Retirement homes → nearest equivalent
-      { source: '/retirement-home-kajang', destination: '/elderly-care-in-cheras', permanent: true },
-      { source: '/retirement-home-kajang/', destination: '/elderly-care-in-cheras', permanent: true },
-      { source: '/retirement-home-petaling-jaya', destination: '/elderly-care-in-damansara', permanent: true },
-      { source: '/retirement-home-petaling-jaya/', destination: '/elderly-care-in-damansara', permanent: true },
-      { source: '/retirement-home-in-puchong', destination: '/elderly-care-in-subang-jaya', permanent: true },
-      { source: '/retirement-home-in-puchong/', destination: '/elderly-care-in-subang-jaya', permanent: true },
-      { source: '/retirement-home-in-klang', destination: '/elderly-care-in-shah-alam', permanent: true },
-      { source: '/retirement-home-in-klang/', destination: '/elderly-care-in-shah-alam', permanent: true },
-      { source: '/retirement-home-in-johor-bahru', destination: '/elderly-care-in-johor', permanent: true },
-      { source: '/retirement-home-in-johor-bahru/', destination: '/elderly-care-in-johor', permanent: true },
+      // Retirement homes → the centre in the same town (they used to go to the nearest of the other five town pages: a different town)
+      { source: '/retirement-home-kajang', destination: '/nursing-home-kajang', permanent: true },
+      { source: '/retirement-home-kajang/', destination: '/nursing-home-kajang', permanent: true },
+      { source: '/retirement-home-petaling-jaya', destination: '/nursing-home-in-petaling-jaya', permanent: true },
+      { source: '/retirement-home-petaling-jaya/', destination: '/nursing-home-in-petaling-jaya', permanent: true },
+      { source: '/retirement-home-in-puchong', destination: '/nursing-home-in-puchong', permanent: true },
+      { source: '/retirement-home-in-puchong/', destination: '/nursing-home-in-puchong', permanent: true },
+      { source: '/retirement-home-in-klang', destination: '/nursing-home-in-klang', permanent: true },
+      { source: '/retirement-home-in-klang/', destination: '/nursing-home-in-klang', permanent: true },
+      { source: '/retirement-home-in-johor-bahru', destination: '/nursing-home-in-johor-bahru', permanent: true },
+      { source: '/retirement-home-in-johor-bahru/', destination: '/nursing-home-in-johor-bahru', permanent: true },
 
       // Post-op / rehab (old slug → new or closest)
       { source: '/post-op-care-in-petaling-jaya', destination: '/post-op-care-malaysia', permanent: true },
@@ -275,15 +311,11 @@ const nextConfig = {
       { source: '/perkhidmatan-penjagaan-orang-tua-di-malaysia/', destination: '/our-services', permanent: true },
       { source: '/nursing-home-cost-in-malaysia', destination: '/blog/nursing-home-cost-in-malaysia', permanent: true },
 
-      // Old WordPress ?lang=zh → new zh pages
-      { source: '/about', destination: '/about-us', permanent: true, has: [{ type: 'query', key: 'lang', value: 'zh' }] },
-
       // Old WordPress category pages → blog
       { source: '/category/:path*', destination: '/blog', permanent: true },
 
-      // Old WordPress /wp-content and /wp-includes paths → homepage
-      { source: '/wp-content/:path*', destination: '/', permanent: true },
-      { source: '/wp-includes/:path*', destination: '/', permanent: true },
+      // Old WordPress /wp-content and /wp-includes paths: no rule on purpose. middleware.ts answers 404 for them (SCANNER_PATH_RE);
+      // a redirect here ran first and sent every old image URL to the home page.
 
       // Old Elementor floating buttons
       { source: '/e-floating-buttons/:path*', destination: '/', permanent: true },

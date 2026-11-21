@@ -7,10 +7,12 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/cost-calculator',
       zh: 'https://genesiscare.com.my/zh/cost-calculator',
+      'x-default': 'https://genesiscare.com.my/cost-calculator',
     },
   },
   title: '安老院费用计算器',
   description: '即时估算 Genesis Life Care 安老院的每月费用。选择护理中心、房型、护理等级和服务，查看费用、服务税 (SST) 和合计。',
+  twitter: { card: 'summary', title: '安老院费用计算器', description: '即时估算 Genesis Life Care 安老院的每月费用。选择护理中心、房型、护理等级和服务，查看费用、服务税 (SST) 和合计。' },
 };
 
 export default function CostCalculatorZhPage() {
