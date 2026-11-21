@@ -22,11 +22,15 @@ function stripHtml(html: string): string {
 export default function ContentRenderer({
   blocks: blocksEn,
   blocksZh,
+  demoteH1 = false,
 }: {
   blocks: ContentBlock[];
   // Optional Chinese translation. Falls back to `blocksEn` whenever this page
   // has no translation yet, so toggling language never blanks the page.
   blocksZh?: ContentBlock[] | null;
+  // A page that already prints its own <h1> (a blog post) sets this so a level-1 heading inside the content is
+  // drawn as an <h2>: one <h1> per page.
+  demoteH1?: boolean;
 }) {
   const lang = useSiteLang();
   const blocks = lang === 'zh' && blocksZh && blocksZh.length > 0 ? blocksZh : blocksEn;
@@ -40,7 +44,7 @@ export default function ContentRenderer({
       {blocks.map((block, i) => {
         switch (block.type) {
           case 'heading': {
-            const Tag = `h${block.level || 2}` as keyof JSX.IntrinsicElements;
+            const Tag = `h${demoteH1 && (block.level || 2) === 1 ? 2 : block.level || 2}` as keyof JSX.IntrinsicElements;
             const classes: Record<number, string> = {
               1: 'text-3xl font-extrabold text-[#173039] tracking-[-0.02em] mb-4 mt-10',
               2: 'text-[26px] font-extrabold text-[#173039] tracking-[-0.02em] mb-4 mt-10',

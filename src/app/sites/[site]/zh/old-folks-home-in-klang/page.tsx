@@ -10,12 +10,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/old-folks-home-in-klang',
       zh: 'https://genesiscare.com.my/zh/old-folks-home-in-klang',
+      'x-default': 'https://genesiscare.com.my/old-folks-home-in-klang',
     },
   },
   openGraph: {
     title: '巴生老年人之家 - Genesis Life Care',
     description: '巴生值得信赖的老年人之家。24/7护理、痴呆症护理、康复服务及营养膳食，价格实惠。立即预约免费参观。',
     images: [{ url: '/images/klang-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care 巴生 — 老年人之家' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '巴生老年人之家 - Genesis Life Care',
+    description: '巴生值得信赖的老年人之家。24/7护理、痴呆症护理、康复服务及营养膳食，价格实惠。立即预约免费参观。',
+    images: ['/images/klang-centre.jpg'],
   },
 };
 

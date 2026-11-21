@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/elderly-care-in-cheras',
       zh: 'https://genesiscare.com.my/zh/elderly-care-in-cheras',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-cheras',
     },
   },
   openGraph: {
     title: '蕉赖附近老年人护理 - Genesis Life Care Kajang',
     description: '专业老年人护理，靠近蕉赖。24/7护理、失智症护理、中风康复。参观我们的Kajang中心——距蕉赖仅数分钟车程。',
     images: [{ url: '/images/kajang-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care Kajang — 蕉赖附近老年人护理' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '蕉赖附近老年人护理 - Genesis Life Care Kajang',
+    description: '专业老年人护理，靠近蕉赖。24/7护理、失智症护理、中风康复。参观我们的Kajang中心——距蕉赖仅数分钟车程。',
+    images: ['/images/kajang-centre.jpeg'],
   },
 };
 

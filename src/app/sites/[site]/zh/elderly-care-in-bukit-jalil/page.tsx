@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/elderly-care-in-bukit-jalil',
       zh: 'https://genesiscare.com.my/zh/elderly-care-in-bukit-jalil',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-bukit-jalil',
     },
   },
   openGraph: {
     title: '武吉加里尔附近老年人护理 - Genesis Life Care Puchong',
     description: '专业老年人护理，靠近武吉加里尔。24/7护理、失智症护理、中风康复。参观我们的Puchong中心——距武吉加里尔仅数分钟车程。',
     images: [{ url: '/images/puchong-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care Puchong — 武吉加里尔附近老年人护理' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '武吉加里尔附近老年人护理 - Genesis Life Care Puchong',
+    description: '专业老年人护理，靠近武吉加里尔。24/7护理、失智症护理、中风康复。参观我们的Puchong中心——距武吉加里尔仅数分钟车程。',
+    images: ['/images/puchong-centre.jpeg'],
   },
 };
 

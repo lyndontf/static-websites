@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/old-folks-home-in-kajang',
       zh: 'https://genesiscare.com.my/zh/old-folks-home-in-kajang',
+      'x-default': 'https://genesiscare.com.my/old-folks-home-in-kajang',
     },
   },
   openGraph: {
     title: '加影老年人之家 - Genesis Life Care',
     description: '一个温暖、家庭友好的环境，您的亲人在这里获得尊严和同情心的专业护理。24/7护理、内部厨房、痴呆症护理和康复设施。',
     images: [{ url: '/images/kajang-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care 加影 — 老年人之家' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '加影老年人之家 - Genesis Life Care',
+    description: '一个温暖、家庭友好的环境，您的亲人在这里获得尊严和同情心的专业护理。24/7护理、内部厨房、痴呆症护理和康复设施。',
+    images: ['/images/kajang-centre.jpeg'],
   },
 };
 

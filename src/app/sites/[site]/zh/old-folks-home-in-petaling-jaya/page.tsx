@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/old-folks-home-in-petaling-jaya',
       zh: 'https://genesiscare.com.my/zh/old-folks-home-in-petaling-jaya',
+      'x-default': 'https://genesiscare.com.my/old-folks-home-in-petaling-jaya',
     },
   },
   openGraph: {
     title: '八打灵再也老年人之家 - Genesis Life Care',
     description: '一个温暖、家庭般的环境，您的亲人在这里获得尊严和同情心的专业护理。专门的记忆护理部门、康复设施及全天候护理团队。',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care 八打灵再也 — 老年人之家' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '八打灵再也老年人之家 - Genesis Life Care',
+    description: '一个温暖、家庭般的环境，您的亲人在这里获得尊严和同情心的专业护理。专门的记忆护理部门、康复设施及全天候护理团队。',
+    images: ['/images/pj-centre.jpg'],
   },
 };
 

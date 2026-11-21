@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/elderly-care-in-johor',
       zh: 'https://genesiscare.com.my/zh/elderly-care-in-johor',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-johor',
     },
   },
   openGraph: {
     title: '柔佛老年人护理 - Genesis Life Care新山中心',
     description: '柔佛专业老年人护理。24/7护理、失智症护理、中风康复。立即预约免费参观。',
     images: [{ url: '/images/jb-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care 新山' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '柔佛老年人护理 - Genesis Life Care新山中心',
+    description: '柔佛专业老年人护理。24/7护理、失智症护理、中风康复。立即预约免费参观。',
+    images: ['/images/jb-centre.jpeg'],
   },
 };
 

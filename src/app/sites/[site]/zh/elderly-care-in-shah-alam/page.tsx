@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/elderly-care-in-shah-alam',
       zh: 'https://genesiscare.com.my/zh/elderly-care-in-shah-alam',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-shah-alam',
     },
   },
   openGraph: {
     title: '莎阿南附近的老年人护理 - Genesis Life Care Klang',
     description: '莎阿南附近的专业老年人护理。24/7护理、失智症护理、中风康复。参观我们的Klang中心——距莎阿南仅数分钟车程。',
     images: [{ url: '/images/klang-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care Klang' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '莎阿南附近的老年人护理 - Genesis Life Care Klang',
+    description: '莎阿南附近的专业老年人护理。24/7护理、失智症护理、中风康复。参观我们的Klang中心——距莎阿南仅数分钟车程。',
+    images: ['/images/klang-centre.jpg'],
   },
 };
 

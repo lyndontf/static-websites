@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/dementia-care-in-klang',
       zh: 'https://genesiscare.com.my/zh/dementia-care-in-klang',
+      'x-default': 'https://genesiscare.com.my/dementia-care-in-klang',
     },
   },
   openGraph: {
     title: '巴生痴呆症护理 - Genesis Life Care',
     description: '巴生专业痴呆症和记忆护理。心理学家主导计划、24小时护理、安全环境。立即预约免费参观。',
     images: [{ url: '/images/klang-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care 巴生 — 痴呆症护理' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '巴生痴呆症护理 - Genesis Life Care',
+    description: '巴生专业痴呆症和记忆护理。心理学家主导计划、24小时护理、安全环境。立即预约免费参观。',
+    images: ['/images/klang-centre.jpg'],
   },
 };
 

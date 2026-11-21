@@ -59,6 +59,9 @@ export async function generateMetadata({ params }: { params: Promise<SiteParams>
   const defaults = settings?.seo_defaults || {};
 
   const siteName = settings?.site_name || 'Genesis Life Care';
+  // Relative share-image paths (e.g. /images/kajang-centre.jpeg) are turned into full addresses against this base. Without it
+  // Next.js falls back to a Vercel environment default, which put maidsinmalaysia.com on the centre's og:image tags.
+  const baseUrl = await getSiteBaseUrlBySlug(siteSlug);
   const description = defaults.default_description || 'Quality healthcare and aged care services in Malaysia';
 
   // og_image_url is a dedicated 1200x630 social-preview asset. logo_url is the
@@ -71,6 +74,7 @@ export async function generateMetadata({ params }: { params: Promise<SiteParams>
     : undefined;
 
   return {
+    metadataBase: new URL(baseUrl),
     title: {
       default: siteName,
       template: `%s | ${siteName}`,
@@ -139,7 +143,7 @@ export default async function RootLayout({
             />
             <script
               dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${settings.google_analytics_id}');${settings.google_ads_id ? `gtag('config','${settings.google_ads_id}');gtag('config','AW-837607499');` : ''}`,
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${settings.google_analytics_id}');${settings.google_ads_id ? `gtag('config','${settings.google_ads_id}');${settings.google_ads_id !== 'AW-837607499' ? `gtag('config','AW-837607499');` : ''}` : ''}`,
               }}
             />
           </>

@@ -11,9 +11,12 @@ import { useForcedLang } from './LangContext';
 // (see LangContext.tsx) — used by /zh/<slug> routes so the very first
 // server-rendered paint is already in Chinese (crawlable, no flash of
 // English, no JS required to see it). A visitor's own explicit toggle
-// choice (saved in localStorage) still wins once they've made one, on any
-// page — the forced language only supplies the *default* when nothing has
-// been chosen yet.
+// choice (saved in localStorage) wins on every page that does NOT force a
+// language. On a forced page (/zh/<slug>) the URL wins: the page language
+// must match the address Google indexed, or a visitor who once chose English
+// would be flipped out of Chinese on a Chinese page. A toggle click on a
+// forced page still switches that view (setLang), it is just not replayed on
+// the next load.
 export function useLangToggle() {
   const forced = useForcedLang();
   const [lang, setLangState] = useState<'en' | 'zh'>(forced ?? 'en');
@@ -21,10 +24,10 @@ export function useLangToggle() {
   useEffect(() => {
     try {
       const saved = localStorage.getItem('glc-lang');
-      if (saved === 'zh' || saved === 'en') {
-        setLangState(saved);
-      } else if (forced) {
+      if (forced) {
         setLangState(forced);
+      } else if (saved === 'zh' || saved === 'en') {
+        setLangState(saved);
       }
     } catch {
       if (forced) setLangState(forced);

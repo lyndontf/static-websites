@@ -10,12 +10,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/old-folks-home-in-puchong',
       zh: 'https://genesiscare.com.my/zh/old-folks-home-in-puchong',
+      'x-default': 'https://genesiscare.com.my/old-folks-home-in-puchong',
     },
   },
   openGraph: {
     title: '蒲种老年人之家 - Genesis Life Care',
     description: '蒲种现代化老年人之家。24/7护理、康复服务、痴呆症护理及营养膳食，价格实惠。立即预约参观。',
     images: [{ url: '/images/puchong-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care 蒲种 — 老年人之家' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '蒲种老年人之家 - Genesis Life Care',
+    description: '蒲种现代化老年人之家。24/7护理、康复服务、痴呆症护理及营养膳食，价格实惠。立即预约参观。',
+    images: ['/images/puchong-centre.jpeg'],
   },
 };
 

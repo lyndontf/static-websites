@@ -15,11 +15,13 @@ export async function generateMetadata({ params }: { params: Promise<SiteParams>
     // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
     title: '部落格',
     description: 'Genesis Life Care的最新消息与更新',
+    twitter: { card: 'summary', title: '部落格', description: 'Genesis Life Care的最新消息与更新' },
     alternates: {
       canonical: `${baseUrl}/zh/blog`,
       languages: {
         en: `${baseUrl}/blog`,
         zh: `${baseUrl}/zh/blog`,
+        'x-default': `${baseUrl}/blog`,
       },
     },
   };

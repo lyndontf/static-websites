@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/stroke-rehabilitation-in-klang',
       zh: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-klang',
+      'x-default': 'https://genesiscare.com.my/stroke-rehabilitation-in-klang',
     },
   },
   openGraph: {
     title: '巴生中风康复 - Genesis Life Care',
     description: '巴生专业中风康复。物理治疗、职业治疗、言语治疗及个性化康复计划。立即预约免费咨询。',
     images: [{ url: '/images/klang-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care 巴生' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '巴生中风康复 - Genesis Life Care',
+    description: '巴生专业中风康复。物理治疗、职业治疗、言语治疗及个性化康复计划。立即预约免费咨询。',
+    images: ['/images/klang-centre.jpg'],
   },
 };
 

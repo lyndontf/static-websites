@@ -17,12 +17,19 @@ export const metadata: Metadata = {
     languages: {
       en: 'https://genesiscare.com.my/elderly-care-in-damansara',
       zh: 'https://genesiscare.com.my/zh/elderly-care-in-damansara',
+      'x-default': 'https://genesiscare.com.my/elderly-care-in-damansara',
     },
   },
   openGraph: {
     title: '白沙罗附近老年人护理 - Genesis Life Care PJ',
     description: '专业老年人护理，靠近白沙罗。24/7护理、失智症护理、中风康复。参观我们位于Kota Damansara的旗舰中心。',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care Petaling Jaya — 白沙罗附近老年人护理' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '白沙罗附近老年人护理 - Genesis Life Care PJ',
+    description: '专业老年人护理，靠近白沙罗。24/7护理、失智症护理、中风康复。参观我们位于Kota Damansara的旗舰中心。',
+    images: ['/images/pj-centre.jpg'],
   },
 };
 
