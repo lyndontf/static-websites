@@ -11,7 +11,7 @@ const centre = {
   fullName: 'Genesis Life Care Petaling Jaya',
   phone: '+6019 295 0457',
   phoneCTA: '+6019-295-0457',
-  address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
+  address: '1, Petaling Utama Ave, PJS 1, 58200 Petaling Jaya, Selangor',
   rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
   established: '2020',
   beds: '50+',
@@ -205,10 +205,10 @@ function buildJsonLd(locale: 'en' | 'zh') {
       telephone: centre.phone,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50',
+        streetAddress: '1, Petaling Utama Ave, PJS 1',
         addressLocality: 'Petaling Jaya',
         addressRegion: 'Selangor',
-        postalCode: '46150',
+        postalCode: '58200',
         addressCountry: 'MY',
       },
       geo: { '@type': 'GeoCoordinates', latitude: centre.lat, longitude: centre.lng },
@@ -334,8 +334,8 @@ export function OldFolksHomePetalingJayaContent({ locale = 'en' }: { locale?: 'e
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
                   <Bilingual
-                    en="Finding the right old folks home for your loved one is one of the most important decisions a family can make. Our Petaling Jaya centre, located in Taman Petaling Utama along Jalan PJS 1/50, is our flagship facility — purpose-built to provide the highest standard of elderly care in the Klang Valley."
-                    zh="为亲人找到合适的老年人之家，是家庭需要做出的最重要决定之一。我们位于Taman Petaling Utama、Jalan PJS 1/50的八打灵再也中心是我们的旗舰设施——专为在巴生谷提供最高水准的乐龄护理而设。"
+                    en="Finding the right old folks home for your loved one is one of the most important decisions a family can make. Our Petaling Jaya centre, located on Petaling Utama Ave, PJS 1, is our flagship facility — purpose-built to provide the highest standard of elderly care in the Klang Valley."
+                    zh="为亲人找到合适的老年人之家，是家庭需要做出的最重要决定之一。我们位于Petaling Utama Ave、PJS 1的八打灵再也中心是我们的旗舰设施——专为在巴生谷提供最高水准的乐龄护理而设。"
                   />
                 </p>
                 <p>

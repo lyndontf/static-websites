@@ -17,7 +17,7 @@ const nearestCentre = {
   slug: 'nursing-home-in-petaling-jaya',
   phone: '+6019 295 0457',
   phoneCTA: '+6019-295-0457',
-  address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
+  address: '1, Petaling Utama Ave, PJS 1, 58200 Petaling Jaya, Selangor',
   rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
   beds: '50+',
   distance: '~10 minutes',
@@ -80,7 +80,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Damansara?',
-    a: 'Yes. Genesis Life Care Petaling Jaya is located in Kota Damansara, approximately 10 minutes from Damansara Heights, Damansara Utama, and Damansara Jaya. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care Petaling Jaya is located in Petaling Utama, approximately 10 minutes from Damansara Heights, Damansara Utama, and Damansara Jaya. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Damansara?',
@@ -92,11 +92,11 @@ const faqs = [
   },
   {
     q: 'Can I visit the nursing home near Damansara before deciding?',
-    a: 'Absolutely. We encourage families to book a visit to our Petaling Jaya facility in Kota Damansara. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
+    a: 'Absolutely. We encourage families to book a visit to our Petaling Jaya facility in Petaling Utama. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
   },
   {
     q: 'How far is Genesis Life Care from Damansara Heights?',
-    a: 'Our Petaling Jaya centre in Kota Damansara is approximately 10 minutes from Damansara Heights via the LDP or Sprint highways. The location is also easily accessible from Damansara Utama and Damansara Jaya.',
+    a: 'Our Petaling Jaya centre in Petaling Utama is approximately 10 minutes from Damansara Heights via the LDP or Sprint highways. The location is also easily accessible from Damansara Utama and Damansara Jaya.',
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Damansara?',
@@ -108,7 +108,7 @@ const faqs = [
 const faqsZh = [
   {
     q: '白沙罗附近有养老院吗？',
-    a: '有。Genesis Life Care Petaling Jaya位于Kota Damansara，距离Damansara Heights、Damansara Utama及Damansara Jaya大约10分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care Petaling Jaya位于Petaling Utama，距离Damansara Heights、Damansara Utama及Damansara Jaya大约10分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '白沙罗附近的老年人护理费用是多少？',
@@ -120,11 +120,11 @@ const faqsZh = [
   },
   {
     q: '在决定之前，我可以参观白沙罗附近的养老院吗？',
-    a: '当然可以。我们鼓励家庭预订我们位于Kota Damansara的Petaling Jaya设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
+    a: '当然可以。我们鼓励家庭预订我们位于Petaling Utama的Petaling Jaya设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
   },
   {
     q: 'Genesis Life Care距离Damansara Heights有多远？',
-    a: '我们位于Kota Damansara的Petaling Jaya中心距离Damansara Heights大约10分钟车程，经由LDP或Sprint大道即可抵达。该地点也方便从Damansara Utama及Damansara Jaya前往。',
+    a: '我们位于Petaling Utama的Petaling Jaya中心距离Damansara Heights大约10分钟车程，经由LDP或Sprint大道即可抵达。该地点也方便从Damansara Utama及Damansara Jaya前往。',
   },
   {
     q: 'Genesis Life Care与白沙罗附近的其他养老院有什么不同？',
@@ -150,10 +150,10 @@ function buildJsonLd(locale: 'en' | 'zh') {
       telephone: '+60192950457',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama',
+        streetAddress: '1, Petaling Utama Ave, PJS 1',
         addressLocality: 'Petaling Jaya',
         addressRegion: 'Selangor',
-        postalCode: '46150',
+        postalCode: '58200',
         addressCountry: 'MY',
       },
       areaServed: [
@@ -302,10 +302,10 @@ export function ElderlyCareDamansaraContent({ locale = 'en' }: { locale?: 'en' |
               <p>
                 <Bilingual
                   en={<>Genesis Life Care Petaling Jaya is the nearest Genesis centre to Damansara — located in
-                  Kota Damansara, just a short drive away. Our facility provides 24-hour nursing care,
+                  Petaling Utama, just a short drive away. Our facility provides 24-hour nursing care,
                   weekly on-site doctor consultations, psychologist-led dementia programmes, and a full
                   rehabilitation department with physiotherapy and occupational therapy.</>}
-                  zh="Genesis Life Care Petaling Jaya是距离白沙罗最近的Genesis中心——位于Kota Damansara，车程仅需数分钟。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care Petaling Jaya是距离白沙罗最近的Genesis中心——位于Petaling Utama，车程仅需数分钟。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
@@ -376,8 +376,8 @@ export function ElderlyCareDamansaraContent({ locale = 'en' }: { locale?: 'en' |
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
               <Bilingual
-                en={<>Just {nearestCentre.distance} from Damansara — our flagship centre in Kota Damansara.</>}
-                zh={<>距白沙罗仅{nearestCentre.distanceZh}——我们位于Kota Damansara的旗舰中心。</>}
+                en={<>Just {nearestCentre.distance} from Damansara — our flagship centre in Petaling Utama.</>}
+                zh={<>距白沙罗仅{nearestCentre.distanceZh}——我们位于Petaling Utama的旗舰中心。</>}
               />
             </p>
           </div>

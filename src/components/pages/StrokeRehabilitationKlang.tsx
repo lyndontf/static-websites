@@ -17,7 +17,7 @@ const centre = {
   slug: 'nursing-home-in-klang',
   phone: '+6019 325 0457',
   phoneCTA: '+6019-325-0457',
-  address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
+  address: '3, Jalan Istana, Kawasan 1, 41000 Klang, Selangor',
   rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
   beds: '120+',
   img: '/images/klang-centre.jpg',
@@ -193,7 +193,7 @@ function buildJsonLd(locale: 'en' | 'zh') {
       telephone: '+60193250457',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'No.3, Jalan Istana, Amverton Business Centre',
+        streetAddress: '3, Jalan Istana, Kawasan 1',
         addressLocality: 'Klang',
         addressRegion: 'Selangor',
         postalCode: '41000',
@@ -351,11 +351,11 @@ export function StrokeRehabilitationKlangContent({ locale = 'en' }: { locale?: '
               </p>
               <p>
                 <Bilingual
-                  en={<>Genesis Life Care Klang is our original centre, located at Amverton Business Centre
+                  en={<>Genesis Life Care Klang is our original centre, located on Jalan Istana
                   with over {centre.beds} beds and 24-hour nursing care. We serve families across
                   the Klang district, Port Klang, Shah Alam, and surrounding areas. Our centre has a Google rating of {centre.rating} from {centre.reviews} reviews from families
                   who have trusted us with their loved ones&apos; recovery.</>}
-                  zh={<>Genesis Life Care巴生是我们的首间中心，位于Amverton Business Centre，设有超过{centre.beds}张床位及24小时护理服务。我们服务巴生地区、Port Klang、Shah Alam及周边地区的家庭。我们的中心Google评分为{centre.rating}，共{centre.reviews}则来自信赖我们照顾挚亲康复的家庭评价。</>}
+                  zh={<>Genesis Life Care巴生是我们的首间中心，位于Jalan Istana，设有超过{centre.beds}张床位及24小时护理服务。我们服务巴生地区、Port Klang、Shah Alam及周边地区的家庭。我们的中心Google评分为{centre.rating}，共{centre.reviews}则来自信赖我们照顾挚亲康复的家庭评价。</>}
                 />
               </p>
             </div>

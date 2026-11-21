@@ -17,7 +17,7 @@ const centre = {
   slug: 'nursing-home-in-klang',
   phone: '+6019 325 0457',
   phoneCTA: '+6019-325-0457',
-  address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
+  address: '3, Jalan Istana, Kawasan 1, 41000 Klang, Selangor',
   rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
   beds: '120+',
   img: '/images/klang-centre.jpg',
@@ -192,7 +192,7 @@ function buildJsonLd(locale: 'en' | 'zh') {
       telephone: '+60193250457',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'No.3, Jalan Istana, Amverton Business Centre',
+        streetAddress: '3, Jalan Istana, Kawasan 1',
         addressLocality: 'Klang',
         addressRegion: 'Selangor',
         postalCode: '41000',
@@ -305,7 +305,7 @@ export function DementiaCareKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-gray-800">Amverton</p>
+                  <p className="text-sm font-bold text-gray-800">Jalan Istana</p>
                   <p className="text-xs text-gray-500"><Bilingual en="Klang, Selangor" zh="巴生，雪兰莪" /></p>
                 </div>
               </div>

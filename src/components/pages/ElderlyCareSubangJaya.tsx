@@ -17,7 +17,7 @@ const pjCentre = {
   slug: 'nursing-home-in-petaling-jaya',
   phone: '+6019 295 0457',
   phoneCTA: '+6019-295-0457',
-  address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
+  address: '1, Petaling Utama Ave, PJS 1, 58200 Petaling Jaya, Selangor',
   rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
   beds: '50+',
   distance: '~20 minutes',
@@ -97,7 +97,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Subang Jaya?',
-    a: 'Yes. Genesis Life Care has two centres near Subang Jaya — our Puchong centre (approximately 15 minutes away) and our Petaling Jaya centre in Kota Damansara (approximately 20 minutes away). Both offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care has two centres near Subang Jaya — our Puchong centre (approximately 15 minutes away) and our Petaling Jaya centre in Petaling Utama (approximately 20 minutes away). Both offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Subang Jaya?',
@@ -105,7 +105,7 @@ const faqs = [
   },
   {
     q: 'Which Genesis centre is closest to Subang Jaya?',
-    a: 'Our Puchong centre (Taman Perindustrian Puchong) is the closest, approximately 15 minutes from Subang Jaya. Our Petaling Jaya centre in Kota Damansara is also accessible at approximately 20 minutes away. Both centres offer the same high standard of care.',
+    a: 'Our Puchong centre (Taman Perindustrian Puchong) is the closest, approximately 15 minutes from Subang Jaya. Our Petaling Jaya centre in Petaling Utama is also accessible at approximately 20 minutes away. Both centres offer the same high standard of care.',
   },
   {
     q: 'What services are available for elderly residents from Subang Jaya?',
@@ -125,7 +125,7 @@ const faqs = [
 const faqsZh = [
   {
     q: '梳邦再也附近有养老院吗？',
-    a: '有。Genesis Life Care在梳邦再也附近设有两间中心——我们的Puchong中心（车程约15分钟）以及位于Kota Damansara的Petaling Jaya中心（车程约20分钟）。两间中心均提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care在梳邦再也附近设有两间中心——我们的Puchong中心（车程约15分钟）以及位于Petaling Utama的Petaling Jaya中心（车程约20分钟）。两间中心均提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '梳邦再也附近的老年人护理费用是多少？',
@@ -133,7 +133,7 @@ const faqsZh = [
   },
   {
     q: '哪一间Genesis中心离梳邦再也最近？',
-    a: '我们的Puchong中心（Taman Perindustrian Puchong）最近，距离梳邦再也约15分钟车程。我们位于Kota Damansara的Petaling Jaya中心也十分方便，车程约20分钟。两间中心提供同样高水准的护理。',
+    a: '我们的Puchong中心（Taman Perindustrian Puchong）最近，距离梳邦再也约15分钟车程。我们位于Petaling Utama的Petaling Jaya中心也十分方便，车程约20分钟。两间中心提供同样高水准的护理。',
   },
   {
     q: '梳邦再也居民可以获得哪些服务？',
@@ -167,10 +167,10 @@ function buildJsonLd(locale: 'en' | 'zh') {
       telephone: '+60197590457',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama',
+        streetAddress: '1, Petaling Utama Ave, PJS 1',
         addressLocality: 'Petaling Jaya',
         addressRegion: 'Selangor',
-        postalCode: '46150',
+        postalCode: '58200',
         addressCountry: 'MY',
       },
       areaServed: [
@@ -339,11 +339,11 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                 <Bilingual
                   en={<>Genesis Life Care has two centres conveniently located near Subang Jaya. Our Puchong
                   centre at Taman Perindustrian Puchong (TPP) is approximately 15 minutes away, while
-                  our Petaling Jaya centre in Kota Damansara is about 20 minutes away. Both facilities
+                  our Petaling Jaya centre in Petaling Utama is about 20 minutes away. Both facilities
                   provide 24-hour nursing care, weekly on-site doctor consultations, psychologist-led
                   dementia programmes, and full rehabilitation departments with physiotherapy and
                   occupational therapy.</>}
-                  zh="Genesis Life Care在梳邦再也附近设有两间交通便利的中心。我们位于Taman Perindustrian Puchong（TPP）的Puchong中心车程约15分钟，而位于Kota Damansara的Petaling Jaya中心车程约20分钟。两间设施均提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care在梳邦再也附近设有两间交通便利的中心。我们位于Taman Perindustrian Puchong（TPP）的Puchong中心车程约15分钟，而位于Petaling Utama的Petaling Jaya中心车程约20分钟。两间设施均提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
