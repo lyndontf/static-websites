@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sora, self-hosted: latin subset of the variable font (weights 100-800), the file Google Fonts serves, licence in
+   public/fonts/OFL-Sora.txt. The lcs site's CMS CSS says `font-family: Sora`, which resolves to this file. Loaded late from
+   Google, Sora is wider than the fallback and re-wraps the home hero (CLS 0.10), so layout.tsx preloads this file from
+   <head> and CmsHtmlRenderer drops the Google Sora stylesheet (lib/self-hosted-fonts.ts): it would define `Sora` a second
+   time, later in the document, and win. */
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/sora-latin-var.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
