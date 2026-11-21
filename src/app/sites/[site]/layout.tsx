@@ -34,6 +34,10 @@ export const dynamicParams = true;
 // shares the Ads and Analytics ids but its WhatsApp clicks (workers and employers) are not that conversion.
 const ADS_WHATSAPP_CONVERSION_SITES = ['centre'];
 
+// Sites whose CMS CSS uses the Sora font (the @font-face is in globals.css): they preload the self-hosted file from <head> so it
+// arrives before first paint. Do not add a site that does not use Sora: a preloaded font nobody uses is a wasted request.
+const SORA_SITES = ['lcs'];
+
 
 // Sites that had no structured data at all get Organization + WebSite generated from their CMS settings. The centre, Genesis
 // Training Academy, Maids in Malaysia and dementia.my already carry their own markup and are left alone.
@@ -117,6 +121,9 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning {...(siteSlug === 'maids' ? { 'data-theme': 'bloom' } : {})}>
       <head suppressHydrationWarning>
+        {SORA_SITES.includes(siteSlug) && (
+          <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/fonts/sora-latin-var.woff2" />
+        )}
         {siteSlug === 'maids' && (
           <>
             {/* Maids in Malaysia: Teal and Sand site template (public/images/maids/maids.css). Change the colours by editing data-theme on <html> above. */}
