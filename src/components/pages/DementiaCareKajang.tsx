@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Centre data ──────────────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const centre = {
   phone: '+6019 334 0457',
   phoneCTA: '+6019-334-0457',
   address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor',
-  rating: '4.7',
-  reviews: 32,
+  rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews,
   beds: '120+',
   img: '/images/kajang-centre.jpeg',
 };

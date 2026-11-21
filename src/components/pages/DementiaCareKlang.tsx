@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Centre data ──────────────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const centre = {
   phone: '+6019 325 0457',
   phoneCTA: '+6019-325-0457',
   address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
-  rating: '4.8',
-  reviews: 45,
+  rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
   beds: '120+',
   img: '/images/klang-centre.jpg',
 };

@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Nearest centre data ──────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const nearestCentre = {
   phone: '+6019 295 0457',
   phoneCTA: '+6019-295-0457',
   address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
-  rating: '4.9',
-  reviews: 155,
+  rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
   beds: '50+',
   distance: '~10 minutes',
   distanceZh: '~10分钟',
@@ -100,7 +100,7 @@ const faqs = [
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Damansara?',
-    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. We have a Google rating of 4.9 from 155 reviews.',
+    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. We have a Google rating of ' + GOOGLE_RATINGS.pj.rating + ' from ' + GOOGLE_RATINGS.pj.reviews + ' reviews.',
   },
 ];
 
@@ -128,7 +128,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care与白沙罗附近的其他养老院有什么不同？',
-    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Google评分为4.9，来自155条评价。',
+    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Google评分为' + GOOGLE_RATINGS.pj.rating + '，来自' + GOOGLE_RATINGS.pj.reviews + '条评价。',
   },
 ];
 

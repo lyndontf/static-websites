@@ -5,6 +5,7 @@ import FaqSection from '@/components/sections/FaqSection';
 import FinalCtaSection from '@/components/sections/FinalCtaSection';
 import { zhCommon } from '@/data/zhCommon';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Services data ──────────────────────────────────────────────────── */
 
@@ -245,11 +246,11 @@ const highlightsZh = [
 ];
 
 const centres = [
-  { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: '4.9', reviews: 155, tag: 'Flagship Centre', img: '/images/pj-centre.jpg' },
-  { name: 'Klang', slug: 'nursing-home-in-klang', rating: '4.8', reviews: 45, tag: 'Original Centre', img: '/images/klang-centre.jpg' },
-  { name: 'Kajang', slug: 'nursing-home-kajang', rating: '4.7', reviews: 32, tag: 'Southern KV', img: '/images/kajang-centre.jpeg' },
-  { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: '4.8', reviews: 58, tag: 'Modern Facility', img: '/images/puchong-centre.jpeg' },
-  { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: '4.8', reviews: 40, tag: 'Southern Region', img: '/images/jb-centre.jpeg' },
+  { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews, tag: 'Flagship Centre', img: '/images/pj-centre.jpg' },
+  { name: 'Klang', slug: 'nursing-home-in-klang', rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews, tag: 'Original Centre', img: '/images/klang-centre.jpg' },
+  { name: 'Kajang', slug: 'nursing-home-kajang', rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews, tag: 'Southern KV', img: '/images/kajang-centre.jpeg' },
+  { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews, tag: 'Modern Facility', img: '/images/puchong-centre.jpeg' },
+  { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: GOOGLE_RATINGS.jb.rating, reviews: GOOGLE_RATINGS.jb.reviews, tag: 'Southern Region', img: '/images/jb-centre.jpeg' },
 ];
 
 const CENTRE_NAME_ZH: Record<string, string> = {

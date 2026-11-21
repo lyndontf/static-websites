@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS, GOOGLE_SELANGOR } from '@/data/centres';
 
 /* ─── All Selangor centres ─────────────────────────────────────────── */
 
@@ -15,8 +16,7 @@ const selangorCentres = [
     name: 'Petaling Jaya',
     fullName: 'Genesis Life Care Petaling Jaya',
     slug: 'nursing-home-in-petaling-jaya',
-    rating: '4.9',
-    reviews: 155,
+    rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
     beds: '50+',
     tag: 'Flagship Centre',
     img: '/images/pj-centre.jpg',
@@ -27,8 +27,7 @@ const selangorCentres = [
     name: 'Klang',
     fullName: 'Genesis Life Care Klang',
     slug: 'nursing-home-in-klang',
-    rating: '4.8',
-    reviews: 45,
+    rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
     beds: '120+',
     tag: 'Original Centre',
     img: '/images/klang-centre.jpg',
@@ -39,8 +38,7 @@ const selangorCentres = [
     name: 'Kajang',
     fullName: 'Genesis Life Care Kajang',
     slug: 'nursing-home-kajang',
-    rating: '4.7',
-    reviews: 32,
+    rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews,
     beds: '120+',
     tag: 'Southern KV',
     img: '/images/kajang-centre.jpeg',
@@ -51,8 +49,7 @@ const selangorCentres = [
     name: 'Puchong',
     fullName: 'Genesis Life Care Puchong',
     slug: 'nursing-home-in-puchong',
-    rating: '4.8',
-    reviews: 58,
+    rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
     beds: '120+',
     tag: 'Modern Facility',
     img: '/images/puchong-centre.jpeg',
@@ -143,7 +140,7 @@ const faqs = [
   },
   {
     q: 'Which is the best nursing home in Selangor?',
-    a: 'Genesis Life Care is one of the highest-rated nursing home providers in Selangor, with Google ratings from 4.7 to 4.9 across the four centres. Our Petaling Jaya centre has a Google rating of 4.9 from 155 reviews. Each centre offers professional nursing, dementia care, and rehabilitation services.',
+    a: 'Genesis Life Care is one of the highest-rated nursing home providers in Selangor, with Google ratings from ' + GOOGLE_SELANGOR.min + ' to ' + GOOGLE_SELANGOR.max + ' across the four centres. Our Petaling Jaya centre has a Google rating of ' + GOOGLE_RATINGS.pj.rating + ' from ' + GOOGLE_RATINGS.pj.reviews + ' reviews. Each centre offers professional nursing, dementia care, and rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost in Selangor?',
@@ -173,7 +170,7 @@ const faqsZh = [
   },
   {
     q: '雪兰莪最好的养老院是哪一间？',
-    a: 'Genesis Life Care是雪兰莪评分最高的养老院提供商之一，四间中心在Google上的评分介于4.7至4.9之间。我们的Petaling Jaya中心Google评分为4.9，来自155条评价。每间中心均提供专业护理、失智症护理及康复服务。',
+    a: 'Genesis Life Care是雪兰莪评分最高的养老院提供商之一，四间中心在Google上的评分介于' + GOOGLE_SELANGOR.min + '至' + GOOGLE_SELANGOR.max + '之间。我们的Petaling Jaya中心Google评分为' + GOOGLE_RATINGS.pj.rating + '，来自' + GOOGLE_RATINGS.pj.reviews + '条评价。每间中心均提供专业护理、失智症护理及康复服务。',
   },
   {
     q: '雪兰莪的老年人护理费用是多少？',
@@ -373,11 +370,11 @@ export function ElderlyCareSelangorContent({ locale = 'en' }: { locale?: 'en' | 
               </p>
               <p>
                 <Bilingual
-                  en={<>Our centres have Google ratings from 4.7 to 4.9, with a combined
-                  total of over 290 reviews from satisfied families across Selangor. We offer
+                  en={<>Our centres have Google ratings from {GOOGLE_SELANGOR.min} to {GOOGLE_SELANGOR.max}, with a combined
+                  total of {GOOGLE_SELANGOR.reviews} reviews from satisfied families across Selangor. We offer
                   affordable rates without compromising on care quality, making professional
                   elderly care accessible to more Malaysian families.</>}
-                  zh="我们的中心在Google上的评分介于4.7至4.9之间，来自雪兰莪各地满意家庭的评价总数超过290则。我们在不牺牲护理品质的前提下提供实惠的收费，让更多马来西亚家庭都能享有专业的老年人护理。"
+                  zh={`我们的中心在Google上的评分介于${GOOGLE_SELANGOR.min}至${GOOGLE_SELANGOR.max}之间，来自雪兰莪各地满意家庭的评价总数为${GOOGLE_SELANGOR.reviews}则。我们在不牺牲护理品质的前提下提供实惠的收费，让更多马来西亚家庭都能享有专业的老年人护理。`}
                 />
               </p>
             </div>

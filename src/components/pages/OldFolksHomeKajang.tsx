@@ -2,6 +2,7 @@ import Link from 'next/link';
 import HeroEnquiryForm from '@/components/HeroEnquiryForm';
 import Bilingual from '@/components/Bilingual';
 import { zhCommon } from '@/data/zhCommon';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Centre-specific data ───────────────────────────────────────────── */
 
@@ -11,8 +12,7 @@ const centre = {
   phone: '+6019 334 0457',
   phoneCTA: '+6019-334-0457',
   address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor',
-  rating: '4.7',
-  reviews: 32,
+  rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews,
   established: '2021',
   beds: '120+',
   heroImg: '/images/kajang-centre.jpeg',
@@ -24,7 +24,7 @@ const centre = {
 const highlights = [
   { label: 'Years Caring', value: '4+', sub: 'Since 2021' },
   { label: 'Residents Capacity', value: '120+', sub: 'Comfortable Beds' },
-  { label: 'Google Rating', value: '4.7', sub: '32 Reviews' },
+  { label: 'Google Rating', value: GOOGLE_RATINGS.kajang.rating, sub: `${GOOGLE_RATINGS.kajang.reviews} Reviews` },
   { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
   { label: 'Care Staff', value: '24/7', sub: 'Round the Clock' },
 ];
@@ -180,10 +180,10 @@ const faqsZh = [
 ];
 
 const otherHomes = [
-  { name: 'Petaling Jaya', nameZh: '八打灵再也', slug: 'old-folks-home-in-petaling-jaya', rating: '4.9', tag: 'Flagship Centre', tagZh: '旗舰中心', img: '/images/pj-centre.jpg' },
-  { name: 'Klang', nameZh: '巴生', slug: 'old-folks-home-in-klang', rating: '4.8', tag: 'Original Centre', tagZh: '首间中心', img: '/images/klang-centre.jpg' },
-  { name: 'Puchong', nameZh: '蒲种', slug: 'old-folks-home-in-puchong', rating: '4.8', tag: 'Modern Facility', tagZh: '现代化设施', img: '/images/puchong-centre.jpeg' },
-  { name: 'Johor Bahru', nameZh: '新山', slug: 'old-folks-home-in-johor-bahru', rating: '4.8', tag: 'Southern Region', tagZh: '南部地区', img: '/images/jb-centre.jpeg' },
+  { name: 'Petaling Jaya', nameZh: '八打灵再也', slug: 'old-folks-home-in-petaling-jaya', rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews, tag: 'Flagship Centre', tagZh: '旗舰中心', img: '/images/pj-centre.jpg' },
+  { name: 'Klang', nameZh: '巴生', slug: 'old-folks-home-in-klang', rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews, tag: 'Original Centre', tagZh: '首间中心', img: '/images/klang-centre.jpg' },
+  { name: 'Puchong', nameZh: '蒲种', slug: 'old-folks-home-in-puchong', rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews, tag: 'Modern Facility', tagZh: '现代化设施', img: '/images/puchong-centre.jpeg' },
+  { name: 'Johor Bahru', nameZh: '新山', slug: 'old-folks-home-in-johor-bahru', rating: GOOGLE_RATINGS.jb.rating, reviews: GOOGLE_RATINGS.jb.reviews, tag: 'Southern Region', tagZh: '南部地区', img: '/images/jb-centre.jpeg' },
 ];
 
 /* ─── JSON-LD Structured Data ───────────────────────────────────────── */

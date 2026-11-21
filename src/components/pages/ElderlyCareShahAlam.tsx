@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Nearest centre data ──────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const nearestCentre = {
   phone: '+6019 325 0457',
   phoneCTA: '+6019-325-0457',
   address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
-  rating: '4.8',
-  reviews: 45,
+  rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
   beds: '120+',
   distance: '~10 minutes',
   distanceZh: '~10分钟',
@@ -100,7 +100,7 @@ const faqs = [
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Shah Alam?',
-    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our Klang centre has 120+ beds and has a Google rating of 4.8 from 45 reviews.',
+    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our Klang centre has 120+ beds and has a Google rating of ' + GOOGLE_RATINGS.klang.rating + ' from ' + GOOGLE_RATINGS.klang.reviews + ' reviews.',
   },
 ];
 
@@ -128,7 +128,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care与莎阿南附近的其他养老院有什么不同？',
-    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Klang中心拥有120多张床位，Google评分4.8，来自45条评价。',
+    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Klang中心拥有120多张床位，Google评分' + GOOGLE_RATINGS.klang.rating + '，来自' + GOOGLE_RATINGS.klang.reviews + '条评价。',
   },
 ];
 

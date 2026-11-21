@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { zhCommon } from '@/data/zhCommon';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 const centres = [
   {
@@ -8,8 +9,7 @@ const centres = [
     slug: 'nursing-home-in-petaling-jaya',
     phone: '+6019 295 0457',
     address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
-    rating: '4.9',
-    reviews: 58,
+    rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
     img: '/images/pj-centre.jpg',
     tags: ['Flagship Centre', 'Memory Care Wing', 'Rehab Facilities'],
     desc: 'Our flagship centre in PJ, featuring a dedicated memory care wing and comprehensive rehabilitation facilities. Enhanced physio and occupational therapy services.',
@@ -19,8 +19,7 @@ const centres = [
     slug: 'nursing-home-in-klang',
     phone: '+6019 325 0457',
     address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
-    rating: '4.8',
-    reviews: 45,
+    rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
     img: '/images/klang-centre.jpg',
     tags: ['Est. 2018', 'Near Major Hospitals', 'Original Centre'],
     desc: 'Where it all began. Our original centre in Klang is conveniently located near major hospitals and serves families across the northern Klang Valley.',
@@ -30,8 +29,7 @@ const centres = [
     slug: 'nursing-home-kajang',
     phone: '+6019 334 0457',
     address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor',
-    rating: '4.7',
-    reviews: 32,
+    rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews,
     img: '/images/kajang-centre.jpeg',
     tags: ['Southern KV', 'Family-Friendly', 'Quality Dining'],
     desc: 'A warm, family-friendly environment with personalised care and quality dining.',
@@ -41,8 +39,7 @@ const centres = [
     slug: 'nursing-home-in-puchong',
     phone: '+6019 759 0457',
     address: '16, Jln TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor',
-    rating: '4.8',
-    reviews: 38,
+    rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
     img: '/images/puchong-centre.jpeg',
     tags: ['Convenient Access', 'Modern Facility', 'Quality Dining'],
     desc: 'Located in Taman Perindustrian Puchong with easy highway access. A modern facility offering our full range of services with quality dining and comfortable facilities.',
@@ -52,8 +49,7 @@ const centres = [
     slug: 'nursing-home-in-johor-bahru',
     phone: '+6019 282 0457',
     address: 'Level 6, Holiday Plaza Tower, Jalan Dato Sulaiman, Taman Century, 80250 Johor Bahru, Johor Darul Ta’zim',
-    rating: '4.8',
-    reviews: 24,
+    rating: GOOGLE_RATINGS.jb.rating, reviews: GOOGLE_RATINGS.jb.reviews,
     img: '/images/jb-centre.jpeg',
     tags: ['Southern Region', 'Newest Centre', 'Full Services'],
     desc: 'Our first centre outside the Klang Valley, bringing Genesis standards of care to families in Johor Bahru and the wider southern region.',

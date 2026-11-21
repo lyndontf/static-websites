@@ -1,5 +1,32 @@
 /* ─── Shared centre data for location service pages ──────────────────── */
 
+/**
+ * Google Business Profile figures per centre: the ONE source for every rating and review count on the site.
+ * Read from the Google Business Profile locations (Markifact, business_profile_get_location_info) on 2026-11-21.
+ * Update the numbers here only; pages import them.
+ */
+export const GOOGLE_RATINGS_AS_OF = '2026-11-21';
+export const GOOGLE_RATINGS = {
+  klang: { rating: '4.3', reviews: 75 },
+  pj: { rating: '4.7', reviews: 23 },
+  puchong: { rating: '4.9', reviews: 29 },
+  kajang: { rating: '4.9', reviews: 40 },
+  jb: { rating: '4.1', reviews: 15 },
+} as const;
+const _all = Object.values(GOOGLE_RATINGS);
+const _sel = [GOOGLE_RATINGS.pj, GOOGLE_RATINGS.klang, GOOGLE_RATINGS.kajang, GOOGLE_RATINGS.puchong];
+/** All five centres together: review-weighted average, one decimal. */
+export const GOOGLE_GROUP = {
+  rating: (_all.reduce((a, c) => a + Number(c.rating) * c.reviews, 0) / _all.reduce((a, c) => a + c.reviews, 0)).toFixed(1),
+  reviews: _all.reduce((a, c) => a + c.reviews, 0),
+};
+/** The four Selangor centres (not Johor Bahru). */
+export const GOOGLE_SELANGOR = {
+  min: Math.min(..._sel.map((c) => Number(c.rating))).toFixed(1),
+  max: Math.max(..._sel.map((c) => Number(c.rating))).toFixed(1),
+  reviews: _sel.reduce((a, c) => a + c.reviews, 0),
+};
+
 export type CentreData = {
   name: string;
   fullName: string;
@@ -27,15 +54,14 @@ export const centres: Record<string, CentreData> = {
     phone: '+6019 325 0457',
     phoneCTA: '+6019-325-0457',
     address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
-    rating: '4.8',
-    reviews: 45,
+    rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
     established: '2018',
     beds: '120+',
     heroImg: '/images/klang-centre.jpg',
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.3!2d101.4484!3d3.0456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4c3a1f5e5b1d%3A0x2e5f5c8b7a8d9e3f!2sGenesis+Life+Care!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.8', sub: '45 reviews' },
+      { label: 'Google Rating', value: GOOGLE_RATINGS.klang.rating, sub: `${GOOGLE_RATINGS.klang.reviews} reviews` },
       { label: 'Beds', value: '120+', sub: 'Capacity' },
       { label: 'Established', value: '2018', sub: 'Our Original Centre' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -98,15 +124,14 @@ export const centres: Record<string, CentreData> = {
     phone: '+6019 295 0457',
     phoneCTA: '+6019-295-0457',
     address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
-    rating: '4.9',
-    reviews: 58,
+    rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
     established: '2020',
     beds: '50+',
     heroImg: '/images/pj-centre.jpg',
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.0!2d101.6168!3d3.0936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4bdc8b9d5c1d%3A0x5e3f7c8a6b4d2e1a!2sGenesis+Life+Care+Petaling+Jaya!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.9', sub: '58 reviews' },
+      { label: 'Google Rating', value: GOOGLE_RATINGS.pj.rating, sub: `${GOOGLE_RATINGS.pj.reviews} reviews` },
       { label: 'Beds', value: '50+', sub: 'Capacity' },
       { label: 'Established', value: '2020', sub: 'Flagship Centre' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -169,15 +194,14 @@ export const centres: Record<string, CentreData> = {
     phone: '+6019 759 0457',
     phoneCTA: '+6019-759-0457',
     address: '16, Jln TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor',
-    rating: '4.8',
-    reviews: 38,
+    rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
     established: '2022',
     beds: '120+',
     heroImg: '/images/puchong-centre.jpeg',
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.5!2d101.6200!3d3.0300!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4e8a5c7d3b1f%3A0x4d2e1a8b6c5f7e3d!2sGenesis+Life+Care+Puchong!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.8', sub: '38 reviews' },
+      { label: 'Google Rating', value: GOOGLE_RATINGS.puchong.rating, sub: `${GOOGLE_RATINGS.puchong.reviews} reviews` },
       { label: 'Beds', value: '120+', sub: 'Capacity' },
       { label: 'Established', value: '2022', sub: 'Modern Facility' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -240,15 +264,14 @@ export const centres: Record<string, CentreData> = {
     phone: '+6019 334 0457',
     phoneCTA: '+6019-334-0457',
     address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor',
-    rating: '4.9',
-    reviews: 32,
+    rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews,
     established: '2021',
     beds: '120',
     heroImg: '/images/kajang-centre.jpeg',
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.6!2d101.7900!3d2.9900!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4f9e5b7a3d1c%3A0x8e3f2a4b6c5d7e1a!2sGenesis+Life+Care+Kajang!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.9', sub: '32 reviews' },
+      { label: 'Google Rating', value: GOOGLE_RATINGS.kajang.rating, sub: `${GOOGLE_RATINGS.kajang.reviews} reviews` },
       { label: 'Beds', value: '120', sub: 'Capacity' },
       { label: 'Established', value: '2021', sub: 'Southern KV' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -311,15 +334,14 @@ export const centres: Record<string, CentreData> = {
     phone: '+6019 282 0457',
     phoneCTA: '+6019-282-0457',
     address: 'Level 6, Holiday Plaza Tower, Jalan Dato Sulaiman, Taman Century, 80250 Johor Bahru, Johor Darul Ta’zim',
-    rating: '4.8',
-    reviews: 24,
+    rating: GOOGLE_RATINGS.jb.rating, reviews: GOOGLE_RATINGS.jb.reviews,
     established: '2023',
     beds: '120+',
     heroImg: '/images/jb-centre.jpeg',
     mapEmbed:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.2!2d103.7600!3d1.4800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1ec8a5b7d3f1%3A0x6e2f4a8b5c7d3e1a!2sGenesis+Life+Care+Johor+Bahru!5e0!3m2!1sen!2smy!4v1700000000000',
     highlights: [
-      { label: 'Google Rating', value: '4.8', sub: '24 reviews' },
+      { label: 'Google Rating', value: GOOGLE_RATINGS.jb.rating, sub: `${GOOGLE_RATINGS.jb.reviews} reviews` },
       { label: 'Beds', value: '120+', sub: 'Capacity' },
       { label: 'Established', value: '2023', sub: 'Southern Region' },
       { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
@@ -379,11 +401,11 @@ export const centres: Record<string, CentreData> = {
 /* ─── Helper to get "other centres" excluding the current one ────────── */
 
 export const allCentreCards = [
-  { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: '4.9', reviews: 155, tag: 'Flagship Centre', img: '/images/pj-centre.jpg' },
-  { name: 'Klang', slug: 'nursing-home-in-klang', rating: '4.8', reviews: 45, tag: 'Original Centre', img: '/images/klang-centre.jpg' },
-  { name: 'Kajang', slug: 'nursing-home-kajang', rating: '4.9', reviews: 32, tag: 'Southern KV', img: '/images/kajang-centre.jpeg' },
-  { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: '4.8', reviews: 58, tag: 'Modern Facility', img: '/images/puchong-centre.jpeg' },
-  { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: '4.8', reviews: 40, tag: 'Southern Region', img: '/images/jb-centre.jpeg' },
+  { name: 'Petaling Jaya', slug: 'nursing-home-in-petaling-jaya', rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews, tag: 'Flagship Centre', img: '/images/pj-centre.jpg' },
+  { name: 'Klang', slug: 'nursing-home-in-klang', rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews, tag: 'Original Centre', img: '/images/klang-centre.jpg' },
+  { name: 'Kajang', slug: 'nursing-home-kajang', rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews, tag: 'Southern KV', img: '/images/kajang-centre.jpeg' },
+  { name: 'Puchong', slug: 'nursing-home-in-puchong', rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews, tag: 'Modern Facility', img: '/images/puchong-centre.jpeg' },
+  { name: 'Johor Bahru', slug: 'nursing-home-in-johor-bahru', rating: GOOGLE_RATINGS.jb.rating, reviews: GOOGLE_RATINGS.jb.reviews, tag: 'Southern Region', img: '/images/jb-centre.jpeg' },
 ];
 
 export function getOtherCentres(excludeName: string) {

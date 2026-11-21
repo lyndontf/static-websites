@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Nearest centre data ──────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const nearestCentre = {
   phone: '+6019 282 0457',
   phoneCTA: '+6019-282-0457',
   address: 'Level 6, Holiday Plaza Tower, Jalan Dato Sulaiman, Taman Century, 80250 Johor Bahru, Johor Darul Ta’zim',
-  rating: '4.8',
-  reviews: 40,
+  rating: GOOGLE_RATINGS.jb.rating, reviews: GOOGLE_RATINGS.jb.reviews,
   beds: '120+',
   img: '/images/jb-centre.jpeg',
 };
@@ -99,7 +99,7 @@ const faqs = [
   },
   {
     q: 'What makes Genesis Life Care JB different from other nursing homes in Johor?',
-    a: 'Genesis Life Care JB stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our Google rating is 4.8 from 40 reviews, and we are part of a trusted network of 5 centres across Malaysia.',
+    a: 'Genesis Life Care JB stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our Google rating is ' + GOOGLE_RATINGS.jb.rating + ' from ' + GOOGLE_RATINGS.jb.reviews + ' reviews, and we are part of a trusted network of 5 centres across Malaysia.',
   },
 ];
 
@@ -130,7 +130,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care JB与柔佛其他养老院有什么不同？',
-    a: 'Genesis Life Care JB以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Google评分为4.8（40条评价），是马来西亚5间中心可信赖网络的一部分。',
+    a: 'Genesis Life Care JB以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Google评分为' + GOOGLE_RATINGS.jb.rating + '（' + GOOGLE_RATINGS.jb.reviews + '条评价），是马来西亚5间中心可信赖网络的一部分。',
   },
 ];
 

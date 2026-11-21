@@ -7,6 +7,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import LocationContact from '@/components/sections/LocationContact';
 import OtherCentres from '@/components/sections/OtherCentres';
 import Bilingual from '@/components/Bilingual';
+import { GOOGLE_RATINGS } from '@/data/centres';
 
 /* ─── Nearest centre data ──────────────────────────────────────────── */
 
@@ -17,8 +18,7 @@ const nearestCentre = {
   phone: '+6019 759 0457',
   phoneCTA: '+6019-759-0457',
   address: '16, Jln TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor',
-  rating: '4.8',
-  reviews: 58,
+  rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
   beds: '120+',
   distance: '~15 minutes',
   distanceZh: '~15分钟',
@@ -100,7 +100,7 @@ const faqs = [
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Bukit Jalil?',
-    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our Puchong centre has 120+ beds and has a Google rating of 4.8 from 58 reviews.',
+    a: 'Genesis Life Care stands out with our on-site doctor, psychologist-led dementia programmes, professional physiotherapy team, and affordable rates. Our Puchong centre has 120+ beds and has a Google rating of ' + GOOGLE_RATINGS.puchong.rating + ' from ' + GOOGLE_RATINGS.puchong.reviews + ' reviews.',
   },
 ];
 
@@ -128,7 +128,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care与武吉加里尔附近的其他养老院有什么不同？',
-    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Puchong中心拥有120多张床位，Google评分4.8，来自58条评价。',
+    a: 'Genesis Life Care以我们的现场医生、心理学家主导的失智症计划、专业物理治疗团队和实惠的收费而脱颖而出。我们的Puchong中心拥有120多张床位，Google评分' + GOOGLE_RATINGS.puchong.rating + '，来自' + GOOGLE_RATINGS.puchong.reviews + '条评价。',
   },
 ];
 

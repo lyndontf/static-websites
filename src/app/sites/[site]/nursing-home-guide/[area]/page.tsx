@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { GOOGLE_RATINGS } from '@/data/centres';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -25,7 +26,7 @@ const AREAS: Record<string, Area> = {
       ],
     },
     extraFaqs: [
-      { q: 'How long has Genesis Life Care been operating in Klang?', a: 'Genesis Life Care Klang is our original, longest-running centre — operating since 2018, with a Google rating of 4.8 from 45 reviews and published pricing from RM2,500/month.' },
+      { q: 'How long has Genesis Life Care been operating in Klang?', a: 'Genesis Life Care Klang is our original, longest-running centre — operating since 2018, with a Google rating of ' + GOOGLE_RATINGS.klang.rating + ' from ' + GOOGLE_RATINGS.klang.reviews + ' reviews and published pricing from RM2,500/month.' },
     ],
   },
   puchong: {
