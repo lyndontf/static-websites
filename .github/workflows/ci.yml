@@ -26,5 +26,6 @@ jobs:
       - run: node scripts/test-safe-url.mjs
       - run: node scripts/test-track.mjs
       - run: node scripts/test-site-schema.mjs
+      - run: node scripts/test-seo.mjs
       - run: npx tsc --noEmit
       - run: npx next lint

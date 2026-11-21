@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabase';
 import { getSiteIdBySlug, getSiteBaseUrlBySlug, type SiteParams } from '@/lib/site-context';
 import { ZH_TWIN_SLUGS } from '@/lib/zh-twins';
+import { buildLanguageMap, isNoindexSlug, pageUrl } from '@/lib/seo';
 
 // Domain-aware sitemap: only the URLs of the site being asked about (from the [site] route param), so each
 // domain's sitemap can be submitted to its own Search Console property without "URL not allowed" errors.
@@ -32,10 +33,7 @@ export async function GET(_req: Request, { params }: { params: Promise<SiteParam
   const siteId = await getSiteIdBySlug(siteSlug);
   if (siteId) {
     const baseUrl = await getSiteBaseUrlBySlug(siteSlug);
-    const urlFor = (locale: string, slug: string) =>
-      locale === 'en'
-        ? slug === 'home' ? baseUrl : `${baseUrl}/${slug}`
-        : slug === 'home' ? `${baseUrl}/${locale}` : `${baseUrl}/${locale}/${slug}`;
+    const urlFor = (locale: string, slug: string) => pageUrl(baseUrl, locale, slug);
 
     const [{ data: pages }, { data: posts }] = await Promise.all([
       supabase
@@ -69,16 +67,11 @@ export async function GET(_req: Request, { params }: { params: Promise<SiteParam
       }
     }
 
-    const alternatesFor = (slug: string) => {
-      const locales = localesBySlug.get(slug);
-      if (!locales || locales.size < 2) return {};
-      const alt: Record<string, string> = {};
-      Array.from(locales).forEach((l) => { alt[l] = urlFor(l, slug); });
-      if (locales.has('en')) alt['x-default'] = urlFor('en', slug);
-      return alt;
-    };
+    const alternatesFor = (slug: string) => buildLanguageMap(baseUrl, slug, Array.from(localesBySlug.get(slug) ?? [])) ?? {};
 
     for (const page of pages || []) {
+      // Pages on the site's noindex list stay reachable but are not offered to search engines.
+      if (isNoindexSlug(siteSlug, page.slug)) continue;
       const locale = page.locale || 'en';
       const isHome = page.slug === 'home';
       const url = urlFor(locale, page.slug);
@@ -93,6 +86,7 @@ export async function GET(_req: Request, { params }: { params: Promise<SiteParam
     // twins that have no cms_pages row of their own
     if (siteSlug === 'centre') {
       for (const slug of ZH_TWIN_SLUGS) {
+        if (isNoindexSlug(siteSlug, slug)) continue;
         for (const l of ['en', 'zh']) {
           const url = urlFor(l, slug);
           if (!entries.has(url)) entries.set(url, { url, changeFrequency: 'weekly', priority: 0.8, alternates: alternatesFor(slug) });
