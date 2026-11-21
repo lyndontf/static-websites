@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Dementia Care in Puchong",
   description:
-    'Specialised dementia care in Puchong. Psychologist-led memory care programmes, cognitive stimulation, safe environment & personalised care plans. Rated 4.8★. Book a free tour at Genesis Life Care Puchong.',
+    'Specialised dementia care in Puchong. Psychologist-led memory care programmes, cognitive stimulation, safe environment & personalised care plans. Book a free tour at Genesis Life Care Puchong.',
   openGraph: {
     title: 'Dementia Care in Puchong - Genesis Life Care',
     description:

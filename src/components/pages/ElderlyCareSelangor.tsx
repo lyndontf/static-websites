@@ -220,20 +220,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
           addressRegion: 'Selangor',
           addressCountry: 'MY',
         },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: c.rating,
-          reviewCount: String(c.reviews),
-          bestRating: '5',
-        },
-      })),
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
       })),
     },
   ],

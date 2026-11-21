@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '加影中风康复',
   description:
-    '加影专业中风康复。物理治疗、职业治疗及言语治疗，为中风患者提供个性化康复计划及24小时护理支持。Google评分4.7星。立即预约Genesis Life Care加影中心的免费咨询。',
+    '加影专业中风康复。物理治疗、职业治疗及言语治疗，为中风患者提供个性化康复计划及24小时护理支持。立即预约Genesis Life Care加影中心，咨询我们的护理顾问。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-kajang',
     languages: {
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: '加影中风康复 - Genesis Life Care',
-    description: '加影专业中风康复。物理治疗、职业治疗、言语治疗及个性化康复计划。立即预约免费咨询。',
+    description: '加影专业中风康复。物理治疗、职业治疗、言语治疗及个性化康复计划。立即咨询我们的护理顾问。',
     images: [{ url: '/images/kajang-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care 加影' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '加影中风康复 - Genesis Life Care',
-    description: '加影专业中风康复。物理治疗、职业治疗、言语治疗及个性化康复计划。立即预约免费咨询。',
+    description: '加影专业中风康复。物理治疗、职业治疗、言语治疗及个性化康复计划。立即咨询我们的护理顾问。',
     images: ['/images/kajang-centre.jpeg'],
   },
 };

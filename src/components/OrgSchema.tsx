@@ -16,12 +16,6 @@ const orgJsonLd = {
     { '@type': 'City', name: 'Puchong' },
     { '@type': 'City', name: 'Johor Bahru' },
   ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.8',
-    reviewCount: '197',
-    bestRating: '5',
-  },
   sameAs: [
     'https://www.facebook.com/share/16cjRPK2U5/',
     'https://www.instagram.com/genesislifecaremalaysia',

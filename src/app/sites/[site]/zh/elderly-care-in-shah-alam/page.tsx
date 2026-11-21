@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '莎阿南附近的老年人护理',
   description:
-    '在莎阿南附近寻找老年人护理？Genesis Life Care Klang经由联邦2号公路仅约10分钟车程——提供24/7护理、失智症计划、中风康复及现场医生。评分4.8星。立即预约免费参观。',
+    '在莎阿南附近寻找老年人护理？Genesis Life Care Klang经由联邦2号公路仅约10分钟车程——提供24/7护理、失智症计划、中风康复及现场医生。立即预约免费参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/elderly-care-in-shah-alam',
     languages: {

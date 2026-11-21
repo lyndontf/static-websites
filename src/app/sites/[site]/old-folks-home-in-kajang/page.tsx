@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Old Folks Home in Kajang",
   description:
-    'Family-friendly old folks home in Kajang with 24/7 nursing care, nutritious meals, dementia care & rehabilitation. Serving southern Klang Valley. Affordable rates. Rated 4.7★.',
+    'Family-friendly old folks home in Kajang with 24/7 nursing care, nutritious meals, dementia care & rehabilitation. Serving southern Klang Valley. Affordable rates.',
 };
 
 export const revalidate = 60;

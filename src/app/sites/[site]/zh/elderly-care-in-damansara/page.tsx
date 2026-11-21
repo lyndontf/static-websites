@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '白沙罗附近的老年人护理',
   description:
-    '白沙罗附近的老年人护理，Genesis Life Care Petaling Jaya中心位于Kota Damansara，车程仅数分钟。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。Google评分4.9星，逾155则评价。立即预约免费参观。',
+    '白沙罗附近的老年人护理，Genesis Life Care Petaling Jaya中心位于Kota Damansara，车程仅数分钟。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。逾155则评价。立即预约免费参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/elderly-care-in-damansara',
     languages: {

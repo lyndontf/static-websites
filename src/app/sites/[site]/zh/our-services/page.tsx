@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '马来西亚长者护理服务',
   description:
-    '5间中心提供全方位长者护理服务：24/7护理服务、失智症与记忆护理、中风康复、缓和医疗、手术后康复、喘息护理及长者日间护理。政府认证。立即预约免费咨询。',
+    '5间中心提供全方位长者护理服务：24/7护理服务、失智症与记忆护理、中风康复、缓和医疗、手术后康复、喘息护理及长者日间护理。已在JKM注册。立即咨询我们的护理顾问。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/our-services',
     languages: {

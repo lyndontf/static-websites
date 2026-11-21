@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '蒲种中风康复',
   description:
-    '蒲种专业中风康复服务。物理治疗、职业治疗及言语治疗协助中风康复。Genesis Life Care蒲种提供个性化康复计划。Google评分4.8星。立即预约免费咨询。',
+    '蒲种专业中风康复服务。物理治疗、职业治疗及言语治疗协助中风康复。Genesis Life Care蒲种提供个性化康复计划。立即咨询我们的护理顾问。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/stroke-rehabilitation-in-puchong',
     languages: {

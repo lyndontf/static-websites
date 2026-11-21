@@ -160,20 +160,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
         { '@type': 'City', name: 'Cheras' },
         { '@type': 'City', name: 'Kajang' },
       ],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.7',
-        reviewCount: '32',
-        bestRating: '5',
-      },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
     },
   ],
   };

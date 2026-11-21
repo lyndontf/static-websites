@@ -161,20 +161,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
         { '@type': 'City', name: 'Bangsar' },
         { '@type': 'City', name: 'Petaling Jaya' },
       ],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        reviewCount: '155',
-        bestRating: '5',
-      },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
     },
   ],
   };

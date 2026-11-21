@@ -62,7 +62,7 @@ const faqs = [
   },
   {
     q: 'How do I know which option is right for my family?',
-    a: 'It usually comes down to how many hours of support are needed each day and whether overnight supervision matters. A free assessment with our team can help you work out the real cost and care needs for your situation, whether that points to home care, a live-in caregiver, or a residential centre.',
+    a: 'It usually comes down to how many hours of support are needed each day and whether overnight supervision matters. A care needs review with our team can help you work out the real cost and care needs for your situation, whether that points to home care, a live-in caregiver, or a residential centre.',
   },
 ];
 
@@ -71,21 +71,6 @@ const faqs = [
 export default function HomeCareVsNursingHomeCostPage() {
   return (
     <main className="bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: faqs.map((f) => ({
-              '@type': 'Question',
-              name: f.q,
-              acceptedAnswer: { '@type': 'Answer', text: f.a },
-            })),
-          }),
-        }}
-      />
-
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section className="relative bg-gradient-to-br from-bloom-900 to-bloom-700 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '28px 28px' }} />
@@ -234,9 +219,9 @@ export default function HomeCareVsNursingHomeCostPage() {
       <section className="bg-gradient-to-br from-bloom-900 to-bloom-700">
         <div className="max-w-4xl mx-auto px-4 py-16 text-center">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Not sure which option fits your family?</h2>
-          <p className="text-lg text-white/85 mb-8 max-w-xl mx-auto">Get a free, no-obligation assessment — we&apos;ll help you work out the real cost and the right level of care.</p>
+          <p className="text-lg text-white/85 mb-8 max-w-xl mx-auto">Request a no-obligation care needs review — we&apos;ll help you work out the real cost and the right level of care.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 bg-gold hover:bg-yellow-500 text-bloom-ink font-bold px-8 py-4 rounded-full transition shadow-lg hover:shadow-xl">
-            Book a Free Assessment
+            Book a Visit
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
           </Link>
         </div>

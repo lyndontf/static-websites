@@ -10,7 +10,7 @@ const WA_MESSAGES = {
     'Would you like to schedule a no-obligations visit?',
     'Did you know we have full-time doctors overseeing each centre?',
     'Fees start from RM2,500/month — transparent pricing, no hidden fees.',
-    "We're JKM registered and AgeCope certified. Want to know more?",
+    "We're JKM registered and an AGECOPE member. Want to know more?",
     'Urgent cases can often be admitted within 24–48 hours.',
   ],
   zh: [
@@ -18,7 +18,7 @@ const WA_MESSAGES = {
     '您想预约一次免费参观吗？',
     '您知道吗？我们每间中心都有全职医生驻守。',
     '收费每月低至RM2,500起 — 价格透明，无隐藏费用。',
-    '我们已获得JKM注册及AgeCope认证。想了解更多吗？',
+    '我们已在JKM注册，并为AGECOPE会员。想了解更多吗？',
     '紧急情况通常可在24至48小时内安排入住。',
   ],
 };

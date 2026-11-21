@@ -24,7 +24,7 @@ const centre = {
 const highlights = [
   { label: 'Years Caring', value: '7+', sub: 'Since 2018' },
   { label: 'Residents Capacity', value: '120+', sub: 'Comfortable Beds' },
-  { label: 'Google Rating', value: '4.8 ★', sub: '45 Reviews' },
+  { label: 'Google Rating', value: '4.8', sub: '45 Reviews' },
   { label: 'Affordable Rates', value: '✓', sub: 'All Centres' },
   { label: 'Care Staff', value: '24/7', sub: 'Round the Clock' },
 ];
@@ -121,14 +121,14 @@ const checklistZh = [
 
 const admissionSteps = [
   { step: '1', title: 'Contact Us', desc: 'Call us or fill in our online form. Our care advisors will answer your questions and arrange a convenient time to visit.' },
-  { step: '2', title: 'Free Assessment & Tour', desc: 'Visit our Klang centre, meet the care team, and we will assess your loved one\'s needs at no charge.' },
+  { step: '2', title: 'Care Needs Review & Tour', desc: 'Visit our Klang centre, meet the care team, and we will review your loved one\'s care needs.' },
   { step: '3', title: 'Move In', desc: 'Once you are ready, we prepare a personalised care plan and help your loved one settle into their new home comfortably.' },
 ];
 
 // Steps 1 and 3 shared verbatim across every old-folks-home-in-X page; step 2 mentions the local centre.
 const admissionStepsZh = [
   { title: '联系我们', desc: '致电我们或填写在线表格，我们的护理顾问将解答您的疑问，并安排方便的参观时间。' },
-  { title: '免费评估与参观', desc: '参观我们的巴生中心，与护理团队见面，我们将免费评估您亲人的需求。' },
+  { title: '护理需求评估与参观', desc: '参观我们的巴生中心，与护理团队见面，我们将评估您亲人的护理需求。' },
   { title: '迁入', desc: '当您准备就绪后，我们将制定个性化护理计划，协助您的亲人舒适地安顿于新家。' },
 ];
 
@@ -217,19 +217,9 @@ function buildJsonLd(locale: 'en' | 'zh') {
         addressCountry: 'MY',
       },
       geo: { '@type': 'GeoCoordinates', latitude: centre.lat, longitude: centre.lng },
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: centre.rating, reviewCount: centre.reviews, bestRating: '5' },
       openingHoursSpecification: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '09:00', closes: '18:00' },
       image: `https://genesiscare.com.my${centre.heroImg}`,
       priceRange: '$$',
-    },
-    faqPage: {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
     },
   };
 }
@@ -265,12 +255,6 @@ export function OldFolksHomeKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.localBusiness) }}
       />
 
-      {/* FAQPage JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd.faqPage) }}
-      />
-
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section className="hero-dark relative bg-gradient-to-br from-primary-800 via-primary to-secondary overflow-hidden">
         <div
@@ -286,7 +270,7 @@ export function OldFolksHomeKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
               <div className="inline-flex items-center gap-2 bg-gold/20 border border-gold/30 rounded-full px-4 py-1.5 mb-6">
                 <svg className="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
                 <span className="text-gold text-xs font-semibold tracking-wide uppercase">
-                  <Bilingual en={<>Rated {centre.rating} ★ on Google</>} zh={<>{centre.rating} ★ Google 评分</>} />
+                  <Bilingual en={<>Google rating {centre.rating} from {centre.reviews} reviews</>} zh={<>Google 评分 {centre.rating}（{centre.reviews} 条评价）</>} />
                 </span>
               </div>
 
@@ -548,7 +532,7 @@ export function OldFolksHomeKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
                 <div className="p-4">
                   <span className="inline-block bg-primary-50 text-primary text-xs font-semibold px-2 py-0.5 rounded-full mb-2"><Bilingual en={home.tag} zh={home.tagZh} /></span>
                   <h3 className="text-base font-bold text-gray-900 group-hover:text-primary transition-colors"><Bilingual en={<>Old Folks Home in {home.name}</>} zh={<>{home.nameZh}老年人之家</>} /></h3>
-                  <span className="text-sm text-gray-500"><Bilingual en={<>Rated {home.rating} ★</>} zh={<>评分 {home.rating} ★</>} /></span>
+                  <span className="text-sm text-gray-500"><Bilingual en={<>Google rating {home.rating}</>} zh={<>Google 评分 {home.rating}</>} /></span>
                 </div>
               </Link>
             ))}

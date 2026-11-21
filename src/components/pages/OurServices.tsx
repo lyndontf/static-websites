@@ -318,7 +318,7 @@ export function OurServicesContent({ locale = 'en' }: { locale?: 'en' | 'zh' } =
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+              <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -473,7 +473,7 @@ export function OurServicesContent({ locale = 'en' }: { locale?: 'en' | 'zh' } =
             {[
               {
                 title: 'Government Licensed',
-                titleZh: '政府认证',
+                titleZh: '已在JKM注册',
                 desc: 'Competitive and transparent pricing with no hidden costs across all centres.',
                 descZh: '所有中心均提供具竞争力且透明的收费，绝无隐藏费用。',
                 icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
@@ -611,8 +611,8 @@ export function OurServicesContent({ locale = 'en' }: { locale?: 'en' | 'zh' } =
       <FinalCtaSection
         heading="Find the Right Care for Your Loved One"
         headingZh="为您的亲人找到合适的护理"
-        description="Every family's situation is unique. Our care advisors are here to understand your specific needs and help you find the perfect service. Book a free consultation today — no obligations, no pressure."
-        descriptionZh="每个家庭的情况都是独特的。我们的护理顾问将了解您的具体需求，协助您找到最合适的服务。立即预约免费咨询——无需承诺，零压力。"
+        description="Every family's situation is unique. Our care advisors are here to understand your specific needs and help you find the perfect service. Speak to our care advisors today — no obligations, no pressure."
+        descriptionZh="每个家庭的情况都是独特的。我们的护理顾问将了解您的具体需求，协助您找到最合适的服务。立即咨询我们的护理顾问——无需承诺，零压力。"
       />
     </main>
   );

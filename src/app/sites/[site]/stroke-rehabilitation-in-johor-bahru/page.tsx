@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Stroke Rehabilitation in Johor Bahru",
   description:
-    'Professional stroke rehabilitation in Johor Bahru. Physiotherapy, occupational therapy & speech therapy for stroke recovery. Personalised rehab plans at Genesis Life Care JB. Rated 4.8★. Book a free consultation.',
+    'Professional stroke rehabilitation in Johor Bahru. Physiotherapy, occupational therapy & speech therapy for stroke recovery. Personalised rehab plans at Genesis Life Care JB. Speak to our care advisors.',
   openGraph: {
     title: 'Stroke Rehabilitation in Johor Bahru - Genesis Life Care',
     description:

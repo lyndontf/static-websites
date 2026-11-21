@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '柔佛老年人护理',
   description:
-    '在柔佛寻找老年人护理？Genesis Life Care新山中心提供24/7护理、失智症计划、中风康复及现场医生咨询。Google评分4.8星。立即预约免费参观。',
+    '在柔佛寻找老年人护理？Genesis Life Care新山中心提供24/7护理、失智症计划、中风康复及现场医生咨询。立即预约免费参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/elderly-care-in-johor',
     languages: {

@@ -204,20 +204,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
         { '@type': 'City', name: 'Damansara' },
       ],
       medicalSpecialty: 'Geriatric Medicine',
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        reviewCount: '155',
-        bestRating: '5',
-      },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
     },
   ],
   };

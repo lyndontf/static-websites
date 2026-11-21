@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Dementia Care in Kajang",
   description:
-    'Specialised dementia care in Kajang. Psychologist-led memory care programmes, cognitive stimulation, safe environment & personalised care plans. Rated 4.7★. Book a free tour at Genesis Life Care Kajang.',
+    'Specialised dementia care in Kajang. Psychologist-led memory care programmes, cognitive stimulation, safe environment & personalised care plans. Book a free tour at Genesis Life Care Kajang.',
   openGraph: {
     title: 'Dementia Care in Kajang - Genesis Life Care',
     description:

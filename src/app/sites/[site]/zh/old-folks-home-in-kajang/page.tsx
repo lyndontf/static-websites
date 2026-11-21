@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '加影老年人之家',
   description:
-    '加影老年人之家，提供24小时护理、内部厨房、痴呆症护理及康复设施，服务南巴生谷地区。价格实惠，Google评分4.7星。',
+    '加影老年人之家，提供24小时护理、内部厨房、痴呆症护理及康复设施，服务南巴生谷地区。价格实惠。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/old-folks-home-in-kajang',
     languages: {

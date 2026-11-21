@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Dementia Care in Klang",
   description:
-    'Specialised dementia care in Klang. Psychologist-led memory care programmes, cognitive stimulation, safe environment & personalised care plans. Rated 4.8★. Book a free tour at Genesis Life Care Klang.',
+    'Specialised dementia care in Klang. Psychologist-led memory care programmes, cognitive stimulation, safe environment & personalised care plans. Book a free tour at Genesis Life Care Klang.',
   openGraph: {
     title: 'Dementia Care in Klang - Genesis Life Care',
     description:

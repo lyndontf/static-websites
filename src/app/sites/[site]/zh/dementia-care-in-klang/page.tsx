@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '巴生痴呆症护理',
   description:
-    '巴生专业痴呆症护理。心理学家主导的记忆护理计划、认知刺激活动、安全环境及个人化护理计划。Google评分4.8星。立即预约Genesis Life Care巴生中心的免费参观。',
+    '巴生专业痴呆症护理。心理学家主导的记忆护理计划、认知刺激活动、安全环境及个人化护理计划。立即预约Genesis Life Care巴生中心的免费参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/dementia-care-in-klang',
     languages: {

@@ -23,7 +23,7 @@ export default function FinalCtaSection({ heading, description, headingZh, descr
   const shownDescription = isZh && descriptionZh ? descriptionZh : description;
   // Same page, no separate /zh route — the toggle swaps text in place.
   const contactHref = '/contact';
-  const btnText = isZh ? '预约免费咨询' : 'Book a Free Consultation';
+  const btnText = isZh ? '咨询我们的护理顾问' : 'Speak to Our Care Advisors';
   const phoneText = isZh ? '致电 +6019-325-0457' : 'Call +6019-325-0457';
 
   return (

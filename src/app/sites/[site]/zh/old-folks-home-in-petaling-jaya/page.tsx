@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '八打灵再也老年人之家',
   description:
-    '八打灵再也老年人之家，设有专门的记忆护理部门、康复设施及全天候护理团队。价格实惠，Google评分4.9星。',
+    '八打灵再也老年人之家，设有专门的记忆护理部门、康复设施及全天候护理团队。价格实惠。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/old-folks-home-in-petaling-jaya',
     languages: {

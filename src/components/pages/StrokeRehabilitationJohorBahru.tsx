@@ -201,20 +201,6 @@ function buildJsonLd(locale: 'en' | 'zh') {
         addressCountry: 'MY',
       },
       areaServed: { '@type': 'City', name: 'Johor Bahru' },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.8',
-        reviewCount: '40',
-        bestRating: '5',
-      },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
     },
   ],
   };
@@ -293,7 +279,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-400 transition-colors text-sm whitespace-nowrap"
                 >
-                  <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                  <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -513,7 +499,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
                     href="/contact"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-lg hover:bg-primary-600 transition-colors text-sm"
                   >
-                    <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+                    <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -581,9 +567,9 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
           </h2>
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto" style={{ color: 'white' }}>
             <Bilingual
-              en="Visit our JB centre for a free consultation. Meet our rehabilitation team
+              en="Visit our JB centre and speak to our care advisors. Meet our rehabilitation team
             and discover how we can help your loved one recover from stroke."
-              zh="欢迎参观我们的新山中心，预约免费咨询。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
+              zh="欢迎参观我们的新山中心，咨询我们的护理顾问。认识我们的康复团队，了解我们如何协助您的至亲从中风中康复。"
             />
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -591,7 +577,7 @@ export function StrokeRehabilitationJohorBahruContent({ locale = 'en' }: { local
               href="/contact"
               className="inline-flex items-center gap-2 bg-gold text-gray-900 font-bold px-6 py-4 rounded-xl hover:bg-yellow-400 transition-colors whitespace-nowrap"
             >
-              <Bilingual en="Book a Free Consultation" zh="预约免费咨询" />
+              <Bilingual en="Speak to Our Care Advisors" zh="咨询我们的护理顾问" />
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
