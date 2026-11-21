@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getPageBySlug, getPublishedPosts, getSiteSettings, getSupportedLocales, pageExistsForLocale } from '@/lib/supabase';
+import { getPageBySlug, getPublishedPosts, getSiteSettings, getSupportedLocales } from '@/lib/supabase';
+import { getLanguageAlternates } from '@/lib/seo-alternates';
+import { isNoindexSlug, titleWithBrandOnce } from '@/lib/seo';
 import { getSiteIdBySlug, getSiteBaseUrlBySlug, type SiteParams } from '@/lib/site-context';
 import ContentRenderer from '@/components/ContentRenderer';
 import { CmsRawBlocks } from '@/components/CmsHtmlPage';
@@ -101,13 +103,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Page Not Found' };
   }
 
-  // None of these three depend on each other — only on siteId/route, both
-  // already resolved above — so they can be fetched concurrently instead of
-  // as three sequential round trips.
-  const [page, settings, supportedLocales] = await Promise.all([
+  // These two depend only on siteId/route, both already resolved above, so they are fetched concurrently.
+  const [page, settings] = await Promise.all([
     getPageBySlug(route.slug, siteId || undefined, route.locale),
     getSiteSettings(siteId || undefined),
-    getSupportedLocales(siteId || undefined),
   ]);
   if (!page) return { title: 'Page Not Found' };
 
@@ -123,32 +122,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ? isHome ? baseUrl : `${baseUrl}/${route.slug}`
       : isHome ? `${baseUrl}/${route.locale}` : `${baseUrl}/${route.locale}/${route.slug}`;
 
-  let languages: Record<string, string> | undefined;
-  if (supportedLocales.length > 1) {
-    // Each locale's translation check is independent — run them concurrently
-    // rather than one Supabase round trip per locale in sequence.
-    const checks = await Promise.all(
-      supportedLocales.map(async (loc) => ({
-        loc,
-        hasTranslation: loc === 'en' || (await pageExistsForLocale(route.slug, siteId || '', loc)),
-      }))
-    );
-    const langMap: Record<string, string> = {};
-    for (const { loc, hasTranslation } of checks) {
-      if (!hasTranslation) continue;
-      langMap[loc] =
-        loc === 'en'
-          ? isHome ? baseUrl : `${baseUrl}/${route.slug}`
-          : isHome ? `${baseUrl}/${loc}` : `${baseUrl}/${loc}/${route.slug}`;
-    }
-    if (Object.keys(langMap).length > 0) languages = langMap;
-  }
+  const languages = await getLanguageAlternates(siteId || undefined, baseUrl, route.slug);
 
-  // A meta title that already ends with the site name (Maids in Malaysia's do) must not get the layout's
-  // " | Site name" template added a second time.
+  // A meta title that already names the site (anywhere in it) must not get the layout's " | Site name"
+  // template added a second time.
   const siteName = settings?.site_name?.trim();
   // Maids in Malaysia: titles are written to fit 60 characters on their own, so the layout never adds a suffix.
-  const titleMeta = siteSlug === 'maids' ? { absolute: title } : siteName && title.trim().toLowerCase().endsWith(siteName.toLowerCase()) ? { absolute: title } : title;
+  const titleMeta = siteSlug === 'maids' ? { absolute: title } : titleWithBrandOnce(title, siteName);
 
   return {
     title: titleMeta,
@@ -157,6 +137,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: url,
       languages,
     },
+    ...(isNoindexSlug(siteSlug, route.slug) ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title,
       description,
