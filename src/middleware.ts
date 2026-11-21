@@ -94,6 +94,14 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  // On a site's own domain the path prefix is never needed: /lcs/pricing would be a second address for
+  // /pricing, so send it (permanently) to the real one. The preview host (no domain match) keeps the prefix.
+  if (DOMAIN_TO_SITE[hostname] && sitePath !== pathname) {
+    const target = request.nextUrl.clone();
+    target.pathname = sitePath;
+    return NextResponse.redirect(target, 308);
+  }
+
   // The /sites/<slug>/... tree is internal. A visitor must never reach it by typing the URL, or the
   // same page would exist twice under a second address.
   if (pathname === '/sites' || pathname.startsWith('/sites/')) {
