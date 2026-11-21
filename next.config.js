@@ -61,6 +61,9 @@ const nextConfig = {
       // ── lcs blog: the buyer's guide lost "best" from its address (21 Nov 2026) ──
       { source: '/blog/best-nursing-home-management-software-malaysia', destination: '/blog/how-to-choose-nursing-home-software-malaysia', permanent: true },
       { source: '/blog/best-nursing-home-management-software-malaysia/', destination: '/blog/how-to-choose-nursing-home-software-malaysia', permanent: true },
+      // ── lcs blog: the trial guide became a 7-day trial guide, so its address changes (21 Nov 2026). The CMS rename is applied right after this deploys. ──
+      { source: '/blog/how-to-run-30-day-trial-care-home-software', destination: '/blog/how-to-run-a-7-day-trial-of-care-home-software', permanent: true },
+      { source: '/blog/how-to-run-30-day-trial-care-home-software/', destination: '/blog/how-to-run-a-7-day-trial-of-care-home-software', permanent: true },
       // ── Old WordPress page slugs → new CMS equivalents ──
       // Nursing homes (old slug pattern → new)
       { source: '/nursing-home-in-cheras', destination: '/elderly-care-in-cheras', permanent: true },
