@@ -53,6 +53,8 @@ interface ResolvedRoute {
   slug: string;
 }
 
+const MANUAL_NAMES = new Set(['family', 'caregiver', 'ops-admin', 'finance-admin', 'hr-payroll', 'tenant-owner']);
+
 async function resolveRoute(slugPath: string[] | undefined, siteId: string | undefined): Promise<ResolvedRoute | null> {
   const segments = slugPath || [];
 
@@ -81,6 +83,12 @@ async function resolveRoute(slugPath: string[] | undefined, siteId: string | und
   // FAQ topic pages (Maids in Malaysia guide), e.g. /faq/process: same one-level rule, one extra allowed prefix.
   if (first === 'faq' && second !== undefined && rest.length === 0) {
     return { locale: 'en', slug: `faq/${second}` };
+  }
+
+  // Published manuals (lcs): /manuals/<manual> and /manuals/<manual>/<chapter>. Only the manuals named here can resolve, and a manual
+  // that is not published as CMS pages simply returns "not found", so a manual that must stay private is protected by not being published.
+  if (first === 'manuals' && second !== undefined && MANUAL_NAMES.has(second) && rest.length <= 1 && (rest.length === 0 || /^[a-z0-9-]+$/.test(rest[0]))) {
+    return { locale: 'en', slug: segments.join('/') };
   }
 
   // Plain English (default-locale) page slug, e.g. /about-us
