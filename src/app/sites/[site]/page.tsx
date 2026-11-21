@@ -8,6 +8,7 @@ import { getSiteIdBySlug, getSiteBaseUrlBySlug, type SiteParams } from '@/lib/si
 import ContentRenderer from '@/components/ContentRenderer';
 import QuickEnquiryCard from '@/components/QuickEnquiryCard';
 import CmsHtmlRenderer from '@/components/CmsHtmlRenderer';
+import { getLanguageAlternates } from '@/lib/seo-alternates';
 import { AgencyCandidates, AgencyEligibility } from '@/components/AgencyHomeSections';
 
 export async function generateMetadata({ params }: { params: Promise<SiteParams> }): Promise<Metadata> {
@@ -78,7 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<SiteParams>
   return {
     title,
     description,
-    alternates: { canonical: baseUrl },
+    alternates: { canonical: baseUrl, languages: await getLanguageAlternates(siteId || undefined, baseUrl, 'home') },
     openGraph: {
       title,
       description,

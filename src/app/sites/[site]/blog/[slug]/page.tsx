@@ -7,6 +7,7 @@ import ContentRenderer from '@/components/ContentRenderer';
 import JsonLd from '@/components/JsonLd';
 import { buildBlogPostingJsonLd } from '@/lib/site-schema';
 import { getBlogChrome } from '@/lib/blog-chrome';
+import { articleTimes } from '@/lib/seo';
 
 interface PostPageProps {
   params: Promise<SiteParams & { slug: string }>;
@@ -31,7 +32,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       description,
       url,
       images: post.featured_image_url ? [{ url: post.featured_image_url }] : undefined,
-      type: 'website',
+      type: 'article',
+      ...articleTimes(post),
     },
     twitter: {
       card: 'summary_large_image',

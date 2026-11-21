@@ -10,15 +10,13 @@ export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<SiteParams> }): Promise<Metadata> {
   const { site: siteSlug } = await params;
-  if (siteSlug === 'centre') {
-    return generateCmsMetadata(siteSlug, 'contact');
-  }
   // Maids in Malaysia: the contact page is an ordinary CMS content page (not one HTML block); use the same
   // metadata as every other page of the site instead of none.
   if (siteSlug === 'maids') {
     return maidsMetadata({ params: Promise.resolve({ site: siteSlug, slugPath: ['contact'] }) });
   }
-  return {};
+  // Every other site: title, description and canonical from the CMS `contact` row (not the layout default).
+  return generateCmsMetadata(siteSlug, 'contact');
 }
 
 export default async function ContactPage({ params }: { params: Promise<SiteParams> }) {

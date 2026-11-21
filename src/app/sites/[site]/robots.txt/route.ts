@@ -30,6 +30,9 @@ const AI_CRAWLERS = [
 const RULES = [
   'Allow: /',
   'Disallow: /api/',
+  // The /lcs path is the shared preview address of the lcs site; on its own domain it redirects. `$` stops the
+  // bare /lcs from also blocking a page whose address merely starts with those letters.
+  'Disallow: /lcs$',
   'Disallow: /lcs/',
   'Disallow: /gta/',
   'Disallow: /glc-hire/',

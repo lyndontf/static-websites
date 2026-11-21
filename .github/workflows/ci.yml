@@ -24,7 +24,10 @@ jobs:
       - run: node scripts/check-zh-twins.mjs
       - run: node scripts/test-lazy-images.mjs
       - run: node scripts/test-safe-url.mjs
+      - run: node scripts/test-link-events.mjs
       - run: node scripts/test-track.mjs
+      - run: node scripts/test-self-hosted-fonts.mjs
       - run: node scripts/test-site-schema.mjs
+      - run: node scripts/test-seo.mjs
       - run: npx tsc --noEmit
       - run: npx next lint
