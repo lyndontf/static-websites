@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import LayoutWrapper from '@/components/LayoutWrapper';
 import { centreNavEN } from '@/lib/nav';
 import { LangProvider } from '@/lib/LangContext';
@@ -77,6 +78,10 @@ export default function SiteShell({
         {maidsWhatsApp}
         {!isCmsSite && !isFullHtmlPage && (
           <WhatsAppWidget phone={(settings?.contact_phone || '60193250457').replace(/[^\d]/g, '')} />
+        )}
+        {/* Sites without a chat card of their own turn the plain button on with seo_defaults.whatsapp_fab_phone. */}
+        {isCmsSite && siteSlug !== 'maids' && settings?.seo_defaults?.whatsapp_fab_phone && (
+          <FloatingWhatsApp phone={settings.seo_defaults.whatsapp_fab_phone} message={settings.seo_defaults.whatsapp_fab_message} />
         )}
       </LangProvider>
       {settings?.custom_css && !isFullHtmlPage && !isBloom && (
