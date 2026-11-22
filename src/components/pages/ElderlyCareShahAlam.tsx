@@ -20,8 +20,8 @@ const nearestCentre = {
   address: '3, Jalan Istana, Kawasan 1, 41000 Klang, Selangor',
   rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
   beds: '120+',
-  distance: '~10 minutes',
-  distanceZh: '~10分钟',
+  distance: 'Klang',
+  distanceZh: '巴生',
   img: '/images/klang-centre.jpg',
 };
 
@@ -80,7 +80,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Shah Alam?',
-    a: 'Yes. Genesis Life Care Klang is located on Jalan Istana, Klang, approximately 10 minutes from Shah Alam via Federal Route 2. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care Klang is located on Jalan Istana, Klang; we welcome families from Shah Alam. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Shah Alam?',
@@ -95,8 +95,8 @@ const faqs = [
     a: 'Absolutely. We encourage families to book a visit to our Klang facility. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
   },
   {
-    q: 'How do I get to Genesis Life Care Klang from Shah Alam?',
-    a: 'Our Klang centre is easily accessible from Shah Alam via Federal Route 2 (Jalan Klang-Shah Alam). The drive typically takes about 10 minutes. The centre is located on Jalan Istana, Klang.',
+    q: 'Where is Genesis Life Care Klang?',
+    a: 'Our Klang centre is at 3, Jalan Istana, Kawasan 1, Klang. Call us and we will help you plan your visit.',
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Shah Alam?',
@@ -108,7 +108,7 @@ const faqs = [
 const faqsZh = [
   {
     q: '莎阿南附近有养老院吗？',
-    a: '有。Genesis Life Care Klang位于Klang的Jalan Istana，经由联邦2号公路，距离莎阿南大约10分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care Klang位于Klang的Jalan Istana，欢迎来自莎阿南的家庭。我们提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '莎阿南附近的老年人护理费用是多少？',
@@ -123,8 +123,8 @@ const faqsZh = [
     a: '当然可以。我们鼓励家庭预订我们Klang设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
   },
   {
-    q: '我如何从莎阿南前往Genesis Life Care Klang？',
-    a: '我们的Klang中心可经由联邦2号公路（Jalan Klang-Shah Alam）从莎阿南轻松抵达，车程通常约10分钟。中心位于Klang Jalan Istana。',
+    q: 'Genesis Life Care Klang在哪里？',
+    a: '我们的Klang中心位于Klang的Jalan Istana，3号，Kawasan 1。欢迎致电，我们将协助您安排参观。',
   },
   {
     q: 'Genesis Life Care与莎阿南附近的其他养老院有什么不同？',
@@ -225,10 +225,9 @@ export function ElderlyCareShahAlamContent({ locale = 'en' }: { locale?: 'en' | 
               <p className="text-lg text-white leading-relaxed mb-8 max-w-xl" style={{ color: 'white' }}>
                 <Bilingual
                   en={<>Families in Shah Alam trust Genesis Life Care for quality nursing home
-                  services. Our Klang centre is just {nearestCentre.distance} away
-                  — offering 24/7 nursing, on-site doctor consultations, dementia care,
+                  services. Our centre on Jalan Istana, Klang offers 24/7 nursing, on-site doctor consultations, dementia care,
                   and comprehensive rehabilitation.</>}
-                  zh={<>莎阿南的家庭信赖Genesis Life Care提供优质的养老院服务。我们的Klang中心距离仅{nearestCentre.distanceZh}——提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
+                  zh={<>莎阿南的家庭信赖Genesis Life Care提供优质的养老院服务。我们位于Klang的Jalan Istana的中心提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
                 />
               </p>
 
@@ -271,7 +270,7 @@ export function ElderlyCareShahAlamContent({ locale = 'en' }: { locale?: 'en' | 
                 </div>
                 <div>
                   <p className="text-sm font-bold text-gray-800"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                  <p className="text-xs text-gray-500"><Bilingual en="from Shah Alam" zh="距莎阿南" /></p>
+                  <p className="text-xs text-gray-500"><Bilingual en="Klang centre" zh="巴生中心" /></p>
                 </div>
               </div>
             </div>
@@ -301,11 +300,10 @@ export function ElderlyCareShahAlamContent({ locale = 'en' }: { locale?: 'en' | 
               <p>
                 <Bilingual
                   en={<>Genesis Life Care Klang is the nearest Genesis centre to Shah Alam — located at
-                  Jalan Istana, Klang, just a short drive via Federal
-                  Route 2. Our facility provides 24-hour nursing care, weekly on-site doctor
+                  Jalan Istana, Klang. Our facility provides 24-hour nursing care, weekly on-site doctor
                   consultations, psychologist-led dementia programmes, and a full rehabilitation
                   department with physiotherapy and occupational therapy.</>}
-                  zh="Genesis Life Care Klang是距离莎阿南最近的Genesis中心——位于Klang Jalan Istana，经由联邦2号公路即可轻松抵达。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care Klang是距离莎阿南最近的Genesis中心——位于Klang Jalan Istana。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
@@ -376,8 +374,8 @@ export function ElderlyCareShahAlamContent({ locale = 'en' }: { locale?: 'en' | 
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
               <Bilingual
-                en={<>Just {nearestCentre.distance} from Shah Alam — our centre on Jalan Istana, Klang.</>}
-                zh={<>距莎阿南仅{nearestCentre.distanceZh}——我们位于Klang的Jalan Istana中心。</>}
+                en={<>Our centre on Jalan Istana, Klang.</>}
+                zh={<>我们位于Klang的Jalan Istana的中心。</>}
               />
             </p>
           </div>
@@ -409,7 +407,7 @@ export function ElderlyCareShahAlamContent({ locale = 'en' }: { locale?: 'en' | 
                   </div>
                   <div className="bg-gray-50 rounded-lg p-3 text-center">
                     <p className="text-2xl font-extrabold text-primary"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                    <p className="text-xs text-gray-500"><Bilingual en="From Shah Alam" zh="距莎阿南" /></p>
+                    <p className="text-xs text-gray-500"><Bilingual en="Klang centre" zh="巴生中心" /></p>
                   </div>
                 </div>
 

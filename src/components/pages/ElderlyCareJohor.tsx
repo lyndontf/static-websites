@@ -95,7 +95,7 @@ const faqs = [
   },
   {
     q: 'Which areas in Johor does Genesis Life Care serve?',
-    a: 'Our Johor Bahru centre serves families across Johor, including Johor Bahru city, Iskandar Puteri, Skudai, Kulai, Pasir Gudang, Masai, and surrounding areas. We are conveniently located in Taman Century with easy highway access.',
+    a: 'Our Johor Bahru centre serves families across Johor, including Johor Bahru city, Iskandar Puteri, Skudai, Kulai, Pasir Gudang, Masai, and surrounding areas. We are conveniently located in Taman Century.',
   },
   {
     q: 'What makes Genesis Life Care JB different from other nursing homes in Johor?',
@@ -126,7 +126,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care在柔佛服务哪些地区？',
-    a: '我们的新山中心为柔佛各地家庭提供服务，包括新山市、依斯干达公主城、士古来、古来、巴西古当、马西及周边地区。我们便利地坐落于Taman Century，高速公路交通便捷。',
+    a: '我们的新山中心为柔佛各地家庭提供服务，包括新山市、依斯干达公主城、士古来、古来、巴西古当、马西及周边地区。我们便利地坐落于Taman Century。',
   },
   {
     q: 'Genesis Life Care JB与柔佛其他养老院有什么不同？',
@@ -305,12 +305,11 @@ export function ElderlyCareJohorContent({ locale = 'en' }: { locale?: 'en' | 'zh
               </p>
               <p>
                 <Bilingual
-                  en={<>Our Johor Bahru centre is conveniently located in Taman Century, with
-                  easy access from major highways. The facility provides 24-hour nursing care,
+                  en={<>Our Johor Bahru centre is conveniently located in Taman Century. The facility provides 24-hour nursing care,
                   weekly on-site doctor consultations, psychologist-led dementia programmes,
                   and a full rehabilitation department with physiotherapy and occupational
                   therapy services.</>}
-                  zh="我们的新山中心便利地坐落于Taman Century，可轻松通过主要高速公路抵达。该设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="我们的新山中心便利地坐落于Taman Century。该设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>

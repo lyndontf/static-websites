@@ -20,8 +20,8 @@ const pjCentre = {
   address: '1, Petaling Utama Ave, PJS 1, 58200 Petaling Jaya, Selangor',
   rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
   beds: '50+',
-  distance: '~20 minutes',
-  distanceZh: '~20分钟',
+  distance: 'PJS 1',
+  distanceZh: 'PJS 1',
   img: '/images/pj-centre.jpg',
   badge: 'Flagship Centre',
 };
@@ -35,8 +35,8 @@ const puchongCentre = {
   address: '16, Jln TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor',
   rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
   beds: '120+',
-  distance: '~15 minutes',
-  distanceZh: '~15分钟',
+  distance: 'TPP',
+  distanceZh: 'TPP',
   img: '/images/puchong-centre.jpeg',
   badge: 'Nearest Centre',
 };
@@ -97,7 +97,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Subang Jaya?',
-    a: 'Yes. Genesis Life Care has two centres near Subang Jaya — our Puchong centre (approximately 15 minutes away) and our Petaling Jaya centre at PJS 1 (approximately 20 minutes away). Both offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care has two centres near Subang Jaya — our Puchong centre at Taman Perindustrian Puchong and our Petaling Jaya centre at PJS 1. Both offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Subang Jaya?',
@@ -105,7 +105,7 @@ const faqs = [
   },
   {
     q: 'Which Genesis centre is closest to Subang Jaya?',
-    a: 'Our Puchong centre (Taman Perindustrian Puchong) is the closest, approximately 15 minutes from Subang Jaya. Our Petaling Jaya centre at PJS 1 is also accessible at approximately 20 minutes away. Both centres offer the same high standard of care.',
+    a: 'Our Puchong centre is at Taman Perindustrian Puchong and our Petaling Jaya centre is at PJS 1. Both centres offer the same high standard of care.',
   },
   {
     q: 'What services are available for elderly residents from Subang Jaya?',
@@ -125,7 +125,7 @@ const faqs = [
 const faqsZh = [
   {
     q: '梳邦再也附近有养老院吗？',
-    a: '有。Genesis Life Care在梳邦再也附近设有两间中心——我们的Puchong中心（车程约15分钟）以及位于PJS 1的Petaling Jaya中心（车程约20分钟）。两间中心均提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care在梳邦再也附近设有两间中心——我们位于Taman Perindustrian Puchong的Puchong中心以及位于PJS 1的Petaling Jaya中心。两间中心均提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '梳邦再也附近的老年人护理费用是多少？',
@@ -133,7 +133,7 @@ const faqsZh = [
   },
   {
     q: '哪一间Genesis中心离梳邦再也最近？',
-    a: '我们的Puchong中心（Taman Perindustrian Puchong）最近，距离梳邦再也约15分钟车程。我们位于PJS 1的Petaling Jaya中心也十分方便，车程约20分钟。两间中心提供同样高水准的护理。',
+    a: '我们的Puchong中心位于Taman Perindustrian Puchong，Petaling Jaya中心位于PJS 1。两间中心提供同样高水准的护理。',
   },
   {
     q: '梳邦再也居民可以获得哪些服务？',
@@ -262,10 +262,10 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
               <p className="text-lg text-white leading-relaxed mb-8 max-w-xl" style={{ color: 'white' }}>
                 <Bilingual
                   en={<>Families in Subang Jaya trust Genesis Life Care for quality nursing home
-                  services. We have two centres nearby — Puchong ({puchongCentre.distance}) and
-                  Petaling Jaya ({pjCentre.distance}) — offering 24/7 nursing, on-site doctor
+                  services. We have two centres nearby — Puchong and
+                  Petaling Jaya (PJS 1) — offering 24/7 nursing, on-site doctor
                   consultations, dementia care, and comprehensive rehabilitation.</>}
-                  zh={<>梳邦再也的家庭信赖Genesis Life Care提供优质的养老院服务。我们附近有两间中心——Puchong（{puchongCentre.distanceZh}）和Petaling Jaya（{pjCentre.distanceZh}）——提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
+                  zh={<>梳邦再也的家庭信赖Genesis Life Care提供优质的养老院服务。我们附近有两间中心——Puchong和Petaling Jaya（PJS 1）——提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
                 />
               </p>
 
@@ -338,12 +338,12 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
               <p>
                 <Bilingual
                   en={<>Genesis Life Care has two centres conveniently located near Subang Jaya. Our Puchong
-                  centre at Taman Perindustrian Puchong (TPP) is approximately 15 minutes away, while
-                  our Petaling Jaya centre at PJS 1 is about 20 minutes away. Both facilities
+                  centre at Taman Perindustrian Puchong (TPP) is one, while
+                  our Petaling Jaya centre at PJS 1 is the other. Both facilities
                   provide 24-hour nursing care, weekly on-site doctor consultations, psychologist-led
                   dementia programmes, and full rehabilitation departments with physiotherapy and
                   occupational therapy.</>}
-                  zh="Genesis Life Care在梳邦再也附近设有两间交通便利的中心。我们位于Taman Perindustrian Puchong（TPP）的Puchong中心车程约15分钟，而位于PJS 1的Petaling Jaya中心车程约20分钟。两间设施均提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care在梳邦再也附近设有两间交通便利的中心。我们位于Taman Perindustrian Puchong（TPP）的Puchong中心是其一，位于PJS 1的Petaling Jaya中心是其二。两间设施均提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
@@ -446,7 +446,7 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                   </div>
                   <div className="bg-gray-50 rounded-lg p-3 text-center">
                     <p className="text-xl font-extrabold text-primary"><Bilingual en={puchongCentre.distance} zh={puchongCentre.distanceZh} /></p>
-                    <p className="text-xs text-gray-500"><Bilingual en="From Subang Jaya" zh="距梳邦再也" /></p>
+                    <p className="text-xs text-gray-500"><Bilingual en="Centre location" zh="中心位置" /></p>
                   </div>
                 </div>
 
@@ -497,7 +497,7 @@ export function ElderlyCareSubangJayaContent({ locale = 'en' }: { locale?: 'en' 
                   </div>
                   <div className="bg-gray-50 rounded-lg p-3 text-center">
                     <p className="text-xl font-extrabold text-primary"><Bilingual en={pjCentre.distance} zh={pjCentre.distanceZh} /></p>
-                    <p className="text-xs text-gray-500"><Bilingual en="From Subang Jaya" zh="距梳邦再也" /></p>
+                    <p className="text-xs text-gray-500"><Bilingual en="Centre location" zh="中心位置" /></p>
                   </div>
                 </div>
 

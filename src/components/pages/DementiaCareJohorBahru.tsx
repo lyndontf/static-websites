@@ -139,7 +139,7 @@ const faqs = [
   },
   {
     q: 'Which areas in Johor does Genesis Life Care serve for dementia care?',
-    a: 'Our Johor Bahru centre serves families across Johor, including Johor Bahru city, Iskandar Puteri, Skudai, Kulai, Pasir Gudang, Masai, and surrounding areas. We are conveniently located in Taman Century with easy highway access.',
+    a: 'Our Johor Bahru centre serves families across Johor, including Johor Bahru city, Iskandar Puteri, Skudai, Kulai, Pasir Gudang, Masai, and surrounding areas. We are conveniently located in Taman Century.',
   },
 ];
 
@@ -167,7 +167,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care在Johor为哪些地区提供痴呆症护理？',
-    a: '我们的Johor Bahru中心为Johor各地的家庭服务，包括Johor Bahru市、Iskandar Puteri、Skudai、Kulai、Pasir Gudang、Masai及周边地区。我们方便地位于Taman Century，易于通过高速公路进入。',
+    a: '我们的Johor Bahru中心为Johor各地的家庭服务，包括Johor Bahru市、Iskandar Puteri、Skudai、Kulai、Pasir Gudang、Masai及周边地区。我们方便地位于Taman Century。',
   },
 ];
 

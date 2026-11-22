@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   },
   title: "Elderly Care in Cheras",
   description:
-    'Looking for elderly care near Cheras? Genesis Life Care Kajang is just ~15 minutes away via the Cheras-Kajang Highway — offering 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
+    'Looking for elderly care near Cheras? Genesis Life Care Kajang, at Kawasan Perindustrian Ria, Kajang, offers 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
   openGraph: {
     title: 'Elderly Care Near Cheras - Genesis Life Care Kajang',
     description:
-      'Professional elderly care near Cheras. 24/7 nursing, dementia care, stroke rehabilitation. Visit our Kajang centre — minutes from Cheras.',
+      'Professional elderly care near Cheras. 24/7 nursing, dementia care, stroke rehabilitation. Visit our Kajang centre at Kawasan Perindustrian Ria, Kajang.',
     images: [{ url: '/images/kajang-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care Kajang' }],
   },
 };

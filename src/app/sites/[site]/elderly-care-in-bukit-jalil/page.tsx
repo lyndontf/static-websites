@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   },
   title: "Elderly Care in Bukit Jalil",
   description:
-    'Looking for elderly care near Bukit Jalil? Genesis Life Care Puchong is just ~15 minutes away — offering 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
+    'Looking for elderly care near Bukit Jalil? Genesis Life Care Puchong, at Taman Perindustrian Puchong, offers 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
   openGraph: {
     title: 'Elderly Care Near Bukit Jalil - Genesis Life Care Puchong',
     description:
-      'Professional elderly care near Bukit Jalil. 24/7 nursing, dementia care, stroke rehabilitation. Visit our Puchong centre — minutes from Bukit Jalil.',
+      'Professional elderly care near Bukit Jalil. 24/7 nursing, dementia care, stroke rehabilitation. Visit our Puchong centre at Taman Perindustrian Puchong.',
     images: [{ url: '/images/puchong-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care Puchong' }],
   },
 };

@@ -139,7 +139,7 @@ const faqs = [
   },
   {
     q: 'Which areas near Puchong does Genesis Life Care serve?',
-    a: 'Our Puchong centre serves families across the central Klang Valley, including Puchong, Subang Jaya, USJ, Sunway, Kinrara, Sri Petaling, and surrounding areas. We are conveniently located in Taman Perindustrian Puchong with easy highway access.',
+    a: 'Our Puchong centre serves families across the central Klang Valley, including Puchong, Subang Jaya, USJ, Sunway, Kinrara, Sri Petaling, and surrounding areas. We are conveniently located in Taman Perindustrian Puchong.',
   },
 ];
 
@@ -167,7 +167,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care在Puchong附近为哪些地区服务？',
-    a: '我们的Puchong中心为中部Klang Valley的家庭服务，包括Puchong、Subang Jaya、USJ、Sunway、Kinrara、Sri Petaling及周边地区。我们方便地位于Taman Perindustrian Puchong，易于从主要高速公路进入。',
+    a: '我们的Puchong中心为中部Klang Valley的家庭服务，包括Puchong、Subang Jaya、USJ、Sunway、Kinrara、Sri Petaling及周边地区。我们方便地位于Taman Perindustrian Puchong。',
   },
 ];
 

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '莎阿南附近的老年人护理',
   description:
-    '在莎阿南附近寻找老年人护理？Genesis Life Care Klang经由联邦2号公路仅约10分钟车程——提供24/7护理、失智症计划、中风康复及现场医生。立即预约参观。',
+    '在莎阿南附近寻找老年人护理？Genesis Life Care Klang位于Jalan Istana，Klang，提供24/7护理、失智症计划、中风康复及现场医生。立即预约参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/elderly-care-in-shah-alam',
     languages: {
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: '莎阿南附近的老年人护理 - Genesis Life Care Klang',
-    description: '莎阿南附近的专业老年人护理。24/7护理、失智症护理、中风康复。参观我们的Klang中心——距莎阿南仅数分钟车程。',
+    description: '莎阿南附近的专业老年人护理。24/7护理、失智症护理、中风康复。参观我们位于Jalan Istana，Klang的Klang中心。',
     images: [{ url: '/images/klang-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care Klang' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '莎阿南附近的老年人护理 - Genesis Life Care Klang',
-    description: '莎阿南附近的专业老年人护理。24/7护理、失智症护理、中风康复。参观我们的Klang中心——距莎阿南仅数分钟车程。',
+    description: '莎阿南附近的专业老年人护理。24/7护理、失智症护理、中风康复。参观我们位于Jalan Istana，Klang的Klang中心。',
     images: ['/images/klang-centre.jpg'],
   },
 };

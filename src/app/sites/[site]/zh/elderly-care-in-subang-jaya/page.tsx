@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '梳邦再也附近的老年人护理',
   description:
-    '在梳邦再也附近寻找老年人护理？Genesis Life Care附近设有两间中心——Petaling Jaya（约20分钟）及Puchong（约15分钟）。24/7护理、失智症计划、中风康复及现场医生。立即预约参观。',
+    '在梳邦再也附近寻找老年人护理？Genesis Life Care附近设有两间中心——Petaling Jaya（PJS 1）及Puchong（Taman Perindustrian Puchong）。24/7护理、失智症计划、中风康复及现场医生。立即预约参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/elderly-care-in-subang-jaya',
     languages: {

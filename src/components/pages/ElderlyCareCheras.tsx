@@ -20,8 +20,8 @@ const nearestCentre = {
   address: '41, Jalan Ria 1, Kawasan Perindustrian Ria, 43500 Kajang, Selangor',
   rating: GOOGLE_RATINGS.kajang.rating, reviews: GOOGLE_RATINGS.kajang.reviews,
   beds: '120+',
-  distance: '~15 minutes',
-  distanceZh: '~15分钟',
+  distance: 'Kajang',
+  distanceZh: '加影',
   img: '/images/kajang-centre.jpeg',
 };
 
@@ -80,7 +80,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Cheras?',
-    a: 'Yes. Genesis Life Care Kajang is located in Kawasan Perindustrian Ria, Kajang, approximately 15 minutes from Cheras via the Cheras-Kajang Highway. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care Kajang is located in Kawasan Perindustrian Ria, Kajang; we welcome families from Cheras. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Cheras?',
@@ -95,8 +95,8 @@ const faqs = [
     a: 'Absolutely. We encourage families to book a visit to our Kajang facility. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
   },
   {
-    q: 'How do I get to Genesis Life Care Kajang from Cheras?',
-    a: 'Our Kajang centre is easily accessible from Cheras via the Cheras-Kajang Highway (Grand Saga Expressway). The drive typically takes about 15 minutes. The centre is located at Kawasan Perindustrian Ria, just off the main highway.',
+    q: 'Where is Genesis Life Care Kajang?',
+    a: 'Our Kajang centre is at 41, Jalan Ria 1, Kawasan Perindustrian Ria, Kajang. Call us and we will help you plan your visit.',
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Cheras?',
@@ -108,7 +108,7 @@ const faqs = [
 const faqsZh = [
   {
     q: '蕉赖附近有养老院吗？',
-    a: '有。Genesis Life Care Kajang位于Kajang的Kawasan Perindustrian Ria，经由蕉赖—加影大道，距离蕉赖大约15分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care Kajang位于Kajang的Kawasan Perindustrian Ria，欢迎来自蕉赖的家庭。我们提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '蕉赖附近的老年人护理费用是多少？',
@@ -123,8 +123,8 @@ const faqsZh = [
     a: '当然可以。我们鼓励家庭预订我们Kajang设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
   },
   {
-    q: '我如何从蕉赖前往Genesis Life Care Kajang？',
-    a: '我们的Kajang中心可经由蕉赖—加影大道（Grand Saga Expressway）从蕉赖轻松抵达，车程通常约15分钟。中心位于Kajang的Kawasan Perindustrian Ria，就在主要干道旁。',
+    q: 'Genesis Life Care Kajang在哪里？',
+    a: '我们的Kajang中心位于Kajang的Jalan Ria 1，41号，Kawasan Perindustrian Ria。欢迎致电，我们将协助您安排参观。',
   },
   {
     q: 'Genesis Life Care与蕉赖附近的其他养老院有什么不同？',
@@ -225,10 +225,9 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
               <p className="text-lg text-white leading-relaxed mb-8 max-w-xl" style={{ color: 'white' }}>
                 <Bilingual
                   en={<>Families in Cheras trust Genesis Life Care for quality nursing home
-                  services. Our Kajang centre is just {nearestCentre.distance} away
-                  — offering 24/7 nursing, on-site doctor consultations, dementia care,
+                  services. Our centre at Kawasan Perindustrian Ria, Kajang offers 24/7 nursing, on-site doctor consultations, dementia care,
                   and comprehensive rehabilitation.</>}
-                  zh={<>蕉赖的家庭信赖Genesis Life Care提供优质的养老院服务。我们的Kajang中心距离仅{nearestCentre.distanceZh}——提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
+                  zh={<>蕉赖的家庭信赖Genesis Life Care提供优质的养老院服务。我们位于Kajang的Kawasan Perindustrian Ria的中心提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
                 />
               </p>
 
@@ -271,7 +270,7 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
                 </div>
                 <div>
                   <p className="text-sm font-bold text-gray-800"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                  <p className="text-xs text-gray-500"><Bilingual en="from Cheras" zh="距蕉赖" /></p>
+                  <p className="text-xs text-gray-500"><Bilingual en="Kajang centre" zh="加影中心" /></p>
                 </div>
               </div>
             </div>
@@ -302,11 +301,10 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
               <p>
                 <Bilingual
                   en={<>Genesis Life Care Kajang is the nearest Genesis centre to Cheras — located in
-                  Kawasan Perindustrian Ria, Kajang, just a short drive via the Cheras-Kajang Highway (Grand Saga
-                  Expressway). Our facility provides 24-hour nursing care, weekly on-site doctor
+                  Kawasan Perindustrian Ria, Kajang. Our facility provides 24-hour nursing care, weekly on-site doctor
                   consultations, psychologist-led dementia programmes, and a full rehabilitation
                   department with physiotherapy and occupational therapy.</>}
-                  zh="Genesis Life Care Kajang是距离蕉赖最近的Genesis中心——位于Kajang的Kawasan Perindustrian Ria，经由蕉赖—加影大道（Grand Saga Expressway）即可轻松抵达。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care Kajang是距离蕉赖最近的Genesis中心——位于Kajang的Kawasan Perindustrian Ria。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
@@ -377,8 +375,8 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
               <Bilingual
-                en={<>Just {nearestCentre.distance} from Cheras — our centre in Kawasan Perindustrian Ria, Kajang.</>}
-                zh={<>距蕉赖仅{nearestCentre.distanceZh}——我们位于Kajang的Kawasan Perindustrian Ria中心。</>}
+                en={<>Our centre at Kawasan Perindustrian Ria, Kajang.</>}
+                zh={<>我们位于Kajang的Kawasan Perindustrian Ria的中心。</>}
               />
             </p>
           </div>
@@ -410,7 +408,7 @@ export function ElderlyCareCherasContent({ locale = 'en' }: { locale?: 'en' | 'z
                   </div>
                   <div className="bg-gray-50 rounded-lg p-3 text-center">
                     <p className="text-2xl font-extrabold text-primary"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                    <p className="text-xs text-gray-500"><Bilingual en="From Cheras" zh="距蕉赖" /></p>
+                    <p className="text-xs text-gray-500"><Bilingual en="Kajang centre" zh="加影中心" /></p>
                   </div>
                 </div>
 

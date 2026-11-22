@@ -104,7 +104,7 @@ const checklist = [
   { title: 'Cleanliness & Hygiene', desc: 'We maintain strict hygiene standards with regular deep cleaning, infection control protocols, and well-maintained facilities.' },
   { title: 'Meal Quality & Options', desc: 'Freshly prepared nutritious meals, dietary accommodations for medical conditions, and varied menus.' },
   { title: 'Visiting Policy', desc: 'We encourage family involvement with flexible visiting hours and comfortable spaces for quality time together.' },
-  { title: 'Location & Accessibility', desc: 'Our PJ centre is easily accessible via Federal Highway and LDP, with ample parking for visitors.' },
+  { title: 'Location & Accessibility', desc: 'Our PJ centre is at PJS 1, Petaling Jaya, with ample parking for visitors.' },
   { title: 'Specialist Care Available', desc: 'Beyond basic care, we offer dementia programmes, stroke rehabilitation, palliative care, and post-surgery recovery.' },
 ];
 
@@ -115,7 +115,7 @@ const checklistZh = [
   { title: '清洁与卫生', desc: '我们严格执行卫生标准，定期进行深层清洁、感染控制措施，并保持设施完善。' },
   { title: '膳食品质与选择', desc: '新鲜烹制的营养膳食、针对医疗状况的饮食安排，以及多样化的菜单。' },
   { title: '探访政策', desc: '我们鼓励家属参与，提供灵活的探访时间和舒适的空间，让家人共度美好时光。' },
-  { title: '地点与交通', desc: '我们的八打灵再也中心可轻松经由联邦大道（Federal Highway）及白蒲大道（LDP）抵达，并设有充足的访客停车位。' },
+  { title: '地点与交通', desc: '我们的八打灵再也中心位于PJS 1，八打灵再也，并设有充足的访客停车位。' },
   { title: '提供专科护理', desc: '除基本护理外，我们也提供痴呆症护理计划、中风康复、缓和医疗及术后康复服务。' },
 ];
 
@@ -340,8 +340,8 @@ export function OldFolksHomePetalingJayaContent({ locale = 'en' }: { locale?: 'e
                 </p>
                 <p>
                   <Bilingual
-                    en="Petaling Jaya is ideal for families looking for accessible, high-quality senior care. Our centre is conveniently located near major hospitals including Sunway Medical Centre and Assunta Hospital, and is easily reachable via the Federal Highway and LDP Expressway, making family visits stress-free."
-                    zh="八打灵再也非常适合寻求便利、高品质乐龄护理的家庭。我们的中心邻近双威医疗中心（Sunway Medical Centre）及安顺医院（Assunta Hospital）等主要医院，并可轻松经由联邦大道及白蒲大道抵达，让家属探访毫无压力。"
+                    en="Petaling Jaya is ideal for families looking for accessible, high-quality senior care. Our centre is conveniently located near major hospitals including Sunway Medical Centre and Assunta Hospital."
+                    zh="八打灵再也非常适合寻求便利、高品质乐龄护理的家庭。我们的中心邻近双威医疗中心（Sunway Medical Centre）及安顺医院（Assunta Hospital）等主要医院。"
                   />
                 </p>
                 <p>
@@ -354,8 +354,6 @@ export function OldFolksHomePetalingJayaContent({ locale = 'en' }: { locale?: 'e
               <div className="flex flex-wrap gap-2 mt-6">
                 {[
                   { en: 'Near Major Hospitals', zh: '邻近主要医院' },
-                  { en: 'Federal Highway Access', zh: '联邦大道直达' },
-                  { en: 'LDP Expressway', zh: '白蒲大道直达' },
                   { en: 'Memory Care Wing', zh: '记忆护理部门' },
                   { en: 'Quality Dining', zh: '优质餐饮' },
                 ].map((t) => (
