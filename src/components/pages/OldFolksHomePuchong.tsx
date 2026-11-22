@@ -104,7 +104,7 @@ const checklist = [
   { title: 'Cleanliness & Hygiene', desc: 'We maintain strict hygiene standards with regular deep cleaning, infection control protocols, and well-maintained facilities.' },
   { title: 'Meal Quality & Options', desc: 'Freshly prepared nutritious meals, dietary accommodations for medical conditions, and varied menus.' },
   { title: 'Visiting Policy', desc: 'We encourage family involvement with flexible visiting hours and comfortable spaces for quality time together.' },
-  { title: 'Location & Accessibility', desc: 'Our Puchong centre in Taman Perindustrian Puchong is easily accessible via LDP Expressway and ELITE Highway, with ample parking for visitors.' },
+  { title: 'Location & Accessibility', desc: 'Our Puchong centre is at Taman Perindustrian Puchong, with ample parking for visitors.' },
   { title: 'Specialist Care Available', desc: 'Beyond basic care, we offer dementia programmes, stroke rehabilitation, palliative care, and post-surgery recovery.' },
 ];
 
@@ -115,7 +115,7 @@ const checklistZh = [
   { title: '清洁与卫生', desc: '我们严格执行卫生标准，定期进行深层清洁、感染控制措施，并保持设施完善。' },
   { title: '膳食品质与选择', desc: '新鲜烹制的营养膳食、针对医疗状况的饮食安排，以及多样化的菜单。' },
   { title: '探访政策', desc: '我们鼓励家属参与，提供灵活的探访时间和舒适的空间，让家人共度美好时光。' },
-  { title: '地点与交通', desc: '我们位于Taman Perindustrian Puchong的蒲种中心可轻松经由白蒲大道（LDP）及ELITE大道抵达，并设有充足的访客停车位。' },
+  { title: '地点与交通', desc: '我们位于Taman Perindustrian Puchong的蒲种中心设有充足的访客停车位。' },
   { title: '提供专科护理', desc: '除基本护理外，我们也提供痴呆症护理计划、中风康复、缓和医疗及术后康复服务。' },
 ];
 
@@ -345,8 +345,8 @@ export function OldFolksHomePuchongContent({ locale = 'en' }: { locale?: 'en' | 
                 </p>
                 <p>
                   <Bilingual
-                    en="Easy highway access via the LDP Expressway and ELITE Highway makes our centre central to many Klang Valley families. We are near Columbia Asia Hospital Puchong and KPJ Damansara Specialist Hospital, and ideal for families from Puchong, Subang Jaya, USJ, Cyberjaya, and Putrajaya."
-                    zh="经由白蒲大道（LDP）及ELITE大道即可轻松抵达，让我们的中心成为许多巴生谷家庭的理想之选。我们邻近哥伦比亚亚洲医院蒲种分院（Columbia Asia Hospital Puchong）及KPJ白沙罗专科医院，非常适合来自蒲种、梳邦再也、USJ、赛城及布城的家庭。"
+                    en="Our centre serves many Klang Valley families. We are near Columbia Asia Hospital Puchong and KPJ Damansara Specialist Hospital, and ideal for families from Puchong, Subang Jaya, USJ, Cyberjaya, and Putrajaya."
+                    zh="我们的中心服务许多巴生谷家庭。我们邻近哥伦比亚亚洲医院蒲种分院（Columbia Asia Hospital Puchong）及KPJ白沙罗专科医院，非常适合来自蒲种、梳邦再也、USJ、赛城及布城的家庭。"
                   />
                 </p>
               </div>
@@ -354,7 +354,6 @@ export function OldFolksHomePuchongContent({ locale = 'en' }: { locale?: 'en' | 
                 {[
                   { en: 'Modern Facility', zh: '现代化设施' },
                   { en: 'Quality Dining', zh: '优质餐饮' },
-                  { en: 'LDP & ELITE Access', zh: 'LDP与ELITE大道直达' },
                   { en: 'Taman Perindustrian Puchong', zh: 'Taman Perindustrian Puchong' },
                   { en: 'Near Hospitals', zh: '邻近医院' },
                 ].map((t) => (

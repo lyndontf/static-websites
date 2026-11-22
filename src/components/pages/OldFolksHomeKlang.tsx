@@ -104,7 +104,7 @@ const checklist = [
   { title: 'Cleanliness & Hygiene', desc: 'We maintain strict hygiene standards with regular deep cleaning, infection control protocols, and well-maintained facilities.' },
   { title: 'Meal Quality & Options', desc: 'Freshly prepared nutritious meals, dietary accommodations for medical conditions, and varied menus.' },
   { title: 'Visiting Policy', desc: 'We encourage family involvement with flexible visiting hours and comfortable spaces for quality time together.' },
-  { title: 'Location & Accessibility', desc: 'Our Klang centre is easily accessible from Federal Route 2 (Klang-Shah Alam) and the NKVE, with ample parking for visitors.' },
+  { title: 'Location & Accessibility', desc: 'Our Klang centre is at 3, Jalan Istana, Kawasan 1, Klang, with ample parking for visitors.' },
   { title: 'Specialist Care Available', desc: 'Beyond basic care, we offer dementia programmes, stroke rehabilitation, palliative care, and post-surgery recovery.' },
 ];
 
@@ -115,7 +115,7 @@ const checklistZh = [
   { title: '清洁与卫生', desc: '我们严格执行卫生标准，定期进行深层清洁、感染控制措施，并保持设施完善。' },
   { title: '膳食品质与选择', desc: '新鲜烹制的营养膳食、针对医疗状况的饮食安排，以及多样化的菜单。' },
   { title: '探访政策', desc: '我们鼓励家属参与，提供灵活的探访时间和舒适的空间，让家人共度美好时光。' },
-  { title: '地点与交通', desc: '我们的巴生中心可轻松经由联邦2号大道（巴生—莎阿南）及新巴生河流域快速大道（NKVE）抵达，并设有充足的访客停车位。' },
+  { title: '地点与交通', desc: '我们的巴生中心位于巴生Jalan Istana，3号，Kawasan 1，并设有充足的访客停车位。' },
   { title: '提供专科护理', desc: '除基本护理外，我们也提供痴呆症护理计划、中风康复、缓和医疗及术后康复服务。' },
 ];
 
@@ -345,8 +345,8 @@ export function OldFolksHomeKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
                 </p>
                 <p>
                   <Bilingual
-                    en="Klang is ideal for families looking for proven, community-rooted elderly care. Our centre is conveniently located near Hospital Tengku Ampuan Rahimah (HTAR), the major government hospital in Klang, and is easily accessible from Federal Route 2 (Klang-Shah Alam) and the NKVE, making family visits stress-free."
-                    zh="巴生非常适合寻求经验证、扎根社区的乐龄护理的家庭。我们的中心邻近东姑安潘拉希玛医院（Hospital Tengku Ampuan Rahimah, HTAR）——巴生主要的政府医院，并可轻松经由联邦2号大道（巴生—莎阿南）及新巴生河流域快速大道（NKVE）抵达，让家属探访无压力。"
+                    en="Klang is ideal for families looking for proven, community-rooted elderly care. Our centre is conveniently located near Hospital Tengku Ampuan Rahimah (HTAR), the major government hospital in Klang."
+                    zh="巴生非常适合寻求经验证、扎根社区的乐龄护理的家庭。我们的中心邻近东姑安潘拉希玛医院（Hospital Tengku Ampuan Rahimah, HTAR）——巴生主要的政府医院。"
                   />
                 </p>
                 <p>

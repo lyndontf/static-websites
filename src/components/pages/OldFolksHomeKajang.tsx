@@ -104,7 +104,7 @@ const checklist = [
   { title: 'Cleanliness & Hygiene', desc: 'We maintain strict hygiene standards with regular deep cleaning, infection control protocols, and well-maintained facilities.' },
   { title: 'Meal Quality & Options', desc: 'Freshly prepared nutritious meals, dietary accommodations for medical conditions, and varied menus.' },
   { title: 'Visiting Policy', desc: 'We encourage family involvement with flexible visiting hours and comfortable spaces for quality time together.' },
-  { title: 'Location & Accessibility', desc: 'Our Kajang centre is easily accessible via SILK Highway, PLUS Highway, and Kajang MRT station, with ample parking for visitors.' },
+  { title: 'Location & Accessibility', desc: 'Our Kajang centre is at 41, Jalan Ria 1, Kawasan Perindustrian Ria, with ample parking for visitors.' },
   { title: 'Specialist Care Available', desc: 'Beyond basic care, we offer dementia programmes, stroke rehabilitation, palliative care, and post-surgery recovery.' },
 ];
 
@@ -115,7 +115,7 @@ const checklistZh = [
   { title: '清洁与卫生', desc: '我们严格执行卫生标准，定期进行深层清洁、感染控制措施，并保持设施完善。' },
   { title: '膳食品质与选择', desc: '新鲜烹制的营养膳食、针对医疗状况的饮食安排，以及多样化的菜单。' },
   { title: '探访政策', desc: '我们鼓励家属参与，提供灵活的探访时间和舒适的空间，让家人共度美好时光。' },
-  { title: '地点与交通', desc: '我们的加影中心可轻松经由SILK大道、南北大道（PLUS Highway）及加影地铁站抵达，并设有充足的访客停车位。' },
+  { title: '地点与交通', desc: '我们的加影中心位于Kawasan Perindustrian Ria，Jalan Ria 1，41号，并设有充足的访客停车位。' },
   { title: '提供专科护理', desc: '除基本护理外，我们也提供痴呆症护理计划、中风康复、缓和医疗及术后康复服务。' },
 ];
 
@@ -340,8 +340,8 @@ export function OldFolksHomeKajangContent({ locale = 'en' }: { locale?: 'en' | '
                 </p>
                 <p>
                   <Bilingual
-                    en="Our Kajang old folks home is situated near Hospital Kajang, making it easy for families to manage medical appointments. The centre is accessible from SILK Highway, PLUS Highway, and Kajang MRT station, ensuring stress-free family visits from Kajang, Bangi, Semenyih, and surrounding areas."
-                    zh="我们的加影老年人之家邻近加影医院（Hospital Kajang），方便家属安排就医预约。中心可经由SILK大道、南北大道（PLUS Highway）及加影地铁站抵达，让来自加影、万挠、士毛月及周边地区的家属探访无压力。"
+                    en="Our Kajang old folks home is situated near Hospital Kajang, making it easy for families to manage medical appointments. We welcome families from Kajang, Bangi, Semenyih, and surrounding areas."
+                    zh="我们的加影老年人之家邻近加影医院（Hospital Kajang），方便家属安排就医预约。欢迎来自加影、万挠、士毛月及周边地区的家庭。"
                   />
                 </p>
                 <p>
@@ -356,7 +356,6 @@ export function OldFolksHomeKajangContent({ locale = 'en' }: { locale?: 'en' | '
                   { en: 'Southern Klang Valley', zh: '南巴生谷' },
                   { en: 'Near Hospital Kajang', zh: '靠近加影医院' },
                   { en: 'Quality Dining', zh: '优质餐饮' },
-                  { en: 'SILK Highway Access', zh: 'SILK大道直达' },
                   { en: 'MRT Accessible', zh: '地铁直达' },
                 ].map((t) => (
                   <span key={t.en} className="bg-primary-50 text-primary-700 text-xs font-semibold px-3 py-1.5 rounded-full"><Bilingual en={t.en} zh={t.zh} /></span>

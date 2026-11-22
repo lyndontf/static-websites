@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   title: "Elderly Care in Subang Jaya",
   description:
-    'Looking for elderly care near Subang Jaya? Genesis Life Care has two centres nearby — Petaling Jaya (~20 min) and Puchong (~15 min). 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
+    'Looking for elderly care near Subang Jaya? Genesis Life Care has two centres nearby — Petaling Jaya (PJS 1) and Puchong (Taman Perindustrian Puchong). 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
   openGraph: {
     title: 'Elderly Care Near Subang Jaya - Genesis Life Care',
     description:

@@ -42,7 +42,7 @@ const centres = [
     rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
     img: '/images/puchong-centre.jpeg',
     tags: ['Convenient Access', 'Modern Facility', 'Quality Dining'],
-    desc: 'Located in Taman Perindustrian Puchong with easy highway access. A modern facility offering our full range of services with quality dining and comfortable facilities.',
+    desc: 'Located in Taman Perindustrian Puchong. A modern facility offering our full range of services with quality dining and comfortable facilities.',
   },
   {
     name: 'Johor Bahru',
@@ -60,7 +60,7 @@ const centresZh = [
   { tags: ['旗舰中心', '记忆护理专区', '康复设施'], desc: '我们位于八打灵再也的旗舰中心，设有专属记忆护理专区及全面的康复设施，提供强化物理治疗与职能治疗服务。' },
   { tags: ['成立于2018年', '邻近主要医院', '首间中心'], desc: '一切的起点。我们位于巴生的首间中心邻近主要医院，服务北部巴生谷各地的家庭。' },
   { tags: ['南巴生谷', '温馨家庭氛围', '优质膳食'], desc: '温馨的家庭式环境，提供个人化护理与优质膳食。' },
-  { tags: ['交通便利', '现代化设施', '优质膳食'], desc: '座落于Taman Perindustrian Puchong，高速公路通行便利。现代化设施提供全方位服务，配备优质膳食与舒适环境。' },
+  { tags: ['交通便利', '现代化设施', '优质膳食'], desc: '座落于Taman Perindustrian Puchong。现代化设施提供全方位服务，配备优质膳食与舒适环境。' },
   { tags: ['南部地区', '最新中心', '全方位服务'], desc: '我们首间设于巴生谷以外的中心，将Genesis的护理标准带给新山及南部地区的家庭。' },
 ];
 
@@ -144,8 +144,8 @@ export function OurLocationsContent({ locale = 'en' }: { locale?: 'en' | 'zh' } 
           </h1>
           <p className="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto leading-relaxed">
             <Bilingual
-              en={<>5 affordable nursing homes across Klang Valley and Johor Bahru &mdash; all conveniently located near major hospitals and highways.</>}
-              zh="5间实惠护理院遍布巴生谷与新山——皆邻近主要医院与高速公路，交通便利。"
+              en={<>5 affordable nursing homes across Klang Valley and Johor Bahru &mdash; all conveniently located near major hospitals.</>}
+              zh="5间实惠护理院遍布巴生谷与新山——皆邻近主要医院。"
             />
           </p>
         </div>

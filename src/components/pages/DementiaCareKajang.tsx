@@ -138,7 +138,7 @@ const faqs = [
   },
   {
     q: 'Which areas near Kajang does Genesis Life Care serve?',
-    a: 'Our Kajang centre serves families across the southern Klang Valley, including Kajang, Bangi, Semenyih, Serdang, south Cheras, and surrounding areas. We are conveniently located in Kawasan Perindustrian Ria with easy access from major highways.',
+    a: 'Our Kajang centre serves families across the southern Klang Valley, including Kajang, Bangi, Semenyih, Serdang, south Cheras, and surrounding areas. We are conveniently located in Kawasan Perindustrian Ria.',
   },
 ];
 
@@ -166,7 +166,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care在Kajang附近为哪些地区服务？',
-    a: '我们的Kajang中心为南部巴生谷的家庭服务，包括Kajang、Bangi、Semenyih、Serdang、南部Cheras及周边地区。我们方便地位于Kawasan Perindustrian Ria，易于从主要高速公路进入。',
+    a: '我们的Kajang中心为南部巴生谷的家庭服务，包括Kajang、Bangi、Semenyih、Serdang、南部Cheras及周边地区。我们方便地位于Kawasan Perindustrian Ria。',
   },
 ];
 

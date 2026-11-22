@@ -20,8 +20,8 @@ const nearestCentre = {
   address: '16, Jln TPP 1/1, Taman Perindustrian Puchong, 47100 Puchong, Selangor',
   rating: GOOGLE_RATINGS.puchong.rating, reviews: GOOGLE_RATINGS.puchong.reviews,
   beds: '120+',
-  distance: '~15 minutes',
-  distanceZh: '~15分钟',
+  distance: 'Puchong',
+  distanceZh: '蒲种',
   img: '/images/puchong-centre.jpeg',
 };
 
@@ -80,7 +80,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Bukit Jalil?',
-    a: 'Yes. Genesis Life Care Puchong is located in Taman Perindustrian Puchong, approximately 15 minutes from Bukit Jalil. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care Puchong is located in Taman Perindustrian Puchong; we welcome families from Bukit Jalil. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Bukit Jalil?',
@@ -95,8 +95,8 @@ const faqs = [
     a: 'Absolutely. We encourage families to book a visit to our Puchong facility. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
   },
   {
-    q: 'How do I get to Genesis Life Care Puchong from Bukit Jalil?',
-    a: 'Our Puchong centre is easily accessible from Bukit Jalil via the LDP (Lebuhraya Damansara-Puchong) or Bukit Jalil Highway. The drive typically takes about 15 minutes. The centre is located in Taman Perindustrian Puchong.',
+    q: 'Where is Genesis Life Care Puchong?',
+    a: 'Our Puchong centre is at 16, Jln TPP 1/1, Taman Perindustrian Puchong. Call us and we will help you plan your visit.',
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Bukit Jalil?',
@@ -108,7 +108,7 @@ const faqs = [
 const faqsZh = [
   {
     q: 'Bukit Jalil附近有养老院吗？',
-    a: '有。Genesis Life Care Puchong位于Taman Perindustrian Puchong，距离武吉加里尔大约15分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care Puchong位于Taman Perindustrian Puchong，欢迎来自武吉加里尔的家庭。我们提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '武吉加里尔附近的老年人护理费用是多少？',
@@ -123,8 +123,8 @@ const faqsZh = [
     a: '当然可以。我们鼓励家庭预订我们Puchong设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
   },
   {
-    q: '我如何从武吉加里尔前往Genesis Life Care Puchong？',
-    a: '我们的Puchong中心可经由LDP（Lebuhraya Damansara-Puchong）或武吉加里尔大道从武吉加里尔轻松抵达，车程通常约15分钟。中心位于Taman Perindustrian Puchong。',
+    q: 'Genesis Life Care Puchong在哪里？',
+    a: '我们的Puchong中心位于Taman Perindustrian Puchong，Jln TPP 1/1，16号。欢迎致电，我们将协助您安排参观。',
   },
   {
     q: 'Genesis Life Care与武吉加里尔附近的其他养老院有什么不同？',
@@ -225,10 +225,9 @@ export function ElderlyCareBukitJalilContent({ locale = 'en' }: { locale?: 'en' 
               <p className="text-lg text-white leading-relaxed mb-8 max-w-xl" style={{ color: 'white' }}>
                 <Bilingual
                   en={<>Families in Bukit Jalil trust Genesis Life Care for quality nursing home
-                  services. Our Puchong centre is just {nearestCentre.distance} away
-                  — offering 24/7 nursing, on-site doctor consultations, dementia care,
+                  services. Our centre in Taman Perindustrian Puchong offers 24/7 nursing, on-site doctor consultations, dementia care,
                   and comprehensive rehabilitation.</>}
-                  zh={<>武吉加里尔的家庭信赖Genesis Life Care提供优质的养老院服务。我们的Puchong中心距离仅{nearestCentre.distanceZh}——提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
+                  zh={<>武吉加里尔的家庭信赖Genesis Life Care提供优质的养老院服务。我们位于Taman Perindustrian Puchong的中心提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
                 />
               </p>
 
@@ -271,7 +270,7 @@ export function ElderlyCareBukitJalilContent({ locale = 'en' }: { locale?: 'en' 
                 </div>
                 <div>
                   <p className="text-sm font-bold text-gray-800"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                  <p className="text-xs text-gray-500"><Bilingual en="from Bukit Jalil" zh="距武吉加里尔" /></p>
+                  <p className="text-xs text-gray-500"><Bilingual en="Puchong centre" zh="蒲种中心" /></p>
                 </div>
               </div>
             </div>
@@ -302,11 +301,11 @@ export function ElderlyCareBukitJalilContent({ locale = 'en' }: { locale?: 'en' 
               <p>
                 <Bilingual
                   en={<>Genesis Life Care Puchong is the nearest Genesis centre to Bukit Jalil — located in
-                  Taman Perindustrian Puchong, easily accessible via the LDP or Bukit Jalil Highway.
+                  Taman Perindustrian Puchong.
                   Our facility provides 24-hour nursing care, weekly on-site doctor consultations,
                   psychologist-led dementia programmes, and a full rehabilitation department with
                   physiotherapy and occupational therapy.</>}
-                  zh="Genesis Life Care Puchong是距离武吉加里尔最近的Genesis中心——位于Taman Perindustrian Puchong，经由LDP或武吉加里尔大道即可轻松抵达。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care Puchong是距离武吉加里尔最近的Genesis中心——位于Taman Perindustrian Puchong。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
@@ -377,8 +376,8 @@ export function ElderlyCareBukitJalilContent({ locale = 'en' }: { locale?: 'en' 
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
               <Bilingual
-                en={<>Just {nearestCentre.distance} from Bukit Jalil — our centre in Taman Perindustrian Puchong.</>}
-                zh={<>距武吉加里尔仅{nearestCentre.distanceZh}——我们位于Taman Perindustrian Puchong的中心。</>}
+                en={<>Our centre in Taman Perindustrian Puchong.</>}
+                zh={<>我们位于Taman Perindustrian Puchong的中心。</>}
               />
             </p>
           </div>
@@ -410,7 +409,7 @@ export function ElderlyCareBukitJalilContent({ locale = 'en' }: { locale?: 'en' 
                   </div>
                   <div className="bg-gray-50 rounded-lg p-3 text-center">
                     <p className="text-2xl font-extrabold text-primary"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                    <p className="text-xs text-gray-500"><Bilingual en="From Bukit Jalil" zh="距武吉加里尔" /></p>
+                    <p className="text-xs text-gray-500"><Bilingual en="Puchong centre" zh="蒲种中心" /></p>
                   </div>
                 </div>
 

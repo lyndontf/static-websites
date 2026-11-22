@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '武吉加里尔附近的老年人护理',
   description:
-    '武吉加里尔附近的老年人护理，Genesis Life Care Puchong中心车程仅约15分钟。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。立即预约参观。',
+    '武吉加里尔附近的老年人护理，Genesis Life Care Puchong中心位于Taman Perindustrian Puchong。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。立即预约参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/elderly-care-in-bukit-jalil',
     languages: {
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: '武吉加里尔附近老年人护理 - Genesis Life Care Puchong',
-    description: '专业老年人护理，靠近武吉加里尔。24/7护理、失智症护理、中风康复。参观我们的Puchong中心——距武吉加里尔仅数分钟车程。',
+    description: '专业老年人护理，靠近武吉加里尔。24/7护理、失智症护理、中风康复。参观我们位于Taman Perindustrian Puchong的Puchong中心。',
     images: [{ url: '/images/puchong-centre.jpeg', width: 1200, height: 630, alt: 'Genesis Life Care Puchong — 武吉加里尔附近老年人护理' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '武吉加里尔附近老年人护理 - Genesis Life Care Puchong',
-    description: '专业老年人护理，靠近武吉加里尔。24/7护理、失智症护理、中风康复。参观我们的Puchong中心——距武吉加里尔仅数分钟车程。',
+    description: '专业老年人护理，靠近武吉加里尔。24/7护理、失智症护理、中风康复。参观我们位于Taman Perindustrian Puchong的Puchong中心。',
     images: ['/images/puchong-centre.jpeg'],
   },
 };
