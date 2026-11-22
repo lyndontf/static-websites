@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // Root layout wraps this in `%s | ${siteName}` automatically — no manual suffix.
   title: '孟沙附近的老年人护理',
   description:
-    '孟沙附近的老年人护理，Genesis Life Care Petaling Jaya中心车程仅约15分钟。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。逾155则评价。立即预约参观。',
+    '孟沙附近的老年人护理，Genesis Life Care Petaling Jaya中心位于PJS 1，八打灵再也。提供24/7护理、现场医生咨询、失智症护理及全面康复服务。立即预约参观。',
   alternates: {
     canonical: 'https://genesiscare.com.my/zh/elderly-care-in-bangsar',
     languages: {
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: '孟沙附近老年人护理 - Genesis Life Care PJ',
-    description: '专业老年人护理，靠近孟沙。24/7护理、失智症护理、中风康复。参观我们的Petaling Jaya中心——距孟沙仅数分钟车程。',
+    description: '专业老年人护理，靠近孟沙。24/7护理、失智症护理、中风康复。参观我们的Petaling Jaya中心——位于PJS 1，八打灵再也。',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care Petaling Jaya — 孟沙附近老年人护理' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '孟沙附近老年人护理 - Genesis Life Care PJ',
-    description: '专业老年人护理，靠近孟沙。24/7护理、失智症护理、中风康复。参观我们的Petaling Jaya中心——距孟沙仅数分钟车程。',
+    description: '专业老年人护理，靠近孟沙。24/7护理、失智症护理、中风康复。参观我们的Petaling Jaya中心——位于PJS 1，八打灵再也。',
     images: ['/images/pj-centre.jpg'],
   },
 };

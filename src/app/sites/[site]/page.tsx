@@ -256,10 +256,10 @@ export default async function HomePage({ params }: { params: Promise<SiteParams>
     email: settings?.contact_email || 'enquiries@genesiscare.com.my',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'No.3, Jalan Istana, Amverton Business Centre',
+      streetAddress: '3, Jalan Istana, Kawasan 1',
       addressLocality: 'Klang',
       addressRegion: 'Selangor',
-      postalCode: '41500',
+      postalCode: '41000',
       addressCountry: 'MY',
     },
     areaServed: [

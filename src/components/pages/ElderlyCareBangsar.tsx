@@ -17,11 +17,11 @@ const nearestCentre = {
   slug: 'nursing-home-in-petaling-jaya',
   phone: '+6019 295 0457',
   phoneCTA: '+6019-295-0457',
-  address: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama, 46150 Petaling Jaya, Selangor',
+  address: '1, Petaling Utama Ave, PJS 1, 58200 Petaling Jaya, Selangor',
   rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
   beds: '50+',
-  distance: '~15 minutes',
-  distanceZh: '~15分钟',
+  distance: 'PJS 1',
+  distanceZh: 'PJS 1',
   img: '/images/pj-centre.jpg',
 };
 
@@ -81,7 +81,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Bangsar?',
-    a: 'Yes. Genesis Life Care Petaling Jaya is located in Kota Damansara, approximately 15 minutes from Bangsar. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care Petaling Jaya is located at PJS 1, Petaling Jaya. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Bangsar?',
@@ -97,7 +97,7 @@ const faqs = [
   },
   {
     q: 'Does Genesis Life Care provide transport from Bangsar?',
-    a: 'While we do not provide regular transport services, our Petaling Jaya centre is easily accessible from Bangsar via major highways (LDP, Sprint, NKVE). The drive typically takes about 15 minutes.',
+    a: 'We do not provide regular transport services. Our centre is at PJS 1, Petaling Jaya; call us and we will help you plan your visit.',
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Bangsar?',
@@ -109,7 +109,7 @@ const faqs = [
 const faqsZh = [
   {
     q: 'Bangsar附近有养老院吗？',
-    a: '有。Genesis Life Care Petaling Jaya位于Kota Damansara，距离孟沙大约15分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care Petaling Jaya位于PJS 1，八打灵再也。我们提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '孟沙附近的老年人护理费用是多少？',
@@ -125,7 +125,7 @@ const faqsZh = [
   },
   {
     q: 'Genesis Life Care提供从孟沙出发的交通服务吗？',
-    a: '虽然我们不提供定期接送服务，但我们的Petaling Jaya中心可经由主要高速公路（LDP、Sprint、NKVE）从孟沙轻松抵达，车程通常约15分钟。',
+    a: '我们不提供定期接送服务。我们的中心位于PJS 1，八打灵再也；欢迎致电，我们将协助您安排参观。',
   },
   {
     q: 'Genesis Life Care与孟沙附近的其他养老院有什么不同？',
@@ -151,10 +151,10 @@ function buildJsonLd(locale: 'en' | 'zh') {
       telephone: '+60192950457',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Lot 1, Petaling Utama Avenue, Jalan PJS 1/50, Taman Petaling Utama',
+        streetAddress: '1, Petaling Utama Ave, PJS 1',
         addressLocality: 'Petaling Jaya',
         addressRegion: 'Selangor',
-        postalCode: '46150',
+        postalCode: '58200',
         addressCountry: 'MY',
       },
       areaServed: [
@@ -226,10 +226,9 @@ export function ElderlyCareBangsarContent({ locale = 'en' }: { locale?: 'en' | '
               <p className="text-lg text-white leading-relaxed mb-8 max-w-xl" style={{ color: 'white' }}>
                 <Bilingual
                   en={<>Families in Bangsar trust Genesis Life Care for quality nursing home
-                  services. Our Petaling Jaya centre is just {nearestCentre.distance} away
-                  — offering 24/7 nursing, on-site doctor consultations, dementia care,
+                  services. Our centre at PJS 1, Petaling Jaya offers 24/7 nursing, on-site doctor consultations, dementia care,
                   and comprehensive rehabilitation.</>}
-                  zh={<>孟沙的家庭信赖Genesis Life Care提供优质的养老院服务。我们的Petaling Jaya中心距离仅{nearestCentre.distanceZh}——提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
+                  zh={<>孟沙的家庭信赖Genesis Life Care提供优质的养老院服务。我们位于PJS 1（八打灵再也）的中心提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
                 />
               </p>
 
@@ -272,7 +271,7 @@ export function ElderlyCareBangsarContent({ locale = 'en' }: { locale?: 'en' | '
                 </div>
                 <div>
                   <p className="text-sm font-bold text-gray-800"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                  <p className="text-xs text-gray-500"><Bilingual en="from Bangsar" zh="距孟沙" /></p>
+                  <p className="text-xs text-gray-500"><Bilingual en="Petaling Jaya centre" zh="八打灵再也中心" /></p>
                 </div>
               </div>
             </div>
@@ -302,11 +301,11 @@ export function ElderlyCareBangsarContent({ locale = 'en' }: { locale?: 'en' | '
               <p>
                 <Bilingual
                   en={<>Genesis Life Care Petaling Jaya is the nearest Genesis centre to Bangsar — located in
-                  Kota Damansara, just a short drive via the LDP or Sprint highways. Our facility
+                  PJS 1, Petaling Jaya. Our facility
                   provides 24-hour nursing care, weekly on-site doctor consultations, psychologist-led
                   dementia programmes, and a full rehabilitation department with physiotherapy and
                   occupational therapy.</>}
-                  zh="Genesis Life Care Petaling Jaya是距离孟沙最近的Genesis中心——位于Kota Damansara，经由LDP或Sprint大道即可轻松抵达。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care Petaling Jaya是距离孟沙最近的Genesis中心——位于PJS 1，八打灵再也。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
@@ -377,8 +376,8 @@ export function ElderlyCareBangsarContent({ locale = 'en' }: { locale?: 'en' | '
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
               <Bilingual
-                en={<>Just {nearestCentre.distance} from Bangsar — our flagship centre in Kota Damansara.</>}
-                zh={<>距孟沙仅{nearestCentre.distanceZh}——我们位于Kota Damansara的旗舰中心。</>}
+                en={<>Our flagship centre at PJS 1, Petaling Jaya.</>}
+                zh={<>我们位于PJS 1（八打灵再也）的旗舰中心。</>}
               />
             </p>
           </div>
@@ -410,7 +409,7 @@ export function ElderlyCareBangsarContent({ locale = 'en' }: { locale?: 'en' | '
                   </div>
                   <div className="bg-gray-50 rounded-lg p-3 text-center">
                     <p className="text-2xl font-extrabold text-primary"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                    <p className="text-xs text-gray-500"><Bilingual en="From Bangsar" zh="距孟沙" /></p>
+                    <p className="text-xs text-gray-500"><Bilingual en="Petaling Jaya centre" zh="八打灵再也中心" /></p>
                   </div>
                 </div>
 

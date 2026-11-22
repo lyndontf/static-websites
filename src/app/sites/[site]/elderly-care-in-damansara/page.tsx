@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   },
   title: "Elderly Care in Damansara",
   description:
-    'Looking for elderly care near Damansara? Genesis Life Care Petaling Jaya in Kota Damansara is just minutes away — offering 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
+    'Looking for elderly care near Damansara? Genesis Life Care Petaling Jaya, at PJS 1, offers 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
   openGraph: {
     title: 'Elderly Care Near Damansara - Genesis Life Care PJ',
     description:
-      'Professional elderly care near Damansara. 24/7 nursing, dementia care, stroke rehabilitation. Visit our Petaling Jaya centre — minutes from Damansara.',
+      'Professional elderly care near Damansara. 24/7 nursing, dementia care, stroke rehabilitation. Visit our Petaling Jaya centre .',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care Petaling Jaya' }],
   },
 };

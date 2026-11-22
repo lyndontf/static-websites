@@ -11,7 +11,7 @@ const centre = {
   fullName: 'Genesis Life Care Klang',
   phone: '+6019 325 0457',
   phoneCTA: '+6019-325-0457',
-  address: 'No.3, Jalan Istana, Amverton Business Centre, 41000 Klang, Selangor',
+  address: '3, Jalan Istana, Kawasan 1, 41000 Klang, Selangor',
   rating: GOOGLE_RATINGS.klang.rating, reviews: GOOGLE_RATINGS.klang.reviews,
   established: '2018',
   beds: '120+',
@@ -210,7 +210,7 @@ function buildJsonLd(locale: 'en' | 'zh') {
       telephone: centre.phone,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'No.3, Jalan Istana, Amverton Business Centre',
+        streetAddress: '3, Jalan Istana, Kawasan 1',
         addressLocality: 'Klang',
         addressRegion: 'Selangor',
         postalCode: '41000',
@@ -339,8 +339,8 @@ export function OldFolksHomeKlangContent({ locale = 'en' }: { locale?: 'en' | 'z
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
                   <Bilingual
-                    en="Finding the right old folks home for your loved one is one of the most important decisions a family can make. Our Klang centre is the original Genesis Life Care home, established in 2018 — making it the most experienced of all five centres. Located at Amverton Business Centre on Jalan Istana, a well-known area in the heart of Klang town, it has been a trusted choice for families across the district."
-                    zh="为亲人找到合适的老年人之家，是家庭需要做出的最重要决定之一。我们的巴生中心是Genesis Life Care的首间中心，成立于2018年——是五间中心中经验最丰富的一间。中心位于Jalan Istana的Amverton Business Centre，地处巴生市中心的知名地段，一直是巴生县内家庭信赖的选择。"
+                    en="Finding the right old folks home for your loved one is one of the most important decisions a family can make. Our Klang centre is the original Genesis Life Care home, established in 2018 — making it the most experienced of all five centres. Located on Jalan Istana, a well-known area in the heart of Klang town, it has been a trusted choice for families across the district."
+                    zh="为亲人找到合适的老年人之家，是家庭需要做出的最重要决定之一。我们的巴生中心是Genesis Life Care的首间中心，成立于2018年——是五间中心中经验最丰富的一间。中心位于Jalan Istana，地处巴生市中心的知名地段，一直是巴生县内家庭信赖的选择。"
                   />
                 </p>
                 <p>
