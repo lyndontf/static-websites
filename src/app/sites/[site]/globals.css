@@ -279,3 +279,28 @@ footer span.footer-address {
   color: rgba(255, 255, 255, 0.8) !important;
 }
 
+
+/* ── Phone fit for genesiscare.com.my (lcs#3228) ──
+   Inline grid-template-columns on the team and "what we offer" grids beat the page stylesheet's phone rules, one
+   call-to-action card could not shrink, and two blog tables were wider than the column: nine pages were up to 793px
+   wide on a 390px phone. Only affects screens up to 900px wide. */
+@media (max-width: 900px) {
+  .cms-html-page .glc-loc-team-grid,
+  .cms-html-page .glc-svc-grid3[style*="repeat(4"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .cms-html-page .glc-svc-cta__grid > * {
+    min-width: 0;
+  }
+  article table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+@media (max-width: 560px) {
+  .cms-html-page .glc-loc-team-grid,
+  .cms-html-page .glc-svc-grid3[style*="repeat(4"] {
+    grid-template-columns: 1fr !important;
+  }
+}
