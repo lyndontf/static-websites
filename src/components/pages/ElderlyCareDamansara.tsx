@@ -20,8 +20,8 @@ const nearestCentre = {
   address: '1, Petaling Utama Ave, PJS 1, 58200 Petaling Jaya, Selangor',
   rating: GOOGLE_RATINGS.pj.rating, reviews: GOOGLE_RATINGS.pj.reviews,
   beds: '50+',
-  distance: '~10 minutes',
-  distanceZh: '~10分钟',
+  distance: 'PJS 1',
+  distanceZh: 'PJS 1',
   img: '/images/pj-centre.jpg',
 };
 
@@ -80,7 +80,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'Is there a nursing home near Damansara?',
-    a: 'Yes. Genesis Life Care Petaling Jaya is located in Petaling Utama, approximately 10 minutes from Damansara Heights, Damansara Utama, and Damansara Jaya. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
+    a: 'Yes. Genesis Life Care Petaling Jaya is located at PJS 1, Petaling Jaya, and welcomes families from Damansara Heights, Damansara Utama, and Damansara Jaya. We offer 24/7 nursing care, dementia programmes, and stroke rehabilitation services.',
   },
   {
     q: 'How much does elderly care cost near Damansara?',
@@ -92,11 +92,11 @@ const faqs = [
   },
   {
     q: 'Can I visit the nursing home near Damansara before deciding?',
-    a: 'Absolutely. We encourage families to book a visit to our Petaling Jaya facility in Petaling Utama. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
+    a: 'Absolutely. We encourage families to book a visit to our Petaling Jaya facility at PJS 1. You can see the living spaces, meet the care team, and ask any questions — with no obligations.',
   },
   {
-    q: 'How far is Genesis Life Care from Damansara Heights?',
-    a: 'Our Petaling Jaya centre in Petaling Utama is approximately 10 minutes from Damansara Heights via the LDP or Sprint highways. The location is also easily accessible from Damansara Utama and Damansara Jaya.',
+    q: 'Where is Genesis Life Care for families from Damansara Heights?',
+    a: 'Our centre is at PJS 1, Petaling Jaya. We welcome families from Damansara Heights, Damansara Utama and Damansara Jaya; call us to arrange a visit.',
   },
   {
     q: 'What makes Genesis Life Care different from other nursing homes near Damansara?',
@@ -108,7 +108,7 @@ const faqs = [
 const faqsZh = [
   {
     q: '白沙罗附近有养老院吗？',
-    a: '有。Genesis Life Care Petaling Jaya位于Petaling Utama，距离Damansara Heights、Damansara Utama及Damansara Jaya大约10分钟车程。我们提供24/7护理、失智症计划和中风康复服务。',
+    a: '有。Genesis Life Care Petaling Jaya位于PJS 1，八打灵再也，欢迎来自Damansara Heights、Damansara Utama及Damansara Jaya的家庭。我们提供24/7护理、失智症计划和中风康复服务。',
   },
   {
     q: '白沙罗附近的老年人护理费用是多少？',
@@ -120,11 +120,11 @@ const faqsZh = [
   },
   {
     q: '在决定之前，我可以参观白沙罗附近的养老院吗？',
-    a: '当然可以。我们鼓励家庭预订我们位于Petaling Utama的Petaling Jaya设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
+    a: '当然可以。我们鼓励家庭预订我们位于PJS 1的Petaling Jaya设施的参观。您可以看到生活空间、与护理团队见面并提出任何问题——无任何义务。',
   },
   {
-    q: 'Genesis Life Care距离Damansara Heights有多远？',
-    a: '我们位于Petaling Utama的Petaling Jaya中心距离Damansara Heights大约10分钟车程，经由LDP或Sprint大道即可抵达。该地点也方便从Damansara Utama及Damansara Jaya前往。',
+    q: 'Damansara Heights的家庭可在哪里找到Genesis Life Care？',
+    a: '我们的中心位于PJS 1，八打灵再也。欢迎来自Damansara Heights、Damansara Utama及Damansara Jaya的家庭，请致电预约参观。',
   },
   {
     q: 'Genesis Life Care与白沙罗附近的其他养老院有什么不同？',
@@ -225,10 +225,9 @@ export function ElderlyCareDamansaraContent({ locale = 'en' }: { locale?: 'en' |
               <p className="text-lg text-white leading-relaxed mb-8 max-w-xl" style={{ color: 'white' }}>
                 <Bilingual
                   en={<>Families in Damansara trust Genesis Life Care for quality nursing home
-                  services. Our Petaling Jaya centre is just {nearestCentre.distance} away
-                  — offering 24/7 nursing, on-site doctor consultations, dementia care,
+                  services. Our centre at PJS 1, Petaling Jaya offers 24/7 nursing, on-site doctor consultations, dementia care,
                   and comprehensive rehabilitation.</>}
-                  zh={<>白沙罗的家庭信赖Genesis Life Care提供优质的养老院服务。我们的Petaling Jaya中心距离仅{nearestCentre.distanceZh}——提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
+                  zh={<>白沙罗的家庭信赖Genesis Life Care提供优质的养老院服务。我们位于PJS 1（八打灵再也）的中心提供24/7护理、现场医生咨询、失智症护理以及全面的康复服务。</>}
                 />
               </p>
 
@@ -271,7 +270,7 @@ export function ElderlyCareDamansaraContent({ locale = 'en' }: { locale?: 'en' |
                 </div>
                 <div>
                   <p className="text-sm font-bold text-gray-800"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                  <p className="text-xs text-gray-500"><Bilingual en="from Damansara" zh="距白沙罗" /></p>
+                  <p className="text-xs text-gray-500"><Bilingual en="Petaling Jaya centre" zh="八打灵再也中心" /></p>
                 </div>
               </div>
             </div>
@@ -301,11 +300,11 @@ export function ElderlyCareDamansaraContent({ locale = 'en' }: { locale?: 'en' |
               </p>
               <p>
                 <Bilingual
-                  en={<>Genesis Life Care Petaling Jaya is the nearest Genesis centre to Damansara — located in
-                  Petaling Utama, just a short drive away. Our facility provides 24-hour nursing care,
+                  en={<>Genesis Life Care Petaling Jaya is the nearest Genesis centre to Damansara — located at
+                  PJS 1, Petaling Jaya. Our facility provides 24-hour nursing care,
                   weekly on-site doctor consultations, psychologist-led dementia programmes, and a full
                   rehabilitation department with physiotherapy and occupational therapy.</>}
-                  zh="Genesis Life Care Petaling Jaya是距离白沙罗最近的Genesis中心——位于Petaling Utama，车程仅需数分钟。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
+                  zh="Genesis Life Care Petaling Jaya是距离白沙罗最近的Genesis中心——位于PJS 1，八打灵再也。我们的设施提供24小时护理服务、每周现场医生诊疗、心理学家主导的失智症护理计划，以及配备物理治疗与职能治疗的完整康复部门。"
                 />
               </p>
               <p>
@@ -376,8 +375,8 @@ export function ElderlyCareDamansaraContent({ locale = 'en' }: { locale?: 'en' |
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
               <Bilingual
-                en={<>Just {nearestCentre.distance} from Damansara — our flagship centre in Petaling Utama.</>}
-                zh={<>距白沙罗仅{nearestCentre.distanceZh}——我们位于Petaling Utama的旗舰中心。</>}
+                en={<>Our flagship centre at PJS 1, Petaling Jaya.</>}
+                zh={<>我们位于PJS 1（八打灵再也）的旗舰中心。</>}
               />
             </p>
           </div>
@@ -409,7 +408,7 @@ export function ElderlyCareDamansaraContent({ locale = 'en' }: { locale?: 'en' |
                   </div>
                   <div className="bg-gray-50 rounded-lg p-3 text-center">
                     <p className="text-2xl font-extrabold text-primary"><Bilingual en={nearestCentre.distance} zh={nearestCentre.distanceZh} /></p>
-                    <p className="text-xs text-gray-500"><Bilingual en="From Damansara" zh="距白沙罗" /></p>
+                    <p className="text-xs text-gray-500"><Bilingual en="Petaling Jaya centre" zh="八打灵再也中心" /></p>
                   </div>
                 </div>
 

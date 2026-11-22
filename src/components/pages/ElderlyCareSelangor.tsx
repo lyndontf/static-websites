@@ -136,7 +136,7 @@ const servicesZh = [
 const faqs = [
   {
     q: 'How many Genesis Life Care centres are there in Selangor?',
-    a: 'Genesis Life Care operates 4 centres across Selangor — in Petaling Jaya (Petaling Utama), Klang, Kajang, and Puchong. Each centre provides 24/7 nursing care, dementia programmes, stroke rehabilitation, and on-site doctor consultations.',
+    a: 'Genesis Life Care operates 4 centres across Selangor — in Petaling Jaya (PJS 1), Klang, Kajang, and Puchong. Each centre provides 24/7 nursing care, dementia programmes, stroke rehabilitation, and on-site doctor consultations.',
   },
   {
     q: 'Which is the best nursing home in Selangor?',
@@ -166,7 +166,7 @@ const faqs = [
 const faqsZh = [
   {
     q: '雪兰莪有多少间Genesis Life Care中心？',
-    a: 'Genesis Life Care在雪兰莪运营4间中心——位于Petaling Jaya（Petaling Utama）、Klang、Kajang和Puchong。每间中心提供24/7护理、失智症计划、中风康复和现场医生咨询。',
+    a: 'Genesis Life Care在雪兰莪运营4间中心——位于Petaling Jaya（PJS 1）、Klang、Kajang和Puchong。每间中心提供24/7护理、失智症计划、中风康复和现场医生咨询。',
   },
   {
     q: '雪兰莪最好的养老院是哪一间？',

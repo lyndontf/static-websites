@@ -306,7 +306,7 @@ export function DementiaCarePetalingJayaContent({ locale = 'en' }: { locale?: 'e
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-gray-800">Petaling Utama</p>
+                  <p className="text-sm font-bold text-gray-800">PJS 1</p>
                   <p className="text-xs text-gray-500"><Bilingual en="Petaling Jaya" zh="八打灵再也" /></p>
                 </div>
               </div>
@@ -442,7 +442,7 @@ export function DementiaCarePetalingJayaContent({ locale = 'en' }: { locale?: 'e
               <Bilingual en="Visit Our Petaling Jaya Centre" zh="参观我们的八打灵再也中心" />
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
-              <Bilingual en="Our flagship centre in Petaling Utama — specialised dementia care in PJ." zh="我们位于Petaling Utama的旗舰中心——八打灵再也的专业痴呆症护理。" />
+              <Bilingual en="Our flagship centre at PJS 1 — specialised dementia care in PJ." zh="我们位于PJS 1的旗舰中心——八打灵再也的专业痴呆症护理。" />
             </p>
           </div>
 

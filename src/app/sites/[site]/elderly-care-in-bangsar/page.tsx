@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   },
   title: "Elderly Care in Bangsar",
   description:
-    'Looking for elderly care near Bangsar? Genesis Life Care Petaling Jaya is just minutes away — offering 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
+    'Looking for elderly care near Bangsar? Genesis Life Care Petaling Jaya, at PJS 1, offers 24/7 nursing care, dementia programmes, stroke rehab & on-site doctor. Book a visit.',
   openGraph: {
     title: 'Elderly Care Near Bangsar - Genesis Life Care PJ',
     description:
-      'Professional elderly care near Bangsar. 24/7 nursing, dementia care, stroke rehabilitation. Visit our Petaling Jaya centre — minutes from Bangsar.',
+      'Professional elderly care near Bangsar. 24/7 nursing, dementia care, stroke rehabilitation. Visit our Petaling Jaya centre .',
     images: [{ url: '/images/pj-centre.jpg', width: 1200, height: 630, alt: 'Genesis Life Care Petaling Jaya' }],
   },
 };

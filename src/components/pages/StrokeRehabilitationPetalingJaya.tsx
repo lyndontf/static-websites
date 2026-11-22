@@ -352,13 +352,13 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
               </p>
               <p>
                 <Bilingual
-                  en={<>Located in Petaling Utama, our Petaling Jaya centre offers 24-hour nursing care,
+                  en={<>Located at PJS 1, our Petaling Jaya centre offers 24-hour nursing care,
                   on-site doctor consultations, and a dedicated rehabilitation department. Whether
                   your loved one is in the early stages of post-stroke recovery or needs ongoing
                   rehabilitation, Genesis Life Care provides a safe and supportive environment.
                   We have a Google rating of {centre.rating} from {centre.reviews} reviews
                   from families across the Klang Valley.</>}
-                  zh={<>我们位于Petaling Utama的八打灵再也中心提供24小时护理服务、驻场医生会诊及专属康复部门。无论您的至亲正处于中风康复的早期阶段，或需要持续的康复治疗，Genesis Life Care都能提供安全且具支持性的环境。我们Google评分为{centre.rating}，共获得来自巴生谷各地超过{centre.reviews}则家庭好评。</>}
+                  zh={<>我们位于PJS 1的八打灵再也中心提供24小时护理服务、驻场医生会诊及专属康复部门。无论您的至亲正处于中风康复的早期阶段，或需要持续的康复治疗，Genesis Life Care都能提供安全且具支持性的环境。我们Google评分为{centre.rating}，共获得来自巴生谷各地超过{centre.reviews}则家庭好评。</>}
                 />
               </p>
             </div>
@@ -458,7 +458,7 @@ export function StrokeRehabilitationPetalingJayaContent({ locale = 'en' }: { loc
               <Bilingual en="Visit Our Petaling Jaya Centre" zh="参观我们的八打灵再也中心" />
             </h2>
             <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
-              <Bilingual en="Our flagship centre in Petaling Utama with dedicated stroke rehabilitation facilities." zh="我们位于Petaling Utama的旗舰中心，设有专属中风康复设施。" />
+              <Bilingual en="Our flagship centre at PJS 1 with dedicated stroke rehabilitation facilities." zh="我们位于PJS 1的旗舰中心，设有专属中风康复设施。" />
             </p>
           </div>
 
