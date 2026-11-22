@@ -96,7 +96,9 @@
   padding: 0 1.25rem;
 }
 
-.cms-html-page header nav {
+/* :where() gives this default zero priority, so a site's own nav classes win. Before, it overrode e.g. .gta-nav__links{display:none}
+   and .sr-mobile-panel{display:none} on phones, leaving desktop link lists and open mobile menus showing. */
+:where(.cms-html-page header nav) {
   display: flex;
   align-items: center;
   justify-content: space-between;

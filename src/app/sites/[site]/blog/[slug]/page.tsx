@@ -131,14 +131,14 @@ export default async function BlogPostPage({ params }: PostPageProps) {
     <article className="pb-16">
       <JsonLd data={buildBlogPostingJsonLd(post, settings, baseUrl)} />
       <div className="max-w-[1100px] mx-auto px-5 sm:px-8 grid lg:grid-cols-[1fr_300px] gap-12 items-start">
-        <div className="max-w-[720px]">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[13px] text-[#7a8a92] py-7">
-            <Link href="/" className="hover:text-[#2c88a2]">Home</Link>
-            <span>/</span>
-            <Link href="/blog" className="hover:text-[#2c88a2]">Blog</Link>
-            <span>/</span>
-            <span className="truncate">{post.title}</span>
+        <div className="max-w-[720px] min-w-0">
+          {/* Breadcrumb. min-w-0 on the column and the title lets a long title truncate instead of widening the page on phones. */}
+          <nav className="flex items-center gap-2 text-[13px] text-[#7a8a92] py-7 min-w-0">
+            <Link href="/" className="hover:text-[#2c88a2] shrink-0">Home</Link>
+            <span className="shrink-0">/</span>
+            <Link href="/blog" className="hover:text-[#2c88a2] shrink-0">Blog</Link>
+            <span className="shrink-0">/</span>
+            <span className="truncate min-w-0">{post.title}</span>
           </nav>
 
           {/* Header */}
